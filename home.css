@@ -81,7 +81,7 @@
 }
 .hero-search .search-icon {
     position: absolute;
-    left: 18px;
+    left: 24px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--clr-text-dim);
@@ -89,7 +89,7 @@
 }
 .hero-search input {
     width: 100%;
-    padding: 16px 20px 16px 60px;
+    padding: 16px 20px 16px 75px;
     font-size: 1rem;
     background: var(--clr-surface);
     border: 1px solid var(--clr-border);
