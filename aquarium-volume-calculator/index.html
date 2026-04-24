@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Aquarium Volume Calculator | Gallons & Liters for Any Tank</title>
+    <meta name="description" content="Free aquarium volume calculator. Calculate exactly how many gallons or liters your tank holds. Supports rectangular, cylindrical, and bow-front shapes.">
+    <meta name="keywords" content="aquarium volume calculator gallons, calculate fish tank size liters, bow front aquarium volume, cylinder tank calculator, aquarium stocking guide">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/aquarium-volume-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .vol-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .vol-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+
+        .shape-tabs { display: flex; gap: 8px; margin-bottom: 25px; }
+        .shape-btn { flex: 1; padding: 12px; background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; text-align: center; }
+        .shape-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+        
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Aquarium volume calculator</h1>
+                    <p>Calculate the exact capacity of your tank. Essential for dosing medicine, adding water conditioner, and stocking fish.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Tank Shape</label>
+                        <div class="shape-tabs">
+                            <button class="shape-btn active" data-shape="rect">Rectangular</button>
+                            <button class="shape-btn" data-shape="cyl">Cylinder</button>
+                            <button class="shape-btn" data-shape="bow">Bow Front</button>
+                        </div>
+
+                        <form class="calc-form" id="tank-form">
+                            <div class="form-group" id="f-dim-1">
+                                <label>Length (inches)</label>
+                                <input type="number" id="dim1" value="24">
+                            </div>
+                            <div class="form-group" id="f-dim-2">
+                                <label>Width / Depth (inches)</label>
+                                <input type="number" id="dim2" value="12">
+                            </div>
+                            <div class="form-group" id="f-dim-3">
+                                <label>Height (inches)</label>
+                                <input type="number" id="dim3" value="16">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-display">
+                            <div class="vol-val" id="res-gal">20</div>
+                            <div class="vol-label">US Gallons</div>
+                            <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.95rem;">
+                                Equivalent to <span id="res-liters">75.7</span> liters.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Glass Displacement" reality</h2>
+                    <p>I genuinely hate it when a tank is sold as "20 Gallons" but it only holds about 17. Why? Because you’ve got 2 inches of substrate at the bottom, a giant piece of driftwood in the middle, and you never fill it all the way to the rim. This calculator gives you the **theoretical maximum**, but when you’re dosing medicine or chemicals, always subtract about 15-20% for the actual water volume.</p>
+                    
+                    <p><strong>Note on Bow Fronts:</strong> Bow front tanks are notoriously tricky because the volume isn't just L x W x H. We use a parabolic formula here to estimate that extra "bulge." It’s much more accurate than the generic "rectangle plus a bit" method most people use.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('tank-form');
+            const shapeBtns = document.querySelectorAll('.shape-btn');
+            const d1I = document.getElementById('dim1');
+            const d2I = document.getElementById('dim2');
+            const d3I = document.getElementById('dim3');
+            
+            const resG = document.getElementById('res-gal');
+            const resL = document.getElementById('res-liters');
+
+            let shape = 'rect';
+
+            shapeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    shapeBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    shape = btn.dataset.shape;
+                    
+                    // Update labels
+                    if (shape === 'rect') {
+                        document.querySelector('#f-dim-1 label').textContent = 'Length (inches)';
+                        document.querySelector('#f-dim-2 label').textContent = 'Width (inches)';
+                        document.querySelector('#f-dim-3 label').textContent = 'Height (inches)';
+                        document.getElementById('f-dim-2').style.display = 'block';
+                    } else if (shape === 'cyl') {
+                        document.querySelector('#f-dim-1 label').textContent = 'Diameter (inches)';
+                        document.querySelector('#f-dim-3 label').textContent = 'Height (inches)';
+                        document.getElementById('f-dim-2').style.display = 'none';
+                    } else {
+                        document.querySelector('#f-dim-1 label').textContent = 'Length (inches)';
+                        document.querySelector('#f-dim-2 label').textContent = 'Depth at Center (inches)';
+                        document.querySelector('#f-dim-3 label').textContent = 'Height (inches)';
+                        document.getElementById('f-dim-2').style.display = 'block';
+                    }
+                    update();
+                });
+            });
+
+            function update() {
+                const d1 = parseFloat(d1I.value) || 0;
+                const d2 = parseFloat(d2I.value) || 0;
+                const d3 = parseFloat(d3I.value) || 0;
+
+                let volInch3 = 0;
+
+                if (shape === 'rect') {
+                    volInch3 = d1 * d2 * d3;
+                } else if (shape === 'cyl') {
+                    const r = d1 / 2;
+                    volInch3 = Math.PI * (r * r) * d3;
+                } else if (shape === 'bow') {
+                    // Approximate parabolic bow. This is a simplified reliable estimate.
+                    // Area = L * W (rectangular part) + approximation of the bow area.
+                    // Assumes the bow starts from the corners. 
+                    const rectArea = d1 * (d2 * 0.8); // Assumes d2 is max depth
+                    const bowArea = (2/3) * d1 * (d2 * 0.2); 
+                    volInch3 = (rectArea + bowArea) * d3;
+                }
+
+                // 231 cu in = 1 US gallon
+                const gallons = volInch3 / 231;
+                const liters = gallons * 3.78541;
+
+                resG.textContent = gallons.toFixed(1);
+                resL.textContent = liters.toFixed(1);
+            }
+
+            [d1I, d2I, d3I].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

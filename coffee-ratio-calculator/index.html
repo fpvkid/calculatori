@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Coffee-to-Water Ratio Calculator | Brew Perfect Coffee</title>
+    <meta name="description" content="Free coffee-to-water ratio calculator. Calculate the perfect amount of coffee grounds and water for French Press, Pour Over, AeroPress, and Espresso.">
+    <meta name="keywords" content="coffee ratio calculator, coffee to water ratio grams, french press ratio calculator, pour over brew ratio, coffee calculator grams">
+    <meta name="author" content="calcsfor.life">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calcsfor.life/coffee-ratio-calculator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Coffee-to-Water Ratio Calculator | Brew Better Coffee">
+    <meta property="og:description" content="Stop guessing. Use the golden ratio for consistent, delicious coffee every morning.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/coffee-ratio-calculator/">
+    <meta property="og:site_name" content="calcsfor.life">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Coffee-to-Water Ratio Calculator",
+        "description": "Calculate precisely how many grams of coffee and water you need for various brewing methods based on standard and custom brew ratios.",
+        "url": "https://calcsfor.life/coffee-ratio-calculator/",
+        "applicationCategory": "KitchenApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .brew-card { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-xl); 
+            padding: 40px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .inputs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .ratio-custom { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+        .ratio-input { width: 80px; text-align: center; }
+
+        .presets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 40px; }
+        .preset-btn { 
+            background: var(--clr-bg-2); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius); 
+            padding: 15px 10px; 
+            cursor: pointer; 
+            text-align: center;
+            transition: all var(--dur) var(--ease);
+        }
+        .preset-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); transform: translateY(-2px); }
+        .preset-name { display: block; font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+        .preset-val { font-size: 0.8rem; color: var(--clr-text-dim); }
+
+        .result-panel { 
+            background: var(--clr-bg-2); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .res-item-val { display: block; font-size: 2.2rem; font-weight: 800; color: var(--clr-accent); }
+        .res-item-label { font-size: 0.85rem; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+
+        @media (max-width: 600px) {
+            .inputs-row { grid-template-columns: 1fr; }
+            .result-panel { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Coffee ratio calculator</h1>
+                    <p>The secret to great coffee is consistency. Calculate the exact grams of coffee and water you need for any brew method.</p>
+                </div>
+
+                <div class="brew-card">
+                    <form id="coffee-form">
+                        <div class="inputs-row">
+                            <div class="form-group">
+                                <label for="coffee-g">Coffee Grounds (g)</label>
+                                <input type="number" id="coffee-g" value="20" step="0.5">
+                            </div>
+                            <div class="form-group">
+                                <label for="water-ml">Water Amount (ml / g)</label>
+                                <input type="number" id="water-ml" value="340" step="1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Brew Ratio (1 : X)</label>
+                            <div class="ratio-custom">
+                                <span>1 :</span>
+                                <input type="number" id="ratio-x" value="17" step="0.5" class="ratio-input">
+                                <span style="font-size: 0.9rem; color: var(--clr-text-dim);">parts water</span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="result-panel">
+                        <div class="res-item">
+                            <span class="res-item-label">Coffee</span>
+                            <span class="res-item-val" id="res-coffee">20g</span>
+                        </div>
+                        <div class="res-item">
+                            <span class="res-item-label">Water</span>
+                            <span class="res-item-val" id="res-water">340ml</span>
+                        </div>
+                    </div>
+
+                    <div class="presets-grid">
+                        <button class="preset-btn" data-ratio="17">
+                            <span class="preset-name">Golden Ratio</span>
+                            <span class="preset-val">1 : 17</span>
+                        </button>
+                        <button class="preset-btn" data-ratio="15">
+                            <span class="preset-name">French Press</span>
+                            <span class="preset-val">1 : 15</span>
+                        </button>
+                        <button class="preset-btn" data-ratio="16">
+                            <span class="preset-name">Pour Over</span>
+                            <span class="preset-val">1 : 16</span>
+                        </button>
+                        <button class="preset-btn" data-ratio="13">
+                            <span class="preset-name">AeroPress</span>
+                            <span class="preset-val">1 : 13</span>
+                        </button>
+                        <button class="preset-btn" data-ratio="2">
+                            <span class="preset-name">Espresso</span>
+                            <span class="preset-val">1 : 2</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The SCA says 1:18, but I disagree</h2>
+                    <p>The "official" Golden Ratio is 1:18 (1g coffee to 18g water). But if I'm being honest, for most people that's a bit thin and watery. If you want a cup that actually has some character and wakes you up, try <strong>1:15 or 1:16</strong>. For an everyday brew, that's usually the sweet spot.</p>
+                    
+                    <p>And please, ditch the scoops and buy a cheap kitchen scale. Coffee beans are all different sizes and densities — a scoop of a dark roast weighs much less than a scoop of light roast. You need grams, not spoons, if you want your coffee to taste exactly the same every morning.</p>
+
+                    <h2>Standard Brew Ratios</h2>
+                    <p>If you're not sure where to start, here are the ratios I usually go with for different gear:</p>
+                    <ul>
+                        <li><strong>French Press:</strong> 1:15 (Rich and full)</li>
+                        <li><strong>Pour Over:</strong> 1:16 or 1:17 (Bright and clean)</li>
+                        <li><strong>AeroPress:</strong> 1:13 to 1:15 (Versatile)</li>
+                        <li><strong>Espresso:</strong> 1:2 (Intense concentrate)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('coffee-form');
+            const coffeeInput = document.getElementById('coffee-g');
+            const waterInput = document.getElementById('water-ml');
+            const ratioInput = document.getElementById('ratio-x');
+
+            const resCoffee = document.getElementById('res-coffee');
+            const resWater = document.getElementById('res-water');
+
+            let lastChanged = 'coffee';
+
+            coffeeInput.addEventListener('input', () => { lastChanged = 'coffee'; update(); });
+            waterInput.addEventListener('input', () => { lastChanged = 'water'; update(); });
+            ratioInput.addEventListener('input', update);
+
+            function update() {
+                const ratio = parseFloat(ratioInput.value) || 17;
+                
+                if (lastChanged === 'coffee') {
+                    const c = parseFloat(coffeeInput.value) || 0;
+                    const w = c * ratio;
+                    waterInput.value = Math.round(w);
+                } else {
+                    const w = parseFloat(waterInput.value) || 0;
+                    const c = w / ratio;
+                    coffeeInput.value = c.toFixed(1);
+                }
+
+                resCoffee.textContent = coffeeInput.value + 'g';
+                resWater.textContent = waterInput.value + 'ml';
+            }
+
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    ratioInput.value = btn.dataset.ratio;
+                    update();
+                });
+            });
+
+            update();
+        })();
+    </script>
+</body>
+</html>
+

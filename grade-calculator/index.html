@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Grade Calculator | Calculate Your Weighted Average</title>
+    <meta name="description" content="Free grade calculator for students. Calculate your current class grade, weighted averages, and find out what you need on your final exam.">
+    <meta name="keywords" content="grade calculator, weighted grade tool, final exam calculator, college grade estimator, gpa calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/grade-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 40px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .grade-row { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .add-row { margin-top: 15px; border-top: 1px dashed var(--clr-border); padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Grade calculator</h1>
+                    <p>Stop stressing and start planning. Calculate your weighted average or find out exactly what score you need on your final to pass.</p>
+                </div>
+
+                <div class="surface-card">
+                    <div id="grade-rows">
+                        <div class="grade-row">
+                            <label style="font-size: 0.7rem; color: var(--clr-text-dim);">Assignment Name</label>
+                            <label style="font-size: 0.7rem; color: var(--clr-text-dim);">Grade (%)</label>
+                            <label style="font-size: 0.7rem; color: var(--clr-text-dim);">Weight (%)</label>
+                            <div></div>
+                        </div>
+                        <div class="grade-row g-row">
+                            <input type="text" placeholder="Homework" value="Homework">
+                            <input type="number" class="g-score" value="90">
+                            <input type="number" class="g-weight" value="40">
+                            <button class="btn-sm btn-ghost remove-btn" style="padding: 10px; height: 42px;">×</button>
+                        </div>
+                        <div class="grade-row g-row">
+                            <input type="text" placeholder="Midterm" value="Midterm">
+                            <input type="number" class="g-score" value="85">
+                            <input type="number" class="g-weight" value="30">
+                            <button class="btn-sm btn-ghost remove-btn" style="padding: 10px; height: 42px;">×</button>
+                        </div>
+                    </div>
+
+                    <div class="add-row">
+                        <button id="add-btn" class="btn btn-outline btn-sm">+ Add Assignment</button>
+                    </div>
+
+                    <div class="result-grid" style="margin-top: 40px;">
+                        <div class="result-card">
+                            <span class="result-card-val" id="res-total">87.5%</span>
+                            <span class="result-card-label">Current Grade</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-card-val" id="res-letter">B+</span>
+                            <span class="result-card-label">Letter Grade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 80px;">
+                    <h2>The "Final Exam" Panic</h2>
+                    <p>I genuinely don't know why professors make grading so complicated. If you're staring at your syllabus trying to figure out if you can still get an A after that "C" on the quiz, you aren't alone. This calculator uses **weighted averages**. It multiplies your score by its importance (weight), adds them all up, and divides by the total weight. If your weights don't add up to 100%, it assumes the remaining percentage is your "Final Exam."</p>
+
+                    <div class="faq-list" style="margin-top: 40px;">
+                        <details class="faq-item">
+                            <summary>What is a weighted average?</summary>
+                            <div class="faq-answer">
+                                <p>A weighted average is a calculation that takes into account the varying degrees of importance of the numbers in a data set. In school, this means a final exam (25% weight) is much more important than a weekly quiz (5% weight).</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What if my weights don't add up to 100%?</summary>
+                            <div class="faq-answer">
+                                <p>No problem. Our calculator will show you your current grade based *only* on the assignments you've entered. It effectively treats the missing weight as "to be determined."</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const container = document.getElementById('grade-rows');
+            const addBtn = document.getElementById('add-btn');
+            const resT = document.getElementById('res-total');
+            const resL = document.getElementById('res-letter');
+
+            function getLetter(score) {
+                if (score >= 93) return 'A';
+                if (score >= 90) return 'A-';
+                if (score >= 87) return 'B+';
+                if (score >= 83) return 'B';
+                if (score >= 80) return 'B-';
+                if (score >= 77) return 'C+';
+                if (score >= 73) return 'C';
+                if (score >= 70) return 'C-';
+                if (score >= 67) return 'D+';
+                if (score >= 60) return 'D';
+                return 'F';
+            }
+
+            function update() {
+                const rows = document.querySelectorAll('.g-row');
+                let totalScoreWeight = 0;
+                let totalWeight = 0;
+
+                rows.forEach(r => {
+                    const s = parseFloat(r.querySelector('.g-score').value) || 0;
+                    const w = parseFloat(r.querySelector('.g-weight').value) || 0;
+                    totalScoreWeight += (s * w);
+                    totalWeight += w;
+                });
+
+                if (totalWeight === 0) {
+                    resT.textContent = '0%';
+                    resL.textContent = '-';
+                    return;
+                }
+
+                const finalGrade = totalScoreWeight / totalWeight;
+                resT.textContent = finalGrade.toFixed(1) + '%';
+                resL.textContent = getLetter(finalGrade);
+            }
+
+            addBtn.addEventListener('click', () => {
+                const row = document.createElement('div');
+                row.className = 'grade-row g-row';
+                row.innerHTML = `
+                    <input type="text" placeholder="Assignment">
+                    <input type="number" class="g-score" value="100">
+                    <input type="number" class="g-weight" value="10">
+                    <button class="btn-sm btn-ghost remove-btn" style="padding: 10px; height: 42px;">×</button>
+                `;
+                container.appendChild(row);
+                attachListeners(row);
+                update();
+            });
+
+            function attachListeners(row) {
+                row.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+                row.querySelector('.remove-btn').addEventListener('click', () => {
+                    row.remove();
+                    update();
+                });
+            }
+
+            document.querySelectorAll('.g-row').forEach(attachListeners);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

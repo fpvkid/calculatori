@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Alcohol Dilution Calculator | Spirits & Gin ABV Blending Tool</title>
+    <meta name="description" content="Free alcohol dilution calculator. Calculate exactly how much water you need to add to high-proof spirits to reach your target ABV percentage.">
+    <meta name="keywords" content="alcohol dilution calculator, diluting spirits with water, how much water to add to alcohol, ABV dilution formula, moonshine dilution calculator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/alcohol-dilution-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        
+        .result-box { 
+            background: var(--clr-accent-glow); 
+            border: 2px solid var(--clr-accent); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center; 
+            margin-top: 30px;
+        }
+        .main-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-unit { font-size: 1.5rem; font-weight: 700; color: var(--clr-text-dim); }
+        .main-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .inputs-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Alcohol dilution calculator</h1>
+                    <p>Whether you're making home-made gin, limoncello, or just diluting high-proof "heart" from a distil, getting the water ratio right is everything.</p>
+                </div>
+
+                <form class="calc-form" id="dilution-form">
+                    <div class="form-group">
+                        <label>Initial Spirits Volume (ml)</label>
+                        <input type="number" id="v1" value="1000" step="10">
+                    </div>
+                    <div class="inputs-split">
+                        <div class="form-group">
+                            <label>Starting ABV (%)</label>
+                            <input type="number" id="abv1" value="95" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label>Target ABV (%)</label>
+                            <input type="number" id="abv2" value="40" step="0.5">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="result-box">
+                    <span class="main-label">Water to add:</span>
+                    <div class="main-val" id="res-water">1,375</div>
+                    <div class="main-unit">milliliters (ml)</div>
+                    <p style="margin-top: 15px; color: var(--clr-text-dim); font-size: 0.95rem;">
+                        Resulting in <span id="res-total">2375</span>ml of <span id="res-abv">40</span>% spirits.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Dilute with distilled water</h2>
+                    <p>I cannot stress this enough: don't use tap water. If you spent weeks fermenting and distilling a beautiful batch of spirits, the last thing you want is for it to turn "cloudy" (known as louching) because of the minerals in your tap water. Buy a gallon of distilled or high-quality spring water.</p>
+                    
+                    <h2>The chemistry of mixing</h2>
+                    <p>When you mix alcohol and water, something weird happens: the total volume is actually slightly <em>less</em> than the sum of the parts. This is because the molecules nestle into each other’s gaps. This calculator uses the standard Pearson's Square logic, which is more than accurate enough for home blending.</p>
+
+                    <p><strong>Flavor Tip:</strong> If you're diluting a gin or flavored spirit, add the water slowly. Adding it all at once can "shock" the oils and cause them to separate, ruining that crystal-clear look.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const v1 = document.getElementById('v1');
+            const abv1 = document.getElementById('abv1');
+            const abv2 = document.getElementById('abv2');
+            
+            const resWater = document.getElementById('res-water');
+            const resTotal = document.getElementById('res-total');
+            const resAbv = document.getElementById('res-abv');
+
+            function update() {
+                const vol = parseFloat(v1.value) || 0;
+                const start = parseFloat(abv1.value) || 0;
+                const target = parseFloat(abv2.value) || 1;
+
+                if (target >= start) {
+                    resWater.textContent = "0";
+                    resTotal.textContent = vol;
+                    resAbv.textContent = start;
+                    return;
+                }
+
+                // V2 = (V1 * ABV1) / ABV2
+                const totalVol = (vol * start) / target;
+                const waterToAdd = totalVol - vol;
+
+                resWater.textContent = Math.round(waterToAdd).toLocaleString();
+                resTotal.textContent = Math.round(totalVol).toLocaleString();
+                resAbv.textContent = target;
+            }
+
+            [v1, abv1, abv2].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

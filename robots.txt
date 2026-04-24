@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /shared/
+Disallow: /temp/
+
+Sitemap: https://calcsfor.life/sitemap.xml

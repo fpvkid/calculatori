@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Potting Soil Calculator | Volume for House Plants</title>
+    <meta name="description" content="Free potting soil calculator. Calculate exactly how many liters or bags of soil you need for your indoor planters and house pots based on dimensions.">
+    <meta name="keywords" content="how much potting soil for 12 inch pot, potting soil volume calculator, house plant soil estimator, planter soil liters calculator, repotting plants soil amount">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/potting-soil-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
+        
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .vol-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .vol-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+
+        .pot-shape-tabs { display: flex; gap: 8px; margin-bottom: 25px; }
+        .shape-btn { flex: 1; padding: 12px; background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; }
+        .shape-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+        
+        .bags-summary { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--clr-border); color: var(--clr-text-muted); font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Potting soil calculator</h1>
+                    <p>Stop overbuying bags of dirt. Calculate exactly many liters or quarts you need to fill your favorite planters.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Pot Shape</label>
+                        <div class="pot-shape-tabs">
+                            <button class="shape-btn active" data-shape="round">Round / Tapered</button>
+                            <button class="shape-btn" data-shape="square">Square / Rect</button>
+                        </div>
+
+                        <form class="calc-form" id="soil-form">
+                            <div class="form-group" id="dia-group">
+                                <label>Top Diameter (inches)</label>
+                                <input type="number" id="dim-w" value="12">
+                            </div>
+                            <div class="form-group">
+                                <label>Height (inches)</label>
+                                <input type="number" id="dim-h" value="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Number of Pots</label>
+                                <input type="number" id="pot-count" value="1">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-display">
+                            <div class="vol-val" id="res-liters">12.5</div>
+                            <div class="vol-label">Liters Needed</div>
+                            <div class="bags-summary">
+                                Equivalent to <span id="res-quarts">13.2</span> US Quarts.<br>
+                                Roughly <span id="res-bags">0.3</span> of a 40L bag.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Dead Space" factor</h2>
+                    <p>I genuinely don't know why soil volume feels so impossible to guess. Every time I repot a Monstera, I either have half a bag left over that gets spider webs in the garage, or I’m 2 liters short and have to use old soil. This calculator assumes you’re filling the pot to about 1 inch (2.5cm) from the top — you need that "headroom" so the water doesn't spill over when you give your plants a drink.</p>
+                    
+                    <p><strong>Note on "tapered" pots:</strong> Most round pots get narrower at the bottom. Our math takes this into account by assuming a standard 10-20% taper. If your pot is a perfect cylinder, your count might be slightly low; if it’s extremely tapered, you’ll have a bit left over.</p>
+
+                    <h2>Pro Tip: Don't pack it down</h2>
+                    <p>When you're filling the pot, don't press the soil down hard with your thumbs. You'll crush all the air pockets that the roots need to breathe. Just tap the pot on the table to let the soil settle naturally. Our calculator accounts for this "settling."</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('soil-form');
+            const shapeBtns = document.querySelectorAll('.shape-btn');
+            const wI = document.getElementById('dim-w');
+            const hI = document.getElementById('dim-h');
+            const countI = document.getElementById('pot-count');
+            const diaLabel = document.querySelector('#dia-group label');
+            
+            const resL = document.getElementById('res-liters');
+            const resQ = document.getElementById('res-quarts');
+            const resB = document.getElementById('res-bags');
+
+            let shape = 'round';
+
+            shapeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    shapeBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    shape = btn.dataset.shape;
+                    diaLabel.textContent = shape === 'round' ? 'Top Diameter (inches)' : 'Width (inches)';
+                    update();
+                });
+            });
+
+            function update() {
+                const w = parseFloat(wI.value) || 0;
+                const h = parseFloat(hI.value) || 0;
+                const n = parseFloat(countI.value) || 1;
+
+                let volCuIn = 0;
+
+                if (shape === 'round') {
+                    // Standard pot taper factor (roughly 0.8 to account for bottom being smaller)
+                    const radius = w / 2;
+                    volCuIn = Math.PI * (radius * radius) * h * 0.85;
+                } else {
+                    volCuIn = w * w * h;
+                }
+
+                // Leave 1 inch head room
+                const fillFactor = (h > 2) ? (h - 1) / h : 1;
+                const totalCuIn = volCuIn * fillFactor * n;
+
+                // 1 cu in = 0.0163871 liters
+                const liters = totalCuIn * 0.0163871;
+                // 1 liter = 1.05669 quarts
+                const quarts = liters * 1.05669;
+
+                resL.textContent = liters.toFixed(1);
+                resQ.textContent = quarts.toFixed(1);
+                resB.textContent = (liters / 40).toFixed(1);
+            }
+
+            [wI, hI, countI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

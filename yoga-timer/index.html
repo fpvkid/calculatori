@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Yoga Interval Timer | Custom Flow & Stretching Tool</title>
+    <meta name="description" content="A simple, clean interval timer for yoga and stretching. Set your pose duration and transition time to create a perfect home practice.">
+    <meta name="keywords" content="yoga timer, stretching interval tool, home yoga clock, interval training timer, flexibility workout tool">
+    <meta name="author" content="CalcsFor.Life">
+    <meta name="category" content="Timers">
+    <link rel="canonical" href="https://calcsfor.life/yoga-timer/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 40px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
+        
+        .yoga-display { background: var(--clr-surface); padding: 50px; border-radius: 50%; width: 320px; height: 320px; margin: 30px auto; border: 10px solid var(--clr-accent-glow); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .yoga-display.resting { border-color: #3b82f633; }
+        
+        .timer-val { font-size: 5rem; font-weight: 800; color: var(--clr-text); line-height: 1; }
+        .round-info { font-weight: 700; color: var(--clr-accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        
+        .controls-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Yoga interval timer</h1>
+                    <p>Focus on your breath, not the clock. Set your intervals and start your flow.</p>
+                </div>
+
+                <div class="surface-card">
+                    <div class="controls-row">
+                        <div class="form-group">
+                            <label>Pose Duration (sec)</label>
+                            <input type="number" id="pose-time" value="60">
+                        </div>
+                        <div class="form-group">
+                            <label>Rounds (Poses)</label>
+                            <input type="number" id="rounds" value="10">
+                        </div>
+                    </div>
+
+                    <div class="yoga-display" id="yoga-box">
+                        <div class="round-info" id="round-text">Ready</div>
+                        <div class="timer-val" id="yoga-display">00</div>
+                        <div style="font-size: 0.8rem; color: var(--clr-text-dim); margin-top: 10px;" id="yoga-instr">Press Start</div>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                        <button id="start-yoga" class="btn btn-primary" style="min-width: 150px;">Start Flow</button>
+                        <button id="reset-yoga" class="btn btn-outline">Reset</button>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 80px; text-align: left;">
+                    <h2>Why "Deep Stretching" takes time</h2>
+                    <p>I genuinely believe the biggest mistake in home yoga is rushing the poses. Connective tissue (fascia) doesn't even begin to relax until about 30 seconds into a stretch. By setting a 60 or 90-second timer, you force your body to move past the initial resistance and into the actual "release" phase. **This is where the real flexibility happens.**</p>
+
+                    <div class="faq-list" style="margin-top: 40px;">
+                        <details class="faq-item">
+                            <summary>How long should I hold a yoga pose?</summary>
+                            <div class="faq-answer">
+                                <p>For Yin Yoga, holds are typically 3 to 5 minutes. For a more active Hatha flow, 30 to 60 seconds per pose is ideal to build strength and flexibility simultaneously.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I use this for HIIT?</summary>
+                            <div class="faq-answer">
+                                <p>Absolutely. You can set shorter intervals (20-30 sec) and high rounds for Tabata or other high-intensity training sessions.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let timeLeft = 0;
+            let currentRound = 1;
+            let totalRounds = 10;
+            let timerId = null;
+            let isResting = false;
+            
+            const display = document.getElementById('yoga-display');
+            const roundText = document.getElementById('round-text');
+            const instr = document.getElementById('yoga-instr');
+            const startBtn = document.getElementById('start-yoga');
+            const resetBtn = document.getElementById('reset-yoga');
+            const box = document.getElementById('yoga-box');
+
+            const poseInput = document.getElementById('pose-time');
+            const roundInput = document.getElementById('rounds');
+
+            function updateDisplay() {
+                display.textContent = timeLeft;
+                roundText.textContent = isResting ? 'Transition' : `Pose ${currentRound} / ${totalRounds}`;
+            }
+
+            function start() {
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                    startBtn.textContent = 'Resume Flow';
+                } else {
+                    if (timeLeft === 0) {
+                        totalRounds = parseInt(roundInput.value);
+                        timeLeft = parseInt(poseInput.value);
+                    }
+                    startBtn.textContent = 'Pause';
+                    timerId = setInterval(() => {
+                        timeLeft--;
+                        updateDisplay();
+                        if (timeLeft <= 0) {
+                            if (!isResting) {
+                                if (currentRound >= totalRounds) {
+                                    clearInterval(timerId);
+                                    timerId = null;
+                                    instr.textContent = 'Namaste. Flow complete.';
+                                    alert('Yoga session complete. Feel the energy.');
+                                    return;
+                                }
+                                isResting = true;
+                                timeLeft = 5; // 5 sec transition
+                                box.classList.add('resting');
+                                instr.textContent = 'Prepare for next pose...';
+                            } else {
+                                isResting = false;
+                                currentRound++;
+                                timeLeft = parseInt(poseInput.value);
+                                box.classList.remove('resting');
+                                instr.textContent = 'Hold the pose. Breathe.';
+                            }
+                        }
+                    }, 1000);
+                }
+            }
+
+            startBtn.addEventListener('click', start);
+            resetBtn.addEventListener('click', () => { location.reload(); });
+        })();
+    </script>
+</body>
+</html>

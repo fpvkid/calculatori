@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Brine Calculator | Salt % for Fermentation & Pickling</title>
+    <meta name="description" content="Free brine calculator for fermentation and pickling. Calculate exactly how many grams of salt you need for any percentage brine (2%, 3.5%, 5%, etc).">
+    <meta name="keywords" content="brine calculator for pickles, fermentation salt ratio calculator, how much salt for 2 percent brine, sauerkraut salt calculator, pickling ratio grams">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/brine-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        
+        .result-box { 
+            background: var(--clr-accent-glow); 
+            border: 2px solid var(--clr-accent); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center; 
+            margin-top: 30px;
+        }
+        .main-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-unit { font-size: 1.5rem; font-weight: 700; color: var(--clr-text-dim); }
+        .main-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .preset-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .preset-btn { background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); padding: 12px; cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; text-align: center; }
+        .preset-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+        .inputs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Brine calculator</h1>
+                    <p>Stop guessing the salt. Whether you're fermenting pickles or brining a turkey, getting the percentage right is the difference between success and a moldy mess.</p>
+                </div>
+
+                <div class="calc-form">
+                    <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Common Brine Strengths</label>
+                    <div class="preset-grid">
+                        <button class="preset-btn active" data-val="2">2% (Sauerkraut / Pickles)</button>
+                        <button class="preset-btn" data-val="3.5">3.5% (Full Sour / Hot Sauce)</button>
+                        <button class="preset-btn" data-val="5">5% (Half-Sour / Extreme)</button>
+                    </div>
+
+                    <div class="inputs-row">
+                        <div class="form-group">
+                            <label>Water Volume (ml / grams)</label>
+                            <input type="number" id="water" value="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Target Percentage (%)</label>
+                            <input type="number" id="pct" value="2" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <span class="main-label">Add Salt:</span>
+                    <div class="main-val" id="res-salt">20</div>
+                    <div class="main-unit">grams</div>
+                    <p style="margin-top: 15px; color: var(--clr-text-dim); font-size: 0.95rem;">
+                        For a total weight of <span id="res-total">1020</span>g.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Why "tablespoons" are useless</h2>
+                    <p>I genuinely lose my mind when a fermentation recipe says "add 2 tablespoons of salt per quart." Which salt? Table salt is fine-grained and dense; sea salt is flaky and light. Two tablespoons of table salt can weigh nearly double the same volume of sea salt. If you’re serious about not growing botulism in your kitchen, <strong>use a scale.</strong> Grams don’t lie.</p>
+                    
+                    <p><strong>Pro Tip:</strong> When fermenting vegetables like cabbage, the "water weight" is actually the weight of the vegetables <em>plus</em> any added water. If you're doing sauerkraut, weigh the shredded cabbage, calculate 2% of that weight in salt, and massage it in. That’s the most accurate way to keep things safe and crunchy.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const waterI = document.getElementById('water');
+            const pctI = document.getElementById('pct');
+            const pBtns = document.querySelectorAll('.preset-btn');
+            
+            const resSalt = document.getElementById('res-salt');
+            const resTotal = document.getElementById('res-total');
+
+            pBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    pBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    pctI.value = btn.dataset.val;
+                    update();
+                });
+            });
+
+            function update() {
+                const w = parseFloat(waterI.value) || 0;
+                const p = parseFloat(pctI.value) || 0;
+
+                // Salt = Water * (P / 100)
+                // Note: For extreme accuracy, it's Salt = (Water * P) / (100 - P) if you want the total solution to be exactly P%
+                // Most chefs use Salt = Water * P/100 because it's easier and the diff is negligible for low %
+                const salt = w * (p / 100);
+
+                resSalt.textContent = Math.round(salt);
+                resTotal.textContent = Math.round(w + salt);
+            }
+
+            [waterI, pctI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Wallpaper Calculator | How Many Rolls with Pattern Repeat</title>
+    <meta name="description" content="Free wallpaper calculator. Calculate exactly how many rolls you need for your room, including waste and pattern repeat offsets.">
+    <meta name="keywords" content="wallpaper calculator with pattern repeat, how many rolls of wallpaper, wallpaper yardage calculator, room wallpaper estimator, wallpaper waste calculator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/wallpaper-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; }
+        .res-card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: var(--radius-lg); padding: 30px; text-align: center; height: fit-content; position: sticky; top: 100px; }
+        .rolls-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); }
+        .rolls-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .inputs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Wallpaper calculator</h1>
+                    <p>Don't let pattern repeats catch you off guard. Calculate the exact number of rolls needed for any wall or room.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <form class="calc-form" id="wall-form">
+                        <div class="inputs-row">
+                            <div class="form-group">
+                                <label>Wall Width (ft)</label>
+                                <input type="number" id="w-width" value="12" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Wall Height (ft)</label>
+                                <input type="number" id="w-height" value="8" step="0.1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Roll Width (inches)</label>
+                            <input type="number" id="r-width" value="20.5" step="0.5">
+                            <small>Most rolls are 20.5" or 27"</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Roll Length (feet)</label>
+                            <input type="number" id="r-length" value="33" step="0.5">
+                            <small>Standard roll is 33 ft (10m)</small>
+                        </div>
+                        
+                        <div class="form-group" style="padding-top: 15px; border-top: 1px solid var(--clr-border);">
+                            <label>Pattern Repeat (inches)</label>
+                            <input type="number" id="p-repeat" value="0" step="1">
+                            <small>Set to 0 if the pattern is a simple match</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Waste Margin (%)</label>
+                            <input type="number" id="waste" value="10" step="1">
+                        </div>
+                    </form>
+
+                    <div class="res-card">
+                        <div class="rolls-val" id="res-rolls">4</div>
+                        <div class="rolls-label">Rolls Required</div>
+                        <p style="margin-top: 20px; font-size: 0.9rem; color: var(--clr-text-muted);">
+                            Covering <span id="res-sqft">0</span> sq ft total (including match waste).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Dye Lot" nightmare</h2>
+                    <p>If there’s one piece of advice I can give you: <strong>always buy one more roll than you think you need.</strong> I've seen too many people run short and try to buy an extra roll a week later, only to find the color is slightly off. Wallpapers are printed in "dye lots," and if you get a roll from a different batch, the difference can be blinding once it’s on your wall.</p>
+                    
+                    <h2>What is pattern repeat?</h2>
+                    <p>If your wallpaper has a large floral pattern or a geometric design, you can’t just stick the next strip up anywhere. You have to shift it up or down to align the pattern. This produces waste at the top and bottom of every strip. Our calculator adds that waste based on the "repeat" size you enter.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('wall-form');
+            const ww = document.getElementById('w-width');
+            const wh = document.getElementById('w-height');
+            const rw = document.getElementById('r-width');
+            const rl = document.getElementById('r-length');
+            const pr = document.getElementById('p-repeat');
+            const ws = document.getElementById('waste');
+
+            const resRolls = document.getElementById('res-rolls');
+            const resSqft = document.getElementById('res-sqft');
+
+            function update() {
+                const wallW = parseFloat(ww.value) || 0;
+                const wallH = parseFloat(wh.value) || 0;
+                const rollW = (parseFloat(rw.value) / 12) || 1.7; // feet
+                const rollL = parseFloat(rl.value) || 0;
+                const repeat = (parseFloat(pr.value) / 12) || 0; // feet
+                const wastePct = (parseFloat(ws.value) / 100) || 0;
+
+                if (rollW === 0 || rollL === 0) return;
+
+                // How many strips to cover width?
+                const numStrips = Math.ceil(wallW / rollW);
+                
+                // Length per strip needed
+                // If there's a repeat, every strip effectively "costs" height + repeat
+                const stripLengthUsed = repeat > 0 ? (wallH + repeat) : wallH;
+                const totalLengthFeet = (numStrips * stripLengthUsed) * (1 + wastePct);
+
+                const rolls = Math.ceil(totalLengthFeet / rollL);
+
+                resRolls.textContent = rolls;
+                resSqft.textContent = Math.round(wallW * wallH);
+            }
+
+            form.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

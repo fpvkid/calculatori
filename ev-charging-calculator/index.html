@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>EV Charging Time Calculator | Level 1, 2, & DC Fast Tool</title>
+    <meta name="description" content="Free EV charging calculator. Estimate how long it takes to charge your electric vehicle based on battery size, charger power (kW), and current charge level.">
+    <meta name="keywords" content="ev charging time calculator, tesla charging time calculator, level 2 charger speed, dc fast charge estimator, electric car charging tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/ev-charging-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
+        
+        .res-panel { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .time-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .time-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+
+        .preset-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .preset-btn { background: var(--clr-bg-2); border: 1px solid var(--clr-border); border-radius: var(--radius); padding: 12px; cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.75rem; text-align: center; }
+        .preset-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>EV charging calculator</h1>
+                    <p>Calculate your charging time. Understand why that "Fast Charger" is actually really slow for the last 20% of your battery.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Charger Level</label>
+                        <div class="preset-grid">
+                            <button class="preset-btn" data-kw="1.4">Level 1 (Wall)</button>
+                            <button class="preset-btn active" data-kw="7.7">Level 2 (Home)</button>
+                            <button class="preset-btn" data-kw="50">DC Fast (Public)</button>
+                        </div>
+
+                        <form class="calc-form" id="ev-form">
+                            <div class="form-group">
+                                <label>Battery Capacity (kWh)</label>
+                                <input type="number" id="capacity" value="75">
+                                <small>e.g. Tesla Model 3 Long Range is ~75kWh</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Charger Power (kW)</label>
+                                <input type="number" id="power" value="7.7" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Target Charge (%)</label>
+                                <input type="number" id="target" value="80">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-panel">
+                            <div class="time-label">Estimated Time:</div>
+                            <div class="time-val" id="res-time">7.8</div>
+                            <div class="time-label">Hours</div>
+                            <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;">
+                                From 0% to <span id="res-target-label">80</span>%.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "80% Wall"</h2>
+                    <p>I genuinely believe the biggest shock for new EV owners is how slow the last 20% of charging is. Think of it like filling a stadium with people. When the stadium is empty, people can run in and find seats quickly (fast charging). But when the stadium is 80% full, the last few people have to walk slowly, check row numbers, and climb over others to find their seats. Your battery is exactly the same—the chemistry slows down at the end to prevent heat damage. That’s why we usually stop charging at 80% on road trips.</p>
+                    
+                    <p><strong>Efficiency Loss:</strong> Charging isn’t 100% efficient. Some energy is lost as heat in the cables and in the charging unit. Our calculator adds a <strong>15% buffer</strong> to account for this real-world efficiency loss. If you use a generic "Capacity / Power" calculation, you will always be late.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const capI = document.getElementById('capacity');
+            const powI = document.getElementById('power');
+            const tarI = document.getElementById('target');
+            const pBtns = document.querySelectorAll('.preset-btn');
+            
+            const resT = document.getElementById('res-time');
+            const resL = document.getElementById('res-target-label');
+
+            pBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    pBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    powI.value = btn.dataset.kw;
+                    update();
+                });
+            });
+
+            function update() {
+                const capacity = parseFloat(capI.value) || 75;
+                const power = parseFloat(powI.value) || 7.7;
+                const target = parseFloat(tarI.value) || 80;
+
+                if (power === 0) return;
+
+                const neededKwh = capacity * (target / 100);
+                // 15% efficiency loss
+                let hours = (neededKwh / power) / 0.85;
+
+                // Simple model for "fast charging slow down" above 80%
+                if (target > 80 && power > 20) {
+                    const slowKwh = capacity * ((target - 80) / 100);
+                    // Charging drops significantly above 80% on fast chargers
+                    const slowHours = (slowKwh / (power * 0.25)); 
+                    hours = ((capacity * 0.8) / power / 0.85) + slowHours;
+                }
+
+                resT.textContent = hours.toFixed(1);
+                resL.textContent = target;
+            }
+
+            [capI, powI, tarI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

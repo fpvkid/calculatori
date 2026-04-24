@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Moving Box Calculator | How Many Boxes for My House?</title>
+    <meta name="description" content="Free moving box calculator. Estimate exactly how many small, medium, and large boxes you need to buy for your next move based on room count and lifestyle.">
+    <meta name="keywords" content="how many moving boxes do i need, moving box calculator for 3 bedroom house, average boxes for 1 bedroom apartment, moving supply estimator, box count tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/moving-box-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .result-panel { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .main-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .stat-grid { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .stat-item { background: var(--clr-bg-2); padding: 15px 10px; border-radius: var(--radius); border: 1px solid var(--clr-border); }
+        .stat-val { display: block; font-weight: 800; font-size: 1.5rem; color: var(--clr-text); }
+        .stat-label { font-size: 0.65rem; color: var(--clr-text-dim); text-transform: uppercase; }
+
+        .lifestyle-tabs { display: flex; gap: 8px; margin-bottom: 25px; }
+        .life-tab { flex: 1; padding: 12px; background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; text-align: center; }
+        .life-tab.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Moving box calculator</h1>
+                    <p>Don't be the person running to Home Depot at 11 PM on moving eve. Get a realistic estimate of the boxes you actually need.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Your Lifestyle</label>
+                        <div class="lifestyle-tabs">
+                            <button class="life-tab" data-val="15">Minimalist</button>
+                            <button class="life-tab active" data-val="25">Average</button>
+                            <button class="life-tab" data-val="40">The Collector</button>
+                        </div>
+
+                        <form class="calc-form" id="box-form">
+                            <div class="form-group">
+                                <label>Number of Bedrooms</label>
+                                <input type="number" id="rooms" value="2">
+                            </div>
+                            <div class="form-group">
+                                <label>Years Lived There</label>
+                                <input type="number" id="years" value="3">
+                                <small>More time = more mysterious clutter</small>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="result-side">
+                        <div class="result-panel">
+                            <span class="main-label">Estimated Total:</span>
+                            <div class="main-val" id="res-total">65</div>
+                            <span class="main-label">Boxes</span>
+                            
+                            <div class="stat-grid">
+                                <div class="stat-item">
+                                    <span class="stat-label">Small</span>
+                                    <span class="stat-val" id="res-s">25</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Medium</span>
+                                    <span class="stat-val" id="res-m">30</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Large</span>
+                                    <span class="stat-val" id="res-l">10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Empty Space" trap</h2>
+                    <p>I genuinely don't know how I manage to accumulate so much junk in such a short time. Every time I move, I think I’ve got about 20 boxes worth of stuff, and I end up with 60. The secret is the "mysterious clutter" — all the things hiding in the back of cabinets and under the bed. That’s why I added the "Years Lived There" slider. If you've been in a place for 10 years, trust me, you need 30% more boxes than you think.</p>
+                    
+                    <h2>Which size box for what?</h2>
+                    <ul>
+                        <li><strong>Small Boxes:</strong> These are for heavy stuff. Books, pans, and canned food. If you put books in a large box, you’ll throw your back out trying to lift it. I've been that person. It's not worth it.</li>
+                        <li><strong>Medium Boxes:</strong> Your workhorses. Clothes, toys, smaller appliances.</li>
+                        <li><strong>Large Boxes:</strong> For light, bulky items. Pillows, blankets, towels, and those giant coats you only wear once a year.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('box-form');
+            const roomsI = document.getElementById('rooms');
+            const yearsI = document.getElementById('years');
+            const tabs = document.querySelectorAll('.life-tab');
+            
+            const resTotal = document.getElementById('res-total');
+            const resS = document.getElementById('res-s');
+            const resM = document.getElementById('res-m');
+            const resL = document.getElementById('res-l');
+
+            let density = 25;
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    density = parseInt(tab.dataset.val);
+                    update();
+                });
+            });
+
+            function update() {
+                const r = parseInt(roomsI.value) || 0;
+                const y = parseInt(yearsI.value) || 0;
+
+                // Base boxes = rooms * density + (extra rooms like living/kitchen ~ 1.5 rooms)
+                // Add 5% more per year lived there
+                const base = (r + 1.5) * density;
+                const total = Math.round(base * (1 + (y * 0.05)));
+
+                resTotal.textContent = total;
+                // Roughly 40% Small, 45% Medium, 15% Large
+                resS.textContent = Math.round(total * 0.4);
+                resM.textContent = Math.round(total * 0.45);
+                resL.textContent = Math.round(total * 0.15);
+            }
+
+            [roomsI, yearsI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

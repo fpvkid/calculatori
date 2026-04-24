@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Fence Material Calculator | Boards, Posts & Rails Estimator</title>
+    <meta name="description" content="Free fence material calculator. Estimate exactly how many pickets, posts, and backer rails you need for your privacy fence based on total length.">
+    <meta name="keywords" content="fence material calculator, how many fence boards for 50 feet, privacy fence post spacing, fence picket count tool, wood fence estimator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/fence-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 900px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
+        
+        .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .res-card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: var(--radius-lg); padding: 25px; text-align: center; }
+        .res-val { font-size: 2.5rem; font-weight: 800; color: var(--clr-accent); display: block; line-height: 1; }
+        .res-label { font-size: 0.75rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-top: 5px; display: block; }
+
+        .inputs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Fence material calculator</h1>
+                    <p>Calculate exactly how many boards, rails, and posts you need to enclose your yard. Build it once, build it right.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <form class="calc-form" id="fence-form">
+                            <div class="form-group">
+                                <label>Total Length of Fence (ft)</label>
+                                <input type="number" id="len" value="50">
+                            </div>
+                            <div class="inputs-row">
+                                <div class="form-group">
+                                    <label>Post Spacing (ft)</label>
+                                    <input type="number" id="spacing" value="8">
+                                </div>
+                                <div class="form-group">
+                                    <label>Picket Width (inches)</label>
+                                    <input type="number" id="picket-w" value="5.5" step="0.1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Picket Gap (inches)</label>
+                                <input type="number" id="gap" value="0" step="0.1">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-grid">
+                            <div class="res-card">
+                                <span class="res-val" id="res-posts">8</span>
+                                <span class="res-label">Posts</span>
+                            </div>
+                            <div class="res-card">
+                                <span class="res-val" id="res-pickets">110</span>
+                                <span class="res-label">Pickets</span>
+                            </div>
+                            <div class="res-card">
+                                <span class="res-val" id="res-rails">12</span>
+                                <span class="res-label">Backer Rails</span>
+                            </div>
+                            <div class="res-card">
+                                <span class="res-val" id="res-bags">14</span>
+                                <span class="res-label">Bags Concrete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Frost Line" mistake</h2>
+                    <p>I genuinely don't know why people try to save money on post holes. If you live in a cold climate and you only dig your posts 2 feet deep, the first big freeze will "heave" your beautiful new fence right out of the ground. The frost line is real. Check your local code, but in most places, <strong>3 feet deep</strong> is the standard for a reason. Don't be the neighbor with the wavy fence.</p>
+                    
+                    <p><strong>Note on 8-foot spacing:</strong> 8 feet is the industry standard for wood fences because backer rails usually come in 8ft or 16ft lengths. If you change your spacing to something like 7 feet, you’ll end up wasting a foot of every single rail you buy. Stick to 8ft or 6ft centers to save money and wood.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const lI = document.getElementById('len');
+            const sI = document.getElementById('spacing');
+            const pI = document.getElementById('picket-w');
+            const gI = document.getElementById('gap');
+            
+            const resPosts = document.getElementById('res-posts');
+            const resPickets = document.getElementById('res-pickets');
+            const resRails = document.getElementById('res-rails');
+            const resBags = document.getElementById('res-bags');
+
+            function update() {
+                const len = parseFloat(lI.value) || 0;
+                const spacing = parseFloat(sI.value) || 8;
+                const picketW = parseFloat(pI.value) || 5.5;
+                const gap = parseFloat(gI.value) || 0;
+
+                if (len === 0) return;
+
+                // Posts = Length / Spacing + 1 (for the end)
+                const posts = Math.ceil(len / spacing) + 1;
+                // Pickets = Length (ft * 12) / (PicketWidth + Gap)
+                const pickets = Math.ceil((len * 12) / (picketW + gap));
+                // Rails = (Length / RailLength[usually spacing]) * 2 or 3
+                const rails = Math.ceil(len / spacing) * 3; // Assumes 3 rails for privacy fence
+
+                resPosts.textContent = posts;
+                resPickets.textContent = Math.ceil(pickets * 1.05); // 5% waste
+                resRails.textContent = rails;
+                resBags.textContent = posts * 2; // 2 bags per post
+            }
+
+            [lI, sI, pI, gI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

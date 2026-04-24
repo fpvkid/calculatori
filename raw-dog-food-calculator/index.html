@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
+    <title>Raw Dog Food Calculator | BARF Diet Portions by Weight & Age</title>
+    <meta name="description" content="Free raw feeding calculator for dogs. Enter your dog's weight, age, and activity level to get exact daily portions of meat, bone, and organs using the 80/10/10 BARF ratio.">
+    <meta name="keywords" content="raw dog food calculator, BARF diet calculator, raw feeding calculator, 80 10 10 ratio dogs, raw meat diet dog, how much raw food for dog">
+    <meta name="author" content="calcsfor.life">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calcsfor.life/raw-dog-food-calculator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Raw Dog Food Calculator | BARF Diet Portions">
+    <meta property="og:description" content="Calculate exact daily raw food portions for your dog. Meat, bone, organs broken down by the 80/10/10 rule.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/raw-dog-food-calculator/">
+    <meta property="og:site_name" content="calcsfor.life">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Raw Dog Food Calculator | BARF Diet Portions">
+    <meta name="twitter:description" content="Calculate exact daily raw food portions for your dog using the 80/10/10 BARF ratio.">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Raw Dog Food Calculator",
+        "description": "Calculate exact daily raw food portions for your dog based on weight, age, and activity level using the BARF 80/10/10 ratio.",
+        "url": "https://calcsfor.life/raw-dog-food-calculator/",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How much raw food should I feed my dog daily?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Adult dogs typically eat 2-3% of their ideal body weight per day. Active or working dogs may need closer to 3-4%, while senior or less active dogs do well at 1.5-2%. Puppies require 5-10% depending on their age and growth rate."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the 80/10/10 ratio in raw feeding?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The 80/10/10 ratio means 80% muscle meat (including heart, tripe, and gizzards), 10% raw edible bone, and 10% secreting organs (with at least half being liver). This ratio approximates the nutritional profile of whole prey."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I feed my puppy a raw diet?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, but puppies need significantly more food relative to their body weight (5-10%) and require careful calcium-to-phosphorus balance for proper bone development. Start transitioning gradually over 7-10 days. Consulting a veterinarian or canine nutritionist is strongly recommended for puppies."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do I need to balance every meal?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Most raw feeders aim for balance over the course of a week or two rather than in every single bowl. Rotating protein sources (beef, chicken, turkey, lamb, fish) over time helps cover micronutrient needs."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://calcsfor.life/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Raw Dog Food Calculator",
+                "item": "https://calcsfor.life/raw-dog-food-calculator/"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero" id="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-tag">Free raw feeding tool</p>
+                    <h1>Raw dog food calculator</h1>
+                    <p class="hero-sub">Figure out exactly how much meat, bone, and organs your dog needs each day. No guesswork, no spreadsheets. Just enter the weight and go.</p>
+                    <a href="#calculator" class="btn btn-primary btn-lg" id="hero-cta">Calculate portions</a>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="hero-card-ring ring-1"></div>
+                        <div class="hero-card-ring ring-2"></div>
+                        <div class="hero-card-ring ring-3"></div>
+                        <div class="hero-card-icon">🥩</div>
+                        <div class="hero-card-label">80% meat</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator -->
+        <section class="calculator-section" id="calculator">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Calculate your dog's daily raw food portions</h2>
+                    <p>Enter your dog's details below. The calculator uses the 80/10/10 BARF ratio to break down daily amounts of muscle meat, edible bone, and secreting organs.</p>
+                </div>
+
+                <div class="calc-wrapper">
+                    <form class="calc-form" id="calc-form" aria-label="Raw food calculator form">
+                        <!-- Weight -->
+                        <div class="form-group" id="fg-weight">
+                            <label for="dog-weight">Dog's weight</label>
+                            <div class="input-row">
+                                <input type="number" id="dog-weight" name="weight" min="0.5" max="120" step="0.1" placeholder="25" required aria-describedby="weight-help">
+                                <div class="unit-toggle" id="unit-toggle">
+                                    <button type="button" class="unit-btn active" data-unit="kg" id="unit-kg">kg</button>
+                                    <button type="button" class="unit-btn" data-unit="lb" id="unit-lb">lb</button>
+                                </div>
+                            </div>
+                            <small id="weight-help">Your dog's current or ideal body weight</small>
+                        </div>
+
+                        <!-- Life stage -->
+                        <div class="form-group" id="fg-stage">
+                            <label for="life-stage">Life stage</label>
+                            <select id="life-stage" name="stage" required>
+                                <option value="" disabled selected>Choose one</option>
+                                <option value="puppy-young">Puppy (under 4 months)</option>
+                                <option value="puppy-mid">Puppy (4-8 months)</option>
+                                <option value="puppy-old">Puppy (8-12 months)</option>
+                                <option value="adult">Adult (1-7 years)</option>
+                                <option value="senior">Senior (7+ years)</option>
+                            </select>
+                        </div>
+
+                        <!-- Activity -->
+                        <div class="form-group" id="fg-activity">
+                            <label for="activity-level">Activity level</label>
+                            <div class="radio-cards" id="activity-cards">
+                                <label class="radio-card" for="activity-low">
+                                    <input type="radio" id="activity-low" name="activity" value="low">
+                                    <div class="radio-card-inner">
+                                        <span class="radio-card-icon">😴</span>
+                                        <span class="radio-card-title">Low</span>
+                                        <span class="radio-card-desc">Mostly sleeps, short walks</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card" for="activity-moderate">
+                                    <input type="radio" id="activity-moderate" name="activity" value="moderate" checked>
+                                    <div class="radio-card-inner">
+                                        <span class="radio-card-icon">🐕</span>
+                                        <span class="radio-card-title">Moderate</span>
+                                        <span class="radio-card-desc">Daily walks, some play</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card" for="activity-high">
+                                    <input type="radio" id="activity-high" name="activity" value="high">
+                                    <div class="radio-card-inner">
+                                        <span class="radio-card-icon">🏃</span>
+                                        <span class="radio-card-title">High</span>
+                                        <span class="radio-card-desc">Working dog, agility training</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Weight goal -->
+                        <div class="form-group" id="fg-goal">
+                            <label for="weight-goal">Weight goal</label>
+                            <select id="weight-goal" name="goal">
+                                <option value="maintain" selected>Maintain current weight</option>
+                                <option value="lose">Lose weight (reduce 10%)</option>
+                                <option value="gain">Gain weight (increase 10%)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="calc-submit">
+                            <span>Show my dog's portions</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </form>
+
+                    <!-- Results -->
+                    <div class="calc-results hidden" id="calc-results" aria-live="polite">
+                        <div class="results-header">
+                            <h3>Daily feeding plan</h3>
+                            <p class="results-summary" id="results-summary"></p>
+                        </div>
+
+                        <div class="results-grid">
+                            <div class="result-card result-total" id="result-total">
+                                <div class="result-card-label">Total daily food</div>
+                                <div class="result-card-value" id="total-grams">--</div>
+                                <div class="result-card-unit">grams / day</div>
+                                <div class="result-card-sub" id="total-oz"></div>
+                            </div>
+
+                            <div class="result-card result-meat" id="result-meat">
+                                <div class="result-card-percent">80%</div>
+                                <div class="result-card-label">Muscle meat</div>
+                                <div class="result-card-value" id="meat-grams">--</div>
+                                <div class="result-card-unit">grams</div>
+                                <div class="result-card-info">Heart, tripe, gizzards, tongue, cheek</div>
+                            </div>
+
+                            <div class="result-card result-bone" id="result-bone">
+                                <div class="result-card-percent">10%</div>
+                                <div class="result-card-label">Edible bone</div>
+                                <div class="result-card-value" id="bone-grams">--</div>
+                                <div class="result-card-unit">grams</div>
+                                <div class="result-card-info">Chicken necks, wings, ribs, frames</div>
+                            </div>
+
+                            <div class="result-card result-organ" id="result-organ">
+                                <div class="result-card-percent">10%</div>
+                                <div class="result-card-label">Secreting organs</div>
+                                <div class="result-card-value" id="organ-grams">--</div>
+                                <div class="result-card-unit">grams</div>
+                                <div class="result-card-info">
+                                    <span id="liver-grams">--</span>g liver + <span id="other-organ-grams">--</span>g kidney/spleen
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Weekly view -->
+                        <div class="weekly-view" id="weekly-view">
+                            <h4>Weekly breakdown</h4>
+                            <div class="weekly-table-wrap">
+                                <table class="weekly-table" id="weekly-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Component</th>
+                                            <th>Per day</th>
+                                            <th>Per week</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="weekly-tbody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="results-note">
+                            <p><strong>Heads up:</strong> These numbers are a starting point. Watch your dog's weight, energy, and stool quality over the first 2-3 weeks and adjust as needed. Every dog is different. If you're new to raw feeding or have a puppy, talk to a vet or canine nutritionist before switching.</p>
+                        </div>
+
+                        <button class="btn btn-outline" id="recalc-btn" type="button">Recalculate</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="info-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How the 80/10/10 ratio works</h2>
+                    <p>The idea behind raw feeding is simple: dogs evolved eating whole prey. The 80/10/10 split tries to replicate that in a way you can actually do at home.</p>
+                </div>
+
+                <div class="info-grid">
+                    <article class="info-card">
+                        <div class="info-card-icon meat-icon">🥩</div>
+                        <h3>80% muscle meat</h3>
+                        <p>This is the bulk of the diet. It covers protein and fat. "Muscle meat" includes more than just steak cuts. Heart, tongue, tripe, gizzards, and cheek meat all count here. Rotating between beef, chicken, turkey, lamb, and fish over the week gives your dog a wider range of amino acids and fatty acids than sticking to one protein.</p>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="info-card-icon bone-icon">🦴</div>
+                        <h3>10% edible bone</h3>
+                        <p>Bone is where calcium and phosphorus come from. Only feed raw bones and only the kind your dog can actually chew and swallow. Chicken necks, duck frames, and rabbit ribs work well for most dogs. Avoid weight-bearing bones from large animals (like beef femurs) since they can crack teeth. And never feed cooked bones because they splinter.</p>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="info-card-icon organ-icon">🫀</div>
+                        <h3>10% secreting organs</h3>
+                        <p>Organs are the multivitamin of a raw diet. At least half of this 10% should be liver, which is packed with vitamin A, B vitamins, and iron. The other half can be kidney, spleen, pancreas, or brain. Start with small amounts because liver especially can cause loose stool if introduced too fast.</p>
+                    </article>
+                </div>
+
+                <div class="info-note">
+                    <h3>A quick word about "balance"</h3>
+                    <p>You don't need to nail the ratio in every single meal. What matters is the average over a week or two. Monday's bowl might be mostly chicken thighs, while Tuesday has more bone-in content. That's fine. Think of it like your own diet: you don't eat a perfectly balanced plate at every meal, but the week evens out.</p>
+                    <p>That said, there are some things 80/10/10 doesn't cover well on its own, like manganese, zinc, vitamin E, and omega-3 fatty acids. Adding oily fish (sardines, mackerel) once or twice a week and rotating proteins helps fill those gaps. Some people also add a small amount of vegetables or a supplement. There's no single right answer here.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feeding Guide -->
+        <section class="guide-section" id="guide">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Feeding guide by life stage</h2>
+                    <p>The percentage of body weight your dog needs changes as they grow. Here's a breakdown based on age and activity.</p>
+                </div>
+
+                <div class="guide-table-wrap">
+                    <table class="guide-table" id="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Life stage</th>
+                                <th>% of body weight per day</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Puppy (under 4 months)</td>
+                                <td>8-10%</td>
+                                <td>Growing fast, needs lots of fuel. Split into 3-4 meals.</td>
+                            </tr>
+                            <tr>
+                                <td>Puppy (4-8 months)</td>
+                                <td>6-8%</td>
+                                <td>Growth slows down a bit. 3 meals per day works well.</td>
+                            </tr>
+                            <tr>
+                                <td>Puppy (8-12 months)</td>
+                                <td>4-6%</td>
+                                <td>Approaching adult size. Start transitioning to 2 meals.</td>
+                            </tr>
+                            <tr>
+                                <td>Adult (1-7 years)</td>
+                                <td>2-3%</td>
+                                <td>Most adults do well at 2.5%. Adjust based on condition.</td>
+                            </tr>
+                            <tr>
+                                <td>Senior (7+ years)</td>
+                                <td>1.5-2.5%</td>
+                                <td>Less active, lower metabolism. Watch weight closely.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="guide-tips">
+                    <h3>Tips for getting started</h3>
+                    <ol>
+                        <li><strong>Transition slowly.</strong> Don't swap from kibble to raw overnight. Start by replacing one meal with raw and keep it simple, like plain chicken thighs with a bit of bone. Take about 7-10 days to fully switch over.</li>
+                        <li><strong>Start with one protein.</strong> Chicken is the usual go-to because it's cheap and mild. After a couple weeks, introduce a second protein (like beef or turkey). Add a new one every week or so.</li>
+                        <li><strong>Weigh everything at first.</strong> Eyeballing portions is fine once you get a feel for it, but use a kitchen scale for the first few weeks. It makes a bigger difference than you'd think, especially with organs.</li>
+                        <li><strong>Watch the poop.</strong> Seriously. White, chalky, or crumbly stool means too much bone. Very dark or loose stool means too much organ or too fast of a transition. Normal raw-fed stool is smaller, firmer, and darker than kibble stool.</li>
+                        <li><strong>Freeze organs in small portions.</strong> Liver and kidney are easier to handle (and less smelly) when frozen. Cut them into meal-sized chunks and thaw as needed.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Common questions about raw feeding</h2>
+                </div>
+
+                <div class="faq-list" id="faq-list">
+                    <details class="faq-item" id="faq-1">
+                        <summary>How much raw food should I feed my dog daily?</summary>
+                        <div class="faq-answer">
+                            <p>Adult dogs typically eat 2-3% of their ideal body weight per day. A 30 kg dog would eat roughly 600-900 grams of food daily. Active or working dogs may need closer to 3-4%, while senior or less active dogs do well at 1.5-2%. Puppies need much more relative to their size: 5-10% depending on age.</p>
+                            <p>These are starting points. The real test is your dog's body condition. If you can feel the ribs without pressing hard but can't see them, the amount is probably right.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-2">
+                        <summary>Is raw food safe for dogs?</summary>
+                        <div class="faq-answer">
+                            <p>Dogs have shorter digestive tracts and more acidic stomachs than humans, which helps them handle raw meat. Millions of dogs eat raw diets without issues. That said, contamination is possible. Buy meat from reputable sources, keep it frozen until use, and clean bowls and surfaces after preparing meals. Common sense food safety applies.</p>
+                            <p>If your dog is immunocompromised or on medication that affects their immune system, check with your vet before starting raw.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-3">
+                        <summary>Can I feed my puppy a raw diet?</summary>
+                        <div class="faq-answer">
+                            <p>Yes, but puppies have more specific nutritional needs than adults. They need more food relative to their body weight (5-10%) and require careful attention to calcium-to-phosphorus ratio for proper bone development. Large breed puppies in particular can run into joint problems if calcium is too high or too low during growth.</p>
+                            <p>If you're new to raw feeding, getting guidance from a vet or canine nutritionist for a puppy's first year is a good idea.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-4">
+                        <summary>Do I need to balance every single meal?</summary>
+                        <div class="faq-answer">
+                            <p>No. Most raw feeders aim for balance over the course of a week or two, not in every bowl. One day might be mostly meat, the next might include more bone. As long as the averages come out close to 80/10/10 over time, that works. Rotating between different protein sources (beef, chicken, turkey, lamb, fish, duck) over the week also helps cover micronutrient gaps.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-5">
+                        <summary>What's the difference between BARF and prey model raw?</summary>
+                        <div class="faq-answer">
+                            <p>BARF (Biologically Appropriate Raw Food) includes vegetables, fruits, and sometimes dairy or eggs alongside meat, bone, and organs. Prey model raw (PMR) sticks strictly to animal products: meat, bone, and organs with no plant matter. The 80/10/10 ratio comes from the PMR side of things, though many BARF feeders use it as a base and add 10-20% vegetables on top.</p>
+                            <p>Both approaches have their advocates. This calculator uses the 80/10/10 base. If you want to add veggies, treat them as extra rather than replacing the meat/bone/organ portions.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-6">
+                        <summary>What proteins should I rotate?</summary>
+                        <div class="faq-answer">
+                            <p>Variety matters. Try to use at least 3-4 different protein sources per month. Common options: chicken, beef, turkey, pork, lamb, duck, rabbit, and fish. Each brings different nutrient profiles. Beef liver, for instance, has more copper than chicken liver. Fish adds omega-3 fatty acids you won't get from land animals. Rotating keeps the diet more complete without needing supplements.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-7">
+                        <summary>How do I store raw dog food?</summary>
+                        <div class="faq-answer">
+                            <p>Bulk buying and freezing is the most practical approach. Portion out a week or two's worth of meals into containers or zip bags and store them in the freezer. Move the next day's food to the fridge to thaw overnight. Most raw feeders prep once a week and stack containers in the fridge for daily use.</p>
+                            <p>A kitchen scale, a chest freezer, and some reusable containers are basically the only gear you need.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-inner">
+                    <h2>About this calculator</h2>
+                    <p>This calculator was built for people who feed their dogs raw food and got tired of doing the same math on a napkin every time they adjust portions or add a new dog. It uses the 80/10/10 ratio (also called PMR or prey model raw) and adjusts daily intake based on life stage and activity level.</p>
+                    <p>It's free, it runs in your browser, and no data leaves your device. The tool should work for most healthy dogs, but it's not a substitute for professional veterinary advice, especially for puppies, dogs with health conditions, or when making significant dietary changes.</p>
+                    <p>If you find it useful, share it with someone who might need it. That's the best way to keep free tools alive.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
+

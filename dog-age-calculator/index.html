@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Dog Age Calculator | Breed-Specific Human Years Tool</title>
+    <meta name="description" content="Calculate your dog's age in human years based on their breed size. Science-backed formula for small, medium, large, and giant breeds.">
+    <meta name="keywords" content="dog age calculator by breed, how old is my dog in human years, giant breed dog age calculator, small dog human years, dog age conversion chart">
+    <meta name="author" content="calcsfor.life">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calcsfor.life/dog-age-calculator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Dog Age Calculator | Human Years by Breed Size">
+    <meta property="og:description" content="Is your dog a teenager or a senior? Get an accurate age conversion based on their breed size.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/dog-age-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 700px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .age-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .age-label { font-size: 1.2rem; color: var(--clr-text-dim); margin-top: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .life-stage { margin-top: 20px; padding: 10px 20px; background: var(--clr-bg-2); border-radius: var(--radius-sm); display: inline-block; font-weight: 700; color: var(--clr-accent); }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Dog age calculator</h1>
+                    <p>The "7 human years for every dog year" rule is a myth. Accurate aging depends heavily on your dog's weight and breed size.</p>
+                </div>
+
+                <form class="calc-form" id="dog-age-form">
+                    <div class="form-group">
+                        <label for="dog-years">Dog's Actual Age (Years)</label>
+                        <input type="number" id="dog-years" value="5" min="0" max="30" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Breed Size (Weight)</label>
+                        <select id="dog-size">
+                            <option value="small">Small (under 20 lbs / 9 kg)</option>
+                            <option value="medium" selected>Medium (21-50 lbs / 10-23 kg)</option>
+                            <option value="large">Large (51-100 lbs / 24-45 kg)</option>
+                            <option value="giant">Giant (over 100 lbs / 45 kg)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="age-val" id="human-years">36</div>
+                    <div class="age-label">Human Years</div>
+                    <div class="life-stage" id="life-stage">Adult</div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "rule of 7" is dead</h2>
+                    <p>I genuinely hate the "multiply by 7" rule. It’s lazy and scientifically wrong. Dogs age much faster in their first two years then they do later in life, and tiny Chihuahuas live nearly twice as long as Great Danes. My old lab was "84" by that logic when he was actually acting like a energetic teenager.</p>
+                    
+                    <p>The math I've used here is based on more recent veterinary data. Basically, the first year for any dog is roughly 15 human years. Then it depends on size. Large breeds might reach "senior" status at age 6, while smaller dogs are still in their prime at age 10.</p>
+
+                    <h2>How aging varies by size:</h2>
+                    <ul>
+                        <li><strong>Small pups:</strong> They reach adulthood fast but age very slowly after that.</li>
+                        <li><strong>Giant breeds:</strong> They take longer to fully grow but hit senior years much earlier — sometimes by age 5 or 6.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('dog-age-form');
+            const yearsInput = document.getElementById('dog-years');
+            const sizeInput = document.getElementById('dog-size');
+            const resVal = document.getElementById('human-years');
+            const resStage = document.getElementById('life-stage');
+
+            const agingChart = {
+                small: [0, 15, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80],
+                medium: [0, 15, 24, 28, 32, 36, 42, 47, 51, 56, 60, 65, 69, 74, 78, 83, 87],
+                large: [0, 15, 24, 28, 32, 36, 45, 50, 55, 61, 66, 72, 77, 82, 88, 93, 99],
+                giant: [0, 12, 22, 31, 38, 45, 49, 56, 64, 71, 79, 86, 93, 100, 107, 114, 121]
+            };
+
+            function update() {
+                const y = parseFloat(yearsInput.value) || 0;
+                const size = sizeInput.value;
+                const chart = agingChart[size];
+                
+                let humanTotal = 0;
+                const idx = Math.floor(y);
+                const fract = y - idx;
+
+                if (idx < chart.length - 1) {
+                    humanTotal = chart[idx] + (chart[idx + 1] - chart[idx]) * fract;
+                } else {
+                    // Beyond chart, add roughly 4-5 per year
+                    humanTotal = chart[chart.length - 1] + (y - (chart.length - 1)) * 5;
+                }
+
+                resVal.textContent = Math.round(humanTotal);
+                
+                // Stages
+                if(humanTotal < 13) resStage.textContent = "Puppy";
+                else if(humanTotal < 25) resStage.textContent = "Adolescent";
+                else if(humanTotal < 50) resStage.textContent = "Adult";
+                else if(humanTotal < 70) resStage.textContent = "Mature";
+                else resStage.textContent = "Senior";
+            }
+
+            form.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

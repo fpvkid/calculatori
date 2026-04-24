@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Egg Timer (C0/C1) — Precise Altitude-Adjusted Boiling</title>
+    <meta name="description" content="Calculate perfect egg boiling times at any altitude. Scientist-calibrated logic for Large (C1) and XL (C0) eggs. Adjusts for fridge temperature, stove type, and air pressure.">
+    <meta name="keywords" content="egg timer, high altitude egg boiling, C0 egg time, C1 egg time, boil eggs in mountains, perfect jammy egg, molecular gastronomy egg timer">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "EggVIBE Precise Timer",
+      "operatingSystem": "Web",
+      "applicationCategory": "UtilitiesApplication",
+      "description": "Calculates perfect egg boiling times based on mass (C0, C1) and starting temperature.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <main class="app-container">
+        <header>
+            <h1 class="title">EggVIBE</h1>
+            <p class="subtitle">Because 6 minutes is never just 6 minutes</p>
+        </header>
+
+        <section class="calculator-card">
+            <!-- Step 1: Selection -->
+            <div id="selection-view">
+                <div class="control-group">
+                    <label class="group-label">Egg Size</label>
+                    <div class="chip-group" id="size-chips">
+                        <button class="chip active" data-value="C0">
+                            <span class="chip-main">XL (C0)</span>
+                            <span class="chip-sub">75g+</span>
+                        </button>
+                        <button class="chip" data-value="C1">
+                            <span class="chip-main">Large (C1)</span>
+                            <span class="chip-sub">65-75g</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="group-label">Initial Temperature</label>
+                    <div class="chip-group" id="temp-chips">
+                        <button class="chip active" data-value="fridge">
+                            <span class="chip-main">Cold (Fridge)</span>
+                            <span class="chip-sub">~4°C / 40°F</span>
+                        </button>
+                        <button class="chip" data-value="room">
+                            <span class="chip-main">Room Temp</span>
+                            <span class="chip-sub">~20°C / 68°F</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="group-label">Cooking Method</label>
+                    <div class="chip-group" id="method-chips">
+                        <button class="chip active" data-value="boiling">
+                            <span class="chip-main">Boiling Start</span>
+                            <span class="chip-sub">Easy to peel</span>
+                        </button>
+                        <button class="chip" data-value="cold">
+                            <span class="chip-main">Cold Start</span>
+                            <span class="chip-sub">Gentle heat</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="group-label">Stove Type</label>
+                    <div class="chip-group" id="stove-chips">
+                        <button class="chip active" data-value="gas">
+                            <span class="chip-main">Gas / Induction</span>
+                        </button>
+                        <button class="chip" data-value="electric">
+                            <span class="chip-main">Electric</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="group-label">Altitude (Elevation)</label>
+                    <div class="chip-group" id="altitude-chips">
+                        <button class="chip active" data-value="0">
+                            <span class="chip-main">Sea Level</span>
+                            <span class="chip-sub">0 - 500m</span>
+                        </button>
+                        <button class="chip" data-value="1000">
+                            <span class="chip-main">High</span>
+                            <span class="chip-sub">~1000m</span>
+                        </button>
+                        <button class="chip" data-value="2000">
+                            <span class="chip-main">Alpine</span>
+                            <span class="chip-sub">2000m+</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="group-label">Desired Doneness</label>
+                    <div class="doneness-grid">
+                        <button class="doneness-card" data-value="soft">
+                            <div class="egg-icon soft"></div>
+                            <span class="label">Soft-Boiled</span>
+                            <span class="desc">Runny yolk</span>
+                        </button>
+                        <button class="doneness-card active" data-value="medium">
+                            <div class="egg-icon medium"></div>
+                            <span class="label">Jammy</span>
+                            <span class="desc">Gooey center</span>
+                        </button>
+                        <button class="doneness-card" data-value="hard">
+                            <div class="egg-icon hard"></div>
+                            <span class="label">Hard-Boiled</span>
+                            <span class="desc">Fully set</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="start-btn" class="primary-btn">Start Timer</button>
+                    <button id="test-btn" class="icon-btn" title="Test Sound">🔊</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Timer -->
+            <div id="timer-view" class="hidden">
+                <div class="timer-display">
+                    <svg class="progress-ring" width="240" height="240">
+                        <circle class="progress-ring__circle-bg" stroke="#ffffff20" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
+                        <circle class="progress-ring__circle" stroke="var(--accent-color)" stroke-width="8" fill="transparent" r="110" cx="120" cy="120" stroke-linecap="round"/>
+                    </svg>
+                    <div class="timer-text">
+                        <span id="time-left">08:00</span>
+                        <span id="timer-status">Варим...</span>
+                    </div>
+                </div>
+                
+                <div class="timer-controls">
+                    <button id="cancel-btn" class="secondary-btn">Отмена</button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="info-section">
+            <h2>Why precision matters</h2>
+            <p>Boiling "by feel" is a gamble. One egg is Extra Large (C0), another is pulled straight from the fridge, and suddenly your breakfast is a rubbery disappointment. We’ve calibrated these times using culinary standards for Large (C1) and XL (C0) categories. For the most consistent results, always drop your eggs into already boiling water.</p>
+            
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <strong>How does altitude affect boiling eggs?</strong>
+                    <p>At high altitudes, lower air pressure causes water to boil at a lower temperature (e.g., 90°C instead of 100°C). This means heat transfer is slower, and you need to add roughly 30-60 seconds of cooking time for every 1000m of elevation.</p>
+                </div>
+                <div class="faq-item">
+                    <strong>What is the molecular secret to a perfect egg?</strong>
+                    <p>E.U. Large (C1) eggs (~68g) reach a "mollet" or jammy state when the yolk hits exactly 70°C. Our physics-based model calculates when the core of the egg reaches this target based on thermal diffusion.</p>
+                </div>
+                <div class="faq-item">
+                    <strong>What is the difference between C0 and C1 eggs?</strong>
+                    <p>In Europe and Russia, C0 eggs are "Extra Large" (75g+) while C1 are "Large" (65-75g). Heavier eggs require 1-2 minutes of extra cooking time.</p>
+                </div>
+                <div class="faq-item">
+                    <strong>Why use boiling water start?</strong>
+                    <p>Starting with boiling water allows for precise timing. Cold starts depend on how fast your stove heats up, which varies for everyone.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <audio id="alarm-sound" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

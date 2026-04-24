@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Pet Food Switch Calculator | 7-Day Transition Schedule</title>
+    <meta name="description" content="Free pet food transition calculator. Get a daily mix ratio to safely switch your dog or cat to new food without causing stomach upset.">
+    <meta name="keywords" content="switching dog food calculator, pet food transition schedule, how to change cat food safely, dog food mix ratio, puppy food switch guide">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/pet-food-switch/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        
+        .transition-table { width: 100%; border-collapse: collapse; margin-top: 40px; background: var(--clr-surface); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--clr-border); }
+        .transition-table th, .transition-table td { padding: 20px; text-align: left; border-bottom: 1px solid var(--clr-border); }
+        .transition-table th { background: var(--clr-bg-2); color: var(--clr-text-dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+        
+        .ratio-bar { height: 10px; background: var(--clr-bg-2); border-radius: 5px; overflow: hidden; display: flex; margin-top: 8px; }
+        .ratio-old { background: #555; height: 100%; }
+        .ratio-new { background: var(--clr-accent); height: 100%; }
+
+        .day-num { font-weight: 800; color: var(--clr-accent); font-size: 1.2rem; margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Pet food transition calculator</h1>
+                    <p>Switching foods too fast is a recipe for a messy floor. Use this 7-day schedule to calculate precisely how much old vs new food to mix.</p>
+                </div>
+
+                <form class="calc-form" id="switch-form">
+                    <div class="form-group">
+                        <label>Total Daily Portion (grams or scoops)</label>
+                        <input type="number" id="total-amount" value="200" step="10">
+                    </div>
+                </form>
+
+                <table class="transition-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Old Food</th>
+                            <th>New Food</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-body">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Listen to the "Poop"</h2>
+                    <p>I genuinely hate the "cold turkey" approach to pet food. I've done it once—thinking my dog had a stomach of steel—and I spent the next three days cleaning the carpet. Dogs and cats have very different gut bacteria than humans, and it takes them time to adjust to new proteins and fibers. 7 days is the absolute minimum I recommend.</p>
+                    
+                    <p><strong>The Golden Rule:</strong> If their stools start getting soft on Day 3 or 4, don't keep increasing the new food. Stay at 50/50 for a few more days until everything "firms up." It’s not a race.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const amountI = document.getElementById('total-amount');
+            const body = document.getElementById('schedule-body');
+
+            function update() {
+                const total = parseFloat(amountI.value) || 0;
+                const phases = [
+                    { days: "1 & 2", old: 0.75, new: 0.25 },
+                    { days: "3 & 4", old: 0.50, new: 0.50 },
+                    { days: "5 & 6", old: 0.25, new: 0.75 },
+                    { days: "7+", old: 0, new: 1.00 }
+                ];
+
+                body.innerHTML = phases.map(p => {
+                    const oldAmt = (total * p.old).toFixed(1);
+                    const newAmt = (total * p.new).toFixed(1);
+                    return `
+                        <tr>
+                            <td><span class="day-num">Day ${p.days}</span></td>
+                            <td>
+                                <strong>${oldAmt}</strong>
+                                <div class="ratio-bar"><div class="ratio-old" style="width:${p.old*100}%"></div></div>
+                            </td>
+                            <td>
+                                <strong>${newAmt}</strong>
+                                <div class="ratio-bar"><div class="ratio-new" style="width:${p.new*100}%"></div></div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            amountI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

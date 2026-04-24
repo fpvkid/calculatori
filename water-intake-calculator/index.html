@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Water Intake Calculator | How Much Water Should I Drink?</title>
+    <meta name="description" content="Free water intake calculator. Find your ideal daily water consumption based on weight, activity level, and local climate. No generic 8-cup advice.">
+    <meta name="keywords" content="water intake calculator ml, how much water should i drink per day, water needs for weight, daily hydration calculator, water for athletes tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/water-intake-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Water intake calculator</h1>
+                    <p>Forget the generic "8 glasses a day" rule. Your hydration needs are as unique as your body weight and the weather.</p>
+                </div>
+
+                <form class="calc-form" id="water-form" style="margin-top: 40px;">
+                    <div class="form-group">
+                        <label>Body Weight (kg)</label>
+                        <input type="number" id="weight" value="75">
+                    </div>
+                    <div class="form-group">
+                        <label>Activity Level</label>
+                        <select id="activity">
+                            <option value="0">Sedentary (Office Work)</option>
+                            <option value="350">Moderate (30-60m walk)</option>
+                            <option value="700">Intense (Sports / Heavy lifting)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Climate</label>
+                        <select id="climate">
+                            <option value="0">Moderate / Temperate</option>
+                            <option value="500">Hot / Humid</option>
+                            <option value="200">Cold / Dry</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="val" id="res-water">2.6</div>
+                    <div class="label">Liters Per Day</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;">
+                        Equivalent to about <span id="res-cups">11</span> cups.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "8 Glasses" Myth</h2>
+                    <p>I genuinely don't know where the "8 glasses" data came from, but it’s mostly marketing fluff. A 110kg athlete training in the desert needs vastly more water than a 50kg person sitting in an air-conditioned office. Hydration is dynamic. Our formula uses a base of **35ml per kg of body weight**, then adds multipliers for sweat loss (exercise) and evaporative loss (climate).</p>
+                    
+                    <p><strong>Pro Tip: "Eat" your water.</strong> About 20% of your daily hydration actually comes from food. If you eat a lot of cucumber, watermelon, or soup, you might need to drink less than this calculator suggests. The best indicator of hydration isn't this tool—it’s the color of your urine. Aim for pale straw color; if it looks like apple juice, drink up.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wI = document.getElementById('weight');
+            const aI = document.getElementById('activity');
+            const cI = document.getElementById('climate');
+            const resW = document.getElementById('res-water');
+            const resC = document.getElementById('res-cups');
+
+            function update() {
+                const w = parseFloat(wI.value) || 0;
+                const a = parseFloat(aI.value) || 0;
+                const c = parseFloat(cI.value) || 0;
+
+                if (w === 0) return;
+
+                // Base = 35ml per kg
+                const baseMl = w * 33; // ~33-35ml
+                const totalMl = baseMl + a + c;
+                const liters = totalMl / 1000;
+
+                resW.textContent = liters.toFixed(1);
+                resC.textContent = Math.round(totalMl / 240); // 240ml cups
+            }
+
+            [wI, aI, cI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

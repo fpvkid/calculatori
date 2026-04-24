@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Mortgage Calculator | Estimate Your Monthly Payments</title>
+    <meta name="description" content="Free mortgage calculator. Estimate your monthly house payments, including interest and principal, based on loan amount, interest rate, and term.">
+    <meta name="keywords" content="mortgage calculator, house payment estimator, monthly mortgage tool, home loan calculator, interest rate calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/mortgage-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 40px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Mortgage calculator</h1>
+                    <p>Find out what that dream home actually costs per month. Includes principal and interest calculations.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <form class="calc-form" id="mortgage-form">
+                            <div class="form-group">
+                                <label>Home Price ($)</label>
+                                <input type="number" id="price" value="350000" step="5000">
+                            </div>
+                            <div class="form-group">
+                                <label>Down Payment ($)</label>
+                                <input type="number" id="down" value="70000" step="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Interest Rate (%)</label>
+                                <input type="number" id="rate" value="6.5" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Loan Term (Years)</label>
+                                <select id="term">
+                                    <option value="30">30 Years</option>
+                                    <option value="20">20 Years</option>
+                                    <option value="15">15 Years</option>
+                                    <option value="10">10 Years</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="surface-card" style="position: sticky; top: 100px; text-align: center;">
+                            <div class="result-card" style="border-width: 2px; border-color: var(--clr-accent);">
+                                <span class="result-card-label">Monthly Payment</span>
+                                <span class="result-card-val" id="res-monthly">$1,769</span>
+                                <small style="color: var(--clr-text-dim); display: block; margin-top: 5px;">(Principal & Interest)</small>
+                            </div>
+                            
+                            <div class="result-grid" style="margin-top: 20px;">
+                                <div class="result-card">
+                                    <span class="result-card-val" id="res-total-p">$637k</span>
+                                    <span class="result-card-label">Total Over Term</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 80px;">
+                    <h2>The "True Cost" of a House</h2>
+                    <p>I genuinely don't know why banks make mortgages sound so simple. When you buy a $350k house with 20% down, you aren't just paying back $280k. Over 30 years at a 6.5% interest rate, you will actually pay back over **$600,000**. That’s double the loan amount. Understanding this "interest gap" is the key to deciding if you should buy now or wait for better rates.</p>
+
+                    <div class="faq-list" style="margin-top: 40px;">
+                        <details class="faq-item">
+                            <summary>Does this include taxes and insurance?</summary>
+                            <div class="faq-answer">
+                                <p>No. This calculator focuses on the "P&I" (Principal and Interest). Depending on where you live, you should add roughly $300–$600 per month for property taxes and homeowners insurance.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What is a good down payment?</summary>
+                            <div class="faq-answer">
+                                <p>While 20% is the gold standard (it removes the need for Private Mortgage Insurance), many first-time buyer programs allow for as little as 3% or 3.5% down.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const pI = document.getElementById('price');
+            const dI = document.getElementById('down');
+            const rI = document.getElementById('rate');
+            const tI = document.getElementById('term');
+            
+            const resM = document.getElementById('res-monthly');
+            const resT = document.getElementById('res-total-p');
+
+            function update() {
+                const price = parseFloat(pI.value) || 0;
+                const down = parseFloat(dI.value) || 0;
+                const rate = (parseFloat(rI.value) || 0) / 100 / 12;
+                const term = (parseFloat(tI.value) || 30) * 12;
+
+                const principal = price - down;
+                if (principal <= 0) {
+                    resM.textContent = '$0';
+                    resT.textContent = '$0';
+                    return;
+                }
+
+                // PMT = P * [r(1+r)^n] / [(1+r)^n – 1]
+                const x = Math.pow(1 + rate, term);
+                const monthly = (principal * rate * x) / (x - 1);
+                const total = monthly * term;
+
+                resM.textContent = '$' + Math.round(monthly).toLocaleString();
+                resT.textContent = '$' + (total / 1000).toFixed(0) + 'k';
+            }
+
+            [pI, dI, rI, tI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

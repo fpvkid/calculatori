@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Protein Intake Calculator | Muscle Gain & Fat Loss Tool</title>
+    <meta name="description" content="Calculate your daily protein needs based on lean body mass, activity level, and fitness goals. Optimized for muscle hypertrophy and weight loss.">
+    <meta name="keywords" content="protein intake calculator for muscle gain, daily protein needs calculator, how much protein should i eat to lose fat, protein calculator grams per day, lean mass protein tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/protein-intake-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-columns { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
+        
+        .result-panel { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .prot-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .prot-unit { font-size: 1.5rem; font-weight: 700; color: var(--clr-text-dim); }
+        .prot-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .goal-tabs { display: flex; gap: 10px; margin-bottom: 25px; }
+        .goal-tab { flex: 1; padding: 12px; background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); cursor: pointer; color: var(--clr-text-muted); font-weight: 700; transition: all var(--dur) var(--ease); font-size: 0.85rem; }
+        .goal-tab.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+
+        @media (max-width: 768px) {
+            .calc-columns { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Protein intake calculator</h1>
+                    <p>Calculate your daily protein targets based on science, not supplement company marketing. Tailored to your lean mass and goal.</p>
+                </div>
+
+                <div class="calc-columns">
+                    <div class="form-side">
+                        <div class="goal-tabs">
+                            <button class="goal-tab active" data-goal="muscle">Build Muscle</button>
+                            <button class="goal-tab" data-goal="maintenance">Maintain</button>
+                            <button class="goal-tab" data-goal="fatloss">Fat Loss</button>
+                        </div>
+                        <form class="calc-form" id="protein-form">
+                            <div class="form-group">
+                                <label>Current Weight (kg)</label>
+                                <input type="number" id="weight" value="80">
+                            </div>
+                            <div class="form-group">
+                                <label>Body Fat % (Estimate)</label>
+                                <input type="number" id="bf" value="20">
+                                <small>Used to calculate Lean Body Mass</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Activity Level</label>
+                                <select id="activity">
+                                    <option value="1">Sedentary</option>
+                                    <option value="1.2" selected>Moderate (3-4x gym/wk)</option>
+                                    <option value="1.4">Heavy Athlete (5-7x or labor)</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="result-panel">
+                        <span class="prot-label">Daily Goal:</span>
+                        <div class="prot-val" id="res-protein">160</div>
+                        <div class="prot-unit">grams per day</div>
+                        <p style="margin-top: 25px; color: var(--clr-text-dim); font-size: 0.9rem;">
+                            Based on your calculated Lean Mass of <span id="res-lean">64</span>kg.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Gram per Pound" myth</h2>
+                    <p>You’ll hear "1 gram per pound of bodyweight" everywhere. It’s simple, it’s easy to remember, and it’s usually way more than most people actually need. If you're 300 lbs and 40% body fat, eating 300g of protein is overkill and probably just going to make your grocery bill depressing.</p>
+                    
+                    <p>The science-backed sweet spot is usually between <strong>1.6g and 2.2g of protein per kilogram of lean body mass</strong>. That’s why we ask for your body fat percentage. Your muscles needs protein; your fat tissue does not. My goal with this tool is to give you a realistic number you can actually hit without living on protein shakes.</p>
+
+                    <h2>Fat Loss & Protein</h2>
+                    <p>When you're in a calorie deficit (losing fat), protein is even more important. It protects your muscle tissue from being burned as fuel. If you don't eat enough protein while dieting, you'll lose weight, but a lot of it will be the muscle you worked hard to build.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('protein-form');
+            const weightI = document.getElementById('weight');
+            const bfI = document.getElementById('bf');
+            const activityI = document.getElementById('activity');
+            const tabs = document.querySelectorAll('.goal-tab');
+            
+            const resVal = document.getElementById('res-protein');
+            const resLean = document.getElementById('res-lean');
+
+            let currentGoal = 'muscle';
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentGoal = tab.dataset.goal;
+                    update();
+                });
+            });
+
+            function update() {
+                const w = parseFloat(weightI.value) || 0;
+                const bf = parseFloat(bfI.value) || 0;
+                const act = parseFloat(activityI.value) || 1;
+
+                const leanMass = w * (1 - (bf / 100));
+                resLean.textContent = leanMass.toFixed(1);
+
+                // Multipliers (per kg of lean mass)
+                let multiplier = 2.0; 
+                if (currentGoal === 'maintenance') multiplier = 1.6;
+                if (currentGoal === 'fatloss') multiplier = 2.4; 
+
+                const dailyTotal = leanMass * multiplier * (act > 1 ? (1 + (act-1)*0.5) : 1);
+
+                resVal.textContent = Math.round(dailyTotal);
+            }
+
+            [weightI, bfI, activityI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

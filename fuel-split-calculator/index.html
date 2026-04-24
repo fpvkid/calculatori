@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Road Trip Fuel Split Calculator | Gas Money per Person</title>
+    <meta name="description" content="Free road trip gas split calculator. Calculate fuel costs based on distance, MPG, and gas price, then split fairly with passengers.">
+    <meta name="keywords" content="gas money split calculator, road trip fuel cost estimator, split gas with friends tool, calculate trip fuel cost per person, gas trip planner">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/fuel-split-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        
+        .res-display { 
+            background: var(--clr-accent-glow); 
+            border: 2px solid var(--clr-accent); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .main-val { font-size: 4.5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .stat-grid { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-item { background: var(--clr-bg-2); padding: 15px; border-radius: var(--radius); border: 1px solid var(--clr-border); text-align: center; }
+        .stat-val { display: block; font-weight: 800; font-size: 1.5rem; color: var(--clr-text); }
+        .stat-label { font-size: 0.7rem; color: var(--clr-text-dim); text-transform: uppercase; }
+
+        .inputs-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Road trip fuel split</h1>
+                    <p>Keeping friendship alive by doing the math fairly. Calculate the total gas cost and split it between everyone in the car.</p>
+                </div>
+
+                <form class="calc-form" id="fuel-form">
+                    <div class="inputs-split">
+                        <div class="form-group">
+                            <label>Distance (Miles)</label>
+                            <input type="number" id="dist" value="300">
+                        </div>
+                        <div class="form-group">
+                            <label>Gas Price ($ per gallon)</label>
+                            <input type="number" id="price" value="3.50" step="0.01">
+                        </div>
+                    </div>
+                    <div class="inputs-split">
+                        <div class="form-group">
+                            <label>Vehicle MPG (City/Hwy Avg)</label>
+                            <input type="number" id="mpg" value="25" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of People</label>
+                            <input type="number" id="people" value="3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Buffer for Side Trips / Detours (%)</label>
+                        <input type="number" id="buffer" value="10">
+                        <small>Accounts for driving around your destination</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="main-label">Each Person Pays:</span>
+                    <div class="main-val" id="res-per-person">$15.40</div>
+                    
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Fuel Cost</span>
+                            <span class="stat-val" id="res-total-cost">$46.20</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Gallons Needed</span>
+                            <span class="stat-val" id="res-gallons">13.2 gal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Driver Tax"</h2>
+                    <p>I genuinely believe that if you’re the one driving your own car on a long trip, you shouldn't have to pay for gas at all. You’re the one putting thousands of miles on your engine, wearing down your tires, and dealing with the stress of traffic while everyone else naps or looks at TikTok. If your friends are cool, they’ll use this calculator with <strong>N-1 people</strong> to cover your share.</p>
+                    
+                    <p><strong>Pro Tip:</strong> Don’t just rely on the distance your GPS gives you. Every road trip has "mysterious miles"—the run to the grocery store once you arrive, the 20-minute detour because someone saw a cool roadside attraction, and the endless search for a parking spot. That’s why I added the 10% buffer. Better to have a few bucks leftover than to be Venmoing for a single gallon of gas on the way home.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('fuel-form');
+            const distI = document.getElementById('dist');
+            const priceI = document.getElementById('price');
+            const mpgI = document.getElementById('mpg');
+            const peopleI = document.getElementById('people');
+            const bufferI = document.getElementById('buffer');
+            
+            const resPer = document.getElementById('res-per-person');
+            const resTotal = document.getElementById('res-total-cost');
+            const resGallons = document.getElementById('res-gallons');
+
+            function update() {
+                const d = parseFloat(distI.value) || 0;
+                const p = parseFloat(priceI.value) || 0;
+                const m = parseFloat(mpgI.value) || 1;
+                const n = parseFloat(peopleI.value) || 1;
+                const b = 1 + (parseFloat(bufferI.value) / 100);
+
+                const totalGallons = (d / m) * b;
+                const totalCost = totalGallons * p;
+                const perPerson = totalCost / n;
+
+                resPer.textContent = '$' + perPerson.toFixed(2);
+                resTotal.textContent = '$' + totalCost.toFixed(2);
+                resGallons.textContent = totalGallons.toFixed(1) + ' gal';
+            }
+
+            [distI, priceI, mpgI, peopleI, bufferI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

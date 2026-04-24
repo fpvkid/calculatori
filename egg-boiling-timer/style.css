@@ -1,0 +1,247 @@
+/* ============================================================
+   Egg Boiling Timer — Page-specific styles
+   ============================================================ */
+
+/* Hero */
+.egg-hero {
+    padding: 140px 0 40px;
+    text-align: center;
+    position: relative;
+}
+.egg-hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(240,160,64,0.1) 0%, transparent 65%);
+    pointer-events: none;
+}
+.egg-hero .hero-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--clr-accent);
+    margin-bottom: 12px;
+}
+.egg-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--clr-text) 40%, var(--clr-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.egg-hero .hero-sub {
+    font-size: 1.05rem;
+    color: var(--clr-text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Calculator Card */
+.egg-calc-section {
+    padding: 40px 0 80px;
+}
+
+.egg-card {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* Control groups */
+.control-group {
+    margin-bottom: 28px;
+}
+.group-label {
+    display: block;
+    color: var(--clr-text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/* Chip buttons */
+.chip-group {
+    display: flex;
+    gap: 10px;
+}
+.chip {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--clr-border);
+    border-radius: 14px;
+    padding: 12px;
+    color: var(--clr-text);
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--ff-body);
+}
+.chip.active {
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 15px rgba(240,160,64,0.3);
+    color: #0c0f14;
+}
+.chip-main {
+    font-weight: 700;
+    font-size: 1rem;
+}
+.chip-sub {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+/* Doneness cards */
+.doneness-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+.doneness-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-lg);
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--clr-text);
+    font-family: var(--ff-body);
+}
+.doneness-card.active {
+    background: rgba(240,160,64,0.12);
+    border-color: var(--clr-accent);
+}
+
+/* Egg yolk visualization */
+.egg-icon {
+    width: 30px;
+    height: 40px;
+    background: white;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.egg-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.egg-icon.soft::after  { background: radial-gradient(circle, #ff9f43 30%, #ffcd3c 100%); opacity: 0.9; }
+.egg-icon.medium::after { background: #ff9f43; width: 18px; height: 18px; }
+.egg-icon.hard::after   { background: #ffd32a; width: 15px; height: 15px; }
+
+.doneness-card .label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+.doneness-card .desc {
+    font-size: 0.65rem;
+    color: var(--clr-text-muted);
+}
+
+/* Button group */
+.button-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Timer View */
+#timer-view {
+    text-align: center;
+    padding: 20px 0;
+    animation: cfl-fadeIn 0.5s var(--ease);
+}
+
+.timer-display {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto 30px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.3s;
+    stroke-dasharray: 691.15;
+    stroke-dashoffset: 691.15;
+}
+
+.timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+#time-left {
+    font-size: 3.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+#timer-status {
+    font-size: 0.9rem;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+}
+
+/* Info / FAQ section */
+.egg-info-section {
+    padding: 60px 0 40px;
+    background: var(--clr-bg-2);
+}
+
+/* Finish animation */
+@keyframes egg-pulse {
+    0%   { transform: scale(1); color: var(--clr-text); }
+    50%  { transform: scale(1.1); color: var(--clr-accent); }
+    100% { transform: scale(1); color: var(--clr-text); }
+}
+.finish-animation {
+    animation: egg-pulse 1s infinite;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .egg-hero h1 { font-size: 2rem; }
+    .egg-card { padding: 20px; }
+    .chip-main { font-size: 0.9rem; }
+}

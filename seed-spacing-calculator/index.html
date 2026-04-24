@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Seed Spacing Calculator | Square Foot Gardening & Row Tool</title>
+    <meta name="description" content="Free seed spacing calculator. Calculate exactly how many plants fit in your garden bed for both Square Foot Gardening (SFG) and traditional row spacing.">
+    <meta name="keywords" content="seed spacing calculator, square foot gardening planner, how many plants per bed, vegetable planting density tool, garden row spacing calculator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/seed-spacing-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .res-panel { 
+            background: var(--clr-accent-glow); 
+            border: 2px solid var(--clr-accent); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .main-num { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; display: block; margin-top: 10px; }
+
+        .method-tabs { display: flex; gap: 8px; margin-bottom: 25px; }
+        .m-btn { flex: 1; padding: 12px; background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; text-align: center; }
+        .m-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Seed spacing calculator</h1>
+                    <p>Stop wasting seeds. Whether you're doing Square Foot Gardening or traditional rows, find the perfect plant density.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Planting Method</label>
+                        <div class="method-tabs">
+                            <button class="m-btn active" data-method="sfg">Square Foot (SFG)</button>
+                            <button class="m-btn" data-method="row">Traditional Row</button>
+                        </div>
+
+                        <form class="calc-form" id="seed-form">
+                            <div class="form-group" id="f-area">
+                                <label>Bed Width (ft)</label>
+                                <input type="number" id="width" value="4">
+                            </div>
+                            <div class="form-group">
+                                <label>Bed Length (ft)</label>
+                                <input type="number" id="length" value="8">
+                            </div>
+                            <div class="form-group" id="f-spacing" style="display: none;">
+                                <label>Plant Spacing (inches)</label>
+                                <input type="number" id="spacing" value="12">
+                            </div>
+                            <div class="form-group" id="f-sfg-plants">
+                                <label>Plants per Square Foot</label>
+                                <select id="sfg-count">
+                                    <option value="1">1 (Tomato, Pepper, Broccoli)</option>
+                                    <option value="4">4 (Lettuce, Chard, Corn)</option>
+                                    <option value="9">9 (Bush beans, Spinach)</option>
+                                    <option value="16">16 (Carrots, Radishes, Onions)</option>
+                                    <option value="0.5">0.5 (Cabbage, Cauliflower - needs 2sqft)</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-panel">
+                            <div class="main-num" id="res-total">32</div>
+                            <span class="main-label">Total Plants Capacity</span>
+                            <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;">
+                                Based on a <span id="res-sqft">32</span> sq ft garden bed.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Seed packets lie to you</h2>
+                    <p>I genuinely don't know why seed packets suggest such wide spacing. If you follow the directions on a carrot packet, you’ll end up wasting half your garden space on bare dirt for "walking rows." That’s fine if you have an acre, but if you’re gardening in a raised bed, it’s a disaster. **Square Foot Gardening (SFG)** is much more efficient—it focuses on plant density rather than row spacing. 16 carrots per square foot sounds like a lot, but they grow perfectly happy side-by-side.</p>
+                    
+                    <p><strong>The "Thinning" Secret:</strong> You should always plant 2-3 seeds per hole. Not because you want 3 plants, but because seeds aren't perfect. If all 3 grow, you **must** cut the two smallest ones with scissors. Don't pull them out, or you'll distirb the roots of the winner. If you don't thin, you'll end up with stunted, tangled plants.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wI = document.getElementById('width');
+            const lI = document.getElementById('length');
+            const sI = document.getElementById('spacing');
+            const sfgI = document.getElementById('sfg-count');
+            const mBtns = document.querySelectorAll('.m-btn');
+            
+            const resT = document.getElementById('res-total');
+            const resS = document.getElementById('res-sqft');
+
+            let method = 'sfg';
+
+            mBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    mBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    method = btn.dataset.method;
+                    
+                    document.getElementById('f-spacing').style.display = method === 'row' ? 'block' : 'none';
+                    document.getElementById('f-sfg-plants').style.display = method === 'sfg' ? 'block' : 'none';
+                    update();
+                });
+            });
+
+            function update() {
+                const w = parseFloat(wI.value) || 0;
+                const l = parseFloat(lI.value) || 0;
+                const sqft = w * l;
+
+                let total = 0;
+
+                if (method === 'sfg') {
+                    const perSq = parseFloat(sfgI.value);
+                    total = sqft * perSq;
+                } else {
+                    const spacing = parseFloat(sI.value) || 12;
+                    // Traditional row simplified: (Area*144) / (Spacing * Spacing) 
+                    // assuming plants are in a grid
+                    total = (sqft * 144) / (spacing * spacing);
+                }
+
+                resT.textContent = Math.floor(total);
+                resS.textContent = sqft;
+            }
+
+            [wI, lI, sI, sfgI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

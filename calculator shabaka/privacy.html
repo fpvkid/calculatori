@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | RawPawsCalc</title>
+    <meta name="description" content="Privacy policy for RawPawsCalc raw dog food calculator. Learn how we handle your data.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://rawpawscalc.com/privacy.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .legal-page { padding: 120px 0 80px; }
+        .legal-page h1 { font-size: 2.2rem; margin-bottom: 8px; }
+        .legal-page .updated { color: var(--clr-text-dim); font-size: 0.85rem; margin-bottom: 32px; }
+        .legal-page h2 { font-size: 1.3rem; margin: 32px 0 12px; }
+        .legal-page p, .legal-page li { color: var(--clr-text-muted); font-size: 0.94rem; line-height: 1.75; margin-bottom: 12px; }
+        .legal-page ul { padding-left: 20px; margin-bottom: 16px; }
+        .legal-inner { max-width: 700px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo"><span class="logo-icon">🐾</span><span class="logo-text">RawPaws<span class="logo-accent">Calc</span></span></a>
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html#calculator">Calculator</a></li>
+                    <li><a href="index.html#guide">Feeding guide</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main class="legal-page">
+        <div class="container">
+            <div class="legal-inner">
+                <h1>Privacy policy</h1>
+                <p class="updated">Last updated: April 2025</p>
+
+                <p>RawPawsCalc ("we", "the site") is a free browser-based calculator for raw dog food portions. This page explains what data we collect and how it's used.</p>
+
+                <h2>What we collect</h2>
+                <p>The calculator runs entirely in your browser. The numbers you enter (dog weight, life stage, activity level) are processed locally and are never sent to our servers. We don't store any personally identifiable information.</p>
+
+                <h2>Cookies and analytics</h2>
+                <p>We may use basic analytics tools (like Google Analytics) to understand how many people visit the site and which pages they look at. These tools may place cookies on your browser. You can block or delete cookies through your browser settings at any time.</p>
+
+                <h2>Third-party advertising</h2>
+                <p>We may display ads through Google AdSense or similar advertising networks. These services may use cookies and web beacons to serve ads based on your prior visits to this or other websites. Google's use of advertising cookies lets it and its partners serve ads to you based on your browsing patterns. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
+
+                <h2>Third-party links</h2>
+                <p>The site may link to external resources. We're not responsible for the privacy practices or content of those sites.</p>
+
+                <h2>Children</h2>
+                <p>This site is not directed at children under 13. We do not knowingly collect data from children.</p>
+
+                <h2>Changes</h2>
+                <p>We may update this policy from time to time. Any changes will be posted on this page with an updated date.</p>
+
+                <h2>Contact</h2>
+                <p>If you have questions about this privacy policy, reach out through our <a href="contact.html">contact page</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 RawPawsCalc. For informational purposes only. Not veterinary advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var menuBtn = document.getElementById('mobile-menu-btn');
+        var mainNav = document.getElementById('main-nav');
+        if (menuBtn && mainNav) {
+            menuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('open');
+                menuBtn.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

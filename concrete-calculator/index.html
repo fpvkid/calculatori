@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Concrete Volume Calculator | Slab, Footing & Bag Count</title>
+    <meta name="description" content="Free concrete calculator. Calculate cubic yards or meters for slabs, footings, and columns. Includes 80lb and 60lb bag counts for DIY projects.">
+    <meta name="keywords" content="concrete calculator bags, cubic yards concrete for slab, how many bags of concrete for 10x10 slab, footing concrete calculator, quikrete bag count tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/concrete-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 900px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
+        
+        .res-panel { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .main-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .stat-line { display: flex; justify-content: space-between; padding: 15px 0; border-top: 1px solid var(--clr-border); margin-top: 15px; }
+        .stat-line-val { font-weight: 800; color: var(--clr-text); font-size: 1.2rem; }
+        .stat-line-label { color: var(--clr-text-dim); font-size: 0.9rem; }
+
+        .inputs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Concrete calculator</h1>
+                    <p>Calculate exactly how much concrete you need for slabs, footings, or post holes. No more "eyeballing" it at the hardware store.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <form class="calc-form" id="concrete-form">
+                            <div class="form-group">
+                                <label>Thickness / Depth (inches)</label>
+                                <input type="number" id="depth" value="4">
+                            </div>
+                            <div class="inputs-row">
+                                <div class="form-group">
+                                    <label>Length (ft)</label>
+                                    <input type="number" id="len" value="10">
+                                </div>
+                                <div class="form-group">
+                                    <label>Width (ft)</label>
+                                    <input type="number" id="wid" value="10">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--clr-border);">
+                                <label>Waste Margin (%)</label>
+                                <input type="number" id="waste" value="10" step="1">
+                                <small>Ground is never perfectly flat! Add 10%.</small>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-panel">
+                            <div class="main-val" id="res-yards">1.4</div>
+                            <div class="main-label">Cubic Yards</div>
+                            
+                            <div class="stat-line" style="margin-top: 30px;">
+                                <span class="stat-line-label">Total 80lb Bags</span>
+                                <span class="stat-line-val" id="res-80lb">63</span>
+                            </div>
+                            <div class="stat-line">
+                                <span class="stat-line-label">Total 60lb Bags</span>
+                                <span class="stat-line-val" id="res-60lb">84</span>
+                            </div>
+                            <div class="stat-line">
+                                <span class="stat-line-label">Cubic Feet</span>
+                                <span class="stat-line-val" id="res-cuft">36.7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "60-Bag" threshold</h2>
+                    <p>I genuinely hate seeing people try to mix more than 50 or 60 bags of concrete in a wheelbarrow for a single job. If this calculator tells you that you need more than 60 bags, <strong>call a ready-mix truck.</strong> Seriously. By the time you mix the 40th bag, you’ll be exhausted, and the first section of your slab will already be setting. You’ll end up with "cold joints" and a slab that cracks in six months.</p>
+                    
+                    <p><strong>Pro Tip:</strong> Rebar and mesh don't take up much space, but the inconsistent ground does. If you dig a hole for a post, it’s never a perfect cylinder. Always buy one or two more bags than you think you need—you can always return unopened bags, but you can’t "un-pour" a half-finished job.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('concrete-form');
+            const dI = document.getElementById('depth');
+            const lI = document.getElementById('len');
+            const wI = document.getElementById('wid');
+            const wsI = document.getElementById('waste');
+            
+            const resY = document.getElementById('res-yards');
+            const res80 = document.getElementById('res-80lb');
+            const res60 = document.getElementById('res-60lb');
+            const resF = document.getElementById('res-cuft');
+
+            function update() {
+                const depth = parseFloat(dI.value) / 12; // feet
+                const len = parseFloat(lI.value) || 0;
+                const wid = parseFloat(wI.value) || 0;
+                const waste = 1 + (parseFloat(wsI.value) / 100);
+
+                const cuft = len * wid * depth * waste;
+                const yards = cuft / 27;
+
+                // 80lb bag yields ~0.6 cu ft
+                // 60lb bag yields ~0.45 cu ft
+                resY.textContent = yards.toFixed(2);
+                resF.textContent = cuft.toFixed(1);
+                res80.textContent = Math.ceil(cuft / 0.6);
+                res60.textContent = Math.ceil(cuft / 0.45);
+            }
+
+            [dI, lI, wI, wsI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,21 @@
+{
+  "name": "CalcsFor Life",
+  "short_name": "CalcsFor",
+  "description": "Professional Niche Calculators for Everything",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f0a040",
+  "icons": [
+    {
+      "src": "/shared/logo-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/shared/logo-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

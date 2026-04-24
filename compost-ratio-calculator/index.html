@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Compost Ratio Calculator | Carbon-to-Nitrogen (C:N) Tool</title>
+    <meta name="description" content="Free compost ratio calculator. Balance your 'greens' and 'browns' for healthy, smell-free composting. Calculate the perfect Carbon-to-Nitrogen (C:N) ratio.">
+    <meta name="keywords" content="compost ratio calculator, green vs brown compost ratio, carbon to nitrogen ratio calculator, bin composting guide, sauerkraut salt calculator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/compost-ratio-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .ratio-panel { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .ratio-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .ratio-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+
+        .status-badge { display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-top: 15px; }
+        .status-perfect { background: #10b981; color: white; }
+        .status-high { background: #f59e0b; color: white; }
+        .status-low { background: #3b82f6; color: white; }
+
+        .input-pair { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Compost ratio calculator</h1>
+                    <p>Stop the smell and speed up the rot. Balance your Carbon (Browns) and Nitrogen (Greens) for a perfect compost pile.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <form class="calc-form" id="compost-form">
+                            <div class="input-pair">
+                                <div>
+                                    <label>Greens (Nitrogen)</label>
+                                    <small style="display:block; margin-bottom:5px;">Grass, kitchen scraps, manure</small>
+                                </div>
+                                <input type="number" id="greens" value="1">
+                            </div>
+                            <div class="input-pair">
+                                <div>
+                                    <label>Browns (Carbon)</label>
+                                    <small style="display:block; margin-bottom:5px;">Leaves, straw, cardboard, woodchips</small>
+                                </div>
+                                <input type="number" id="browns" value="3">
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--clr-text-muted);">Measured by <strong>volume</strong> (e.g. buckets or wheelbarrows).</p>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="ratio-panel">
+                            <div class="ratio-label">Approx. C:N Ratio</div>
+                            <div class="ratio-val" id="res-ratio">30:1</div>
+                            <div class="status-badge status-perfect" id="res-status">Perfect Balance</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Rotten Egg" warning</h2>
+                    <p>I genuinely don't know why people make composting sound like a hobby for scientists. It’s actually very simple: if your pile smells like ammonia or rotten eggs, you’ve got too many "Greens" (Nitrogen). If absolutely nothing is happening and the pile is cold, you’ve got too many "Browns" (Carbon).</p>
+                    
+                    <p>The "Golden Rule" is a <strong>30:1 ratio</strong> of Carbon to Nitrogen. This doesn't mean 30 buckets of leaves to 1 bucket of scraps—because leaves themselves have some nitrogen. A safe, easy volume ratio for most backyard bins is <strong>3 parts Brown to 1 part Green</strong>. If you stick to that, your pile will be hot, hungry, and smell like fresh earth.</p>
+
+                    <h2>What is what?</h2>
+                    <ul>
+                        <li><strong>Greens (High Nitrogen):</strong> Vegetable scraps, coffee grounds (yes, they are green!), fresh grass clippings, chicken manure.</li>
+                        <li><strong>Browns (High Carbon):</strong> Dried leaves, shredded cardboard, straw, saw dust, wood chips.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const gI = document.getElementById('greens');
+            const bI = document.getElementById('browns');
+            const resR = document.getElementById('res-ratio');
+            const resS = document.getElementById('res-status');
+
+            function update() {
+                const g = parseFloat(gI.value) || 1;
+                const b = parseFloat(bI.value) || 1;
+
+                // Simple volume-to-CN approximation
+                // Greens avg CN is ~15:1
+                // Browns avg CN is ~50:1
+                // Result = (G*15 + B*50) / (G + B)
+                const ratio = ((g * 15) + (b * 60)) / (g + b);
+                
+                resR.textContent = Math.round(ratio) + ":1";
+
+                if (ratio >= 25 && ratio <= 35) {
+                    resS.textContent = "Perfect Balance";
+                    resS.className = "status-badge status-perfect";
+                } else if (ratio < 25) {
+                    resS.textContent = "Too much Green (Smelly)";
+                    resS.className = "status-badge status-low";
+                } else {
+                    resS.textContent = "Too much Brown (Slow)";
+                    resS.className = "status-badge status-high";
+                }
+            }
+
+            [gI, bI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

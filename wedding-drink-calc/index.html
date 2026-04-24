@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Wedding Alcohol Calculator | How Much Drink for 100 Guests?</title>
+    <meta name="description" content="Free wedding alcohol calculator. Estimate how many bottles of wine, beer, and spirits you need based on guest count and event duration.">
+    <meta name="keywords" content="wedding drink calculator, how much alcohol for wedding 100 guests, wedding wine and beer estimator, wedding bar supply tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/wedding-drink-calc/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 900px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .res-panel { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 20px;
+        }
+        .drink-item { background: var(--clr-bg-2); padding: 20px; border-radius: var(--radius); border: 1px solid var(--clr-border); display: flex; justify-content: space-between; align-items: center; }
+        .drink-val { font-size: 2rem; font-weight: 800; color: var(--clr-accent); }
+        .drink-label { color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; }
+        
+        .intensity-tabs { display: flex; gap: 8px; margin-bottom: 25px; }
+        .int-tab { flex: 1; padding: 12px; background: var(--clr-bg-2); border: 1px solid var(--clr-border); border-radius: var(--radius); cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; text-align: center; }
+        .int-tab.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Wedding drink calculator</h1>
+                    <p>Don't let the bar run dry. Get a realistic estimate of the bottles you need to keep the party alive.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Crowd Intensity</label>
+                        <div class="intensity-tabs">
+                            <button class="int-tab" data-val="1">Light</button>
+                            <button class="int-tab active" data-val="1.5">Average</button>
+                            <button class="int-tab" data-val="2">Heavy</button>
+                        </div>
+
+                        <form class="calc-form" id="wedding-form">
+                            <div class="form-group">
+                                <label>Guest Count</label>
+                                <input type="number" id="guests" value="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Event Duration (Hours)</label>
+                                <input type="number" id="hours" value="5">
+                            </div>
+                            <div class="form-group">
+                                <label>Drink Preference</label>
+                                <select id="pref">
+                                    <option value="balanced">Balanced (Beer/Wine/Spirits)</option>
+                                    <option value="winebeer">Wine & Beer Only</option>
+                                    <option value="heavywine">Heavy Wine</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-panel">
+                            <div class="drink-item">
+                                <div><span class="drink-label">Wine (750ml)</span></div>
+                                <div class="drink-val" id="res-wine">30</div>
+                            </div>
+                            <div class="drink-item">
+                                <div><span class="drink-label">Beer (Bottles)</span></div>
+                                <div class="drink-val" id="res-beer">150</div>
+                            </div>
+                            <div class="drink-item" id="spirits-row">
+                                <div><span class="drink-label">Spirits (750ml)</span></div>
+                                <div class="drink-val" id="res-spirits">10</div>
+                            </div>
+                            <div class="drink-item">
+                                <div><span class="drink-label">Champagne (Toast)</span></div>
+                                <div class="drink-val" id="res-champ">17</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Average is dangerous</h2>
+                    <p>I genuinely hate it when blogs say "2 drinks per person." That works for a boring office party, but a wedding is different. People usually have 2 drinks in the first hour alone (cocktail hour), and then settles into one drink per hour after that. If you follow the generic advice, your bar will be empty by 9 PM, which is a disaster.</p>
+                    
+                    <p>This calculator uses a "1 + 1" formula: one drink per hour, plus one extra for the first hour of chaos. Then we add a 10% safety margin because, trust me, you’d rather have 5 cases of beer leftover in your garage than have 100 sober, annoyed guests staring at an empty keg.</p>
+
+                    <h2>Pro Tip: The Return Rule</h2>
+                    <p>Check with your liquor store. Many shops (like Total Wine in the US) will let you return unopened, unchilled, and un-damaged cases of wine and beer. This is your insurance policy. Buy 20% more than you need, keep it in the back room, and only chill it if you actually need to open it.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('wedding-form');
+            const guestsI = document.getElementById('guests');
+            const hoursI = document.getElementById('hours');
+            const prefI = document.getElementById('pref');
+            const tabs = document.querySelectorAll('.int-tab');
+            
+            const resWine = document.getElementById('res-wine');
+            const resBeer = document.getElementById('res-beer');
+            const resSpirits = document.getElementById('res-spirits');
+            const resChamp = document.getElementById('res-champ');
+            const spiritsRow = document.getElementById('spirits-row');
+
+            let intensity = 1.5;
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    intensity = parseFloat(tab.dataset.val);
+                    update();
+                });
+            });
+
+            function update() {
+                const g = parseInt(guestsI.value) || 0;
+                const h = parseInt(hoursI.value) || 0;
+                const p = prefI.value;
+
+                // Total drinks needed = (1 per hour + 1 for start) * intensity
+                const totalDrinks = g * (h + 1) * (intensity / 1.5);
+                
+                let beer = 0, wine = 0, spirits = 0;
+                
+                if (p === 'balanced') {
+                    beer = totalDrinks * 0.4;
+                    wine = totalDrinks * 0.35 / 5; // 5 glasses per bottle
+                    spirits = totalDrinks * 0.25 / 16; // ~16 drinks per bottle
+                    spiritsRow.style.display = 'flex';
+                } else if (p === 'winebeer') {
+                    beer = totalDrinks * 0.5;
+                    wine = totalDrinks * 0.5 / 5;
+                    spiritsRow.style.display = 'none';
+                } else {
+                    beer = totalDrinks * 0.2;
+                    wine = totalDrinks * 0.8 / 5;
+                    spiritsRow.style.display = 'none';
+                }
+
+                resBeer.textContent = Math.ceil(beer * 1.1);
+                resWine.textContent = Math.ceil(wine * 1.1);
+                resSpirits.textContent = Math.ceil(spirits * 1.1);
+                resChamp.textContent = Math.ceil(g / 6); // 6 glasses per bottle
+            }
+
+            [guestsI, hoursI, prefI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

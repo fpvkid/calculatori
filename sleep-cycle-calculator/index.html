@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Sleep Cycle Calculator | Wake Up Refreshed</title>
+    <meta name="description" content="Calculate the best time to go to bed or wake up based on 90-minute sleep cycles. Avoid grogginess and wake up feeling energized.">
+    <meta name="keywords" content="sleep cycle calculator, 90 minute sleep cycle, when to go to sleep, wake up refreshed tool, sleep schedule generator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/sleep-cycle-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 40px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .res-highlight { color: var(--clr-accent); font-weight: 800; }
+        .time-input-group { display: flex; gap: 10px; align-items: center; }
+        .time-input-group select { flex: 1; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Sleep cycle calculator</h1>
+                    <p>Waking up in the middle of a sleep cycle leaves you tired. Use science to find the perfect moment to open your eyes.</p>
+                </div>
+
+                <div class="surface-card">
+                    <form class="calc-form" id="sleep-form">
+                        <div class="form-group">
+                            <label>I want to wake up at:</label>
+                            <div class="time-input-group">
+                                <select id="wake-hour">
+                                    <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                                    <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                                    <option value="7" selected>7</option><option value="8">8</option><option value="9">9</option>
+                                    <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                                </select>
+                                <select id="wake-min">
+                                    <option value="00">00</option><option value="15">15</option><option value="30" selected>30</option><option value="45">45</option>
+                                </select>
+                                <select id="wake-ampm">
+                                    <option value="AM" selected>AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="results-area" style="margin-top: 40px;">
+                        <h3 style="margin-bottom: 20px; font-family: var(--ff-body); font-weight: 700; font-size: 1rem; text-transform: uppercase; color: var(--clr-text-dim);">Suggested Bedtimes:</h3>
+                        <div class="result-grid" id="bedtimes-grid">
+                            <!-- JS filled -->
+                        </div>
+                        <p style="margin-top: 25px; font-size: 0.9rem; color: var(--clr-text-muted); text-align: center;">
+                            * Includes 15 minutes to fall asleep.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 80px;">
+                    <h2>Why you wake up tired</h2>
+                    <p>I genuinely hate that "hit by a truck" feeling in the morning. It usually happens because your alarm went off while you were in deep sleep. Humans sleep in **90-minute cycles**. If you wake up at the end of a cycle, you feel alert. If you wake up in the middle, you’re a zombie. This calculator works backward from your wake-up time to find the exact moments a cycle ends.</p>
+
+                    <div class="faq-list" style="margin-top: 40px;">
+                        <details class="faq-item">
+                            <summary>How many cycles do I need?</summary>
+                            <div class="faq-answer">
+                                <p>The average adult needs 5 to 6 cycles (7.5 to 9 hours) for optimal health. However, even 4 cycles (6 hours) can feel better than 5.5 cycles, because you're waking up at the right time.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What is the 90-minute rule?</summary>
+                            <div class="faq-answer">
+                                <p>The 90-minute rule is based on the average length of a human sleep cycle, which includes light sleep, deep sleep, and REM. Completing a full cycle prevents "sleep inertia"—that heavy, groggy feeling.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Does 15 minutes really matter?</summary>
+                            <div class="faq-answer">
+                                <p>Yes. It takes the average person about 14-16 minutes to actually fall asleep after closing their eyes. We factor this in so your cycles align with when you're actually unconscious.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const hI = document.getElementById('wake-hour');
+            const mI = document.getElementById('wake-min');
+            const aI = document.getElementById('wake-ampm');
+            const grid = document.getElementById('bedtimes-grid');
+
+            function update() {
+                let h = parseInt(hI.value);
+                const m = parseInt(mI.value);
+                const ampm = aI.value;
+
+                if (ampm === 'PM' && h !== 12) h += 12;
+                if (ampm === 'AM' && h === 12) h = 0;
+
+                const wakeTime = new Date();
+                wakeTime.setHours(h, m, 0, 0);
+
+                const cycles = [6, 5, 4]; // 9h, 7.5h, 6h
+                let html = '';
+
+                cycles.forEach(c => {
+                    const bedTime = new Date(wakeTime.getTime() - (c * 90 * 60 * 1000) - (15 * 60 * 1000));
+                    let bh = bedTime.getHours();
+                    let bm = bedTime.getMinutes();
+                    let bampm = bh >= 12 ? 'PM' : 'AM';
+                    bh = bh % 12 || 12;
+                    bm = bm < 10 ? '0' + bm : bm;
+
+                    html += `
+                        <div class="result-card">
+                            <span class="result-card-val">${bh}:${bm} ${bampm}</span>
+                            <span class="result-card-label">${c} Cycles (${c * 1.5}h sleep)</span>
+                        </div>
+                    `;
+                });
+
+                grid.innerHTML = html;
+            }
+
+            [hI, mI, aI].forEach(i => i.addEventListener('change', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

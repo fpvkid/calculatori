@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>BAC Calculator | Blood Alcohol Content Estimator</title>
+    <meta name="description" content="Free blood alcohol content (BAC) calculator. Estimate your current level based on weight, gender, drinks consumed, and time elapsed. Stay safe and informed.">
+    <meta name="keywords" content="blood alcohol content calculator, bac estimator, how many drinks to be over the limit, calculate bac by weight and gender, alcohol clearance time tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/bac-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .res-panel { 
+            background: var(--clr-surface); 
+            border: 2px solid #555; 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .bac-val { font-size: 5rem; font-weight: 800; color: #fff; line-height: 1; }
+        .bac-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+
+        .status-msg { margin-top: 20px; font-weight: 800; font-size: 1.1rem; }
+        .danger { border-color: #ef4444 !important; }
+        .danger .bac-val { color: #ef4444; }
+        .safe { border-color: #10b981 !important; }
+        .safe .bac-val { color: #10b981; }
+
+        .gender-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+        .gen-btn { flex: 1; padding: 10px; background: var(--clr-bg-2); border: 1px solid var(--clr-border); border-radius: var(--radius); cursor: pointer; color: var(--clr-text-dim); font-weight: 700; }
+        .gen-btn.active { background: var(--clr-bg-3); color: var(--clr-text); border-color: var(--clr-accent); }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header" style="text-align: center; max-width: 100%;">
+                    <h1>BAC estimator</h1>
+                    <p>Alcohol affects everyone differently. Use the Widmark formula to estimate your Blood Alcohol Content (BAC).</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <form class="calc-form" id="bac-form">
+                            <div class="gender-tabs">
+                                <button class="gen-btn active" data-val="0.68">Male</button>
+                                <button class="gen-btn" data-val="0.55">Female</button>
+                            </div>
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="weight" value="75">
+                            </div>
+                            <div class="form-group">
+                                <label>Standard Drinks Consumed</label>
+                                <input type="number" id="drinks" value="2" step="0.1">
+                                <small>1 drink = 12oz beer, 5oz wine, or 1.5oz spirit</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Time Since First Drink (Hours)</label>
+                                <input type="number" id="hours" value="1" step="0.5">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-panel" id="res-box">
+                            <span class="bac-label">Estimated BAC:</span>
+                            <div class="bac-val" id="res-bac">0.038</div>
+                            <div class="status-msg" id="res-msg">Under the limit</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                        <h3 style="color: #ef4444; margin-top: 0;">Legal Disclaimer</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">I genuinely hope you read this: <strong>This calculator is for educational purposes only.</strong> It does not account for food in your stomach, hydration, meds, or individual metabolism. Never use an online tool to decide if you are "safe to drive." If you have to ask, you aren't. Don’t be stupid.</p>
+                    </div>
+
+                    <h2>How the math works</h2>
+                    <p>This tool uses the <strong>Widmark Formula</strong>: <code>BAC = [Alcohol consumed in grams / (Body weight in grams × r)] × 100 - (ElapsedTime × 0.015)</code>. The "r" is a distribution constant (usually 0.68 for men and 0.55 for women). We assume a standard drink contains roughly 14 grams of pure alcohol. Finally, we subtract about 0.015% per hour for the rate at which your liver processes the alcohol.</p>
+                    
+                    <h2>Factors humans ignore</h2>
+                    <p>Your stomach contents are the biggest variable. If you drink two beers on an empty stomach, your peak BAC will be much higher and hit you much faster than if you just ate a giant steak dinner. This calculator assumes an "average" state. If you haven't eaten, your real BAC could be much higher than shown here.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wI = document.getElementById('weight');
+            const dI = document.getElementById('drinks');
+            const hI = document.getElementById('hours');
+            const gBtns = document.querySelectorAll('.gen-btn');
+            
+            const resB = document.getElementById('res-bac');
+            const resM = document.getElementById('res-msg');
+            const box = document.getElementById('res-box');
+
+            let rVal = 0.68;
+
+            gBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    gBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    rVal = parseFloat(btn.dataset.val);
+                    update();
+                });
+            });
+
+            function update() {
+                const wKg = parseFloat(wI.value) || 0;
+                const drinks = parseFloat(dI.value) || 0;
+                const hours = parseFloat(hI.value) || 0;
+
+                if (wKg === 0) return;
+
+                // Alcohol in grams (standard drink ~14g)
+                const alcoholGrams = drinks * 14;
+                const weightGrams = wKg * 1000;
+
+                // BAC = [ (14*drinks) / (weight*1000 * r) ] * 100 - (0.015 * hours)
+                let bac = ( (alcoholGrams / (weightGrams * rVal)) * 100 ) - (0.015 * hours);
+                bac = Math.max(0, bac);
+
+                resB.textContent = bac.toFixed(3);
+                
+                if (bac >= 0.08) {
+                    resM.textContent = "Over the Legal Limit (Typical)";
+                    box.className = "res-panel danger";
+                } else if (bac >= 0.05) {
+                    resM.textContent = "Caution: Significant Impairment";
+                    box.className = "res-panel danger";
+                } else {
+                    resM.textContent = "Under the limit";
+                    box.className = "res-panel safe";
+                }
+            }
+
+            [wI, dI, hI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

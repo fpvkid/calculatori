@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Pizza Party Calculator | How Many Pizzas to Order?</title>
+    <meta name="description" content="Free pizza party calculator. Estimate exactly how many pizzas you need for your next event based on number of adults, kids, and hunger levels.">
+    <meta name="keywords" content="how many pizzas for 20 people, pizza party calculator, pizza order estimator, pizzas for kids party, pizza slices per person tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/pizza-party-calc/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        
+        .result-box { 
+            background: var(--clr-accent-glow); 
+            border: 2px solid var(--clr-accent); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center; 
+            margin-top: 30px;
+        }
+        .main-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .hunger-select { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .hunger-btn { background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); padding: 10px; cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; transition: all var(--dur) var(--ease); }
+        .hunger-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+        .inputs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Pizza party calculator</h1>
+                    <p>Forget the stress of ordering too much or (worse) running out. Calculate the perfect pizza count based on your guest list.</p>
+                </div>
+
+                <form class="calc-form" id="pizza-form">
+                    <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Hunger Level</label>
+                    <div class="hunger-select">
+                        <button class="hunger-btn" data-val="2">Light (2 slices)</button>
+                        <button class="hunger-btn active" data-val="3">Average (3 slices)</button>
+                        <button class="hunger-btn" data-val="4">Famished (4 slices)</button>
+                    </div>
+
+                    <div class="inputs-row">
+                        <div class="form-group">
+                            <label>Number of Adults</label>
+                            <input type="number" id="adults" value="10">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Kids</label>
+                            <input type="number" id="kids" value="5">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="result-box">
+                    <span class="main-label">Order:</span>
+                    <div class="main-val" id="res-pizzas">6</div>
+                    <div class="main-label">Large Pizzas</div>
+                    <p style="margin-top: 15px; color: var(--clr-text-dim); font-size: 0.95rem;">
+                        Roughly <span id="res-slices">45</span> slices total (8 per pizza).
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "One Too Many" rule</h2>
+                    <p>I genuinely believe that leftover pizza is a feature, not a bug. If this calculator tells you that you need 5.2 pizzas, <strong>order 6</strong>. It’s always better to have three cold slices in the fridge the next morning than to have one guest standing by an empty box looking sad. Trust me, I've lived through the 12-party "slice drought," and it’s awkward.</p>
+                    
+                    <h2>How we count kids</h2>
+                    <p>Unless you're hosting a sports team of teenagers, kids usually eat about half as much as adults. Our math assumes kids eat 1.5 to 2 slices on average. If it's a toddler party, you can probably drop the count even further, but why risk it? Everyone loves crust.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('pizza-form');
+            const adultsI = document.getElementById('adults');
+            const kidsI = document.getElementById('kids');
+            const hungerBtns = document.querySelectorAll('.hunger-btn');
+            
+            const resPizzas = document.getElementById('res-pizzas');
+            const resSlices = document.getElementById('res-slices');
+
+            let hungerSlices = 3;
+
+            hungerBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    hungerBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    hungerSlices = parseInt(btn.dataset.val);
+                    update();
+                });
+            });
+
+            function update() {
+                const a = parseInt(adultsI.value) || 0;
+                const k = parseInt(kidsI.value) || 0;
+
+                const totalSlices = (a * hungerSlices) + (k * (hungerSlices * 0.6));
+                const pizzas = Math.ceil(totalSlices / 8);
+
+                resPizzas.textContent = pizzas;
+                resSlices.textContent = Math.round(totalSlices);
+            }
+
+            [adultsI, kidsI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

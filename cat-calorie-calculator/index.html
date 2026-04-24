@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Cat Calorie Calculator | Daily Feeding Guide</title>
+    <meta name="description" content="Calculate how many calories your cat needs daily based on weight, activity level, and life stage. Accurate RER and DER formula for healthy cats.">
+    <meta name="keywords" content="cat calorie calculator, how much to feed my cat, cat daily calorie needs, feline nutrition calculator, indoor cat calorie guide">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/cat-calorie-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cal-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .cal-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Cat calorie calculator</h1>
+                    <p>Don't let your feline friend get "chonky." Calculate their exact daily needs based on their current weight and lifestyle.</p>
+                </div>
+
+                <form class="calc-form" id="cat-form">
+                    <div class="form-group">
+                        <label>Cat's Weight (kg)</label>
+                        <input type="number" id="weight" value="4.5" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Life Stage / Activity</label>
+                        <select id="status">
+                            <option value="1.2">Neutered Adult (Typical)</option>
+                            <option value="1.4">Intact Adult</option>
+                            <option value="1.0">Inactive / Weight Loss</option>
+                            <option value="2.5">Kitten (Active Growth)</option>
+                            <option value="1.6">Active Outdoor Cat</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="cal-val" id="res-cal">225</div>
+                    <div class="cal-label">kcal Per Day</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;">
+                        Resting Energy Requirement (RER): <span id="res-rer">180</span> kcal
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Most cat food labels are wrong</h2>
+                    <p>I genuinely believe that pet food companies want you to overfeed your cat. If you follow the label on the back of the bag, you’re often giving them 30% more calories than they actually burn, especially if they’re a "lazy indoor" house cat. Obesity is the #1 health problem in cats today, and it’s almost always because we trust the label more than the cat's actual weight.</p>
+                    
+                    <p>This calculator uses the standard <strong>RER (Resting Energy Requirement)</strong> formula: RER = 70 × (body weight in kg)<sup>0.75</sup>. We then apply a multiplier based on whether your cat is fixed, active, or a growing kitten. Use this as a starting point, but always weigh your cat once a month to see if you need to adjust.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wI = document.getElementById('weight');
+            const sI = document.getElementById('status');
+            const resC = document.getElementById('res-cal');
+            const resR = document.getElementById('res-rer');
+
+            function update() {
+                const w = parseFloat(wI.value) || 0;
+                const m = parseFloat(sI.value) || 1.2;
+
+                if (w === 0) return;
+
+                // RER = 70 * (weight ^ 0.75)
+                const rer = 70 * Math.pow(w, 0.75);
+                const der = rer * m;
+
+                resC.textContent = Math.round(der);
+                resR.textContent = Math.round(rer);
+            }
+
+            [wI, sI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

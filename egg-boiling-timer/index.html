@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
+    <title>Egg Boiling Timer | Precise Times for Soft, Jammy & Hard Boiled Eggs</title>
+    <meta name="description" content="Free altitude-adjusted egg boiling timer. Get precise times for soft, jammy, and hard-boiled eggs based on size (C0/C1), starting temperature, stove type, and elevation.">
+    <meta name="keywords" content="egg timer, egg boiling timer, soft boiled egg time, hard boiled egg time, jammy egg timer, altitude egg cooking, perfect egg timer">
+    <meta name="author" content="calcsfor.life">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calcsfor.life/egg-boiling-timer/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Egg Boiling Timer | Precise Altitude-Adjusted Times">
+    <meta property="og:description" content="Get the perfect soft, jammy, or hard boiled egg every time. Adjusted for egg size, altitude, and stove type.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/egg-boiling-timer/">
+    <meta property="og:site_name" content="calcsfor.life">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Egg Boiling Timer | Perfect Times Every Time">
+    <meta name="twitter:description" content="Precise egg boiling timer adjusted for size, altitude, and starting temperature.">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Egg Boiling Timer",
+        "description": "Calculates perfect egg boiling times based on egg size (C0/C1), starting temperature, stove type, and altitude.",
+        "url": "https://calcsfor.life/egg-boiling-timer/",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How does altitude affect boiling eggs?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "At high altitudes, lower air pressure causes water to boil at a lower temperature (e.g., 90°C instead of 100°C). This means heat transfer is slower, and you need to add roughly 30-60 seconds of cooking time for every 1000m of elevation."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between C0 and C1 eggs?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "In Europe, C0 eggs are Extra Large (75g+) while C1 are Large (65-75g). Heavier eggs require 1-2 minutes of extra cooking time to reach the same level of doneness."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Should I start eggs in boiling water or cold water?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Starting with boiling water allows for precise timing since you have a consistent reference point. Cold starts depend on how fast your stove heats up, which varies for everyone."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How long to boil an egg for a jammy yolk?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For a large (C1) egg starting from the fridge and placed into boiling water, a jammy yolk takes roughly 7-8 minutes. Extra large (C0) eggs need about 8-9 minutes. Adjust if your eggs are at room temperature."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://calcsfor.life/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Egg Boiling Timer",
+                "item": "https://calcsfor.life/egg-boiling-timer/"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main>
+        <!-- Hero intro -->
+        <section class="egg-hero">
+            <div class="container">
+                <p class="hero-tag">Free precision timer</p>
+                <h1>Egg boiling timer</h1>
+                <p class="hero-sub">Because 6 minutes is never just 6 minutes. Adjusted for egg size, altitude, stove type, and starting temperature.</p>
+            </div>
+        </section>
+
+        <!-- Calculator Card -->
+        <section class="egg-calc-section" id="calculator">
+            <div class="container">
+                <div class="egg-card">
+                    <!-- Step 1: Selection -->
+                    <div id="selection-view">
+                        <div class="control-group">
+                            <label class="group-label">Egg Size</label>
+                            <div class="chip-group" id="size-chips">
+                                <button class="chip active" data-value="C0">
+                                    <span class="chip-main">XL (C0)</span>
+                                    <span class="chip-sub">75g+</span>
+                                </button>
+                                <button class="chip" data-value="C1">
+                                    <span class="chip-main">Large (C1)</span>
+                                    <span class="chip-sub">65-75g</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="group-label">Initial Temperature</label>
+                            <div class="chip-group" id="temp-chips">
+                                <button class="chip active" data-value="fridge">
+                                    <span class="chip-main">Cold (Fridge)</span>
+                                    <span class="chip-sub">~4°C / 40°F</span>
+                                </button>
+                                <button class="chip" data-value="room">
+                                    <span class="chip-main">Room Temp</span>
+                                    <span class="chip-sub">~20°C / 68°F</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="group-label">Cooking Method</label>
+                            <div class="chip-group" id="method-chips">
+                                <button class="chip active" data-value="boiling">
+                                    <span class="chip-main">Boiling Start</span>
+                                    <span class="chip-sub">Easy to peel</span>
+                                </button>
+                                <button class="chip" data-value="cold">
+                                    <span class="chip-main">Cold Start</span>
+                                    <span class="chip-sub">Gentle heat</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="group-label">Stove Type</label>
+                            <div class="chip-group" id="stove-chips">
+                                <button class="chip active" data-value="gas">
+                                    <span class="chip-main">Gas / Induction</span>
+                                </button>
+                                <button class="chip" data-value="electric">
+                                    <span class="chip-main">Electric</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="group-label">Altitude (Elevation)</label>
+                            <div class="chip-group" id="altitude-chips">
+                                <button class="chip active" data-value="0">
+                                    <span class="chip-main">Sea Level</span>
+                                    <span class="chip-sub">0 - 500m</span>
+                                </button>
+                                <button class="chip" data-value="1000">
+                                    <span class="chip-main">High</span>
+                                    <span class="chip-sub">~1000m</span>
+                                </button>
+                                <button class="chip" data-value="2000">
+                                    <span class="chip-main">Alpine</span>
+                                    <span class="chip-sub">2000m+</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="group-label">Desired Doneness</label>
+                            <div class="doneness-grid">
+                                <button class="doneness-card" data-value="soft">
+                                    <div class="egg-icon soft"></div>
+                                    <span class="label">Soft-Boiled</span>
+                                    <span class="desc">Runny yolk</span>
+                                </button>
+                                <button class="doneness-card active" data-value="medium">
+                                    <div class="egg-icon medium"></div>
+                                    <span class="label">Jammy</span>
+                                    <span class="desc">Gooey center</span>
+                                </button>
+                                <button class="doneness-card" data-value="hard">
+                                    <div class="egg-icon hard"></div>
+                                    <span class="label">Hard-Boiled</span>
+                                    <span class="desc">Fully set</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button id="start-btn" class="btn btn-primary btn-lg" style="flex:1">Start Timer</button>
+                            <button id="test-btn" class="btn btn-ghost" title="Test Sound" style="width:58px;height:58px;padding:0;font-size:1.5rem;">🔊</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Timer -->
+                    <div id="timer-view" class="hidden">
+                        <div class="timer-display">
+                            <svg class="progress-ring" width="240" height="240">
+                                <circle class="progress-ring__circle-bg" stroke="#ffffff20" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
+                                <circle class="progress-ring__circle" stroke="var(--clr-accent)" stroke-width="8" fill="transparent" r="110" cx="120" cy="120" stroke-linecap="round"/>
+                            </svg>
+                            <div class="timer-text">
+                                <span id="time-left">08:00</span>
+                                <span id="timer-status">Boiling...</span>
+                            </div>
+                        </div>
+
+                        <div class="timer-controls">
+                            <button id="cancel-btn" class="btn btn-outline">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Info / FAQ -->
+        <section class="egg-info-section" id="guide">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why precision matters</h2>
+                    <p>Boiling "by feel" is a gamble. One egg is Extra Large (C0), another is pulled straight from the fridge, and suddenly your breakfast is a rubbery disappointment. We've calibrated these times using culinary standards for Large (C1) and XL (C0) categories.</p>
+                </div>
+
+                <div class="faq-list" id="faq-list">
+                    <details class="faq-item" id="faq-1">
+                        <summary>How does altitude affect boiling eggs?</summary>
+                        <div class="faq-answer">
+                            <p>At high altitudes, lower air pressure causes water to boil at a lower temperature (e.g., 90°C instead of 100°C). This means heat transfer is slower, and you need to add roughly 30-60 seconds of cooking time for every 1000m of elevation.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-2">
+                        <summary>What is the molecular secret to a perfect egg?</summary>
+                        <div class="faq-answer">
+                            <p>E.U. Large (C1) eggs (~68g) reach a "mollet" or jammy state when the yolk hits exactly 70°C. Our physics-based model calculates when the core of the egg reaches this target based on thermal diffusion.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-3">
+                        <summary>What is the difference between C0 and C1 eggs?</summary>
+                        <div class="faq-answer">
+                            <p>In Europe, C0 eggs are "Extra Large" (75g+) while C1 are "Large" (65-75g). Heavier eggs require 1-2 minutes of extra cooking time because there's more mass for heat to penetrate.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-4">
+                        <summary>Why use boiling water start?</summary>
+                        <div class="faq-answer">
+                            <p>Starting with boiling water allows for precise timing. Cold starts depend on how fast your stove heats up, which varies for everyone. For the most consistent results, always drop your eggs into already boiling water.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" id="faq-5">
+                        <summary>How long to boil an egg for a jammy yolk?</summary>
+                        <div class="faq-answer">
+                            <p>For a Large (C1) egg from the fridge into boiling water: about 7.5-8 minutes. For XL (C0), add about 1 minute. If starting from room temperature, subtract about 1 minute. At high altitude (1000m+), add 30-60 seconds.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <audio id="alarm-sound" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav" preload="auto"></audio>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
+

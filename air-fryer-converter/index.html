@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Air Fryer vs Oven Converter | Convert Time & Temp Tool</title>
+    <meta name="description" content="Free air fryer to oven converter. Instantly adjust oven recipes for your air fryer by calculating the correct reduced time and temperature.">
+    <meta name="keywords" content="air fryer oven converter, air fryer conversion chart, oven to air fryer time calculator, air fryer temperature conversion, ninja air fryer converter">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/air-fryer-converter/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        
+        .result-group { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .result-card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: var(--radius-lg); padding: 30px; text-align: center; }
+        .res-val { font-size: 3rem; font-weight: 800; color: var(--clr-accent); line-height: 1; margin-bottom: 5px; }
+        .res-label { font-size: 0.85rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+
+        .unit-switch { margin-bottom: 20px; display: inline-flex; background: var(--clr-bg-2); padding: 4px; border-radius: var(--radius-sm); }
+        .unit-btn { padding: 6px 12px; border: none; background: transparent; color: var(--clr-text-dim); cursor: pointer; border-radius: var(--radius-xs); font-weight: 700; font-size: 0.8rem; }
+        .unit-btn.active { background: var(--clr-accent); color: var(--clr-bg); }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Air fryer converter</h1>
+                    <p>Stop burning your dinner. Air fryers are essentially high-speed convection ovens — they need less time and lower heat.</p>
+                </div>
+
+                <div style="text-align: center;">
+                    <div class="unit-switch">
+                        <button class="unit-btn active" data-unit="F">Fahrenheit (°F)</button>
+                        <button class="unit-btn" data-unit="C">Celsius (°C)</button>
+                    </div>
+                </div>
+
+                <form class="calc-form" id="converter-form" style="margin-top: 10px;">
+                    <div class="form-group">
+                        <label>Original Oven Temperature</label>
+                        <input type="number" id="temp-in" value="400">
+                    </div>
+                    <div class="form-group">
+                        <label>Original Oven Time (Minutes)</label>
+                        <input type="number" id="time-in" value="20">
+                    </div>
+                </form>
+
+                <div class="result-group">
+                    <div class="result-card">
+                        <div class="res-val" id="res-temp">375°</div>
+                        <div class="res-label">Air Fryer Temp</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="res-val" id="res-time">15m</div>
+                        <div class="res-label">Air Fryer Time</div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The 20/25 rule</h2>
+                    <p>I genuinely don't know why air fryer manuals make this sound so complicated. Most people stick to the "20/25 rule" and it works perfectly: <strong>reduce the temperature by 25°F (or 15°C) and reduce the time by 20% to 25%.</strong></p>
+                    
+                    <p>Because an air fryer is smaller and the fan is much more powerful than a traditional oven, the hot air hits the food faster and more directly. If you try to cook a chicken breast at 400°F for 20 minutes like you would in a big oven, you’ll end up with a dry, blackened rock. Use this calculator, and most importantly: <strong>always check the food a few minutes early.</strong> Every air fryer model is a little different.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const tempInput = document.getElementById('temp-in');
+            const timeInput = document.getElementById('time-in');
+            const resTemp = document.getElementById('res-temp');
+            const resTime = document.getElementById('res-time');
+            const unitBtns = document.querySelectorAll('.unit-btn');
+            
+            let unit = 'F';
+
+            unitBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    unitBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    unit = btn.dataset.unit;
+                    if(unit === 'C') {
+                        if(tempInput.value == 400) tempInput.value = 200;
+                    } else {
+                        if(tempInput.value == 200) tempInput.value = 400;
+                    }
+                    update();
+                });
+            });
+
+            function update() {
+                const t = parseFloat(tempInput.value) || 0;
+                const m = parseFloat(timeInput.value) || 0;
+
+                const targetTime = m * 0.75;
+                const targetTemp = unit === 'F' ? (t - 25) : (t - 15);
+
+                resTemp.textContent = Math.round(targetTemp) + '°';
+                resTime.textContent = Math.round(targetTime) + 'm';
+            }
+
+            [tempInput, timeInput].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

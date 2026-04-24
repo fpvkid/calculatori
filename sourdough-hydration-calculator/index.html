@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Sourdough Hydration Calculator | Baker's Percentage & Recipe Tool</title>
+    <meta name="description" content="Free sourdough hydration calculator. Calculate baker's percentages, total water content, and salt ratios for your sourdough bread recipes. Adjusted for starter hydration.">
+    <meta name="keywords" content="sourdough hydration calculator, baker's percentage sourdough, sourdough recipe calculator, sourdough water ratio, bread hydration calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calcsfor.life/sourdough-hydration-calculator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sourdough Hydration Calculator | Baker's Percentage Tool">
+    <meta property="og:description" content="Perfect your sourdough recipe. Calculate hydration %, salt %, and total weight instantly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/sourdough-hydration-calculator/">
+    <meta property="og:site_name" content="calcsfor.life">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sourdough Hydration Calculator",
+        "description": "Calculate exact hydration levels and baker's percentages for sourdough bread recipes, accounting for starter water and flour content.",
+        "url": "https://calcsfor.life/sourdough-hydration-calculator/",
+        "applicationCategory": "KitchenApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the best hydration for sourdough?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Most beginners start with 65-70% hydration for better manageability. Advanced bakers often go for 75-85% hydration to achieve a more open, lacy crumb structure."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does sourdough starter affect hydration?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Most starters are 100% hydration (equal parts flour and water). This calculator automatically accounts for the flour and water in your starter to give you a true total hydration percentage."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 700px; margin: 0 auto; }
+        .inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .result-panel { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .stat-card { text-align: center; }
+        .stat-value { font-size: 2rem; font-weight: 800; color: var(--clr-accent); }
+        .stat-label { font-size: 0.8rem; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        
+        .info-content { margin-top: 80px; }
+        .info-content h2 { margin-bottom: 20px; }
+        .info-content p { color: var(--clr-text-muted); line-height: 1.7; margin-bottom: 16px; }
+
+        @media (max-width: 600px) {
+            .inputs-grid { grid-template-columns: 1fr; }
+            .result-panel { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Sourdough hydration calculator</h1>
+                    <p>Enter your recipe weights to calculate the exact hydration percentage and baker's ratios.</p>
+                </div>
+
+                <form class="calc-form" id="sourdough-form">
+                    <div class="inputs-grid">
+                        <div class="form-group">
+                            <label for="flour">Total Flour (g)</label>
+                            <input type="number" id="flour" value="500" step="1" required>
+                            <small>Main flour amount in your dough</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="water">Total Water (g)</label>
+                            <input type="number" id="water" value="350" step="1" required>
+                            <small>Water added to the dough</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="starter">Starter Weight (g)</label>
+                            <input type="number" id="starter" value="100" step="1" required>
+                            <small>Assumes 100% hydration starter</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="salt">Salt Weight (g)</label>
+                            <input type="number" id="salt" value="10" step="0.1" required>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="result-panel">
+                    <div class="stat-card">
+                        <div class="stat-label">Hydration</div>
+                        <div class="stat-value" id="res-hydration">72.7%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Salt Ratio</div>
+                        <div class="stat-value" id="res-salt">2.0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Weight</div>
+                        <div class="stat-value" id="res-weight">960g</div>
+                    </div>
+                </div>
+
+                <div class="info-content">
+                    <h2>The truth about hydration</h2>
+                    <p>Sourdough hydration is basically a trade-off between how good the bread looks and how much you're going to hate your life while shaping it. High hydration (80%+) is what gets you those "Instagrammable" holes in the crumb, but the dough is like working with wet glue. If you're just starting out, stick to 65-70%. It's much easier to handle and still tastes fantastic.</p>
+                    
+                    <h2>How the math actually works</h2>
+                    <p>Most calculators forget the flour and water <em>already inside</em> your starter. If you use a standard 100% hydration starter (equal parts flour and water), a 100g scoop of it is actually contributing 50g of flour and 50g of water to your dough. I've built this tool to account for that "hidden" hydration so your recipe stays consistent every single time.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('sourdough-form');
+            const resHydration = document.getElementById('res-hydration');
+            const resSalt = document.getElementById('res-salt');
+            const resWeight = document.getElementById('res-weight');
+
+            function update() {
+                const flour = parseFloat(document.getElementById('flour').value) || 0;
+                const water = parseFloat(document.getElementById('water').value) || 0;
+                const starter = parseFloat(document.getElementById('starter').value) || 0;
+                const salt = parseFloat(document.getElementById('salt').value) || 0;
+
+                // Starter split (assuming 100% hydration starter)
+                const starterFlour = starter / 2;
+                const starterWater = starter / 2;
+
+                const totalFlour = flour + starterFlour;
+                const totalWater = water + starterWater;
+                const totalWeight = flour + water + starter + salt;
+
+                const hydration = totalFlour > 0 ? (totalWater / totalFlour) * 100 : 0;
+                const saltRatio = totalFlour > 0 ? (salt / totalFlour) * 100 : 0;
+
+                resHydration.textContent = hydration.toFixed(1) + '%';
+                resSalt.textContent = saltRatio.toFixed(1) + '%';
+                resWeight.textContent = Math.round(totalWeight) + 'g';
+            }
+
+            form.addEventListener('input', update);
+        })();
+    </script>
+</body>
+</html>
+

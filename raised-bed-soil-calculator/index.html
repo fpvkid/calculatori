@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Raised Bed Soil Calculator | Calculate Cubic Feet & Bags</title>
+    <meta name="description" content="Free raised garden bed soil calculator. Calculate exactly how many cubic feet, cubic yards, or soil bags you need to fill your garden beds based on dimensions.">
+    <meta name="keywords" content="raised bed soil calculator, cubic feet soil calculator, how much soil for garden bed, garden bed soil volume, raised bed garden calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calcsfor.life/raised-bed-soil-calculator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Raised Bed Soil Calculator | Fill Your Garden Beds">
+    <meta property="og:description" content="Never buy too much soil again. Calculate cubic feet and number of bags needed for any raised garden bed.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/raised-bed-soil-calculator/">
+    <meta property="og:site_name" content="calcsfor.life">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Raised Bed Soil Calculator",
+        "description": "Calculate soil volume in cubic feet and yards for raised garden beds, with bag count estimation.",
+        "url": "https://calcsfor.life/raised-bed-soil-calculator/",
+        "applicationCategory": "GardenApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+        
+        .result-box { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            position: sticky;
+            top: 100px;
+        }
+
+        .main-res-val { font-size: 3.5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; margin-bottom: 5px; }
+        .main-res-label { font-size: 0.9rem; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 20px; }
+        
+        .sub-res { border-top: 1px solid var(--clr-border); padding-top: 20px; display: grid; gap: 15px; }
+        .sub-res-item { display: flex; justify-content: space-between; align-items: center; }
+        .sub-res-val { font-weight: 700; font-size: 1.2rem; }
+        .sub-res-label { color: var(--clr-text-dim); font-size: 0.9rem; }
+
+        .unit-toggle { display: inline-flex; background: var(--clr-bg-2); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 20px; }
+        .unit-btn { padding: 8px 16px; border: none; background: none; color: var(--clr-text-muted); cursor: pointer; border-radius: var(--radius-xs); font-size: 0.85rem; font-weight: 600; }
+        .unit-btn.active { background: var(--clr-accent); color: var(--clr-bg); shadow: 0 4px 10px rgba(240,160,64,0.3); }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Raised bed soil calculator</h1>
+                    <p>Plan your garden budget. Calculate the volume of soil needed to fill your raised beds in cubic feet, yards, and standard bags.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="calc-form-container">
+                        <div class="unit-toggle">
+                            <button class="unit-btn active" data-unit="ft">Feet/Inches</button>
+                            <button class="unit-btn" data-unit="metric">Meters/CM</button>
+                        </div>
+
+                        <form class="calc-form" id="soil-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="length" id="lbl-len">Length (ft)</label>
+                                    <input type="number" id="length" value="4" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="width" id="lbl-wid">Width (ft)</label>
+                                    <input type="number" id="width" value="4" step="0.1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="depth" id="lbl-dep">Depth (inches)</label>
+                                <input type="number" id="depth" value="12" step="0.5">
+                            </div>
+
+                            <div class="form-group" style="margin-top: 30px;">
+                                <label for="bag-size">Standard Bag Size</label>
+                                <select id="bag-size">
+                                    <option value="0.75">0.75 cu. ft. (Small)</option>
+                                    <option value="1.0">1.0 cu. ft. (Mid)</option>
+                                    <option value="1.5" selected>1.5 cu. ft. (Standard)</option>
+                                    <option value="2.0">2.0 cu. ft. (Large)</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="result-box">
+                        <div class="main-res-val" id="res-cu-ft">16.0</div>
+                        <div class="main-res-label">Cubic Feet Needed</div>
+                        
+                        <div class="sub-res">
+                            <div class="sub-res-item">
+                                <span class="sub-res-label">Cubic Yards</span>
+                                <span class="sub-res-val" id="res-cu-yd">0.59</span>
+                            </div>
+                            <div class="sub-res-item">
+                                <span class="sub-res-label">Number of Bags</span>
+                                <span class="sub-res-val" id="res-bags">11</span>
+                            </div>
+                            <div class="sub-res-item">
+                                <span class="sub-res-label">Estimate Metric</span>
+                                <span class="sub-res-val" id="res-liters">453L</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Don't go broke buying bags</h2>
+                    <p>Let's be honest: filling a massive raised bed with pre-bagged soil from a big-box store is a financial mistake. It'll drain your bank account faster than you think. Most seasoned growers I know mix their own using the <strong>"Mel's Mix"</strong> rule: 1/3 compost, 1/3 peat moss (or coconut coir), and 1/3 coarse vermiculite. It stays light and doesn't turn into a brick after the first rain.</p>
+                    
+                    <p>If your bed is really deep (over 18 inches), don't fill the whole thing with expensive soil. Look up the <strong>Hugelkultur method</strong>: throw old logs, branches, and dry leaves in the bottom half. They'll break down over years, holding moisture like a sponge and saving you a fortune on soil volume.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('soil-form');
+            const unitBtns = document.querySelectorAll('.unit-btn');
+            let unit = 'ft';
+
+            const resCuFt = document.getElementById('res-cu-ft');
+            const resCuYd = document.getElementById('res-cu-yd');
+            const resBags = document.getElementById('res-bags');
+            const resLiters = document.getElementById('res-liters');
+
+            unitBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    unitBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    unit = btn.dataset.unit;
+                    
+                    if(unit === 'metric') {
+                        document.getElementById('lbl-len').textContent = 'Length (m)';
+                        document.getElementById('lbl-wid').textContent = 'Width (m)';
+                        document.getElementById('lbl-dep').textContent = 'Depth (cm)';
+                        document.getElementById('length').value = 1.2;
+                        document.getElementById('width').value = 1.2;
+                        document.getElementById('depth').value = 30;
+                    } else {
+                        document.getElementById('lbl-len').textContent = 'Length (ft)';
+                        document.getElementById('lbl-wid').textContent = 'Width (ft)';
+                        document.getElementById('lbl-dep').textContent = 'Depth (inches)';
+                        document.getElementById('length').value = 4;
+                        document.getElementById('width').value = 4;
+                        document.getElementById('depth').value = 12;
+                    }
+                    update();
+                });
+            });
+
+            function update() {
+                const l = parseFloat(document.getElementById('length').value) || 0;
+                const w = parseFloat(document.getElementById('width').value) || 0;
+                const d = parseFloat(document.getElementById('depth').value) || 0;
+                const bagSize = parseFloat(document.getElementById('bag-size').value) || 1;
+
+                let volumeCuFt = 0;
+
+                if (unit === 'ft') {
+                    // Length(ft) * Width(ft) * Depth(ft)
+                    volumeCuFt = l * w * (d / 12);
+                } else {
+                    // Meters to feet calculation
+                    // L(m) * W(m) * D(m) = CuMeters -> to CuFt
+                    volumeCuFt = (l * w * (d / 100)) * 35.3147;
+                }
+
+                const cubicYards = volumeCuFt / 27;
+                const bags = Math.ceil(volumeCuFt / bagSize);
+                const liters = volumeCuFt * 28.3168;
+
+                resCuFt.textContent = volumeCuFt.toFixed(1);
+                resCuYd.textContent = cubicYards.toFixed(2);
+                resBags.textContent = bags;
+                resLiters.textContent = Math.round(liters) + 'L';
+            }
+
+            form.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

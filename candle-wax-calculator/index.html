@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Candle Wax Calculator | Fragrance Oil & Wax Weight Tool</title>
+    <meta name="description" content="Free candle making calculator. Calculate exactly how much wax and fragrance oil you need based on container size and fragrance load (%).">
+    <meta name="keywords" content="candle wax calculator grams, fragrance oil percentage calculator, how much wax for 8oz jar, candle making supply tool, soy wax calculator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/candle-wax-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .val-num { font-size: 3.5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .val-label { font-size: 0.85rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        
+        .res-split { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .res-card { background: var(--clr-bg-2); padding: 20px; border-radius: var(--radius); border: 1px solid var(--clr-border); }
+
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Candle wax calculator</h1>
+                    <p>Stop wasting expensive fragrance oils. Calculate the exact weight of wax and oil needed to fill your jars perfectly.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <form class="calc-form" id="candle-form">
+                            <div class="form-group">
+                                <label>Container Size (Total Fl Oz or ml)</label>
+                                <input type="number" id="size" value="8">
+                            </div>
+                            <div class="form-group">
+                                <label>Number of Candles</label>
+                                <input type="number" id="count" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Fragrance Load (%)</label>
+                                <input type="number" id="load" value="10">
+                                <small>Usually between 6% and 10%</small>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-display">
+                            <div class="res-card" style="margin-bottom: 20px;">
+                                <div class="val-num" id="res-wax">180</div>
+                                <div class="val-label">Total Wax (grams)</div>
+                            </div>
+                            <div class="res-card">
+                                <div class="val-num" id="res-oil">18</div>
+                                <div class="val-label">Fragrance Oil (grams)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Volume vs Weight" trap</h2>
+                    <p>I genuinely don't know why candle making tutorials are so confusing. Here is the secret: <strong>Wax is lighter than water.</strong> If you have an "8oz jar," it doesn't hold 8 ounces of wax; it holds 8 ounces of *water*. Wax is about 15% less dense than water. If you just fill a jar with 8oz of wax, you’ll have leftovers. This calculator uses the density of typical soy/paraffin wax (roughly 0.86) to give you the exact grams you need.</p>
+                    
+                    <p><strong>Measuring by Weight:</strong> Never, ever measure candle ingredients by eye or by "cups." Professional candlemaking is chemistry. Use a digital scale and measure everything in grams. If you're off by even 5 grams of fragrance oil, your candle might smoke or the oil might "leak" out of the wax (sweating).</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const sI = document.getElementById('size');
+            const cI = document.getElementById('count');
+            const lI = document.getElementById('load');
+            
+            const resW = document.getElementById('res-wax');
+            const resO = document.getElementById('res-oil');
+
+            function update() {
+                const size = parseFloat(sI.value) || 0;
+                const count = parseFloat(cI.value) || 1;
+                const load = parseFloat(lI.value) || 10;
+
+                // 1 fl oz water = 28.35 grams
+                // Wax density ~ 0.86
+                const totalGramsWater = size * 28.35 * count;
+                const totalGramsWaxTarget = totalGramsWater * 0.86;
+
+                // Formula: Wax = Total / (1 + load%)
+                // Oil = Total - Wax
+                const wax = totalGramsWaxTarget / (1 + (load / 100));
+                const oil = totalGramsWaxTarget - wax;
+
+                resW.textContent = Math.round(wax);
+                resO.textContent = Math.round(oil);
+            }
+
+            [sI, cI, lI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

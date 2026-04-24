@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Butter to Oil Conversion Calculator | Baking Substitute Tool</title>
+    <meta name="description" content="Free butter to oil conversion calculator. Quickly convert butter measurements to oil (or vice versa) for baking. Includes volume and weight ratios.">
+    <meta name="keywords" content="butter to oil conversion baking, substitute oil for butter ratio, how much oil for 1 cup butter, butter to oil grams, baking substitution tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/butter-oil-conversion/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .main-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+        
+        .toggle-wrap { display: flex; justify-content: center; margin-bottom: 25px; }
+        .toggle-btn { background: var(--clr-bg-2); border: 1px solid var(--clr-border); padding: 10px 20px; cursor: pointer; color: var(--clr-text-dim); font-weight: 700; }
+        .toggle-btn.active { background: var(--clr-accent); color: var(--clr-bg); border-color: var(--clr-accent); }
+        .toggle-left { border-radius: 8px 0 0 8px; }
+        .toggle-right { border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Butter to oil converter</h1>
+                    <p>Swapping butter for oil isn't a 1:1 trade. Get the exact ratio for cookies, cakes, and bread.</p>
+                </div>
+
+                <div class="toggle-wrap">
+                    <button class="toggle-btn toggle-left active" data-dir="b2o">Butter to Oil</button>
+                    <button class="toggle-btn toggle-right" data-dir="o2b">Oil to Butter</button>
+                </div>
+
+                <form class="calc-form" id="butter-form">
+                    <div class="form-group">
+                        <label id="input-label">Butter Amount (Cups)</label>
+                        <input type="number" id="amount" value="1" step="0.1">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="main-label" id="res-label">Use this much Oil:</div>
+                    <div class="main-val" id="res-val">3/4</div>
+                    <div class="main-label">Cups</div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Butter is 20% water</h2>
+                    <p>I genuinely believe that subbing oil for butter is one of the easiest ways to ruin a cake if you aren't careful. Butter isn't pure fat; it’s about 80% fat and 20% water and milk solids. Oil is 100% fat. If you swap them 1:1, your cake will be greasy and heavy. The "Golden Ratio" is <strong>3/4 parts oil for every 1 part butter</strong>. This accounts for the missing water and keeps the texture moist without being oily.</p>
+                    
+                    <p><strong>When NOT to swap:</strong> If your recipe asks you to "cream butter and sugar," don't use oil. Creaming creates tiny air pockets that oil just can't hold. If you use oil there, your cake will be flat and dense. Stick to oil for recipes that ask for melted butter or just "fats."</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const aI = document.getElementById('amount');
+            const resV = document.getElementById('res-val');
+            const resL = document.getElementById('res-label');
+            const inL = document.getElementById('input-label');
+            const tBtns = document.querySelectorAll('.toggle-btn');
+            
+            let dir = 'b2o';
+
+            tBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    dir = btn.dataset.dir;
+                    inL.textContent = dir === 'b2o' ? 'Butter Amount (Cups)' : 'Oil Amount (Cups)';
+                    resL.textContent = dir === 'b2o' ? 'Use this much Oil:' : 'Use this much Butter:';
+                    update();
+                });
+            });
+
+            function update() {
+                const amt = parseFloat(aI.value) || 0;
+                let val = 0;
+
+                if (dir === 'b2o') {
+                    val = amt * 0.75;
+                } else {
+                    val = amt * 1.25;
+                }
+
+                // Try to show as fraction if it's standard
+                if (val === 0.75) resV.textContent = "3/4";
+                else if (val === 0.5) resV.textContent = "1/2";
+                else if (val === 0.25) resV.textContent = "1/4";
+                else resV.textContent = val.toFixed(2);
+            }
+
+            aI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

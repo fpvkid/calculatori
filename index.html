@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
+    <title>CalcsFor.Life | 40+ Smart Niche Calculators & Focus Tools</title>
+    <meta name="description" content="Discover the ultimate collection of niche calculators for pets, kitchen, finance, and home DIY. Fast, privacy-friendly, and optimized for everyday decisions.">
+    <meta name="keywords" content="niche calculators, raw dog food calculator, meditation timer, mortgage calculator, air fryer converter, sleep cycle tool, car depreciation">
+    <link rel="canonical" href="https://calcsfor.life/">
+
+    <!-- Social Meta (Open Graph) -->
+    <meta property="og:site_name" content="CalcsFor.Life">
+    <meta property="og:title" content="CalcsFor.Life — Smart Tools for Smart People">
+    <meta property="og:description" content="40+ professional niche calculators for pets, DIY, kitchen, and finance. Everything runs in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/">
+    <meta property="og:image" content="https://calcsfor.life/shared/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CalcsFor.Life — Specialized Niche Calculators">
+    <meta name="twitter:description" content="Fast, private, and accurate tools for everyday decisions.">
+    <meta name="twitter:image" content="https://calcsfor.life/shared/og-image.jpg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "CalcsFor.Life",
+        "url": "https://calcsfor.life/",
+        "description": "A curated collection of professional niche calculators and timers.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "CalcsFor.Life",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://calcsfor.life/shared/logo-icon.png"
+            }
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://calcsfor.life/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "calcsfor.life",
+        "url": "https://calcsfor.life/",
+        "logo": "https://calcsfor.life/logo.png"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="shared/global.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#f0a040">
+</head>
+<body>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero" id="hero">
+            <div class="hero-bg-glow"></div>
+            <div class="hero-bg-glow hero-bg-glow-2"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="badge-hero">🧮 Smart tools for smart people</div>
+                    <h1>The calculator for <span class="hero-typed" id="hero-typed">everything</span></h1>
+                    <p class="hero-sub">Simple, precise, and human-friendly tools for your daily life. No ads, no fluff, just the math you need.</p>
+
+                    <div class="hero-search" id="hero-search">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        <input type="search" id="search-input" placeholder="Search calculators… e.g. 'dog food', 'egg timer', 'paint'" autocomplete="off" aria-label="Search calculators">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories-section" id="categories">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Browse by category</h2>
+                    <p>We group tools by topic so you can find what you need fast.</p>
+                </div>
+                <div class="cat-grid" id="cat-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- All Calculators -->
+        <section class="calcs-section" id="calculators">
+            <div class="container">
+                <div class="section-header">
+                    <h2>All calculators</h2>
+                    <p>Every tool we've built so far. More are added regularly.</p>
+                </div>
+
+                <!-- Filter tags -->
+                <div class="filter-bar" id="filter-bar">
+                    <button class="filter-tag active" data-filter="all">All</button>
+                </div>
+
+                <div class="calc-grid" id="calc-grid">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="no-results hidden" id="no-results">
+                    <p>😕 No calculators match your search. Try a different keyword.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-inner surface-card">
+                    <h2>About calcsfor.life</h2>
+                    <p>We built calcsfor.life because we got tired of searching for simple tools and landing on bloated, ad-heavy pages that barely work. Every calculator here is designed to load fast, give you accurate results, and respect your privacy.</p>
+                    <p>All calculations run entirely in your browser. Nothing is sent to a server. No accounts, no cookies, no tracking pixels. Just open the page, use the tool, and close the tab.</p>
+                    <p>We add new calculators regularly. If there's a niche tool you wish existed, drop us a message on the <a href="contact.html">contact page</a>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="shared/header.js" defer></script>
+    <script src="shared/footer.js" defer></script>
+    <script src="home.js" defer></script>
+</body>
+</html>
+

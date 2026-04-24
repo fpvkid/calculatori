@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Electricity Cost Calculator | Appliance Power Usage Tool</title>
+    <meta name="description" content="Free electricity cost calculator. Estimates how much it costs to run any household appliance (heaters, AC, computers) based on wattage and your local kWh rate.">
+    <meta name="keywords" content="electricity cost calculator, appliance power usage calculator, how much does it cost to run a heater, energy cost calculator, kWh cost calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calcsfor.life/electricity-cost-calculator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Electricity Cost Calculator | Energy Savings Tool">
+    <meta property="og:description" content="Calculate your monthly bill before it arrives. Find out which appliances are costing you the most.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcsfor.life/electricity-cost-calculator/">
+    <meta property="og:site_name" content="calcsfor.life">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Electricity Cost Calculator",
+        "description": "Calculate daily, monthly, and yearly electricity costs for any electronic device or appliance based on power consumption and local rates.",
+        "url": "https://calcsfor.life/electricity-cost-calculator/",
+        "applicationCategory": "HomeApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 900px; margin: 0 auto; }
+        .calc-main { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
+        
+        .presets-panel { margin-top: 40px; border-top: 1px solid var(--clr-border); padding-top: 40px; }
+        .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .preset-btn { 
+            background: var(--clr-bg-2); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius); 
+            padding: 15px; 
+            text-align: left; 
+            cursor: pointer; 
+            transition: all var(--dur) var(--ease);
+        }
+        .preset-btn:hover { border-color: var(--clr-accent); background: var(--clr-accent-glow); transform: translateY(-3px); }
+        .preset-name { font-weight: 700; display: block; margin-bottom: 4px; }
+        .preset-watt { font-size: 0.8rem; color: var(--clr-text-dim); }
+
+        .cost-display { display: grid; gap: 20px; }
+        .cost-card { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 24px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .cost-card.highlight { border-color: var(--clr-accent); background: var(--clr-accent-glow); }
+        .cost-val { font-size: 2.2rem; font-weight: 800; color: var(--clr-text); }
+        .cost-period { font-size: 0.9rem; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+        @media (max-width: 900px) {
+            .calc-main { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Electricity cost calculator</h1>
+                    <p>Calculate exactly how much an appliance adds to your monthly bill. Ideal for tracking heaters, computers, or old refrigerators.</p>
+                </div>
+
+                <div class="calc-main">
+                    <form class="calc-form" id="energy-form">
+                        <div class="form-group">
+                            <label for="watts">Power Consumption (Watts)</label>
+                            <input type="number" id="watts" value="1500" step="1">
+                            <small>Check the sticker on the back of your appliance</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="hours">Usage Per Day (Hours)</label>
+                            <input type="number" id="hours" value="4" step="0.5" max="24">
+                        </div>
+                        <div class="form-group">
+                            <label for="rate">Cost per kWh ($)</label>
+                            <input type="number" id="rate" value="0.15" step="0.01">
+                            <small>Find "Price per kWh" on your utility bill</small>
+                        </div>
+                    </form>
+
+                    <div class="cost-display">
+                        <div class="cost-card">
+                            <div class="cost-period">Daily Cost</div>
+                            <div class="cost-val" id="res-daily">$0.90</div>
+                        </div>
+                        <div class="cost-card highlight">
+                            <div class="cost-period">Monthly Cost</div>
+                            <div class="cost-val" id="res-monthly">$27.00</div>
+                        </div>
+                        <div class="cost-card">
+                            <div class="cost-period">Yearly Cost</div>
+                            <div class="cost-val" id="res-yearly">$328.50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="presets-panel">
+                    <h2>Common appliance power draw</h2>
+                    <p>Click a preset to fill the wattage for common household electronics.</p>
+                    <div class="preset-grid">
+                        <button class="preset-btn" data-watt="1500">
+                            <span class="preset-name">Space Heater</span>
+                            <span class="preset-watt">1500W</span>
+                        </button>
+                        <button class="preset-btn" data-watt="1200">
+                            <span class="preset-name">Air Conditioner (Window)</span>
+                            <span class="preset-watt">900W - 1400W</span>
+                        </button>
+                        <button class="preset-btn" data-watt="600">
+                            <span class="preset-name">Gaming PC</span>
+                            <span class="preset-watt">400W - 800W</span>
+                        </button>
+                        <button class="preset-btn" data-watt="150">
+                            <span class="preset-name">Refrigerator (Average)</span>
+                            <span class="preset-watt">~150W running</span>
+                        </button>
+                        <button class="preset-btn" data-watt="100">
+                            <span class="preset-name">Large LED TV</span>
+                            <span class="preset-watt">80W - 150W</span>
+                        </button>
+                        <button class="preset-btn" data-watt="10">
+                            <span class="preset-name">LED Bulb</span>
+                            <span class="preset-watt">8W - 12W</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Where's your money actually going?</h2>
+                    <p>Electricity bills can feel like a dark art, but the math is actually pretty blunt. To find the cost, you take the wattage, divide by 1000 to get kilowatts, and multiply it by the hours you run it and your local rate. Simple.</p>
+                    <p>The usual culprits? Space heaters and old AC units. A standard 1500W space heater can easily add $50 to your monthly bill if you're not careful. I always suggest checking the sticker on any appliance you leave on all day — old refrigerators are basically "energy vampires" that cost way more than a modern model.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('energy-form');
+            const wattsInput = document.getElementById('watts');
+            const hoursInput = document.getElementById('hours');
+            const rateInput = document.getElementById('rate');
+            
+            const resDaily = document.getElementById('res-daily');
+            const resMonthly = document.getElementById('res-monthly');
+            const resYearly = document.getElementById('res-yearly');
+
+            function update() {
+                const w = parseFloat(wattsInput.value) || 0;
+                const h = parseFloat(hoursInput.value) || 0;
+                const r = parseFloat(rateInput.value) || 0;
+
+                const dailyKwh = (w / 1000) * h;
+                const dailyCost = dailyKwh * r;
+                const monthlyCost = dailyCost * 30.42; // Average days in month
+                const yearlyCost = dailyCost * 365;
+
+                resDaily.textContent = '$' + dailyCost.toFixed(2);
+                resMonthly.textContent = '$' + monthlyCost.toFixed(2);
+                resYearly.textContent = '$' + yearlyCost.toFixed(2);
+            }
+
+            form.addEventListener('input', update);
+            
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    wattsInput.value = btn.dataset.watt;
+                    update();
+                    window.scrollTo({ top: wattsInput.getBoundingClientRect().top + window.pageYOffset - 120, behavior: 'smooth' });
+                });
+            });
+
+            update();
+        })();
+    </script>
+</body>
+</html>
+

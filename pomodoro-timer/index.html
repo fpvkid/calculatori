@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Pomodoro Timer | 25-Minute Focus & Productivity Tool</title>
+    <meta name="description" content="Boost your productivity with the Pomodoro technique. Use our 25-minute focus timer to stay sharp, avoid burnout, and manage your time better.">
+    <meta name="keywords" content="pomodoro timer, productivity tool, 25 minute timer, focus clock, time management tool, study timer">
+    <meta name="author" content="CalcsFor.Life">
+    <meta name="category" content="Timers">
+    <link rel="canonical" href="https://calcsfor.life/pomodoro-timer/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        :root { --clr-pomo: #ef4444; --clr-break: #10b981; }
+        .calc-section { padding: 40px 0 80px; transition: background 0.5s ease; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
+        
+        .pomo-card { background: var(--clr-surface); padding: 40px; border-radius: var(--radius-lg); border: 2px solid var(--clr-border); transition: all 0.5s ease; }
+        .pomo-card.on-break { border-color: var(--clr-break); box-shadow: 0 0 40px rgba(16, 185, 129, 0.1); }
+        .pomo-card.on-work { border-color: var(--clr-pomo); box-shadow: 0 0 40px rgba(239, 68, 68, 0.1); }
+        
+        .timer-val { font-size: 6rem; font-weight: 800; font-variant-numeric: tabular-nums; margin: 20px 0; color: var(--clr-text); }
+        .mode-label { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--clr-text-dim); }
+        
+        .controls { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section" id="pomo-bg">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="pomo-card on-work" id="pomo-card">
+                    <div class="mode-label" id="pomo-mode">Focus Time</div>
+                    <div class="timer-val" id="pomo-display">25:00</div>
+                    
+                    <div class="controls">
+                        <button id="start-pomo" class="btn btn-primary" style="background: var(--clr-pomo); border-color: var(--clr-pomo);">Start Focus</button>
+                        <button id="reset-pomo" class="btn btn-outline">Reset</button>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 80px; text-align: left;">
+                    <h2>The Science of "Focus Sprints"</h2>
+                    <p>I genuinely don't believe the human brain was built for 8-hour spreadsheets. Our focus naturally ebbs and flows. The Pomodoro technique works by aligning your work with your brain's natural rhythms: 25 minutes of intense focus followed by a 5-minute mental reset. **By the third cycle, you'll be amazed at how much you've actually accomplished.**</p>
+
+                    <div class="faq-list" style="margin-top: 40px;">
+                        <details class="faq-item">
+                            <summary>Who invented the Pomodoro technique?</summary>
+                            <div class="faq-answer">
+                                <p>It was developed by Francesco Cirillo in the late 1980s. He named it after the tomato-shaped kitchen timer he used as a university student (Pomodoro is Italian for tomato).</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What should I do during the 5-minute break?</summary>
+                            <div class="faq-answer">
+                                <p>Step away from the screen! Stretch, drink water, or look out the window. The goal is to give your brain's "prefrontal cortex" a moment to recover from active problem-solving.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let timeLeft = 25 * 60;
+            let timerId = null;
+            let isBreak = false;
+            
+            const display = document.getElementById('pomo-display');
+            const modeText = document.getElementById('pomo-mode');
+            const startBtn = document.getElementById('start-pomo');
+            const resetBtn = document.getElementById('reset-pomo');
+            const card = document.getElementById('pomo-card');
+
+            function updateDisplay() {
+                const m = Math.floor(timeLeft / 60);
+                const s = timeLeft % 60;
+                display.textContent = `${m}:${s < 10 ? '0' + s : s}`;
+                document.title = `(${display.textContent}) CalcsFor.Life`;
+            }
+
+            function toggle() {
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                    startBtn.textContent = 'Resume';
+                } else {
+                    startBtn.textContent = 'Pause';
+                    timerId = setInterval(() => {
+                        timeLeft--;
+                        updateDisplay();
+                        if (timeLeft <= 0) {
+                            clearInterval(timerId);
+                            timerId = null;
+                            switchMode();
+                        }
+                    }, 1000);
+                }
+            }
+
+            function switchMode() {
+                isBreak = !isBreak;
+                timeLeft = isBreak ? 5 * 60 : 25 * 60;
+                modeText.textContent = isBreak ? 'Break Time' : 'Focus Time';
+                card.className = isBreak ? 'pomo-card on-break' : 'pomo-card on-work';
+                startBtn.style.background = isBreak ? 'var(--clr-break)' : 'var(--clr-pomo)';
+                startBtn.style.borderColor = isBreak ? 'var(--clr-break)' : 'var(--clr-pomo)';
+                startBtn.textContent = isBreak ? 'Start Break' : 'Start Focus';
+                alert(isBreak ? 'Focus time over! Take 5 mins.' : 'Break over! Back to focus.');
+                updateDisplay();
+            }
+
+            function reset() {
+                clearInterval(timerId);
+                timerId = null;
+                isBreak = false;
+                timeLeft = 25 * 60;
+                modeText.textContent = 'Focus Time';
+                card.className = 'pomo-card on-work';
+                startBtn.textContent = 'Start Focus';
+                updateDisplay();
+            }
+
+            startBtn.addEventListener('click', toggle);
+            resetBtn.addEventListener('click', reset);
+            updateDisplay();
+        })();
+    </script>
+</body>
+</html>

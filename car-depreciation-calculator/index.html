@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Car Depreciation Calculator | Future Resale Value Tool</title>
+    <meta name="description" content="Free car depreciation calculator. Estimate your car's value over the next 5 years. Understand the true cost of ownership and 'off the lot' value loss.">
+    <meta name="keywords" content="car depreciation calculator, vehicle resale value estimator, car value loss by year, how much does a car depreciate in 5 years, automotive finance tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/car-depreciation-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        
+        .chart-container { margin-top: 40px; background: var(--clr-surface); padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--clr-border); }
+        .year-row { display: flex; align-items: center; gap: 20px; margin-bottom: 12px; }
+        .year-label { font-weight: 700; width: 60px; font-size: 0.9rem; color: var(--clr-text-dim); }
+        .bar-wrap { flex: 1; height: 12px; background: var(--clr-bg-2); border-radius: 6px; overflow: hidden; }
+        .bar-fill { height: 100%; background: var(--clr-accent); transition: width 0.5s ease; }
+        .bar-val { width: 100px; text-align: right; font-weight: 800; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Car depreciation calculator</h1>
+                    <p>Understanding the true cost of that new car. Most of the money you "spend" on a vehicle disappears in value loss, not at the gas pump.</p>
+                </div>
+
+                <form class="calc-form" id="dep-form">
+                    <div class="form-group">
+                        <label>Purchase Price ($)</label>
+                        <input type="number" id="price" value="35000" step="500">
+                    </div>
+                </form>
+
+                <div class="chart-container" id="res-chart">
+                    <!-- Filled by JS -->
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Cars are expensive umbrellas</h2>
+                    <p>I genuinely believe that cars are the worst financial decision most people make. We treat them like assets, but they’re actually high-maintenance "appliances" that lose value faster than an open bag of chips. The old saying that a car loses 10-15% the moment you drive it off the lot is actually statistically true for most models.</p>
+                    
+                    <p><strong>The "Steep Curve":</strong> Our math follows the typical depreciation curve: roughly 20% in Year 1, and 15% per year after that. By Year 5, most cars are worth only 40-50% of what you paid for them. This is why "gently used" cars (3 years old) are often the sweet spot—someone else has already paid for the steepest part of the curve for you.</p>
+
+                    <h2>Factors that speed it up</h2>
+                    <ul>
+                        <li><strong>High Mileage:</strong> Anything over 12,000 miles/year accelerates value loss.</li>
+                        <li><strong>Accidents:</strong> Even a minor dent on your Carfax can drop your resale value by 10% or more.</li>
+                        <li><strong>Modifications:</strong> I've seen people spend $5,000 on a lift kit only to realize it *lowered* the resale value. Keep it stock if you want to keep the value.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const pI = document.getElementById('price');
+            const chart = document.getElementById('res-chart');
+
+            function update() {
+                const p = parseFloat(pI.value) || 0;
+                let html = '';
+                
+                // Curve: 20% Yr1, then 15% thereafter
+                let val = p;
+                for (let i = 0; i <= 5; i++) {
+                    if (i === 1) val *= 0.8;
+                    else if (i > 1) val *= 0.85;
+
+                    const pct = (val / p) * 100;
+                    html += `
+                        <div class="year-row">
+                            <span class="year-label">${i === 0 ? 'Today' : 'Year '+i}</span>
+                            <div class="bar-wrap"><div class="bar-fill" style="width: ${pct}%"></div></div>
+                            <span class="bar-val">$${Math.round(val).toLocaleString()}</span>
+                        </div>
+                    `;
+                }
+                chart.innerHTML = html;
+            }
+
+            pI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

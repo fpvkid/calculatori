@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Percentage Calculator | Quick & Accurate Math Tool</title>
+    <meta name="description" content="Free percentage calculator. Quickly find percentage increase, decrease, or what percentage one number is of another. The ultimate tool for daily math.">
+    <meta name="keywords" content="percentage calculator, percent change calculator, percentage increase tool, calculate discount percentage, percentage math tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/percentage-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 40px 0 80px; }
+        .calc-wrapper { max-width: 700px; margin: 0 auto; }
+        .p-block { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: var(--radius); padding: 30px; margin-bottom: 25px; }
+        .p-inline { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .p-inline input { width: 100px; }
+        .p-res { font-weight: 800; color: var(--clr-accent); font-size: 1.2rem; min-width: 60px; display: inline-block; border-bottom: 2px solid var(--clr-accent-glow); }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Percentage calculator</h1>
+                    <p>Calculations that should be easy but never are. Quickly solve percentage increases, decreases, and common math problems.</p>
+                </div>
+
+                <div class="p-block">
+                    <p style="margin-bottom: 15px; font-weight: 700; font-size: 0.85rem; color: var(--clr-text-dim); text-transform: uppercase;">1. Percentage of a Number</p>
+                    <div class="p-inline">
+                        <span>What is</span>
+                        <input type="number" id="p1-1" value="20">
+                        <span>% of</span>
+                        <input type="number" id="p1-2" value="150">
+                        <span>?</span>
+                        <span style="margin-left: auto;">Answer: <span class="p-res" id="res-1">30</span></span>
+                    </div>
+                </div>
+
+                <div class="p-block">
+                    <p style="margin-bottom: 15px; font-weight: 700; font-size: 0.85rem; color: var(--clr-text-dim); text-transform: uppercase;">2. Percentage Change (Inc/Dec)</p>
+                    <div class="p-inline">
+                        <span>From</span>
+                        <input type="number" id="p2-1" value="50">
+                        <span>to</span>
+                        <input type="number" id="p2-2" value="75">
+                        <span>is a</span>
+                        <span style="margin-left: auto;">Change: <span class="p-res" id="res-2">50%</span></span>
+                    </div>
+                </div>
+
+                <div class="p-block">
+                    <p style="margin-bottom: 15px; font-weight: 700; font-size: 0.85rem; color: var(--clr-text-dim); text-transform: uppercase;">3. Reverse Percentage</p>
+                    <div class="p-inline">
+                        <input type="number" id="p3-1" value="40">
+                        <span>is what % of</span>
+                        <input type="number" id="p3-2" value="200">
+                        <span>?</span>
+                        <span style="margin-left: auto;">Answer: <span class="p-res" id="res-3">20%</span></span>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Percentage math made simple</h2>
+                    <p>I genuinely believe humans aren't built for percentage math. We use it for tips, sales, taxes, and stock market gains, yet most of us still reach for a calculator every time. This page is designed to be your permanent "math tab"—open it, solve your problem, and get back to your life.</p>
+
+                    <div class="faq-list" style="margin-top: 40px;">
+                        <details class="faq-item">
+                            <summary>How do I calculate percent increase manually?</summary>
+                            <div class="faq-answer">
+                                <p>To calculate percentage increase: 1. Subtract the original number from the new number. 2. Divide that result by the original number. 3. Multiply by 100.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What is 20% off $100?</summary>
+                            <div class="faq-answer">
+                                <p>It's $80. You take the original price ($100), multiply it by 0.20 to get the discount ($20), and subtract that from the original ($80).</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            // Block 1
+            const p11 = document.getElementById('p1-1');
+            const p12 = document.getElementById('p1-2');
+            const r1 = document.getElementById('res-1');
+
+            function update1() {
+                const v1 = parseFloat(p11.value) || 0;
+                const v2 = parseFloat(p12.value) || 0;
+                r1.textContent = (v1 / 100 * v2).toFixed(2).replace(/\.00$/, '');
+            }
+
+            // Block 2
+            const p21 = document.getElementById('p2-1');
+            const p22 = document.getElementById('p2-2');
+            const r2 = document.getElementById('res-2');
+
+            function update2() {
+                const v1 = parseFloat(p21.value) || 0;
+                const v2 = parseFloat(p22.value) || 0;
+                if (v1 === 0) { r2.textContent = '0%'; return; }
+                const diff = ((v2 - v1) / v1) * 100;
+                r2.textContent = (diff > 0 ? '+' : '') + diff.toFixed(1).replace(/\.0$/, '') + '%';
+            }
+
+            // Block 3
+            const p31 = document.getElementById('p3-1');
+            const p32 = document.getElementById('p3-2');
+            const r3 = document.getElementById('res-3');
+
+            function update3() {
+                const v1 = parseFloat(p31.value) || 0;
+                const v2 = parseFloat(p32.value) || 0;
+                if (v2 === 0) { r3.textContent = '0%'; return; }
+                r3.textContent = ((v1 / v2) * 100).toFixed(1).replace(/\.0$/, '') + '%';
+            }
+
+            [p11, p12].forEach(i => i.addEventListener('input', update1));
+            [p21, p22].forEach(i => i.addEventListener('input', update2));
+            [p31, p32].forEach(i => i.addEventListener('input', update3));
+        })();
+    </script>
+</body>
+</html>
+

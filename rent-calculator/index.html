@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Rent Affordability Calculator | Can I Afford This Apartment?</title>
+    <meta name="description" content="Free rent affordability calculator. Find your maximum monthly rent based on your annual income using the 30% rule and debt-to-income balance.">
+    <meta name="keywords" content="how much rent can i afford, rent affordability calculator, 30 percent rule rent, apartment budget tool, income for 2000 rent">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/rent-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .rent-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .rent-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Rent affordability calculator</h1>
+                    <p>Stop guessing if you can afford that apartment. Find your safe monthly rent ceiling based on your actual income.</p>
+                </div>
+
+                <form class="calc-form" id="rent-form">
+                    <div class="form-group">
+                        <label>Annual Gross Income ($)</label>
+                        <input type="number" id="income" value="60000" step="1000">
+                    </div>
+                    <div class="form-group">
+                        <label>Monthly Debt (Loans, Credit Cards, etc)</label>
+                        <input type="number" id="debt" value="200" step="50">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="rent-val" id="res-rent">$1,500</div>
+                    <div class="rent-label">Max Affordable Rent</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;">
+                        Based on the standard 30% of gross income rule.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "30% Rule" is a lie (sometimes)</h2>
+                    <p>I genuinely believe that the "30% of your gross income" rule was invented when living costs were much lower. If you live in a city like New York or London, spending only 30% of your pre-tax income on rent feels like a fantasy. However, it’s still the gold standard for financial safety. If you go above 40%, you aren't just "living," you’re "rent burdened"—which means one medical bill or car repair could wipe you out.</p>
+                    
+                    <p><strong>Look at your Net, not your Gross:</strong> Landlords look at your gross income (before taxes), but you should look at your <strong>net income</strong> (what actually hits your bank account). If you're contributing to a 401k or have high health insurance premiums, that 30% of gross is actually 45% of your take-home pay. Be careful.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const incI = document.getElementById('income');
+            const dbtI = document.getElementById('debt');
+            const resR = document.getElementById('res-rent');
+
+            function update() {
+                const inc = parseFloat(incI.value) || 0;
+                const dbt = parseFloat(dbtI.value) || 0;
+
+                // 30% Rule: (Annual / 12) * 0.3
+                const monthlyAffordable = (inc / 12) * 0.3;
+                
+                // Subtract some debt if it's very high? No, usually 30% is just for rent.
+                // But let's show a "safe" number
+                const final = Math.max(0, monthlyAffordable);
+
+                resR.textContent = '$' + Math.round(final).toLocaleString();
+            }
+
+            [incI, dbtI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

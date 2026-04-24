@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use | RawPawsCalc</title>
+    <meta name="description" content="Terms of use for RawPawsCalc raw dog food calculator.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://rawpawscalc.com/terms.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .legal-page { padding: 120px 0 80px; }
+        .legal-page h1 { font-size: 2.2rem; margin-bottom: 8px; }
+        .legal-page .updated { color: var(--clr-text-dim); font-size: 0.85rem; margin-bottom: 32px; }
+        .legal-page h2 { font-size: 1.3rem; margin: 32px 0 12px; }
+        .legal-page p, .legal-page li { color: var(--clr-text-muted); font-size: 0.94rem; line-height: 1.75; margin-bottom: 12px; }
+        .legal-page ul { padding-left: 20px; margin-bottom: 16px; }
+        .legal-inner { max-width: 700px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo"><span class="logo-icon">🐾</span><span class="logo-text">RawPaws<span class="logo-accent">Calc</span></span></a>
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html#calculator">Calculator</a></li>
+                    <li><a href="index.html#guide">Feeding guide</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main class="legal-page">
+        <div class="container">
+            <div class="legal-inner">
+                <h1>Terms of use</h1>
+                <p class="updated">Last updated: April 2025</p>
+
+                <h2>What this tool does</h2>
+                <p>RawPawsCalc is a free online calculator that estimates daily raw food portions for dogs using the 80/10/10 ratio (prey model raw). The calculations are based on commonly cited feeding guidelines in the raw feeding community.</p>
+
+                <h2>Not veterinary advice</h2>
+                <p>This calculator is an educational tool. It does not replace professional veterinary advice, diagnosis, or treatment. Every dog is different. Factors like breed, metabolism, health conditions, and medications can change how much a dog should eat. Before starting a raw diet, especially for puppies or dogs with health issues, consult a veterinarian or qualified canine nutritionist.</p>
+
+                <h2>Accuracy</h2>
+                <p>We do our best to keep the calculations accurate and consistent with widely accepted raw feeding practices. However, we make no guarantees about the results. The output should be treated as a starting point, not a prescription. You are responsible for monitoring your dog's weight and condition and adjusting amounts accordingly.</p>
+
+                <h2>Use at your own risk</h2>
+                <p>By using this site, you acknowledge that you are responsible for your pet's diet and health. We are not liable for any issues that arise from following the calculator's output.</p>
+
+                <h2>Intellectual property</h2>
+                <p>The content, design, and code on this site are owned by RawPawsCalc. You're welcome to share links to the site, but please don't copy and republish the content or calculator code on other websites without permission.</p>
+
+                <h2>Changes</h2>
+                <p>We may update these terms at any time. Continued use of the site after changes means you accept the new terms.</p>
+
+                <h2>Contact</h2>
+                <p>Questions? Get in touch through the <a href="contact.html">contact page</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 RawPawsCalc. For informational purposes only. Not veterinary advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var menuBtn = document.getElementById('mobile-menu-btn');
+        var mainNav = document.getElementById('main-nav');
+        if (menuBtn && mainNav) {
+            menuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('open');
+                menuBtn.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

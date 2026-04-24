@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Discount Calculator | Sale Price & Savings Tool</title>
+    <meta name="description" content="Free discount calculator. Quickly find the sale price after percentage off (e.g. '20% off') or flat discounts. Calculate your total savings instantly.">
+    <meta name="keywords" content="discount calculator percentage, sale price calculator, how much is 20 percent off 50, retail discount tool, savings calculator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/discount-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-accent-glow); 
+            border: 2px solid var(--clr-accent); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .price-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .price-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+        .save-banner { margin-top: 20px; font-weight: 700; color: var(--clr-text-muted); }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Discount calculator</h1>
+                    <p>Stop doing mental gymnastics in the checkout line. Find out exactly what you'll pay and how much you're saving.</p>
+                </div>
+
+                <form class="calc-form" id="discount-form">
+                    <div class="form-group">
+                        <label>Original Price ($)</label>
+                        <input type="number" id="price" value="100" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Discount Percentage (%)</label>
+                        <input type="number" id="pct" value="20">
+                    </div>
+                    <div class="form-group">
+                        <label>Sales Tax (Optional %)</label>
+                        <input type="number" id="tax" value="0">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="price-label">Final Sale Price</div>
+                    <div class="price-val" id="res-final">$80.00</div>
+                    <div class="save-banner">You save <span id="res-save">$20.00</span></div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Math Anxiety" at the store</h2>
+                    <p>I genuinely hate the pressure of trying to figure out if "$50 with 15% off and a $5 coupon" is a better deal than "$40 flat." Stores bank on you being tired and just guessing. This calculator is designed to be mobile-first so you can pull it up while standing in the aisle, type in the number, and know exactly what's coming out of your bank account.</p>
+                    
+                    <p><strong>Note on "Stacking":</strong> Most stores calculate sales tax *after* the discount is applied. Our math follows this standard retail logic. If you have multiple coupons, apply the biggest percentage first, then subtract any flat-rate dollars at the end.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const pI = document.getElementById('price');
+            const pctI = document.getElementById('pct');
+            const tI = document.getElementById('tax');
+            
+            const resF = document.getElementById('res-final');
+            const resS = document.getElementById('res-save');
+
+            function update() {
+                const p = parseFloat(pI.value) || 0;
+                const pct = parseFloat(pctI.value) || 0;
+                const tax = parseFloat(tI.value) || 0;
+
+                const discounted = p * (1 - (pct / 100));
+                const total = discounted * (1 + (tax / 100));
+                const savings = p - discounted;
+
+                resF.textContent = '$' + total.toFixed(2);
+                resS.textContent = '$' + savings.toFixed(2);
+            }
+
+            [pI, pctI, tI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

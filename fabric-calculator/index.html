@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Fabric Yardage Calculator | Reupholstery & Sewing Tool</title>
+    <meta name="description" content="Calculate how much fabric you need for chairs, sofas, curtains, or garments. Accounts for different fabric bolt widths and project types.">
+    <meta name="keywords" content="fabric yardage calculator for upholstery, how much fabric to reupholster a chair, calculate fabric for curtains, sewing yardage estimator, fabric bolt width tool">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/fabric-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 850px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .res-card { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+        }
+        .main-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .main-unit { font-size: 1.5rem; font-weight: 700; color: var(--clr-text-dim); }
+        .main-label { display: block; margin-top: 10px; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .type-select { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .type-btn { background: var(--clr-bg-2); border: 2px solid var(--clr-border); border-radius: var(--radius); padding: 12px; cursor: pointer; color: var(--clr-text-dim); font-weight: 700; font-size: 0.8rem; transition: all var(--dur) var(--ease); }
+        .type-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-text); }
+        
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Fabric yardage calculator</h1>
+                    <p>Calculate exactly how much fabric to buy for your sewing or upholstery project. Supports varying bolt widths and pattern repeats.</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim);">Project Type</label>
+                        <div class="type-select">
+                            <button class="type-btn active" data-type="chair">Dining Chair</button>
+                            <button class="type-btn" data-type="armchair">Armchair</button>
+                            <button class="type-btn" data-type="custom">Custom Dimensions</button>
+                        </div>
+
+                        <form class="calc-form" id="fabric-form">
+                            <div id="cfg-preset">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="number" id="qty" value="4">
+                                </div>
+                            </div>
+                            <div id="cfg-custom" style="display:none;">
+                                <div class="form-group">
+                                    <label>Total Surface Area (sq. ft)</label>
+                                    <input type="number" id="custom-area" value="20">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="padding-top: 15px; border-top: 1px solid var(--clr-border);">
+                                <label>Fabric Bolt Width</label>
+                                <select id="bolt-width">
+                                    <option value="44">44" (Standard Quilting)</option>
+                                    <option value="54" selected>54" (Upholstery)</option>
+                                    <option value="60">60" (Apparel/Wide)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Waste / Pattern Allowance (%)</label>
+                                <input type="number" id="waste" value="15">
+                                <small>Add more for matching patterns</small>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="res-card">
+                            <span class="main-label">Buy:</span>
+                            <div class="main-val" id="res-yards">4.5</div>
+                            <div class="main-unit">Linear Yards</div>
+                            <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;">
+                                Covers <span id="res-total-sqft">0</span> sq. ft / <span id="res-meters">0</span> meters.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Watch out for the "Nap"</h2>
+                    <p>I genuinely hate it when I find a perfect fabric, start cutting, and realize halfway through that the pattern only looks "right" in one direction. This is called the "nap." If you’re using velvet, corduroy, or any fabric with a directional print, you can’t just flip pieces upside down to save space. You’ll need to buy about 20% more yardage to make sure everything faces the same way, or your finished chair will look like a patchwork mess.</p>
+                    
+                    <h2>Upholstery vs. Apparel width</h2>
+                    <p>Most beginners don’t realize that fabric comes in different widths. If you’re buying quilting cotton (44"), you’ll need a lot more length than if you’re buying 54-inch upholstery fabric. Always check the width of the bolt before you order. This calculator defaults to 54 inches because that’s the gold standard for furniture.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const form = document.getElementById('fabric-form');
+            const typeBtns = document.querySelectorAll('.type-btn');
+            const qtyI = document.getElementById('qty');
+            const customAreaI = document.getElementById('custom-area');
+            const boltW = document.getElementById('bolt-width');
+            const wasteI = document.getElementById('waste');
+            
+            const resY = document.getElementById('res-yards');
+            const resSqft = document.getElementById('res-total-sqft');
+            const resM = document.getElementById('res-meters');
+
+            let currentType = 'chair';
+
+            typeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    typeBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentType = btn.dataset.type;
+                    document.getElementById('cfg-preset').style.display = currentType !== 'custom' ? 'block' : 'none';
+                    document.getElementById('cfg-custom').style.display = currentType === 'custom' ? 'block' : 'none';
+                    update();
+                });
+            });
+
+            function update() {
+                let sqftPerUnit = 0;
+                if(currentType === 'chair') sqftPerUnit = 10; // Simple dining chair
+                if(currentType === 'armchair') sqftPerUnit = 45; // Average armchair
+                
+                let totalSqft = currentType === 'custom' ? (parseFloat(customAreaI.value) || 0) : (sqftPerUnit * (parseFloat(qtyI.value) || 0));
+                
+                const waste = (parseFloat(wasteI.value) / 100) || 0;
+                const totalAreaNeeded = totalSqft * (1 + waste);
+                
+                const widthFeet = parseFloat(boltW.value) / 12;
+                const yardsNeeded = (totalAreaNeeded / widthFeet) / 3;
+
+                resY.textContent = yardsNeeded.toFixed(1);
+                resSqft.textContent = Math.round(totalAreaNeeded);
+                resM.textContent = (yardsNeeded * 0.9144).toFixed(1);
+            }
+
+            form.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+

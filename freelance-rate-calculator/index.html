@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Freelance Rate Calculator | Find Your Hourly Rate</title>
+    <meta name="description" content="Calculate your ideal freelance hourly rate based on your desired annual income, business expenses, taxes, and actual billable hours.">
+    <meta name="keywords" content="freelance rate calculator, hourly rate tool, freelance pricing guide, independent contractor rates, calculate billable hours">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Time">
+    <link rel="canonical" href="https://calcsfor.life/freelance-rate-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 40px 0 80px; }
+        .calc-wrapper { max-width: 900px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .inputs-group { background: var(--clr-bg-2); padding: 20px; border-radius: var(--radius); border: 1px solid var(--clr-border); margin-bottom: 20px; }
+        .inputs-group h3 { font-family: var(--ff-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--clr-text-dim); margin-bottom: 15px; }
+        
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Freelance rate calculator</h1>
+                    <p>Stop undercharging. Calculate a rate that actually covers your taxes, health insurance, and those unpaid hours spent on "admin."</p>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-side">
+                        <form class="calc-form" id="rate-form">
+                            <div class="inputs-group">
+                                <h3>The Goals</h3>
+                                <div class="form-group">
+                                    <label>Desired Annual Net Income ($)</label>
+                                    <input type="number" id="net-income" value="60000" step="1000">
+                                    <small>What you want to take home after taxes</small>
+                                </div>
+                            </div>
+
+                            <div class="inputs-group">
+                                <h3>The Realities</h3>
+                                <div class="form-group">
+                                    <label>Annual Business Expenses ($)</label>
+                                    <input type="number" id="expenses" value="5000" step="500">
+                                    <small>Software, hardware, office, etc.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Estimated Tax Rate (%)</label>
+                                    <input type="number" id="tax-rate" value="25">
+                                </div>
+                            </div>
+
+                            <div class="inputs-group">
+                                <h3>The Time</h3>
+                                <div class="form-group">
+                                    <label>Billable Hours per Week</label>
+                                    <input type="number" id="billable-w" value="25">
+                                    <small>Be honest. 40 hours is impossible.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Weeks Worked per Year</label>
+                                    <input type="number" id="weeks-y" value="48">
+                                    <small>Subtract holidays and sick days.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="res-side">
+                        <div class="surface-card" style="position: sticky; top: 100px;">
+                            <div class="result-card" style="border-width: 2px; border-color: var(--clr-accent);">
+                                <span class="result-card-label">Recommended Hourly Rate</span>
+                                <span class="result-card-val" id="res-hourly">$71</span>
+                            </div>
+                            
+                            <div class="result-grid" style="margin-top: 20px;">
+                                <div class="result-card">
+                                    <span class="result-card-val" id="res-monthly">$7,100</span>
+                                    <span class="result-card-label">Gross Monthly</span>
+                                </div>
+                                <div class="result-card">
+                                    <span class="result-card-val" id="res-total">$85.2k</span>
+                                    <span class="result-card-label">Gross Yearly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 80px;">
+                    <h2>The "Billable vs. Real" Gap</h2>
+                    <p>I genuinely believe the biggest mistake new freelancers make is thinking they can bill 40 hours a week. In reality, about 30% of your time is spent on "non-billable" work: emails, chasing invoices, learning new skills, and drinking coffee while staring at a blank screen. If you calculate your rate based on 40 hours, you will end up working 60 hours just to hit your income goal. **Be aggressive with your billable hour estimates.**</p>
+
+                    <div class="faq-list" style="margin-top: 40px;">
+                        <details class="faq-item">
+                            <summary>Should I include health insurance?</summary>
+                            <div class="faq-answer">
+                                <p>Yes! Everything you used to get as a "benefit" in a 9-5 must now be covered by your rate. Add your annual health insurance premium to your "Business Expenses" field for a more accurate calculation.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What is a standard tax rate?</summary>
+                            <div class="faq-answer">
+                                <p>It varies wildly by country and state. However, a safe rule of thumb for most freelancers is 25-30% to cover income tax and self-employment contributions. Always talk to an accountant, though.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Why is my rate so much higher than my old salary?</summary>
+                            <div class="faq-answer">
+                                <p>Because as a freelancer, you ARE the company. You pay for the office, the laptop, the electricity, and the time you spend finding clients. Your hourly rate isn't just your "wage"—it's the revenue of a small business.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const netI = document.getElementById('net-income');
+            const expI = document.getElementById('expenses');
+            const taxI = document.getElementById('tax-rate');
+            const bilI = document.getElementById('billable-w');
+            const weekI = document.getElementById('weeks-y');
+
+            const resH = document.getElementById('res-hourly');
+            const resM = document.getElementById('res-monthly');
+            const resY = document.getElementById('res-total');
+
+            function update() {
+                const net = parseFloat(netI.value) || 0;
+                const exp = parseFloat(expI.value) || 0;
+                const tax = parseFloat(taxI.value) || 0;
+                const bil = parseFloat(bilI.value) || 0;
+                const weeks = parseFloat(weekI.value) || 0;
+
+                // Gross needed = (Net + Expenses) / (1 - TaxRate)
+                const grossYearly = (net + exp) / (1 - (tax / 100));
+                const totalHours = bil * weeks;
+
+                if (totalHours === 0) return;
+
+                const hourly = grossYearly / totalHours;
+                const monthly = grossYearly / 12;
+
+                resH.textContent = '$' + Math.round(hourly);
+                resM.textContent = '$' + Math.round(monthly).toLocaleString();
+                resY.textContent = '$' + (grossYearly / 1000).toFixed(1) + 'k';
+            }
+
+            [netI, expI, taxI, bilI, weekI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
+

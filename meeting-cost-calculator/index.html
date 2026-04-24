@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Meeting Cost Calculator | Real-Time Meeting Waste Tool</title>
+    <meta name="description" content="Calculate the real-time cost of your meetings. Enter attendee count and average salaries to see how much money is being spent as the clock ticks.">
+    <meta name="keywords" content="meeting cost calculator, how much is this meeting costing, calculate company meeting cost, employee salary meeting tool, productive meeting calculator">
+    <meta name="author" content="calcsfor.life">
+    <link rel="canonical" href="https://calcsfor.life/meeting-cost-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        
+        .timer-display { 
+            background: #111; 
+            border: 4px solid var(--clr-accent); 
+            border-radius: var(--radius-xl); 
+            padding: 50px 20px; 
+            text-align: center; 
+            margin: 40px 0;
+            box-shadow: 0 0 50px rgba(240,160,64,0.15);
+        }
+        .cost-ticker { font-family: 'Courier New', monospace; font-size: 5rem; font-weight: 800; color: var(--clr-accent); margin-bottom: 10px; }
+        .time-ticker { color: var(--clr-text-dim); letter-spacing: 2px; font-weight: 600; font-size: 1.1rem; }
+
+        .btn-start { background: var(--clr-accent); color: var(--clr-bg); border: none; padding: 20px 40px; font-size: 1.2rem; font-weight: 800; border-radius: var(--radius-sm); cursor: pointer; display: block; width: 100%; transition: all var(--dur) var(--ease); }
+        .btn-start.active { background: #ff4444; }
+        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(240,160,64,0.3); }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        
+        @media (max-width: 600px) {
+            .cost-ticker { font-size: 3rem; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Meeting cost calculator</h1>
+                    <p>Watch your budget drain in real-time. This is the simplest way to visualize why that "quick sync" is actually a huge investment.</p>
+                </div>
+
+                <div class="calc-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Number of Attendees</label>
+                            <input type="number" id="num-people" value="5">
+                        </div>
+                        <div class="form-group">
+                            <label>Avg. Annual Salary ($)</label>
+                            <input type="number" id="avg-salary" value="85000">
+                        </div>
+                    </div>
+                    <button class="btn-start" id="btn-toggle">Start Meeting</button>
+                </div>
+
+                <div class="timer-display">
+                    <div class="cost-ticker" id="cost-ticker">$0.00</div>
+                    <div class="time-ticker" id="time-ticker">00:00:00</div>
+                </div>
+
+                <div class="info-content">
+                    <h2>The hidden cost of "Syncs"</h2>
+                    <p>I find it fascinating (and terrifying) that most companies have strict budgets for software or office snacks, but they let people spend hundreds of dollars in salary costs on a single hour of purposeless chatter. If you have 8 people in a room making $100k each, that hour literally cost the company nearly $500. Was that meeting worth a decent hotel night or a new laptop? Usually, no.</p>
+                    
+                    <p>Use this ticker offensively. Put it on the big screen during your next standup. I promise you, people will start getting to the point a lot faster when they see the dollar figure ticking up every second.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const btn = document.getElementById('btn-toggle');
+            const costT = document.getElementById('cost-ticker');
+            const timeT = document.getElementById('time-ticker');
+            
+            const numEl = document.getElementById('num-people');
+            const salEl = document.getElementById('avg-salary');
+
+            let active = false;
+            let startTime = 0;
+            let interval = null;
+
+            function update() {
+                const now = Date.now();
+                const diffSec = (now - startTime) / 1000;
+                
+                // Calc cost per second
+                const n = parseInt(numEl.value) || 0;
+                const sal = parseInt(salEl.value) || 0;
+                // Assumes 2080 working hours per year
+                const costPerYear = n * sal;
+                const costPerSecond = costPerYear / (2080 * 3600);
+
+                const totalCost = diffSec * costPerSecond;
+                
+                costT.textContent = '$' + totalCost.toFixed(2);
+                
+                const h = Math.floor(diffSec / 3600).toString().padStart(2, '0');
+                const m = Math.floor((diffSec % 3600) / 60).toString().padStart(2, '0');
+                const s = Math.floor(diffSec % 60).toString().padStart(2, '0');
+                timeT.textContent = `${h}:${m}:${s}`;
+            }
+
+            btn.addEventListener('click', () => {
+                active = !active;
+                if(active) {
+                    startTime = Date.now();
+                    btn.textContent = "End Meeting";
+                    btn.classList.add('active');
+                    interval = setInterval(update, 100);
+                } else {
+                    btn.textContent = "Start Meeting";
+                    btn.classList.remove('active');
+                    clearInterval(interval);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
+
