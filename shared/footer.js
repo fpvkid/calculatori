@@ -28,9 +28,9 @@
                     <div class="footer-brand">
                         <a href="${base}" class="logo">
                             <span class="logo-icon">🧮</span>
-                            <span class="logo-text">Calcs<span class="logo-accent">For</span><span class="logo-dot">.</span>Life</span>
+                            <span class="logo-text">Calcs<span class="logo-accent">For</span> Life</span>
                         </a>
-                        <p>Specialized niche calculators for your daily life. Accurate, fast, and privacy-focused tools that run entirely in your browser.</p>
+                        <p>No ads, no tracking, just specialized tools for the stuff you actually need to figure out. Everything runs right here in your browser.</p>
                     </div>
                     <div class="footer-links">
                         <h4>Top Tools</h4>
