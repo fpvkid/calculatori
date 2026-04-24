@@ -37,7 +37,7 @@
             <div class="container header-inner">
                 <a href="${base}" class="logo" id="logo">
                     <span class="logo-icon">🧮</span>
-                    <span class="logo-text">Calcs<span class="logo-accent">For</span> Life</span>
+                    <span class="logo-text">Calcs<span class="logo-accent">For</span>Life</span>
                 </a>
                 <nav class="main-nav" id="main-nav" aria-label="Main navigation">
                     <ul>
