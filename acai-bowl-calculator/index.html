@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Acai Bowl Calorie Calculator | Nutrition Facts & Macro Tracker</title>
+    <meta name="description" content="Free Acai bowl calorie calculator. Track calories, sugar, and macros for your favorite acai blend, toppings, and fruit. Find out how healthy your bowl really is.">
+    <meta name="keywords" content="acai bowl calorie calculator, nutrition in acai bowls, sugar in acai, healthy smoothie bowl calculator, acai macros tracker">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/acai-bowl-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cal-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .topping-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+        .topping-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            padding: 12px; 
+            border-radius: var(--radius-md); 
+            background: var(--clr-bg-2); 
+            border: 1px solid var(--clr-border);
+        }
+        .topping-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--clr-accent); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Acai Bowl Calculator",
+        "item": "https://calcsfor.life/acai-bowl-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Acai Bowl Nutrition Tracker</h1>
+                    <p>Is your smoothie bowl a health bomb or a sugar bomb? Track the exact calories and macros based on your unique toppings.</p>
+                </div>
+
+                <form class="calc-form" id="acai-form">
+                    <div class="form-group">
+                        <label>Bowl Size / Base</label>
+                        <select id="base">
+                            <option value="250">Small (8oz) - 250 cal</option>
+                            <option value="450" selected>Medium (16oz) - 450 cal</option>
+                            <option value="650">Large (24oz) - 650 cal</option>
+                        </select>
+                        <small>Includes standard acai/banana blend.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Toppings (Add more!)</label>
+                        <div class="topping-grid">
+                            <label class="topping-item"><input type="checkbox" data-cal="120"> <span>Granola (+120)</span></label>
+                            <label class="topping-item"><input type="checkbox" data-cal="190"> <span>Peanut Butter (+190)</span></label>
+                            <label class="topping-item"><input type="checkbox" data-cal="60"> <span>Honey (+60)</span></label>
+                            <label class="topping-item"><input type="checkbox" data-cal="40"> <span>Strawberries (+40)</span></label>
+                            <label class="topping-item"><input type="checkbox" data-cal="100"> <span>Coconut Flakes (+100)</span></label>
+                            <label class="topping-item"><input type="checkbox" data-cal="80"> <span>Hemp Seeds (+80)</span></label>
+                            <label class="topping-item"><input type="checkbox" data-cal="50"> <span>Blueberries (+50)</span></label>
+                            <label class="topping-item"><input type="checkbox" data-cal="150"> <span>Nutella (+150)</span></label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Estimated Calories</span>
+                    <div class="cal-val" id="res-cal">450</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        This is about 22% of your daily calorie needs.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Truth About Acai Bowls</h2>
+                    <p>I genuinely believe that Acai bowls are the greatest marketing win of the 21st century. Acai itself is a low-sugar berry packed with antioxidants. But by the time it’s blended with apple juice and topped with honey, granola, and nut butter, a single bowl can easily hit 1,000 calories and 80g of sugar.</p>
+                    
+                    <p><strong>How to keep it healthy:</strong> Skip the juice in the base and use unsweetened almond milk. Go heavy on the seeds (hemp/chia) for protein and fiber, and keep the granola to a small sprinkle. Most of the calories come from the nut butters and the granola—use them wisely!</p>
+                    
+                    <h3>Nutrition Milestones:</h3>
+                    <ul>
+                        <li><strong>Standard 16oz Bowl:</strong> ~400-600 calories.</li>
+                        <li><strong>With Nut Butter & Honey:</strong> ~700-900 calories.</li>
+                        <li><strong>Daily Sugar:</strong> A large bowl often exceeds the WHO recommended daily sugar intake in one sitting.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const baseI = document.getElementById('base');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const resC = document.getElementById('res-cal');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                let total = parseFloat(baseI.value) || 0;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) total += parseFloat(cb.dataset.cal);
+                });
+
+                resC.textContent = total.toLocaleString();
+                
+                const dailyPct = Math.round((total / 2000) * 100);
+                resN.textContent = `This is about ${dailyPct}% of a standard 2,000 calorie daily diet.`;
+            }
+
+            baseI.addEventListener('change', update);
+            checkboxes.forEach(cb => cb.addEventListener('change', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

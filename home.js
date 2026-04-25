@@ -47,6 +47,7 @@
         { title: 'VO2 Max Calculator', slug: 'vo2-max-calculator', icon: '🫁', cat: 'health', desc: 'Estimate your aerobic fitness and oxygen capacity.', live: true },
         { title: 'Sleep Apnea (AHI) Test', slug: 'ahi-calculator', icon: '😴', cat: 'health', desc: 'Screening test for sleep apnea risk and snoring.', live: true },
         { title: 'TDEE Calculator', slug: 'tdee-calculator', icon: '🔥', cat: 'health', desc: 'Calculate your total daily maintenance calories.', live: true },
+        { title: 'Acai Bowl Calories', slug: 'acai-bowl-calculator', icon: '🥣', cat: 'health', desc: 'Nutrition and macro tracker for your smoothie bowls.', live: true },
         { title: 'Sleep Cycle Calculator', slug: 'sleep-cycle-calculator', icon: '🌙', cat: 'health', desc: 'When to sleep or wake up to align with 90min cycles.', live: true },
 
         // ---- Home ----
@@ -58,6 +59,7 @@
         { title: 'ADU Cost Calculator', slug: 'adu-cost-calculator', icon: '🏡', cat: 'home', desc: 'Estimate the budget for building a guest house or granny flat.', live: true },
         { title: 'Window Replacement Cost', slug: 'window-replacement-cost', icon: '🪟', cat: 'home', desc: 'Estimate the cost of new windows and installation.', live: true },
         { title: 'Hurricane Shutter Cost', slug: 'hurricane-shutter-calculator', icon: '🌀', cat: 'home', desc: 'Storm protection pricing for your windows and doors.', live: true },
+        { title: 'HVAC Airflow (CFM)', slug: 'hvac-cfm-calculator', icon: '🌬️', cat: 'home', desc: 'Calculate required airflow for proper room ventilation.', live: true },
 
         // ---- Garden ----
         { title: 'Raised Bed Soil Calculator', slug: 'raised-bed-soil-calculator', icon: '🌻', cat: 'garden', desc: 'Cubic feet of soil mix for your raised garden bed.', live: true },
@@ -72,6 +74,7 @@
         { title: 'Discount Calculator', slug: 'discount-calculator', icon: '🔖', cat: 'finance', desc: 'Final price after percentage or flat discount.', live: true },
         { title: 'Mortgage Calculator', slug: 'mortgage-calculator', icon: '🏦', cat: 'finance', desc: 'Estimate monthly mortgage payments and interest.', live: true },
         { title: 'ARV Calculator', slug: 'arv-calculator', icon: '📈', cat: 'finance', desc: 'After Repair Value & MAO estimate for house flipping.', live: true },
+        { title: 'Annuity Commission', slug: 'annuity-commission-calculator', icon: '🏦', cat: 'finance', desc: 'Estimate agent fees for fixed and variable annuities.', live: true },
         { title: 'KDP Royalty Calculator', slug: 'book-royalty-calculator', icon: '📚', cat: 'finance', desc: 'Estimate Amazon KDP profits for ebooks and paperbacks.', live: true },
         { title: 'ROAS & Ad ROI', slug: 'roas-calculator', icon: '🎯', cat: 'finance', desc: 'Measure the profitability of your marketing campaigns.', live: true },
         { title: 'Grade Calculator', slug: 'grade-calculator', icon: '🎓', cat: 'finance', desc: 'Calculate weighted class grades and final exam needs.', live: true },
@@ -101,6 +104,7 @@
         { title: 'Alcohol Dilution Calculator', slug: 'alcohol-dilution-calculator', icon: '🍶', cat: 'fun', desc: 'Dilute spirits to a target ABV percentage.', live: true },
         { title: 'BAC Estimate Calculator', slug: 'bac-calculator', icon: '🍺', cat: 'fun', desc: 'Estimate blood alcohol content from drinks and time.', live: true },
         { title: 'OSRS Agility Calculator', slug: 'osrs-agility-calculator', icon: '🏃', cat: 'fun', desc: 'Calculate laps to your next Agility level in Old School RuneScape.', live: true },
+        { title: 'Betting Odds Converter', slug: 'betting-odds-calculator', icon: '🎲', cat: 'fun', desc: 'Convert Moneyline, Decimal, and Fractional odds.', live: true },
     ];
 
     /* ====== HERO TYPING EFFECT ====== */

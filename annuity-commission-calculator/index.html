@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Annuity Commission Calculator | Estimate Agent Fees & Payouts</title>
+    <meta name="description" content="Free annuity commission calculator. Estimate how much an insurance agent earns from your annuity purchase based on the premium amount and annuity type.">
+    <meta name="keywords" content="annuity commission calculator, insurance agent fees, fixed annuity commission, fia commission rate, variable annuity fees estimator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/annuity-commission-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .comm-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .type-grid { display: grid; gap: 10px; margin-bottom: 24px; }
+        .type-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 15px 20px; 
+            border-radius: var(--radius-md); 
+            background: var(--clr-bg-2); 
+            border: 1px solid var(--clr-border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .type-item.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-accent); }
+        .type-item .rate { font-weight: 700; opacity: 0.7; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Annuity Commission Calculator",
+        "item": "https://calcsfor.life/annuity-commission-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Annuity Commission Estimator</h1>
+                    <p>Transparency matters. Find out how much of your premium goes toward agent commissions based on standard industry rates.</p>
+                </div>
+
+                <form class="calc-form" id="annuity-form">
+                    <div class="form-group">
+                        <label>Premium Amount ($)</label>
+                        <input type="number" id="premium" value="100000" step="5000">
+                        <small>The total amount you are investing.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Annuity Type</label>
+                        <div class="type-grid">
+                            <div class="type-item active" data-rate="0.03">
+                                <span>Fixed Annuity</span>
+                                <span class="rate">~3%</span>
+                            </div>
+                            <div class="type-item" data-rate="0.06">
+                                <span>Fixed Index Annuity (FIA)</span>
+                                <span class="rate">~6%</span>
+                            </div>
+                            <div class="type-item" data-rate="0.07">
+                                <span>Variable Annuity</span>
+                                <span class="rate">~7%</span>
+                            </div>
+                            <div class="type-item" data-rate="0.02">
+                                <span>SPIA (Single Premium Immediate)</span>
+                                <span class="rate">~2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Agent Commission</span>
+                    <div class="comm-val" id="res-comm">$3,000</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        This is paid by the insurance company, not out of your pocket.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Are you paying the commission?</h2>
+                    <p>I genuinely believe that the biggest myth in the insurance world is that "commissions are bad." In most cases, the commission is paid by the insurance company as a marketing expense. It doesn't get deducted from your $100,000 deposit. However, high commissions usually mean the product has longer "surrender periods" (where you can't take your money out without a penalty).</p>
+                    
+                    <p><strong>Commission Rates:</strong> Rates vary by age and state, but 3% to 7% is the standard range. If an agent is pushing a specific product very hard, check if it's a Variable Annuity—those typically offer the highest payouts to the person selling them.</p>
+                    
+                    <h3>What to ask your agent:</h3>
+                    <ul>
+                        <li>"How long is the surrender period?"</li>
+                        <li>"What is the internal fee (M&E) for this variable annuity?"</li>
+                        <li>"Are there lower-commission options with better rates?"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let rate = 0.03;
+            const premI = document.getElementById('premium');
+            const resC = document.getElementById('res-comm');
+
+            document.querySelectorAll('.type-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.type-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    rate = parseFloat(this.dataset.rate);
+                    update();
+                });
+            });
+
+            function update() {
+                const premium = parseFloat(premI.value) || 0;
+                const commission = premium * rate;
+
+                resC.textContent = '$' + Math.round(commission).toLocaleString();
+            }
+
+            premI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
