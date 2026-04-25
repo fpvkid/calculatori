@@ -117,6 +117,16 @@
         { title: 'ACA Affordability', slug: 'aca-affordability-calculator', icon: '🏥', cat: 'finance', desc: 'Check if health insurance is affordable under ACA.', live: true },
         { title: 'Mortgage & Escrow', slug: 'mortgage-escrow-calculator', icon: '🏦', cat: 'finance', desc: 'Full PITI payment with taxes and insurance.', live: true },
         { title: 'A/R Turnover Ratio', slug: 'ar-turnover-calculator', icon: '📊', cat: 'finance', desc: 'Business efficiency in collecting receivables.', live: true },
+        { title: 'BAH Calculator', slug: 'bah-calculator', icon: '🏠', cat: 'finance', desc: 'Military Basic Allowance for Housing (BAH) estimate.', live: true },
+        { title: 'Military Retirement', slug: 'military-retirement-calculator', icon: '🎖️', cat: 'finance', desc: 'Legacy High-3 and BRS pension projections.', live: true },
+        { title: 'VA Disability Pay', slug: 'va-disability-calculator', icon: '🎗️', cat: 'finance', desc: 'Monthly tax-free veterans disability compensation.', live: true },
+        { title: 'Combat Pay Tool', slug: 'combat-pay-calculator', icon: '⚔️', cat: 'finance', desc: 'HDP-L and Hostile Fire Pay for deployed troops.', live: true },
+        { title: 'Divorce Asset Split', slug: 'divorce-settlement-calculator', icon: '⚖️', cat: 'finance', desc: 'Rough estimate of marital property division.', live: true },
+        { title: 'Lemon Law Refund', slug: 'lemon-law-calculator', icon: '🍋', cat: 'finance', desc: 'Car buyback estimate with mileage offset.', live: true },
+        { title: 'Injury Claim Value', slug: 'personal-injury-calculator', icon: '🩹', cat: 'finance', desc: 'Estimate settlement using the multiplier method.', live: true },
+        { title: 'Workers Comp Pay', slug: 'workers-comp-calculator', icon: '👷', cat: 'finance', desc: 'Weekly disability benefits for workplace injuries.', live: true },
+        { title: 'Wrongful Death Calc', slug: 'wrongful-death-calculator', icon: '🕯️', cat: 'finance', desc: 'Economic loss and future earnings estimation.', live: true },
+        { title: 'Copyright Penalty', slug: 'copyright-calculator', icon: '©️', cat: 'finance', desc: 'Statutory damages for intellectual property theft.', live: true },
 
         // ---- Craft ----
         { title: 'Fabric Yardage Calculator', slug: 'fabric-calculator', icon: '🧵', cat: 'craft', desc: 'How much fabric for a garment or furniture by size and type.', live: true },

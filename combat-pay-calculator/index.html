@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Combat Pay Calculator | HDP-L & Hostile Fire Pay Tool</title>
+    <meta name="description" content="Calculate your military Combat Pay and Hardship Duty Pay (HDP-L). Estimate monthly allowances for hostile fire and imminent danger zones.">
+    <meta name="keywords" content="combat pay calculator, hdp-l rates, hostile fire pay tool, imminent danger pay, military deployment pay, tax-free combat zone pay">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Military Finance">
+    <link rel="canonical" href="https://calcsfor.life/combat-pay-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .pay-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Military Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Combat Pay Calculator",
+        "item": "https://calcsfor.life/combat-pay-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Deployment Pay Tool</h1>
+                    <p>Calculate your combat-related allowances. Estimate your monthly Hostile Fire Pay (HFP) and Hardship Duty Pay (HDP-L) while deployed.</p>
+                </div>
+
+                <form class="calc-form" id="combat-form">
+                    <div class="form-group">
+                        <label>Hostile Fire / Imminent Danger Pay</label>
+                        <select id="hfp">
+                            <option value="0">No (Standard Duty)</option>
+                            <option value="225" selected>Yes ($225 / month)</option>
+                        </select>
+                        <small>Paid when subject to hostile fire or in a designated danger zone.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hardship Duty Pay (HDP-L)</label>
+                        <select id="hdp">
+                            <option value="0">None</option>
+                            <option value="50">$50 / month</option>
+                            <option value="100">$100 / month</option>
+                            <option value="150" selected>$150 / month</option>
+                        </select>
+                        <small>Based on specific geographic locations with quality-of-life hardships.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Family Separation Allowance (FSA)</label>
+                        <select id="fsa">
+                            <option value="0">Not Eligible</option>
+                            <option value="250" selected>Eligible ($250 / month)</option>
+                        </select>
+                        <small>Paid if deployed away from family for more than 30 days.</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Monthly Add-ons</span>
+                    <div class="pay-val" id="res-total">$625</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        This amount is usually tax-exempt in combat zones.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Pay for the Toughest Missions</h2>
+                    <p>I genuinely believe that the extra pay for deployment is a small but important recognition of the risks and hardships military families endure. When you are in a designated Combat Zone, your pay structure changes significantly—most notably, your income earned while in the zone is typically **excluded from federal income tax**.</p>
+                    
+                    <p><strong>HDP-L vs HFP:</strong></p>
+                    <ul>
+                        <li><strong>Hostile Fire Pay (HFP):</strong> A flat monthly rate (prorated by day) paid to service members who are exposed to actual hostile fire or mines, or who are in close proximity to such events.</li>
+                        <li><strong>Hardship Duty Pay (HDP-L):</strong> Compensation for service members assigned to locations where living conditions are substantially below those in the continental US. Rates range from $50 to $150.</li>
+                    </ul>
+                    
+                    <p><em>Note: Combat Zone Tax Exclusion (CZTE) is one of the biggest financial benefits of a deployment. Ensure your LES (Leave and Earnings Statement) correctly reflects your time in the zone to maximize your take-home pay.</em></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const hI = document.getElementById('hfp');
+            const dI = document.getElementById('hdp');
+            const fI = document.getElementById('fsa');
+            
+            const resT = document.getElementById('res-total');
+
+            function update() {
+                const hfp = parseFloat(hI.value) || 0;
+                const hdp = parseFloat(dI.value) || 0;
+                const fsa = parseFloat(fI.value) || 0;
+
+                const total = hfp + hdp + fsa;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+                resT.textContent = formatter.format(total);
+            }
+
+            [hI, dI, fI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>VA Disability Pay Calculator 2026 | Veterans Benefits Tool</title>
+    <meta name="description" content="Estimate your monthly VA disability compensation. Includes 2025 rates and projected 2026 COLA increases for veterans with dependents.">
+    <meta name="keywords" content="va disability calculator, veterans disability pay 2026, va compensation tool, disability rating pay, va cola increase estimate, veteran benefits calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Military Finance">
+    <link rel="canonical" href="https://calcsfor.life/va-disability-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .pay-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .dep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Veterans Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "VA Disability Calculator",
+        "item": "https://calcsfor.life/va-disability-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>VA Disability Pay Tool</h1>
+                    <p>Calculate your deserved compensation. Estimate your monthly tax-free VA disability pay based on your rating and dependency status.</p>
+                </div>
+
+                <form class="calc-form" id="va-form">
+                    <div class="form-group">
+                        <label>Combined Disability Rating (%)</label>
+                        <select id="rating">
+                            <option value="171.23">10%</option>
+                            <option value="338.49">20%</option>
+                            <option value="524.31">30%</option>
+                            <option value="755.28">40%</option>
+                            <option value="1075.16">50%</option>
+                            <option value="1361.88">60%</option>
+                            <option value="1716.28">70%</option>
+                            <option value="1995.01">80%</option>
+                            <option value="2246.91">90%</option>
+                            <option value="3737.85" selected>100%</option>
+                        </select>
+                    </div>
+
+                    <div class="dep-grid">
+                        <div class="form-group">
+                            <label>Spouse</label>
+                            <select id="spouse">
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Children (Under 18)</label>
+                            <input type="number" id="children" value="2" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Projected 2026 COLA (%)</label>
+                        <input type="number" id="cola" value="2.5" step="0.1">
+                        <small>Estimated inflation adjustment for 2026.</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Monthly Tax-Free Payment</span>
+                    <div class="pay-val" id="res-pay">$4,482</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Estimated 2026 compensation with COLA.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How VA Disability is Calculated</h2>
+                    <p>I genuinely believe that every veteran deserves clarity on their benefits. The VA uses a complex "combined" rating system (often called "VA Math") to determine your total disability level. Once you have a rating of 30% or higher, you can receive additional compensation for dependents (spouse, children, and dependent parents).</p>
+                    
+                    <p><strong>COLA Adjustments:</strong> Every year, the VA adjusts benefit rates based on the Social Security Administration's Cost-of-Living Adjustment (COLA). This ensures your buying power stays stable even as prices rise.</p>
+                    
+                    <h3>Dependency Ratios (at 100%):</h3>
+                    <ul>
+                        <li><strong>Spouse:</strong> Adds approx $200 - $300 to your base pay.</li>
+                        <li><strong>Child:</strong> Adds approx $100 - $150 per child under age 18.</li>
+                        <li><strong>Special Allowances:</strong> SMC (Special Monthly Compensation) may be available for severe disabilities like loss of limb or blindness.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const rI = document.getElementById('rating');
+            const sI = document.getElementById('spouse');
+            const cI = document.getElementById('children');
+            const colI = document.getElementById('cola');
+            
+            const resP = document.getElementById('res-pay');
+
+            function update() {
+                const base = parseFloat(rI.value);
+                const hasSpouse = sI.value === '1';
+                const children = parseInt(cI.value) || 0;
+                const cola = 1 + (parseFloat(colI.value) / 100);
+
+                // Approx dependency bumps for 100% rating (simplified)
+                let depPay = 0;
+                const ratingPct = (base / 3737.85); // Normalizing to see if >= 30%
+
+                if (base >= 524) { // 30% or higher
+                    if (hasSpouse) depPay += 200 * ratingPct;
+                    depPay += (children * 100) * ratingPct;
+                }
+
+                const total = (base + depPay) * cola;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+                resP.textContent = formatter.format(total);
+            }
+
+            [rI, sI, cI, colI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
