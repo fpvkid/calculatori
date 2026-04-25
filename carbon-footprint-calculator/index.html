@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Flight Carbon Footprint Calculator | Estimate Travel Emissions</title>
+    <meta name="description" content="Free flight carbon footprint calculator. Estimate the CO2 emissions of your air travel based on distance, class, and flight type. Eco-friendly travel tool.">
+    <meta name="keywords" content="carbon footprint calculator, flight emissions tool, co2 flight calculator, sustainable travel, air travel offset, carbon offset calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Auto">
+    <link rel="canonical" href="https://calcsfor.life/carbon-footprint-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .co2-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Sustainability",
+        "item": "https://calcsfor.life/#auto"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Carbon Footprint Calculator",
+        "item": "https://calcsfor.life/carbon-footprint-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Flight Carbon Footprint</h1>
+                    <p>Travel with awareness. Estimate the total CO2 emissions of your flight and see how different classes and distances impact the environment.</p>
+                </div>
+
+                <form class="calc-form" id="carbon-form">
+                    <div class="form-group">
+                        <label>Flight Distance (Miles)</label>
+                        <input type="number" id="dist" value="2500">
+                        <small>E.g., NYC to London is ~3,500 miles.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Class of Service</label>
+                        <select id="class">
+                            <option value="1">Economy</option>
+                            <option value="1.5">Premium Economy</option>
+                            <option value="2.5">Business Class</option>
+                            <option value="4">First Class</option>
+                        </select>
+                        <small>Higher classes take up more space and "carry" more of the flight's emissions.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Number of Passengers</label>
+                        <input type="number" id="passengers" value="1">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total CO2 Emissions</span>
+                    <div class="co2-val" id="res-co2">0.5</div>
+                    <div class="label" style="font-size: 1.5rem; color: var(--clr-text); margin-top: 10px;">Metric Tons</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Equivalent to driving a car for 1,250 miles.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Does air travel really matter?</h2>
+                    <p>I genuinely believe that transparency about our impact is the first step toward sustainability. A single long-haul flight can produce more CO2 than an average person in many countries produces in an entire year. While aviation only accounts for about 2-3% of global emissions, its impact is concentrated among a small percentage of the world's population.</p>
+                    
+                    <p><strong>Why class matters:</strong> When you fly Business or First class, your seat takes up the space of 3-4 economy seats. This means you are responsible for a larger "share" of the fuel burned by the aircraft to get that space across the ocean.</p>
+                    
+                    <h3>Ways to offset your flight:</h3>
+                    <ul>
+                        <li><strong>Direct Flights:</strong> Takeoffs and landings consume the most fuel. Reducing layovers reduces emissions.</li>
+                        <li><strong>Pack Light:</strong> More weight equals more fuel. Every pound matters!</li>
+                        <li><strong>Carbon Offsets:</strong> Consider investing in certified projects that plant trees or capture carbon to balance out your travel.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const dI = document.getElementById('dist');
+            const cI = document.getElementById('class');
+            const pI = document.getElementById('passengers');
+            
+            const resC = document.getElementById('res-co2');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const dist = parseFloat(dI.value) || 0;
+                const cls = parseFloat(cI.value);
+                const pass = parseFloat(pI.value) || 1;
+
+                // Base coefficient: approx 0.15 kg CO2 per mile (avg for modern jet)
+                const kgPerMile = 0.15;
+                const totalKg = dist * kgPerMile * cls * pass;
+                const tons = totalKg / 1000;
+
+                resC.textContent = tons.toFixed(2);
+                
+                // 1 ton CO2 is approx 2,500 miles of driving an average car
+                const carMiles = Math.round(tons * 2500);
+                resN.textContent = `Equivalent to driving an average car for ${carMiles.toLocaleString()} miles.`;
+            }
+
+            [dI, cI, pI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

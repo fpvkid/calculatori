@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Towing Capacity Calculator | Safe Towing Weight for Trucks & SUVs</title>
+    <meta name="description" content="Free towing capacity calculator. Estimate your vehicle's maximum safe towing weight based on GCWR, GVWR, and curb weight. Essential for RVs and trailers.">
+    <meta name="keywords" content="towing capacity calculator, max towing weight, truck towing tool, rv towing capacity, trailer weight calculator, gcwr gvwr calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Auto">
+    <link rel="canonical" href="https://calcsfor.life/towing-capacity-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .tow-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--clr-text); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Auto & Travel",
+        "item": "https://calcsfor.life/#auto"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Towing Capacity Calculator",
+        "item": "https://calcsfor.life/towing-capacity-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Towing Capacity Calculator</h1>
+                    <p>Stay safe on the road. Calculate your vehicle's maximum towing capacity and ensure your trailer doesn't exceed legal or safety limits.</p>
+                </div>
+
+                <form class="calc-form" id="tow-form">
+                    <div class="form-group">
+                        <label>GCWR (Gross Combined Weight Rating)</label>
+                        <input type="number" id="gcwr" value="15000">
+                        <small>Found in your owner's manual or driver's side door jamb.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Curb Weight (of your vehicle)</label>
+                        <input type="number" id="curb" value="5000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cargo & Passengers Weight</label>
+                        <input type="number" id="cargo" value="500">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Max Towing Capacity</span>
+                    <div class="tow-val" id="res-tow">9,500</div>
+                    <div class="label" style="font-size: 1.5rem; color: var(--clr-text); margin-top: 10px;">Lbs</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Safe margin (80% rule): 7,600 Lbs.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Towing Safety 101</h2>
+                    <p>I genuinely believe that towing is the most dangerous thing you can do with a vehicle if you don't know your numbers. Just because your truck's brochure says "tows 10,000 lbs" doesn't mean *your* specific truck can do it once you've loaded it with cargo, a heavy bed liner, and five passengers.</p>
+                    
+                    <p><strong>The 80% Rule:</strong> Experienced RVers often suggest never towing more than 80% of your maximum capacity. This provides a safety buffer for steep hills, strong winds, and emergency braking situations. It also puts less strain on your transmission and cooling system.</p>
+                    
+                    <h3>Key Terms:</h3>
+                    <ul>
+                        <li><strong>GVWR:</strong> The max weight your vehicle can be, including itself, passengers, and cargo.</li>
+                        <li><strong>GCWR:</strong> The max weight of the *entire* setup (Vehicle + Trailer + everything inside both).</li>
+                        <li><strong>Tongue Weight:</strong> The amount of the trailer's weight that presses down on the hitch. Should be 10-15% of the total trailer weight.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const gI = document.getElementById('gcwr');
+            const cI = document.getElementById('curb');
+            const crI = document.getElementById('cargo');
+            
+            const resT = document.getElementById('res-tow');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const gcwr = parseFloat(gI.value) || 0;
+                const curb = parseFloat(cI.value) || 0;
+                const cargo = parseFloat(crI.value) || 0;
+
+                // Towing Capacity = GCWR - (Curb + Cargo)
+                const maxTow = gcwr - (curb + cargo);
+                const safeTow = maxTow * 0.8;
+
+                resT.textContent = Math.round(maxTow).toLocaleString();
+                resN.textContent = `Safe margin (80% rule): ${Math.round(safeTow).toLocaleString()} Lbs.`;
+            }
+
+            [gI, cI, crI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

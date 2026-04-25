@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Hotel Points Value Calculator | Is it Better to Pay with Cash or Points?</title>
+    <meta name="description" content="Free hotel points value calculator. Determine the cents-per-point (CPP) value of your hotel stay. Compare with Marriott, Hilton, and Hyatt averages.">
+    <meta name="keywords" content="hotel points calculator, cents per point tool, marriott points value, hilton honors value, hyatt points calculator, travel rewards tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Auto">
+    <link rel="canonical" href="https://calcsfor.life/hotel-points-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cpp-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .p-item { text-align: center; font-size: 0.8rem; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Travel Finance",
+        "item": "https://calcsfor.life/#auto"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Hotel Points Calculator",
+        "item": "https://calcsfor.life/hotel-points-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Hotel Points Value Tool</h1>
+                    <p>Stop wasting your points. Calculate the exact Cents Per Point (CPP) value of your stay and decide if you should pay with cash or rewards.</p>
+                </div>
+
+                <form class="calc-form" id="points-form">
+                    <div class="form-group">
+                        <label>Cash Price (including taxes & fees)</label>
+                        <input type="number" id="cash" value="350">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Points Required for the Stay</label>
+                        <input type="number" id="points" value="45000" step="1000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Taxes on Points Booking ($)</label>
+                        <input type="number" id="fees" value="0">
+                        <small>Resort fees or taxes that still apply when using points.</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Your Point Value</span>
+                    <div class="cpp-val" id="res-cpp">0.78</div>
+                    <div class="label" style="font-size: 1.5rem; color: var(--clr-text); margin-top: 10px;">Cents / Point</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        This is a decent redemption for Marriott.
+                    </p>
+                </div>
+
+                <div class="prog-grid">
+                    <div class="p-item">
+                        <strong>Marriott</strong><br>~0.8¢
+                    </div>
+                    <div class="p-item">
+                        <strong>Hilton</strong><br>~0.5¢
+                    </div>
+                    <div class="p-item">
+                        <strong>Hyatt</strong><br>~1.7¢
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "CPP" Rule</h2>
+                    <p>I genuinely believe that "Cents Per Point" is the only metric that matters for travel hackers. It’s simple: (Cash Price - Fees) / Number of Points. If your calculated value is higher than the average for that program, you're getting a "deal." If it's lower, you're better off paying cash and saving your points for a more expensive stay later.</p>
+                    
+                    <p><strong>Resort Fees:</strong> One major benefit of booking with points at Hilton or Hyatt is that they often waive the resort fees (which can be $50+ per night). Always include these in your "Cash Price" to get an accurate comparison!</p>
+                    
+                    <h3>Average Point Values:</h3>
+                    <ul>
+                        <li><strong>Hyatt:</strong> The king of value. Often 1.5 to 2.0 cents per point.</li>
+                        <li><strong>Marriott Bonvoy:</strong> Generally 0.7 to 0.9 cents.</li>
+                        <li><strong>Hilton Honors:</strong> Generally 0.4 to 0.6 cents.</li>
+                        <li><strong>IHG:</strong> Generally 0.5 to 0.7 cents.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const cashI = document.getElementById('cash');
+            const pntI = document.getElementById('points');
+            const feeI = document.getElementById('fees');
+            
+            const resC = document.getElementById('res-cpp');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const cash = parseFloat(cashI.value) || 0;
+                const points = parseFloat(pntI.value) || 1;
+                const fees = parseFloat(feeI.value) || 0;
+
+                // CPP = (Cash - Fees) / Points * 100
+                const cpp = ((cash - fees) / points) * 100;
+
+                resC.textContent = cpp.toFixed(2);
+                
+                if (cpp > 1.5) {
+                    resN.textContent = "Excellent redemption! Always use points for this stay.";
+                    resC.style.color = "#10b981";
+                } else if (cpp >= 0.7) {
+                    resN.textContent = "Good value. This is a solid use of your rewards.";
+                    resC.style.color = "var(--clr-accent)";
+                } else {
+                    resN.textContent = "Poor value. You might want to pay cash and save your points.";
+                    resC.style.color = "#ef4444";
+                }
+            }
+
+            [cashI, pntI, feeI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

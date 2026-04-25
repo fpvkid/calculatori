@@ -121,7 +121,11 @@
 
         // ---- Auto ----
         { title: 'Car Depreciation Estimate', slug: 'car-depreciation-calculator', icon: '📉', cat: 'auto', desc: 'Estimate future value and total cost of ownership.', live: true },
-        { title: 'EV Charging Time Calculator', slug: 'ev-charging-calculator', icon: '🔋', cat: 'auto', desc: 'How long to charge your EV at different power levels.', live: true },
+        { title: 'Tire Size Converter', slug: 'tire-size-calculator', icon: '🛞', cat: 'auto', desc: 'Compare tire diameters and check speedometer error.', live: true },
+        { title: 'Towing Capacity Calc', slug: 'towing-capacity-calculator', icon: '🛻', cat: 'auto', desc: 'Safe towing weight for your truck or SUV setup.', live: true },
+        { title: 'Flight Carbon Footprint', slug: 'carbon-footprint-calculator', icon: '✈️', cat: 'auto', desc: 'Estimate CO2 emissions for your next air trip.', live: true },
+        { title: 'Hotel Points Value', slug: 'hotel-points-calculator', icon: '🏨', cat: 'auto', desc: 'Is it better to pay with cash or rewards points?', live: true },
+        { title: 'EV Charging Time', slug: 'ev-charging-calculator', icon: '🔋', cat: 'auto', desc: 'How long to charge your EV at different power levels.', live: true },
 
         // ---- Fun ----
         { title: 'Life Expectancy Calculator', slug: 'life-expectancy-calculator', icon: '⏳', cat: 'fun', desc: 'Estimate your lifespan based on lifestyle and health data.', live: true },
