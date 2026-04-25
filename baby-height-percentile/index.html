@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Baby Height Percentile Calculator | WHO Growth Tracker</title>
+    <meta name="description" content="Check your baby's height percentile based on WHO growth charts. Compare your child's growth to healthy peers of the same age and gender.">
+    <meta name="keywords" content="baby height percentile, infant growth calculator, who growth chart tool, child height tracker, baby development calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/baby-height-percentile/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .perc-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .perc-bar { height: 12px; background: #eee; border-radius: 10px; margin: 20px 0; overflow: hidden; position: relative; }
+        .perc-fill { height: 100%; background: var(--clr-accent); transition: width 0.3s; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Baby Height Percentile",
+        "item": "https://calcsfor.life/baby-height-percentile/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Baby Height Percentile</h1>
+                    <p>Track your little one's growth. This tool uses World Health Organization (WHO) data to see how your baby's height compares to healthy peers.</p>
+                </div>
+
+                <form class="calc-form" id="baby-form">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="boy">Boy</option>
+                            <option value="girl">Girl</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Age (Months)</label>
+                        <input type="number" id="age" value="12" min="0" max="24">
+                        <small>From birth up to 24 months.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Height (cm)</label>
+                        <input type="number" id="height" value="75" step="0.1">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Height Percentile</span>
+                    <div class="perc-val" id="res-perc">50th</div>
+                    <div class="perc-bar">
+                        <div class="perc-fill" id="res-fill" style="width: 50%;"></div>
+                    </div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Your baby is taller than 50% of peers.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What do Percentiles Mean?</h2>
+                    <p>I genuinely believe that percentiles are the best way to track growth trends without worrying about "averages." A 50th percentile height means your child is exactly in the middle—half of children their age are taller, and half are shorter. It does **not** mean they are "healthier" than a child in the 10th or 90th percentile.</p>
+                    
+                    <p><strong>Growth Curves:</strong> Pediatricians look for consistent growth over time. If your baby has always been in the 10th percentile and stays there, that is usually perfectly healthy. Concerns only arise if there is a sudden, significant drop or jump in their percentile curve.</p>
+                    
+                    <h3>Quick Guide:</h3>
+                    <ul>
+                        <li><strong>50th:</strong> Average height for age.</li>
+                        <li><strong>Above 95th:</strong> Among the tallest 5% of children.</li>
+                        <li><strong>Below 5th:</strong> Among the shortest 5% of children.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            // WHO Simplified Height-for-age data (0-24m)
+            const data = {
+                boy: { m: [49.9, 54.7, 58.4, 61.4, 63.9, 65.9, 67.6, 69.2, 70.6, 72.0, 73.3, 74.5, 75.7, 76.9, 78.0, 79.1, 80.2, 81.2, 82.3, 83.2, 84.2, 85.1, 86.0, 86.9, 87.8], s: 2.5 },
+                girl: { m: [49.1, 53.7, 57.1, 59.8, 62.1, 64.0, 65.7, 67.3, 68.7, 70.1, 71.4, 72.6, 74.0, 75.2, 76.4, 77.5, 78.6, 79.7, 80.7, 81.7, 82.7, 83.7, 84.6, 85.5, 86.4], s: 2.5 }
+            };
+
+            const aI = document.getElementById('age');
+            const hI = document.getElementById('height');
+            const gI = document.getElementById('gender');
+            
+            const resP = document.getElementById('res-perc');
+            const resF = document.getElementById('res-fill');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const age = Math.min(24, Math.max(0, parseInt(aI.value) || 0));
+                const height = parseFloat(hI.value) || 0;
+                const gender = gI.value;
+
+                const mean = data[gender].m[age];
+                const sd = data[gender].s;
+
+                // Z-score calculation
+                const z = (height - mean) / sd;
+                
+                // Normal Distribution Percentile Approximation
+                let perc = 0.5 * (1 + erf(z / Math.sqrt(2))) * 100;
+                perc = Math.max(1, Math.min(99, perc));
+
+                resP.textContent = Math.round(perc) + (getOrdinal(Math.round(perc)));
+                resF.style.width = perc + '%';
+                resN.textContent = `Your baby is taller than ${Math.round(perc)}% of healthy ${gender}s at ${age} months.`;
+            }
+
+            function erf(x) {
+                const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741, a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911;
+                const sign = (x < 0) ? -1 : 1;
+                x = Math.abs(x);
+                const t = 1.0 / (1.0 + p * x);
+                const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+                return sign * y;
+            }
+
+            function getOrdinal(n) {
+                const s = ["th", "st", "nd", "rd"], v = n % 100;
+                return (s[(v - 20) % 10] || s[v] || s[0]);
+            }
+
+            [aI, hI, gI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

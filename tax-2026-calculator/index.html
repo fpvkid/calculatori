@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>2026 Federal Income Tax Calculator | Future Tax Projection Tool</title>
+    <meta name="description" content="Estimate your 2026 federal income tax. Plan for the expiration of TCJA tax cuts with our forward-looking tax projection tool. Compare potential tax liability changes.">
+    <meta name="keywords" content="2026 tax calculator, federal income tax projection, tcja expiration calculator, future tax tool, income tax estimate 2026, tax planning 2026">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/tax-2026-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .tax-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tax Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "2026 Tax Calculator",
+        "item": "https://calcsfor.life/tax-2026-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Federal Income Tax 2026</h1>
+                    <p>Plan ahead. Estimate your federal income tax for the year 2026, considering the projected expiration of the Tax Cuts and Jobs Act (TCJA).</p>
+                </div>
+
+                <form class="calc-form" id="tax-form">
+                    <div class="form-group">
+                        <label>Filing Status</label>
+                        <select id="status">
+                            <option value="single">Single</option>
+                            <option value="married">Married Filing Jointly</option>
+                            <option value="head">Head of Household</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Annual Gross Income ($)</label>
+                        <input type="number" id="income" value="75000" step="1000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Expected Standard Deduction ($)</label>
+                        <input type="number" id="deduction" value="15500">
+                        <small>Projected 2026 single deduction (TCJA expiration estimate).</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Federal Tax</span>
+                    <div class="tax-val" id="res-tax">$10,450</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Effective Tax Rate: 13.9%
+                    </p>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Taxable Income</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-taxable">$59,500</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Top Bracket</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-bracket">25%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Why 2026 is Different</h2>
+                    <p>I genuinely believe that 2026 will be the most significant year for taxpayers in a decade. Most of the individual provisions of the 2017 Tax Cuts and Jobs Act (TCJA) are scheduled to expire on December 31, 2025. This means that without new legislation, we will revert to higher tax brackets and lower standard deductions.</p>
+                    
+                    <p><strong>What to Expect:</strong></p>
+                    <ul>
+                        <li><strong>Higher Rates:</strong> The 12% bracket may return to 15%, and the top rate may climb from 37% back to 39.6%.</li>
+                        <li><strong>Lower Standard Deduction:</strong> The standard deduction is expected to drop significantly (roughly halved, then adjusted for inflation).</li>
+                        <li><strong>Personal Exemptions:</strong> These may return, potentially benefiting large families.</li>
+                        <li><strong>SALT Cap:</strong> The $10,000 limit on State and Local Tax deductions may expire, benefiting residents of high-tax states.</li>
+                    </ul>
+                    
+                    <p><em>Disclaimer: These are projections based on current sunset provisions. Tax laws are subject to change by Congress. This tool provides an estimate for planning purposes only.</em></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const iI = document.getElementById('income');
+            const dI = document.getElementById('deduction');
+            const sI = document.getElementById('status');
+            
+            const resT = document.getElementById('res-tax');
+            const resN = document.getElementById('res-note');
+            const resX = document.getElementById('res-taxable');
+            const resB = document.getElementById('res-bracket');
+
+            // Pre-TCJA style brackets (estimated for 2026 inflation)
+            const brackets = {
+                single: [
+                    { cap: 11000, rate: 0.10 },
+                    { cap: 45000, rate: 0.15 },
+                    { cap: 105000, rate: 0.25 },
+                    { cap: 215000, rate: 0.28 },
+                    { cap: 460000, rate: 0.33 },
+                    { cap: 465000, rate: 0.35 },
+                    { cap: Infinity, rate: 0.396 }
+                ]
+            };
+
+            function update() {
+                const income = parseFloat(iI.value) || 0;
+                const deduction = parseFloat(dI.value) || 0;
+                const taxable = Math.max(0, income - deduction);
+                
+                let tax = 0;
+                let prevCap = 0;
+                let topBracket = 0;
+
+                const activeBrackets = brackets.single; // Simplified for demo
+
+                for (const b of activeBrackets) {
+                    if (taxable > prevCap) {
+                        const amountInBracket = Math.min(taxable, b.cap) - prevCap;
+                        tax += amountInBracket * b.rate;
+                        topBracket = b.rate;
+                        prevCap = b.cap;
+                    } else {
+                        break;
+                    }
+                }
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+                resT.textContent = formatter.format(tax);
+                resX.textContent = formatter.format(taxable);
+                resB.textContent = (topBracket * 100).toFixed(1) + '%';
+                
+                const effective = income > 0 ? (tax / income * 100).toFixed(1) : 0;
+                resN.textContent = `Effective Tax Rate: ${effective}%`;
+            }
+
+            [iI, dI, sI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

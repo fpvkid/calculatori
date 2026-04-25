@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO -->
-    <title>AHI Estimator | Sleep Apnea Risk Assessment (STOP-BANG)</title>
-    <meta name="description" content="Free Sleep Apnea (AHI) risk estimator. Use the clinical STOP-BANG screening to find your risk level for obstructive sleep apnea and snoring issues.">
-    <meta name="keywords" content="ahi calculator, sleep apnea test, stop bang score, snoring risk assessment, apnea hypopnea index estimator, sleep quality tool">
+    <title>AHI Calculator | Sleep Apnea Severity Tool</title>
+    <meta name="description" content="Calculate your Apnea-Hypopnea Index (AHI) to determine the severity of your sleep apnea. Free online tool based on sleep study data.">
+    <meta name="keywords" content="ahi calculator, sleep apnea index, apnea hypopnea index, sleep study calculator, ahi score interpretation">
     <meta name="author" content="calcsfor.life">
     <meta name="category" content="Health">
     <link rel="canonical" href="https://calcsfor.life/ahi-calculator/">
@@ -28,28 +28,11 @@
             text-align: center;
             margin-top: 30px;
         }
-        .score-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .ahi-val { font-size: 5rem; font-weight: 800; line-height: 1; }
+        .severity-badge { display: inline-block; padding: 5px 15px; border-radius: 100px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-top: 10px; }
         .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
         
-        .question-list { display: grid; gap: 12px; margin-bottom: 30px; }
-        .q-item { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            padding: 16px; 
-            border-radius: var(--radius-md); 
-            background: var(--clr-bg-2); 
-            border: 1px solid var(--clr-border);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .q-item:hover { border-color: var(--clr-accent); }
-        .q-item.active { background: var(--clr-accent-glow); border-color: var(--clr-accent); }
-        .q-item input { width: 20px; height: 20px; accent-color: var(--clr-accent); }
-        .q-text { font-weight: 600; font-size: 1rem; flex: 1; margin-left: 15px; }
-
-        .risk-bar { height: 10px; width: 100%; background: var(--clr-bg-2); border-radius: 10px; margin-top: 20px; overflow: hidden; }
-        .risk-fill { height: 100%; width: 0%; transition: width 0.5s ease; }
+        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     </style>
 
     <script type="application/ld+json">
@@ -69,7 +52,7 @@
       },{
         "@type": "ListItem",
         "position": 3,
-        "name": "AHI Estimator",
+        "name": "AHI Calculator",
         "item": "https://calcsfor.life/ahi-calculator/"
       }]
     }
@@ -81,64 +64,51 @@
         <div class="container">
             <div class="calc-wrapper">
                 <div class="section-header">
-                    <h1>Sleep Apnea Risk Test</h1>
-                    <p>Waking up tired? Use the clinical STOP-BANG screening to find your risk level for Obstructive Sleep Apnea (OSA).</p>
+                    <h1>Sleep Apnea (AHI) Calculator</h1>
+                    <p>Calculate your Apnea-Hypopnea Index. This score measures the number of times your breathing stops or becomes shallow per hour of sleep.</p>
                 </div>
 
-                <div class="question-list" id="q-list">
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">S: Do you Snore loudly?</span>
-                    </label>
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">T: Do you feel Tired/Sleepy during the day?</span>
-                    </label>
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">O: Has anyone Observed you stop breathing?</span>
-                    </label>
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">P: Do you have high blood Pressure?</span>
-                    </label>
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">B: BMI more than 35?</span>
-                    </label>
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">A: Age older than 50?</span>
-                    </label>
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">N: Neck size over 16" (F) or 17" (M)?</span>
-                    </label>
-                    <label class="q-item">
-                        <input type="checkbox" data-score="1">
-                        <span class="q-text">G: Gender is Male?</span>
-                    </label>
-                </div>
+                <form class="calc-form" id="ahi-form">
+                    <div class="form-group">
+                        <label>Total Number of Apneas</label>
+                        <input type="number" id="apneas" value="10" min="0">
+                        <small>Complete stops in breathing for at least 10 seconds.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Number of Hypopneas</label>
+                        <input type="number" id="hypopneas" value="15" min="0">
+                        <small>Partial stops/shallow breathing episodes.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Hours of Sleep</label>
+                        <input type="number" id="hours" value="7" min="1" step="0.5">
+                    </div>
+                </form>
 
                 <div class="res-display">
-                    <span class="label">STOP-BANG Risk Score</span>
-                    <div class="score-val" id="res-score">0</div>
-                    <div class="risk-bar"><div class="risk-fill" id="res-fill"></div></div>
-                    <p style="margin-top: 20px; color: var(--clr-text); font-weight: 700;" id="res-risk">
-                        Risk Level: Low
-                    </p>
-                    <p style="margin-top: 10px; color: var(--clr-text-dim); font-size: 0.85rem;" id="res-note">
-                        Scores of 0-2 indicate a low risk for sleep apnea.
+                    <span class="label">Your AHI Score</span>
+                    <div class="ahi-val" id="res-ahi">3.5</div>
+                    <div class="severity-badge" id="res-sev" style="background: #10b981; color: #fff;">Normal</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Fewer than 5 episodes per hour.
                     </p>
                 </div>
 
                 <div class="info-content" style="margin-top: 60px;">
-                    <h2>What is the STOP-BANG score?</h2>
-                    <p>I genuinely believe that Sleep Apnea is the silent killer of productivity. Most people think they are "just bad sleepers," but if you stop breathing 15 times an hour, your brain is essentially suffocating all night. This STOP-BANG test is the same one used by doctors to decide if a patient needs an expensive sleep study.</p>
+                    <h2>What is the AHI Score?</h2>
+                    <p>I genuinely believe that sleep is the most underrated pillar of health. The AHI (Apnea-Hypopnea Index) is the gold standard for diagnosing sleep apnea. It is calculated by dividing the total number of respiratory events by the total sleep time in hours.</p>
                     
-                    <p><strong>Low Risk (0-2):</strong> You're likely fine, but check your pillow height. <strong>Intermediate Risk (3-4):</strong> You should mention this to your doctor. <strong>High Risk (5-8):</strong> This is a serious signal. Most people in this range have moderate to severe sleep apnea.</p>
+                    <p><strong>Severity Levels:</strong></p>
+                    <ul>
+                        <li><strong>Normal:</strong> AHI < 5 per hour.</li>
+                        <li><strong>Mild:</strong> AHI between 5 and 15 per hour.</li>
+                        <li><strong>Moderate:</strong> AHI between 15 and 30 per hour.</li>
+                        <li><strong>Severe:</strong> AHI > 30 per hour.</li>
+                    </ul>
                     
-                    <p style="font-size: 0.8rem; color: var(--clr-text-dim);">Disclaimer: This screening is for educational purposes and is not a medical diagnosis. If you are concerned about your sleep, please consult a healthcare professional.</p>
+                    <p>If you have a high AHI, you may experience excessive daytime sleepiness, morning headaches, or loud snoring. Long-term untreated sleep apnea is linked to high blood pressure, heart disease, and Type 2 diabetes. Always consult a sleep specialist if your AHI is consistently above 5.</p>
                 </div>
             </div>
         </div>
@@ -148,47 +118,46 @@
     <script src="../shared/footer.js" defer></script>
     <script>
         (function() {
-            const inputs = document.querySelectorAll('input[type="checkbox"]');
-            const resS = document.getElementById('res-score');
-            const resF = document.getElementById('res-fill');
-            const resR = document.getElementById('res-risk');
+            const apI = document.getElementById('apneas');
+            const hyI = document.getElementById('hypopneas');
+            const hrI = document.getElementById('hours');
+            
+            const resA = document.getElementById('res-ahi');
+            const resS = document.getElementById('res-sev');
             const resN = document.getElementById('res-note');
 
             function update() {
-                let score = 0;
-                inputs.forEach(i => {
-                    const parent = i.closest('.q-item');
-                    if (i.checked) {
-                        score++;
-                        parent.classList.add('active');
-                    } else {
-                        parent.classList.remove('active');
-                    }
-                });
+                const apneas = parseFloat(apI.value) || 0;
+                const hypopneas = parseFloat(hyI.value) || 0;
+                const hours = parseFloat(hrI.value) || 1;
 
-                resS.textContent = score;
-                const pct = (score / 8) * 100;
-                resF.style.width = pct + '%';
+                const ahi = (apneas + hypopneas) / hours;
+                resA.textContent = ahi.toFixed(1);
 
-                if (score <= 2) {
-                    resF.style.background = "#10b981";
-                    resR.textContent = "Risk Level: Low";
-                    resR.style.color = "#10b981";
-                    resN.textContent = "Scores of 0-2 indicate a low risk for obstructive sleep apnea.";
-                } else if (score <= 4) {
-                    resF.style.background = "#f59e0b";
-                    resR.textContent = "Risk Level: Intermediate";
-                    resR.style.color = "#f59e0b";
-                    resN.textContent = "A score of 3-4 suggests you might have mild apnea. Talk to a doctor.";
+                if (ahi < 5) {
+                    resS.textContent = "Normal";
+                    resS.style.background = "#10b981";
+                    resA.style.color = "#10b981";
+                    resN.textContent = "Your breathing is within the normal range during sleep.";
+                } else if (ahi < 15) {
+                    resS.textContent = "Mild Apnea";
+                    resS.style.background = "#f59e0b";
+                    resA.style.color = "#f59e0b";
+                    resN.textContent = "Slightly elevated events. Consider monitoring your sleep habits.";
+                } else if (ahi < 30) {
+                    resS.textContent = "Moderate Apnea";
+                    resS.style.background = "#f97316";
+                    resA.style.color = "#f97316";
+                    resN.textContent = "Significant respiratory events. Consultation with a sleep specialist is recommended.";
                 } else {
-                    resF.style.background = "#ef4444";
-                    resR.textContent = "Risk Level: High";
-                    resR.style.color = "#ef4444";
-                    resN.textContent = "A score of 5 or more indicates a high risk for moderate to severe apnea.";
+                    resS.textContent = "Severe Apnea";
+                    resS.style.background = "#ef4444";
+                    resA.style.color = "#ef4444";
+                    resN.textContent = "High risk of health complications. Please seek medical advice immediately.";
                 }
             }
 
-            inputs.forEach(i => i.addEventListener('change', update));
+            [apI, hyI, hrI].forEach(i => i.addEventListener('input', update));
             update();
         })();
     </script>

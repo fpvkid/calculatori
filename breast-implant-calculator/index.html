@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Breast Implant Size Calculator | Volume & Projection Guide</title>
+    <meta name="description" content="Calculate estimated breast implant volume (cc) and projection based on your base width and desired results. Free plastic surgery planning tool.">
+    <meta name="keywords" content="breast implant calculator, implant volume cc, breast augmentation tool, implant projection calculator, breast width measurement">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/breast-implant-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cc-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Breast Implant Calculator",
+        "item": "https://calcsfor.life/breast-implant-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Breast Implant Size Tool</h1>
+                    <p>Plan your journey. This tool helps estimate the required implant volume (cc) based on your breast base width and desired projection profile.</p>
+                </div>
+
+                <form class="calc-form" id="implant-form">
+                    <div class="form-group">
+                        <label>Breast Base Width (cm)</label>
+                        <input type="number" id="width" value="12" min="8" max="20" step="0.1">
+                        <small>Measure across the widest part of each breast.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Desired Projection</label>
+                        <select id="projection">
+                            <option value="moderate">Moderate (Natural)</option>
+                            <option value="moderate-plus">Moderate Plus (Fuller)</option>
+                            <option value="high" selected>High (Pronounced)</option>
+                            <option value="ultra-high">Ultra High (Dramatic)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Volume</span>
+                    <div class="cc-val" id="res-cc">350</div>
+                    <div class="label" style="font-size: 1.5rem; color: var(--clr-text); margin-top: 10px;">CC</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Ideal for a 12.0 cm base width.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Finding Your CCs</h2>
+                    <p>I genuinely believe that choosing the right implant size is more about geometry than just "a cup size." Your **Breast Base Width (BBW)** is the most important measurement because the implant must sit comfortably within the boundaries of your natural breast tissue to avoid complications.</p>
+                    
+                    <p><strong>Volume vs Projection:</strong></p>
+                    <ul>
+                        <li><strong>Moderate Projection:</strong> Provides a wider, flatter look, often appearing very natural.</li>
+                        <li><strong>High Projection:</strong> Projects further out from the chest wall, giving more upper-pole fullness.</li>
+                        <li><strong>Ultra High Projection:</strong> Maximum forward projection with a narrower base width.</li>
+                    </ul>
+                    
+                    <p><em>Disclaimer: This tool provides an estimate based on average industry dimensions. Your plastic surgeon will take detailed 3D measurements and perform physical assessments to determine the absolute best size for your anatomy.</em></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wI = document.getElementById('width');
+            const pI = document.getElementById('projection');
+            
+            const resC = document.getElementById('res-cc');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const width = parseFloat(wI.value) || 12;
+                const proj = pI.value;
+
+                // Base volume approximation (Industry averages)
+                // Vol = (Width^2 * Factor)
+                let factor = 2.4; // moderate
+                if (proj === 'moderate-plus') factor = 2.6;
+                if (proj === 'high') factor = 2.8;
+                if (proj === 'ultra-high') factor = 3.2;
+
+                // cc = Width^2 * factor (approximate volumetric mapping)
+                // e.g. 12cm * 12cm * 2.4 = 345cc
+                const cc = Math.round((Math.pow(width, 2) * factor) / 10) * 10;
+
+                resC.textContent = cc;
+                resN.textContent = `Estimated volume for a ${width.toFixed(1)} cm base width with ${proj.replace('-', ' ')} projection.`;
+            }
+
+            [wI, pI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

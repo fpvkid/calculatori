@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>ANC Calculator | Absolute Neutrophil Count Tool</title>
+    <meta name="description" content="Calculate your Absolute Neutrophil Count (ANC) using WBC and differential results. Determine neutropenia severity and infection risk online.">
+    <meta name="keywords" content="anc calculator, absolute neutrophil count, neutropenia severity, chemotherapy risk tool, wbc differential calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/anc-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .anc-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .severity-badge { display: inline-block; padding: 5px 15px; border-radius: 100px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-top: 10px; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ANC Calculator",
+        "item": "https://calcsfor.life/anc-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>ANC Calculator</h1>
+                    <p>Calculate your Absolute Neutrophil Count. This value measures the number of infection-fighting white blood cells in your blood.</p>
+                </div>
+
+                <form class="calc-form" id="anc-form">
+                    <div class="form-group">
+                        <label>Total WBC Count (per μL or mm³)</label>
+                        <input type="number" id="wbc" value="4500" step="100">
+                        <small>E.g., 4.5 on a lab report usually means 4,500.</small>
+                    </div>
+
+                    <div class="grid-inputs">
+                        <div class="form-group">
+                            <label>Neutrophils / Polys (%)</label>
+                            <input type="number" id="neut" value="40">
+                        </div>
+                        <div class="form-group">
+                            <label>Bands (%)</label>
+                            <input type="number" id="bands" value="5">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Calculated ANC</span>
+                    <div class="anc-val" id="res-anc">2,025</div>
+                    <div class="severity-badge" id="res-sev" style="background: #10b981; color: #fff;">Normal</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Normal range (Above 1,500).
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is ANC?</h2>
+                    <p>I genuinely believe that the Absolute Neutrophil Count (ANC) is the most critical number for patients undergoing chemotherapy or dealing with blood disorders. Neutrophils are the "first responders" of your immune system. When their count drops too low (a condition called neutropenia), your body loses its primary defense against bacteria.</p>
+                    
+                    <p><strong>Neutropenia Levels:</strong></p>
+                    <ul>
+                        <li><strong>Mild Neutropenia:</strong> 1,000 to 1,500 cells/μL.</li>
+                        <li><strong>Moderate Neutropenia:</strong> 500 to 1,000 cells/μL.</li>
+                        <li><strong>Severe Neutropenia:</strong> Less than 500 cells/μL (High risk of infection).</li>
+                    </ul>
+                    
+                    <p><em>Note: This calculator is for educational purposes. Lab values can be reported in different units. Always follow the clinical guidance of your oncologist or primary care physician.</em></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wbcI = document.getElementById('wbc');
+            const neutI = document.getElementById('neut');
+            const bandI = document.getElementById('bands');
+            
+            const resA = document.getElementById('res-anc');
+            const resS = document.getElementById('res-sev');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const wbc = parseFloat(wbcI.value) || 0;
+                const neut = parseFloat(neutI.value) || 0;
+                const bands = parseFloat(bandI.value) || 0;
+
+                // ANC = WBC * (%Neut + %Bands) / 100
+                const anc = wbc * (neut + bands) / 100;
+                resA.textContent = Math.round(anc).toLocaleString();
+
+                if (anc >= 1500) {
+                    resS.textContent = "Normal";
+                    resS.style.background = "#10b981";
+                    resA.style.color = "#10b981";
+                    resN.textContent = "Within standard clinical range.";
+                } else if (anc >= 1000) {
+                    resS.textContent = "Mild Neutropenia";
+                    resS.style.background = "#f59e0b";
+                    resA.style.color = "#f59e0b";
+                    resN.textContent = "Increased risk of infection.";
+                } else if (anc >= 500) {
+                    resS.textContent = "Moderate Neutropenia";
+                    resS.style.background = "#f97316";
+                    resA.style.color = "#f97316";
+                    resN.textContent = "High risk of infection. Consult your physician.";
+                } else {
+                    resS.textContent = "Severe Neutropenia";
+                    resS.style.background = "#ef4444";
+                    resA.style.color = "#ef4444";
+                    resN.textContent = "Critical risk. Seek medical attention immediately.";
+                }
+            }
+
+            [wbcI, neutI, bandI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

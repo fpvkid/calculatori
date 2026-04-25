@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO -->
-    <title>Heart Age Calculator | Find Your Cardiovascular Age</title>
-    <meta name="description" content="Free heart age calculator. Compare your heart's health age to your actual age based on blood pressure, BMI, and lifestyle factors.">
-    <meta name="keywords" content="heart age calculator, cardio age test, heart health score, fitness age calculator, cardiovascular risk assessment">
+    <title>Heart Age Calculator | Find Your Heart's Real Age</title>
+    <meta name="description" content="Calculate your heart age based on blood pressure, cholesterol, and lifestyle. See if your heart is older or younger than your chronological age.">
+    <meta name="keywords" content="heart age calculator, cardiovascular risk, heart health tool, blood pressure heart age, cholesterol risk calculator">
     <meta name="author" content="calcsfor.life">
     <meta name="category" content="Health">
     <link rel="canonical" href="https://calcsfor.life/heart-age-calculator/">
@@ -27,25 +27,11 @@
             padding: 40px; 
             text-align: center;
             margin-top: 30px;
-            position: relative;
-            overflow: hidden;
         }
-        .age-val { font-size: 6rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
-        .label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .age-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
         
-        .status-pill {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-top: 15px;
-        }
-        .status-good { background: #10b98120; color: #10b981; }
-        .status-warning { background: #f59e0b20; color: #f59e0b; }
-        .status-danger { background: #ef444420; color: #ef4444; }
-
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     </style>
 
     <script type="application/ld+json">
@@ -78,14 +64,14 @@
             <div class="calc-wrapper">
                 <div class="section-header">
                     <h1>Heart Age Calculator</h1>
-                    <p>Is your heart older than you are? Find out how your lifestyle and health markers impact your cardiovascular "age".</p>
+                    <p>Is your heart older than you? This tool compares your cardiovascular risk profile to a person with normal levels to estimate your heart's "effective age."</p>
                 </div>
 
                 <form class="calc-form" id="heart-form">
-                    <div class="form-grid">
+                    <div class="grid-inputs">
                         <div class="form-group">
-                            <label>Actual Age</label>
-                            <input type="number" id="age" value="35" min="18" max="100">
+                            <label>Chronological Age</label>
+                            <input type="number" id="age" value="45" min="30" max="75">
                         </div>
                         <div class="form-group">
                             <label>Gender</label>
@@ -96,50 +82,50 @@
                         </div>
                     </div>
 
-                    <div class="form-grid">
+                    <div class="grid-inputs">
                         <div class="form-group">
-                            <label>Systolic BP (top)</label>
-                            <input type="number" id="bp" value="120" min="80" max="220">
+                            <label>Systolic BP (mmHg)</label>
+                            <input type="number" id="sbp" value="135">
                         </div>
                         <div class="form-group">
-                            <label>BMI (or Weight level)</label>
-                            <select id="bmi">
-                                <option value="0">Healthy (18-25)</option>
-                                <option value="2">Overweight (25-30)</option>
-                                <option value="5">Obese (30+)</option>
-                            </select>
+                            <label>Total Cholesterol (mg/dL)</label>
+                            <input type="number" id="total_c" value="210">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label style="display: flex; align-items: center; gap: 8px;">
-                            <input type="checkbox" id="smoker" style="width: auto;"> I am a regular smoker
+                    <div class="form-group" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="smoker" style="width: auto;"> Smoker
                         </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label style="display: flex; align-items: center; gap: 8px;">
-                            <input type="checkbox" id="diabetes" style="width: auto;"> I have diabetes
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="diabetes" style="width: auto;"> Diabetes
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="bp_med" style="width: auto;"> Taking BP Meds
                         </label>
                     </div>
                 </form>
 
                 <div class="res-display">
-                    <span class="label">Your Heart Age</span>
-                    <div class="age-val" id="res-age">35</div>
-                    <div id="res-status" class="status-pill status-good">Great Job!</div>
-                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;" id="res-note">
-                        Your heart age is the same as your actual age.
+                    <span class="label">Estimated Heart Age</span>
+                    <div class="age-val" id="res-age">52</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Your heart is 7 years older than you.
                     </p>
                 </div>
 
                 <div class="info-content" style="margin-top: 60px;">
-                    <h2>What does "Heart Age" mean?</h2>
-                    <p>I genuinely believe that "heart age" is a much better way to talk about health than "percentage risk." Telling someone they have a 5% risk of a heart attack in 10 years sounds abstract. Telling a 35-year-old they have the heart of a 50-year-old is a wake-up call.</p>
+                    <h2>Understanding Heart Age</h2>
+                    <p>I genuinely believe that "Heart Age" is one of the best ways to understand cardiovascular risk. Instead of looking at abstract percentages, you get a number that represents how your body is actually doing compared to healthy peers.</p>
                     
-                    <p><strong>Can you reverse it?</strong> Absolutely. Unlike your birthday, your heart age can go backward. Lowering your blood pressure by just 10 points or quitting smoking can shave 5-10 years off your heart's biological age in just a few months.</p>
+                    <p><strong>The Calculation:</strong> This tool uses a simplified version of the Framingham Risk Score. It looks at how your blood pressure, smoking status, and cholesterol levels deviate from "ideal" levels for your age. If you have higher risk factors, your heart effectively works harder and ages faster.</p>
                     
-                    <p style="font-size: 0.8rem; color: var(--clr-text-dim);">Disclaimer: This tool provides an estimate for educational purposes and is not a medical diagnosis. Always consult a doctor for heart health concerns.</p>
+                    <h3>Key Risk Factors:</h3>
+                    <ul>
+                        <li><strong>Blood Pressure:</strong> High BP strains the heart and arteries over time.</li>
+                        <li><strong>Smoking:</strong> This is a massive multiplier for heart age. Quitting can drop your heart age significantly within months.</li>
+                        <li><strong>Cholesterol:</strong> High levels can lead to plaque buildup (atherosclerosis).</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -150,53 +136,59 @@
     <script>
         (function() {
             const ageI = document.getElementById('age');
-            const genI = document.getElementById('gender');
-            const bpI = document.getElementById('bp');
-            const bmiI = document.getElementById('bmi');
-            const smokeC = document.getElementById('smoker');
-            const diabC = document.getElementById('diabetes');
+            const genderI = document.getElementById('gender');
+            const sbpI = document.getElementById('sbp');
+            const totalCI = document.getElementById('total_c');
+            const smokerI = document.getElementById('smoker');
+            const diabetesI = document.getElementById('diabetes');
+            const bpMedI = document.getElementById('bp_med');
             
             const resA = document.getElementById('res-age');
-            const resS = document.getElementById('res-status');
             const resN = document.getElementById('res-note');
 
             function update() {
                 const age = parseFloat(ageI.value) || 0;
-                const bp = parseFloat(bpI.value) || 120;
-                const bmiAdd = parseFloat(bmiI.value);
-                const isSmoker = smokeC.checked;
-                const isDiabetic = diabC.checked;
+                const gender = genderI.value;
+                const sbp = parseFloat(sbpI.value) || 0;
+                const totalC = parseFloat(totalCI.value) || 0;
+                const smoker = smokerI.checked;
+                const diabetes = diabetesI.checked;
+                const bpMed = bpMedI.checked;
 
+                // Simple additive risk model (approximation)
                 let heartAge = age;
+                
+                // BP Adjustment
+                if (sbp > 120) heartAge += (sbp - 120) / 4;
+                if (bpMed) heartAge += 3;
+                
+                // Cholesterol Adjustment
+                if (totalC > 180) heartAge += (totalC - 180) / 10;
+                
+                // Smoking/Diabetes (Massive penalties)
+                if (smoker) heartAge += 8;
+                if (diabetes) heartAge += 5;
+                
+                // Gender tweak (Male heart age tends to be slightly higher in risk models)
+                if (gender === 'male') heartAge += 2;
 
-                // Simple additive model based on common risk factors
-                if (bp > 130) heartAge += (bp - 130) / 5;
-                if (isSmoker) heartAge += 8;
-                if (isDiabetic) heartAge += 5;
-                heartAge += bmiAdd;
-
-                if (genI.value === 'male') heartAge += 2; // Statistically higher risk
-
-                const final = Math.round(heartAge);
-                resA.textContent = final;
-
-                const diff = final - age;
-                if (diff <= 2) {
-                    resS.textContent = "Great Job!";
-                    resS.className = "status-pill status-good";
-                    resN.textContent = "Your heart is in excellent shape for your age.";
-                } else if (diff <= 8) {
-                    resS.textContent = "Pay Attention";
-                    resS.className = "status-pill status-warning";
-                    resN.textContent = `Your heart is ${diff} years older than you. Consider lifestyle changes.`;
+                const rounded = Math.round(heartAge);
+                resA.textContent = rounded;
+                
+                const diff = rounded - age;
+                if (diff > 0) {
+                    resN.textContent = `Your heart is ${diff} years older than you. Time for some lifestyle changes!`;
+                    resA.style.color = "#ef4444";
+                } else if (diff < 0) {
+                    resN.textContent = `Excellent! Your heart is ${Math.abs(diff)} years younger than you. Keep it up!`;
+                    resA.style.color = "#10b981";
                 } else {
-                    resS.textContent = "High Risk";
-                    resS.className = "status-pill status-danger";
-                    resN.textContent = `Your heart is ${diff} years older! This is a significant risk factor.`;
+                    resN.textContent = "Your heart age matches your chronological age. Stay consistent!";
+                    resA.style.color = "var(--clr-accent)";
                 }
             }
 
-            [ageI, genI, bpI, bmiI, smokeC, diabC].forEach(i => i.addEventListener('input', update));
+            [ageI, genderI, sbpI, totalCI, smokerI, diabetesI, bpMedI].forEach(i => i.addEventListener('input', update));
             update();
         })();
     </script>

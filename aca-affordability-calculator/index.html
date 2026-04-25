@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>ACA Affordability Calculator 2026 | Health Insurance Compliance</title>
+    <meta name="description" content="Check if your employer-sponsored health insurance is considered affordable under the ACA for 2026. Calculate premium limits based on your household income.">
+    <meta name="keywords" content="aca affordability calculator 2026, health insurance compliance tool, employer mandate calculator, affordable care act premium limit, health insurance subsidy tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/aca-affordability-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .limit-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .status-badge { display: inline-block; padding: 5px 15px; border-radius: 100px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-top: 10px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ACA Affordability Calculator",
+        "item": "https://calcsfor.life/aca-affordability-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>ACA Affordability 2026</h1>
+                    <p>Compliance check. Determine if your employer-sponsored health plan is "affordable" based on the projected IRS percentage for the 2026 plan year.</p>
+                </div>
+
+                <form class="calc-form" id="aca-form">
+                    <div class="form-group">
+                        <label>Monthly Gross Household Income ($)</label>
+                        <input type="number" id="income" value="5000" step="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Monthly Premium Share ($)</label>
+                        <input type="number" id="premium" value="450">
+                        <small>The amount you pay for self-only coverage.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Year</label>
+                        <select id="year">
+                            <option value="0.0839">2024 (8.39%)</option>
+                            <option value="0.0902">2025 (9.02%)</option>
+                            <option value="0.0920" selected>2026 (9.20% Projected)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Affordability Limit</span>
+                    <div class="limit-val" id="res-limit">$460</div>
+                    <div class="status-badge" id="res-status" style="background: #10b981; color: #fff;">Affordable</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Your premium is below the 9.20% threshold.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The "Affordability" Standard</h2>
+                    <p>I genuinely believe that navigating health insurance shouldn't require a law degree. Under the Affordable Care Act, an employer's job-based health insurance is considered affordable if the employee's share of the premium for the lowest-cost **self-only** plan does not exceed a certain percentage of their household income.</p>
+                    
+                    <p><strong>Why it matters:</strong> If your employer's plan is NOT affordable, you may be eligible for a premium tax credit (subsidy) to buy a plan through the Health Insurance Marketplace (Exchange).</p>
+                    
+                    <h3>Key Rule Points:</h3>
+                    <ul>
+                        <li><strong>Self-Only Focus:</strong> The affordability test only looks at the cost of insuring *just you*, even if you choose a family plan.</li>
+                        <li><strong>Safe Harbors:</strong> Employers can use your W-2 wages, rate of pay, or the federal poverty level to calculate affordability.</li>
+                        <li><strong>Annual Adjustments:</strong> The IRS adjusts the percentage every year based on health care cost trends.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const iI = document.getElementById('income');
+            const pI = document.getElementById('premium');
+            const yI = document.getElementById('year');
+            
+            const resL = document.getElementById('res-limit');
+            const resS = document.getElementById('res-status');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const income = parseFloat(iI.value) || 0;
+                const premium = parseFloat(pI.value) || 0;
+                const rate = parseFloat(yI.value);
+
+                const limit = income * rate;
+                const isAffordable = premium <= limit;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+                resL.textContent = formatter.format(limit);
+                
+                const pctLabel = (rate * 100).toFixed(2);
+                if (isAffordable) {
+                    resS.textContent = "Affordable";
+                    resS.style.background = "#10b981";
+                    resN.textContent = `Your premium is below the ${pctLabel}% threshold.`;
+                } else {
+                    resS.textContent = "Not Affordable";
+                    resS.style.background = "#ef4444";
+                    resN.textContent = `Your premium exceeds the ${pctLabel}% threshold by ${formatter.format(premium - limit)}.`;
+                }
+            }
+
+            [iI, pI, yI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

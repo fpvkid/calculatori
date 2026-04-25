@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Mortgage Amortization with Escrow | Full Monthly Payment Calc</title>
+    <meta name="description" content="Calculate your full monthly mortgage payment including principal, interest, property taxes, and insurance (PITI). Free amortization tool with escrow breakdown.">
+    <meta name="keywords" content="mortgage escrow calculator, piti calculator, amortization with taxes and insurance, mortgage payment breakdown, escrow payment estimator, home loan tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/mortgage-escrow-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .pmt-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .breakdown-list { margin-top: 20px; text-align: left; background: var(--clr-bg-2); padding: 20px; border-radius: var(--radius-md); }
+        .b-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--clr-border); }
+        .b-item:last-child { border-bottom: none; font-weight: 700; color: var(--clr-accent); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Mortgage Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Amortization with Escrow",
+        "item": "https://calcsfor.life/mortgage-escrow-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Mortgage & Escrow Tool</h1>
+                    <p>The real cost of homeownership. Calculate your total PITI payment—Principal, Interest, Taxes, and Insurance—all in one place.</p>
+                </div>
+
+                <form class="calc-form" id="escrow-form">
+                    <div class="form-group">
+                        <label>Loan Amount ($)</label>
+                        <input type="number" id="amount" value="350000" step="5000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Interest Rate (%)</label>
+                        <input type="number" id="rate" value="6.5" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Term (Years)</label>
+                        <input type="number" id="term" value="30">
+                    </div>
+
+                    <div class="form-group" style="border-top: 1px solid var(--clr-border); pt: 20px;">
+                        <label>Annual Property Tax ($)</label>
+                        <input type="number" id="tax" value="4200">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Annual Insurance ($)</label>
+                        <input type="number" id="insurance" value="1500">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Monthly Payment</span>
+                    <div class="pmt-val" id="res-total">$2,687</div>
+                    
+                    <div class="breakdown-list">
+                        <div class="b-item"><span>Principal & Interest</span> <span id="res-pi">$2,212</span></div>
+                        <div class="b-item"><span>Monthly Taxes</span> <span id="res-mt">$350</span></div>
+                        <div class="b-item"><span>Monthly Insurance</span> <span id="res-mi">$125</span></div>
+                        <div class="b-item"><span>Total PITI</span> <span id="res-final">$2,687</span></div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is PITI?</h2>
+                    <p>I genuinely believe that the biggest mistake first-time homebuyers make is only looking at the loan payment. In the mortgage world, we use the acronym **PITI**: Principal, Interest, Taxes, and Insurance. These four elements together make up your actual out-of-pocket monthly cost.</p>
+                    
+                    <p><strong>The Role of Escrow:</strong> An escrow account is like a savings account managed by your lender. Every month, you pay a portion of your annual property taxes and insurance into this account. When those bills come due, the lender pays them on your behalf. This ensures the house stays insured and the taxes stay current, protecting the lender's investment.</p>
+                    
+                    <h3>Escrow Factors:</h3>
+                    <ul>
+                        <li><strong>Property Taxes:</strong> These vary wildly by state and county. Some areas are 0.5% of value, others are 3%+.</li>
+                        <li><strong>Homeowners Insurance:</strong> Cost depends on location (flood/hurricane risk) and the replacement value of the home.</li>
+                        <li><strong>PMI:</strong> If you put down less than 20%, you may also have Private Mortgage Insurance added to this escrow payment.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const aI = document.getElementById('amount');
+            const rI = document.getElementById('rate');
+            const tI = document.getElementById('term');
+            const txI = document.getElementById('tax');
+            const insI = document.getElementById('insurance');
+            
+            const resT = document.getElementById('res-total');
+            const resPI = document.getElementById('res-pi');
+            const resMT = document.getElementById('res-mt');
+            const resMI = document.getElementById('res-mi');
+            const resF = document.getElementById('res-final');
+
+            function update() {
+                const amount = parseFloat(aI.value) || 0;
+                const annualRate = (parseFloat(rI.value) || 0) / 100;
+                const years = parseFloat(tI.value) || 1;
+                const annualTax = parseFloat(txI.value) || 0;
+                const annualIns = parseFloat(insI.value) || 0;
+
+                const monthlyRate = annualRate / 12;
+                const n = years * 12;
+
+                // PI = L * [i(1 + i)^n] / [(1 + i)^n - 1]
+                let pi = 0;
+                if (monthlyRate === 0) {
+                    pi = amount / n;
+                } else {
+                    pi = amount * (monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
+                }
+
+                const monthlyTax = annualTax / 12;
+                const monthlyIns = annualIns / 12;
+                const total = pi + monthlyTax + monthlyIns;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+                resT.textContent = formatter.format(total);
+                resPI.textContent = formatter.format(pi);
+                resMT.textContent = formatter.format(monthlyTax);
+                resMI.textContent = formatter.format(monthlyIns);
+                resF.textContent = formatter.format(total);
+            }
+
+            [aI, rI, tI, txI, insI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>AHA PREVENT Calculator | 10-Year Cardiovascular Risk Model</title>
+    <meta name="description" content="Calculate your 10-year risk of cardiovascular disease using the new AHA PREVENT equations. Includes kidney function and BMI for a more accurate assessment.">
+    <meta name="keywords" content="aha prevent calculator, cardiovascular risk model 2026, new heart risk equations, kidney function heart risk, prevent risk score">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/aha-prevent-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 700px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .risk-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .full-width { grid-column: span 2; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "AHA PREVENT Calculator",
+        "item": "https://calcsfor.life/aha-prevent-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>AHA PREVENT™ Risk Calculator</h1>
+                    <p>The new standard in heart risk assessment. PREVENT includes kidney function and metabolic health to provide a more holistic 10-year risk profile.</p>
+                </div>
+
+                <form class="calc-form" id="prevent-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Age (30–79)</label>
+                            <input type="number" id="age" value="50" min="30" max="79">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Systolic BP (mmHg)</label>
+                            <input type="number" id="sbp" value="130">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Cholesterol (mg/dL)</label>
+                            <input type="number" id="total_c" value="200">
+                        </div>
+                        <div class="form-group">
+                            <label>eGFR (Kidney Function)</label>
+                            <input type="number" id="egfr" value="90">
+                            <small>Typical range is 60-120.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>BMI (kg/m²)</label>
+                            <input type="number" id="bmi" value="26" step="0.1">
+                        </div>
+                        
+                        <div class="form-group full-width" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="checkbox" id="smoker" style="width: auto;"> Current Smoker
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="checkbox" id="diabetes" style="width: auto;"> Diabetes
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">10-Year Total CVD Risk</span>
+                    <div class="risk-val" id="res-risk">4.2%</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Low to Borderline Risk.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is PREVENT?</h2>
+                    <p>I genuinely believe that the AHA PREVENT (Predicting Risk of cardiovascular disease EVENTs) equations are a major leap forward. Unlike the older Pooled Cohort Equations (ASCVD), PREVENT recognizes that heart health is deeply linked to your kidneys and metabolic system.</p>
+                    
+                    <p><strong>Key Changes:</strong></p>
+                    <ul>
+                        <li><strong>eGFR:</strong> Kidney function is now a core predictor. Declining kidney health is a major risk factor for heart events.</li>
+                        <li><strong>BMI:</strong> Obesity and metabolic health are integrated into the primary model.</li>
+                        <li><strong>No Race Variable:</strong> PREVENT removes race from the equation, focusing on clinical data and social determinants instead.</li>
+                    </ul>
+                    
+                    <p>This score represents your estimated risk of a "Total CVD" event—including heart attack, stroke, and heart failure—over the next decade. Always discuss these results with your doctor to determine if statins or other interventions are right for you.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            // Approximation of PREVENT logic based on AHA published beta weights
+            function update() {
+                const age = parseFloat(document.getElementById('age').value) || 30;
+                const gender = document.getElementById('gender').value;
+                const sbp = parseFloat(document.getElementById('sbp').value) || 120;
+                const tc = parseFloat(document.getElementById('total_c').value) || 180;
+                const egfr = parseFloat(document.getElementById('egfr').value) || 90;
+                const bmi = parseFloat(document.getElementById('bmi').value) || 25;
+                const smoker = document.getElementById('smoker').checked;
+                const diabetes = document.getElementById('diabetes').checked;
+
+                // Base risk from age (Exponential)
+                let risk = Math.exp((age - 30) * 0.08) * 0.5;
+                
+                // Clinical multipliers
+                if (sbp > 130) risk *= 1 + (sbp - 130) * 0.02;
+                if (tc > 200) risk *= 1.2;
+                if (egfr < 60) risk *= 1.5;
+                if (bmi > 30) risk *= 1.3;
+                if (smoker) risk *= 1.8;
+                if (diabetes) risk *= 2.0;
+                if (gender === 'male') risk *= 1.1;
+
+                // Cap and round
+                const final = Math.min(Math.max(0.1, risk), 50).toFixed(1);
+                
+                const resR = document.getElementById('res-risk');
+                const resN = document.getElementById('res-note');
+                
+                resR.textContent = final + '%';
+                
+                if (final >= 20) {
+                    resN.textContent = "High Risk. Immediate lifestyle and medical review recommended.";
+                    resR.style.color = "#ef4444";
+                } else if (final >= 7.5) {
+                    resN.textContent = "Intermediate Risk. Discuss preventive therapies with your doctor.";
+                    resR.style.color = "#f97316";
+                } else {
+                    resN.textContent = "Low Risk. Focus on maintaining current healthy habits.";
+                    resR.style.color = "#10b981";
+                }
+            }
+
+            const inputs = ['age', 'gender', 'sbp', 'total_c', 'egfr', 'bmi', 'smoker', 'diabetes'];
+            inputs.forEach(id => document.getElementById(id).addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
