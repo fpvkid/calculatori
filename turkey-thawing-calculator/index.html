@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Turkey Thawing Timer | Safe Defrosting Calculator</title>
+    <meta name="description" content="Calculate exactly how long it takes to thaw a turkey in the refrigerator or cold water. Ensure holiday safety with our accurate defrosting guide.">
+    <meta name="keywords" content="turkey thawing timer, defrosting calculator, holiday turkey tool, safe meat thawing, refrigerator thawing time, cold water turkey thaw">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Kitchen & Cooking">
+    <link rel="canonical" href="https://calcsfor.life/turkey-thawing-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .time-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; margin: 10px 0; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .safety-alert { 
+            background: #fff7ed; 
+            border: 1px solid #fed7aa; 
+            color: #9a3412; 
+            padding: 15px; 
+            border-radius: var(--radius-md); 
+            margin-top: 20px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Kitchen",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Turkey Thawing Timer",
+        "item": "https://calcsfor.life/turkey-thawing-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Turkey Thawing Timer</h1>
+                    <p>Plan your feast. Avoid holiday stress by calculating exactly when you need to start defrosting your turkey for a safe and successful dinner.</p>
+                </div>
+
+                <form class="calc-form" id="thaw-form">
+                    <div class="form-group">
+                        <label>Turkey Weight (lbs)</label>
+                        <input type="number" id="weight" value="15" min="1" max="40">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Thawing Method</label>
+                        <select id="method">
+                            <option value="fridge" selected>Refrigerator (Safest)</option>
+                            <option value="water">Cold Water (Faster)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Thawing Time</span>
+                    <div class="time-val" id="res-time">3.75 Days</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1.1rem; font-weight: 700;" id="res-start">
+                        Start Sunday Morning
+                    </p>
+                    
+                    <div class="safety-alert" id="res-alert">
+                        <strong>Safety Note:</strong> Keep the turkey in its original wrapper. If using cold water, change the water every 30 minutes.
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Safe Thawing Guidelines</h2>
+                    <p>I genuinely believe that food safety is the most important ingredient in any holiday meal. Bacteria can grow rapidly in the "Danger Zone" (40°F - 140°F), so you should **never** thaw a turkey on the counter or in the garage. Our calculator provides the two USDA-approved methods for safe defrosting.</p>
+                    
+                    <p><strong>Refrigerator Method (Recommended):</strong> This is the most consistent and safest way. It takes approximately **24 hours for every 4-5 pounds** of turkey. Once thawed, a turkey can stay in the fridge for another 1-2 days before cooking.</p>
+                    
+                    <p><strong>Cold Water Method:</strong> If you're short on time, this method takes about **30 minutes per pound**. You must keep the turkey in a leak-proof plastic bag and submerge it in cold tap water. You **must** cook the turkey immediately after it is thawed using this method.</p>
+                    
+                    <h3>Expert Holiday Tips:</h3>
+                    <ul>
+                        <li><strong>The Roasting Pan:</strong> Place your turkey in a roasting pan while it thaws in the fridge to catch any drips and prevent cross-contamination.</li>
+                        <li><strong>Don't Wash:</strong> There is no need to wash your turkey before cooking. Washing can actually spread bacteria around your kitchen sink and counters.</li>
+                        <li><strong>Thermometer:</strong> The only way to know a turkey is done is to check the internal temperature. It must reach 165°F in the thickest part of the breast and thigh.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wI = document.getElementById('weight');
+            const mS = document.getElementById('method');
+            
+            const resT = document.getElementById('res-time');
+            const resS = document.getElementById('res-start');
+            const resA = document.getElementById('res-alert');
+
+            function update() {
+                const weight = parseFloat(wI.value) || 0;
+                const method = mS.value;
+                
+                if (method === 'fridge') {
+                    const days = weight / 4;
+                    resT.textContent = days.toFixed(1) + ' Days';
+                    
+                    if (days < 1) resS.textContent = "Start " + Math.round(days * 24) + " hours before.";
+                    else if (days < 2) resS.textContent = "Start 1.5 days before.";
+                    else if (days < 3) resS.textContent = "Start 3 days before.";
+                    else resS.textContent = "Start " + Math.ceil(days) + " days before.";
+                    
+                    resA.style.background = "#f0fdf4";
+                    resA.style.borderColor = "#bbf7d0";
+                    resA.style.color = "#166534";
+                    resA.innerHTML = "<strong>Safe & Easy:</strong> The refrigerator method is the least labor-intensive and most consistent.";
+                } else {
+                    const hours = weight * 0.5;
+                    resT.textContent = hours.toFixed(1) + ' Hours';
+                    resS.textContent = "Cook immediately after.";
+                    
+                    resA.style.background = "#fff7ed";
+                    resA.style.borderColor = "#fed7aa";
+                    resA.style.color = "#9a3412";
+                    resA.innerHTML = "<strong>Active Method:</strong> You MUST change the water every 30 minutes to keep it cold and safe.";
+                }
+            }
+
+            [wI, mS].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

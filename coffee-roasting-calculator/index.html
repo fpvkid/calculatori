@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Coffee Roasting Weight Loss Calculator | Roast Degree Tool</title>
+    <meta name="description" content="Calculate the percentage of weight loss during coffee roasting. A vital tool for artisan roasters to track roast degree and consistency.">
+    <meta name="keywords" content="coffee roasting calculator, coffee weight loss tool, roast degree calculator, green to roasted coffee, coffee roasting math, artisan coffee tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Kitchen & Cooking">
+    <link rel="canonical" href="https://calcsfor.life/coffee-roasting-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .loss-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .roast-meter { height: 10px; background: #ddd; border-radius: 5px; margin: 20px 0; overflow: hidden; position: relative; }
+        .roast-progress { height: 100%; background: #4b2c20; width: 0%; transition: width 0.3s; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Kitchen",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Coffee Roasting Calculator",
+        "item": "https://calcsfor.life/coffee-roasting-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Coffee Roast Tool</h1>
+                    <p>Track your development. Calculate the percentage of moisture loss during your roast—a critical metric for defining roast profiles and ensuring consistency.</p>
+                </div>
+
+                <form class="calc-form" id="roast-form">
+                    <div class="form-group">
+                        <label>Green Bean Weight (g)</label>
+                        <input type="number" id="green" value="500" step="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Roasted Bean Weight (g)</label>
+                        <input type="number" id="roasted" value="425" step="10">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Weight Loss Percentage</span>
+                    <div class="loss-val" id="res-loss">15.0%</div>
+                    
+                    <div class="roast-meter">
+                        <div class="roast-progress" id="res-bar"></div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1.1rem; font-weight: 700;" id="res-note">
+                        Medium Roast
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Why Weight Loss Matters</h2>
+                    <p>I genuinely believe that coffee roasting is where chemistry meets culinary art. As you apply heat to green coffee beans, they undergo complex reactions (like the Maillard reaction and caramelization). The weight loss you observe is primarily the evaporation of water, but it also includes the release of organic compounds and chaff.</p>
+                    
+                    <p><strong>Roast Degree Benchmarks:</strong></p>
+                    <ul>
+                        <li><strong>Light Roast (11% - 13%):</strong> Bright acidity, floral and fruity notes. The bean retains most of its original character.</li>
+                        <li><strong>Medium Roast (14% - 16%):</strong> Balanced body and acidity. Developed sugars and caramel notes.</li>
+                        <li><strong>Dark Roast (17% - 20%):</strong> Low acidity, heavy body, and smoky or bitter-sweet chocolate flavors. The bean's surface often becomes oily.</li>
+                    </ul>
+                    
+                    <h3>Roasting Tips:</h3>
+                    <ul>
+                        <li><strong>Consistency:</strong> Even a 0.5% difference in weight loss can significantly change the flavor profile of a specific coffee origin.</li>
+                        <li><strong>Moisture Content:</strong> Most green coffee has a starting moisture content of 10-12%. If your starting beans are drier or wetter, your final results will shift.</li>
+                        <li><strong>The Cooling Tray:</strong> Beans continue to lose a tiny amount of weight (and develop flavor) while they are in the cooling tray.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const gI = document.getElementById('green');
+            const rI = document.getElementById('roasted');
+            
+            const resL = document.getElementById('res-loss');
+            const resN = document.getElementById('res-note');
+            const resB = document.getElementById('res-bar');
+
+            function update() {
+                const green = parseFloat(gI.value) || 0;
+                const roasted = parseFloat(rI.value) || 0;
+
+                if (green === 0) return;
+
+                const loss = ((green - roasted) / green) * 100;
+                
+                resL.textContent = loss.toFixed(1) + '%';
+                resB.style.width = Math.min(100, (loss / 25) * 100) + '%';
+
+                if (loss < 11) {
+                    resN.textContent = "Under-developed / Very Light";
+                    resN.style.color = "#10b981";
+                } else if (loss <= 13.5) {
+                    resN.textContent = "Light Roast (City)";
+                    resN.style.color = "#84cc16";
+                } else if (loss <= 16.5) {
+                    resN.textContent = "Medium Roast (City+/Full City)";
+                    resN.style.color = "#f59e0b";
+                } else if (loss <= 20) {
+                    resN.textContent = "Dark Roast (Vienna/French)";
+                    resN.style.color = "#ef4444";
+                } else {
+                    resN.textContent = "Over-roasted / Carbonized";
+                    resN.style.color = "#000";
+                }
+            }
+
+            [gI, rI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

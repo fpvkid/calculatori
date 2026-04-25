@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Bread Yield Calculator | Dough to Baked Loaf Estimator</title>
+    <meta name="description" content="Calculate the final weight of your baked bread based on dough weight. Account for evaporation loss and baking factors. Perfect for artisan bakers.">
+    <meta name="keywords" content="bread yield calculator, dough weight loss, baked bread weight, sourdough yield tool, baker's math, bread evaporation calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Kitchen & Cooking">
+    <link rel="canonical" href="https://calcsfor.life/bread-yield-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .yield-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Kitchen",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Bread Yield Calculator",
+        "item": "https://calcsfor.life/bread-yield-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Bread Yield Tool</h1>
+                    <p>Baker's precision. Estimate the final weight of your baked loaf by accounting for the typical 10-20% weight loss during the baking process.</p>
+                </div>
+
+                <form class="calc-form" id="yield-form">
+                    <div class="form-group">
+                        <label>Total Dough Weight (grams)</label>
+                        <input type="number" id="dough" value="900" step="50">
+                        <small>Include flour, water, salt, and leaven.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bake Style / Loss Factor</label>
+                        <select id="loss">
+                            <option value="0.10">Light (Short Bake / Pan Loaf) - 10%</option>
+                            <option value="0.15" selected>Standard (Artisan / Hearth) - 15%</option>
+                            <option value="0.20">Dark (High Crust / Long Bake) - 20%</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Baked Weight</span>
+                    <div class="yield-val" id="res-weight">765g</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Assuming 15% weight loss from evaporation.
+                    </p>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Loss in Grams</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-loss">135g</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Remaining Yield</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-pct">85%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Why does bread lose weight?</h2>
+                    <p>I genuinely believe that the transformation of raw dough into a golden, crusty loaf is magic, but the weight loss is pure science. During baking, the high heat of the oven causes the water in the dough to evaporate. Additionally, carbon dioxide and alcohol produced during fermentation are released.</p>
+                    
+                    <p><strong>Standard Factors:</strong> Most artisan hearth loaves lose between **12% and 18%** of their pre-baked weight. If you prefer a very dark, "well-fired" crust, your loss could be as high as 20-22%. Soft sandwich breads baked in a pan usually lose less (around 10%) because the pan protects the sides of the loaf from direct heat.</p>
+                    
+                    <h3>Scaling Your Bakery:</h3>
+                    <ul>
+                        <li><strong>Target Loaf:</strong> If you want a finished 500g loaf, you should scale your dough to roughly 600g (assuming a 16% loss).</li>
+                        <li><strong>Moisture Content:</strong> High-hydration doughs (80%+) often lose a higher percentage of weight because there is more free water to evaporate.</li>
+                        <li><strong>Cooling:</strong> Bread continues to lose a small amount of weight (around 1-2%) while it cools on the rack.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const dI = document.getElementById('dough');
+            const lS = document.getElementById('loss');
+            
+            const resW = document.getElementById('res-weight');
+            const resL = document.getElementById('res-loss');
+            const resP = document.getElementById('res-pct');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const dough = parseFloat(dI.value) || 0;
+                const lossFactor = parseFloat(lS.value);
+
+                const lossGrams = dough * lossFactor;
+                const finalWeight = dough - lossGrams;
+                const yieldPct = (1 - lossFactor) * 100;
+
+                resW.textContent = Math.round(finalWeight) + 'g';
+                resL.textContent = Math.round(lossGrams) + 'g';
+                resP.textContent = Math.round(yieldPct) + '%';
+                resN.textContent = `Assuming ${Math.round(lossFactor * 100)}% weight loss from evaporation.`;
+            }
+
+            [dI, lS].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

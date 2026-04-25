@@ -41,6 +41,16 @@
         { title: 'Coffee-to-Water Ratio Calculator', slug: 'coffee-ratio-calculator', icon: '☕', cat: 'kitchen', desc: 'Brew ratios for pour-over, French press, AeroPress, and espresso.', live: true },
         { title: 'Brine Calculator', slug: 'brine-calculator', icon: '🥒', cat: 'kitchen', desc: 'Salt-to-water brine percentages for fermentation and pickling.', live: true },
         { title: 'Butter-to-Oil Conversion', slug: 'butter-oil-conversion', icon: '🧈', cat: 'kitchen', desc: 'Substitute butter for oil (or vice versa) in any recipe.', live: true },
+        { title: 'Cake Pan Converter', slug: 'cake-pan-calculator', icon: '🎂', cat: 'kitchen', desc: 'Adjust recipes for different round or square pan sizes.', live: true },
+        { title: 'Bread Yield Tool', slug: 'bread-yield-calculator', icon: '🍞', cat: 'kitchen', desc: 'Estimate baked loaf weight from raw dough weight.', live: true },
+        { title: 'Steak Doneness', slug: 'steak-doneness-calculator', icon: '🥩', cat: 'kitchen', desc: 'Internal temps and rest times for the perfect steak.', live: true },
+        { title: 'Coffee Roast Loss', slug: 'coffee-roasting-calculator', icon: '☕', cat: 'kitchen', desc: 'Calculate moisture loss and roast degree for beans.', live: true },
+        { title: 'Instant Pot Conv.', slug: 'pressure-cooker-calculator', icon: '🥘', cat: 'kitchen', desc: 'Convert slow cooker times to pressure cooker settings.', live: true },
+        { title: 'Turkey Thawing', slug: 'turkey-thawing-calculator', icon: '🦃', cat: 'kitchen', desc: 'Safe defrosting times for fridge or cold water methods.', live: true },
+        { title: 'Rice Water Ratio', slug: 'rice-ratio-calculator', icon: '🍚', cat: 'kitchen', desc: 'Exact water-to-rice ratios for every variety of grain.', live: true },
+        { title: 'Egg Sub Guide', slug: 'egg-substitution-calculator', icon: '🥚', cat: 'kitchen', desc: 'Best alternatives for flax, applesauce, and banana.', live: true },
+        { title: 'Kitchen Converter', slug: 'kitchen-unit-calculator', icon: '⚖️', cat: 'kitchen', desc: 'Convert between cups, grams, and ounces for baking.', live: true },
+        { title: 'Pizza Dough Tool', slug: 'pizza-dough-calculator', icon: '🍕', cat: 'kitchen', desc: 'Baker\'s percentages for Neapolitan and NY style dough.', live: true },
 
         // ---- Health ----
         { title: 'Protein Intake Calculator', slug: 'protein-intake-calculator', icon: '💪', cat: 'health', desc: 'Daily protein needs based on lean mass and activity.', live: true },
