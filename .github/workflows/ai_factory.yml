@@ -1,0 +1,44 @@
+name: CalcsForLife AI Factory
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *' # Запуск каждые 3 дня в полночь
+  workflow_dispatch: # Позволяет запустить вручную кнопкой
+
+jobs:
+  run-agents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/set-up-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests beautifulsoup4 praw
+
+      - name: Run Master Agent
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python master_agent.py
+
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "AI Agent Report: New Features Ready"
+          body: |
+            Hello! The AI Factory has found and implemented new improvements.
+            Please check the PRs in your GitHub repository to approve them.
+          to: your-email@example.com
+          from: AI Factory <noreply@calcsfor.life>
