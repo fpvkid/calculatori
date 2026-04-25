@@ -218,6 +218,17 @@
         { title: 'Pokemon Weakness', slug: 'pokemon-calculator', icon: '🔴', cat: 'fun', desc: 'Identify dual-type vulnerabilities and resistances instantly.', live: true },
         { title: 'Sudoku Scorer', slug: 'sudoku-calculator', icon: '🔢', cat: 'fun', desc: 'True difficulty level based on clues and required logic.', live: true },
         { title: 'Guitar Tension', slug: 'guitar-calculator', icon: '🎸', cat: 'fun', desc: 'Neck force calculation based on string gauge and tuning.', live: true },
+        // ---- Tech ----
+        { title: 'Sitemap Extractor', slug: 'sitemap-extractor', icon: '🔗', cat: 'fun', desc: 'Extract clean URL lists from XML sitemap source code.', live: true },
+        { title: 'CSS Shadow Gen', slug: 'shadow-calculator', icon: '🌗', cat: 'fun', desc: 'Create perfect box-shadows and neumorphic designs.', live: true },
+        { title: 'JSON to CSV', slug: 'json-csv-calculator', icon: '📊', cat: 'fun', desc: 'Convert JSON arrays to CSV format for spreadsheets.', live: true },
+        { title: 'Base64 Tool', slug: 'base64-calculator', icon: '🔐', cat: 'fun', desc: 'Encode and decode text to Base64 format instantly.', live: true },
+        { title: 'Hex to RGB', slug: 'hex-rgb-calculator', icon: '🎨', cat: 'fun', desc: 'Convert colors and generate CSS variable snippets.', live: true },
+        { title: 'UTM Link Builder', slug: 'utm-calculator', icon: '🔗', cat: 'fun', desc: 'Add tracking parameters for marketing campaigns.', live: true },
+        { title: 'Cron Descriptor', slug: 'cron-calculator', icon: '⏰', cat: 'fun', desc: 'Translate cryptic crontab schedules into plain English.', live: true },
+        { title: 'Password Entropy', slug: 'password-calculator', icon: '🔐', cat: 'fun', desc: 'Calculate true password strength and crack time.', live: true },
+        { title: 'Image Breakpoints', slug: 'image-breakpoint-calculator', icon: '🖼️', cat: 'fun', desc: 'Optimal srcset widths for responsive web images.', live: true },
+        { title: 'SVG Path Scaler', slug: 'svg-calculator', icon: '📐', cat: 'fun', desc: 'Resize vector paths manually with a scale factor.', live: true },
     ];
 
     /* ====== HERO TYPING EFFECT ====== */

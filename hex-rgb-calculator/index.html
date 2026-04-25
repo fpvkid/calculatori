@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Hex to RGB Converter | CSS Color Variable Tool</title>
+    <meta name="description" content="Convert Hex colors to RGB and RGBA instantly. Generate clean CSS variables and color codes for your web projects. Free developer tool.">
+    <meta name="keywords" content="hex to rgb converter, hex to rgba, css color variables tool, web design color tool, hex color parser, rgb code generator, design system colors">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Web & Tech">
+    <link rel="canonical" href="https://calcsfor.life/hex-rgb-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            margin-top: 30px;
+        }
+        
+        .color-preview { 
+            width: 100%; 
+            height: 120px; 
+            border-radius: var(--radius-md); 
+            background: #6366f1; 
+            margin-bottom: 30px;
+            border: 1px solid var(--clr-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-size: 1.5rem;
+        }
+        
+        .code-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: var(--clr-bg); 
+            padding: 12px 15px; 
+            border-radius: var(--radius-sm); 
+            margin-bottom: 10px;
+            border: 1px solid var(--clr-border);
+        }
+        .code-val { font-family: monospace; font-weight: 600; color: var(--clr-accent); }
+        .btn-copy-small { font-size: 0.75rem; font-weight: 700; color: var(--clr-text-dim); cursor: pointer; background: none; border: none; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tech",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Hex to RGB Converter",
+        "item": "https://calcsfor.life/hex-rgb-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Hex to RGB Tool</h1>
+                    <p>Color precision. Convert Hexadecimal colors to RGB and generate clean snippets for your CSS variables and design systems.</p>
+                </div>
+
+                <form class="calc-form">
+                    <div class="form-group">
+                        <label>Hex Color Code</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="hex-text" value="#6366f1" maxlength="7">
+                            <input type="color" id="hex-picker" value="#6366f1" style="width: 60px; height: 50px; padding: 2px;">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="color-preview" id="preview">#6366F1</div>
+                    
+                    <span class="label">CSS Outputs</span>
+                    
+                    <div class="code-row">
+                        <span class="label" style="margin:0;">RGB</span>
+                        <span class="code-val" id="res-rgb">rgb(99, 102, 241)</span>
+                        <button class="btn-copy-small">Copy</button>
+                    </div>
+
+                    <div class="code-row">
+                        <span class="label" style="margin:0;">Variable</span>
+                        <span class="code-val" id="res-var">99, 102, 241</span>
+                        <button class="btn-copy-small">Copy</button>
+                    </div>
+
+                    <div class="code-row">
+                        <span class="label" style="margin:0;">RGBA (0.5)</span>
+                        <span class="code-val" id="res-rgba">rgba(99, 102, 241, 0.5)</span>
+                        <button class="btn-copy-small">Copy</button>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Power of RGB in CSS</h2>
+                    <p>I genuinely believe that every modern design system should use RGB-based CSS variables. While HEX codes are easy to read, they don't allow you to adjust opacity on the fly. By storing your color as a comma-separated list of numbers (e.g., `99, 102, 241`), you can use it in your CSS like this: `background: rgba(var(--brand-color), 0.1);`.</p>
+                    
+                    <p><strong>Hex vs. RGB:</strong> Hexadecimal is a base-16 system, while RGB represents the intensity of Red, Green, and Blue on a scale from 0 to 255. Both systems represent the exact same color gamut in the sRGB space.</p>
+                    
+                    <h3>Web Design Tips:</h3>
+                    <ul>
+                        <li><strong>Contrast:</strong> Always check that your text color has enough contrast against the background. Use the preview box above to see how white text looks on your selected color.</li>
+                        <li><strong>Shorthand:</strong> You can use 3-digit hex codes (like #F00) for simple colors, but 6-digit codes are standard for professional design systems.</li>
+                        <li><strong>HSLA:</strong> If you need to adjust brightness or saturation, consider using HSL (Hue, Saturation, Lightness), which is often more intuitive than RGB.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const hexT = document.getElementById('hex-text');
+            const hexP = document.getElementById('hex-picker');
+            const preview = document.getElementById('preview');
+            
+            const rRgb = document.getElementById('res-rgb');
+            const rVar = document.getElementById('res-var');
+            const rRgba = document.getElementById('res-rgba');
+
+            function update(val) {
+                let hex = val.replace('#', '');
+                if (hex.length === 3) {
+                    hex = hex.split('').map(c => c + c).join('');
+                }
+
+                if (hex.length === 6) {
+                    const r = parseInt(hex.slice(0, 2), 16);
+                    const g = parseInt(hex.slice(2, 4), 16);
+                    const b = parseInt(hex.slice(4, 6), 16);
+
+                    const rgbStr = `rgb(${r}, ${g}, ${b})`;
+                    const varStr = `${r}, ${g}, ${b}`;
+                    const rgbaStr = `rgba(${r}, ${g}, ${b}, 0.5)`;
+
+                    rRgb.textContent = rgbStr;
+                    rVar.textContent = varStr;
+                    rRgba.textContent = rgbaStr;
+
+                    preview.style.backgroundColor = rgbStr;
+                    preview.textContent = '#' + hex.toUpperCase();
+                    
+                    // Contrast check for text
+                    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                    preview.style.color = brightness > 128 ? 'black' : 'white';
+                }
+            }
+
+            hexT.addEventListener('input', () => {
+                update(hexT.value);
+                if (hexT.value.length === 7) hexP.value = hexT.value;
+            });
+
+            hexP.addEventListener('input', () => {
+                hexT.value = hexP.value;
+                update(hexP.value);
+            });
+
+            document.querySelectorAll('.btn-copy-small').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const val = this.parentElement.querySelector('.code-val').textContent;
+                    navigator.clipboard.writeText(val).then(() => {
+                        const old = this.textContent;
+                        this.textContent = 'Copied!';
+                        setTimeout(() => this.textContent = old, 1000);
+                    });
+                });
+            });
+
+            update(hexT.value);
+        })();
+    </script>
+</body>
+</html>

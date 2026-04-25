@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Responsive Image Breakpoints Generator | Web Performance Tool</title>
+    <meta name="description" content="Calculate optimal image widths for your responsive design. Generate srcset breakpoints to improve web performance and LCP scores. Free developer tool.">
+    <meta name="keywords" content="responsive image breakpoints, srcset generator, web performance tool, optimize image sizes, frontend development math, responsive design tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Web & Tech">
+    <link rel="canonical" href="https://calcsfor.life/image-breakpoint-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            margin-top: 30px;
+        }
+        
+        .breakpoint-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .bp-chip { 
+            background: var(--clr-bg); 
+            border: 1px solid var(--clr-border); 
+            padding: 8px 15px; 
+            border-radius: 20px; 
+            font-weight: 700; 
+            font-family: monospace; 
+            color: var(--clr-accent);
+        }
+        
+        .code-output { 
+            background: #1e1e1e; 
+            color: #4ade80; 
+            padding: 20px; 
+            border-radius: var(--radius-md); 
+            font-family: monospace; 
+            font-size: 0.85rem;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tech",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Responsive Image Breakpoints",
+        "item": "https://calcsfor.life/image-breakpoint-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Breakpoint Generator</h1>
+                    <p>Speed up your site. Calculate the mathematically optimal widths for your responsive images to ensure every user downloads the smallest file possible for their screen.</p>
+                </div>
+
+                <form class="calc-form">
+                    <div class="form-group">
+                        <label>Minimum Width (px)</label>
+                        <input type="number" id="min" value="320">
+                    </div>
+                    <div class="form-group">
+                        <label>Maximum Width (px)</label>
+                        <input type="number" id="max" value="1920">
+                    </div>
+                    <div class="form-group">
+                        <label>Size Step (%)</label>
+                        <input type="number" id="step" value="20">
+                        <small>Increases width by this % per step.</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Calculated Widths</span>
+                    <div class="breakpoint-list" id="res-list">
+                        <!-- Chips -->
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+                        <span class="label">Suggested <code>srcset</code> attribute</span>
+                        <button id="copy-btn" style="background:none; border:none; color:var(--clr-accent); font-weight:700; cursor:pointer;">Copy</button>
+                    </div>
+                    <div class="code-output" id="res-code">srcset="image-320.jpg 320w, ..."</div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Importance of Breakpoints</h2>
+                    <p>I genuinely believe that images are the biggest performance killer on the web today. If you serve a 4000px image to a mobile user with a 375px screen, you are wasting their data and slowing down your page load time. Responsive images solve this by letting the browser choose the best size from a list you provide.</p>
+                    
+                    <p><strong>The "Step" Strategy:</strong> You shouldn't just create a size for every device. Instead, use a percentage step (like 20%). This ensures that the file size increases linearly, providing a consistent experience while keeping your build process efficient.</p>
+                    
+                    <h3>Performance Tips:</h3>
+                    <ul>
+                        <li><strong>Next-Gen Formats:</strong> Use WebP or AVIF instead of JPEG/PNG where possible. They provide much better compression at the same quality.</li>
+                        <li><strong>Sizes Attribute:</strong> Always use the `sizes` attribute alongside `srcset` to tell the browser how much space the image will take up on the page.</li>
+                        <li><strong>Lazy Loading:</strong> Use `loading="lazy"` for all images below the fold to prioritize the content the user sees first.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const minI = document.getElementById('min');
+            const maxI = document.getElementById('max');
+            const stepI = document.getElementById('step');
+            
+            const resL = document.getElementById('res-list');
+            const resC = document.getElementById('res-code');
+            const copyBtn = document.getElementById('copy-btn');
+
+            function update() {
+                const min = parseInt(minI.value) || 320;
+                const max = parseInt(maxI.value) || 1920;
+                const step = (parseInt(stepI.value) || 20) / 100;
+
+                let widths = [min];
+                let current = min;
+
+                while (current < max) {
+                    current = Math.round(current * (1 + step));
+                    if (current > max) current = max;
+                    widths.push(current);
+                    if (current === max) break;
+                }
+
+                // Render Chips
+                resL.innerHTML = '';
+                widths.forEach(w => {
+                    const chip = document.createElement('div');
+                    chip.className = 'bp-chip';
+                    chip.textContent = w + 'px';
+                    resL.appendChild(chip);
+                });
+
+                // Render Code
+                const srcSet = widths.map(w => `image-${w}.jpg ${w}w`).join(',\n  ');
+                resC.textContent = `srcset="${srcSet}"`;
+            }
+
+            [minI, maxI, stepI].forEach(i => i.addEventListener('input', update));
+
+            copyBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(resC.textContent).then(() => {
+                    const old = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => copyBtn.textContent = old, 2000);
+                });
+            });
+
+            update();
+        })();
+    </script>
+</body>
+</html>

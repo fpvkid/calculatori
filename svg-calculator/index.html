@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>SVG Path Scaler | SVG Path Data Resizer Tool</title>
+    <meta name="description" content="Scale and resize SVG path data instantly. Multiply coordinates in your 'd' attribute by any factor. Perfect for developers and designers.">
+    <meta name="keywords" content="svg path scaler, svg resizer tool, svg d attribute scaler, scale svg path data, web design tool, developer utility, svg coordinate math">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Web & Tech">
+    <link rel="canonical" href="https://calcsfor.life/svg-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            margin-top: 30px;
+        }
+        
+        textarea { 
+            width: 100%; 
+            height: 120px; 
+            background: var(--clr-bg); 
+            color: var(--clr-text); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-md); 
+            padding: 15px; 
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        
+        .output-area { 
+            background: #1e1e1e; 
+            color: #dcdcdc; 
+            padding: 20px; 
+            border-radius: var(--radius-md); 
+            max-height: 300px; 
+            overflow-y: auto; 
+            margin-top: 20px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.85rem;
+            border: 1px solid #333;
+        }
+        
+        .preview-box { 
+            width: 100px; 
+            height: 100px; 
+            background: var(--clr-bg); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-md); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            margin: 20px auto;
+        }
+        
+        svg { width: 80px; height: 80px; fill: var(--clr-accent); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tech",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "SVG Path Scaler",
+        "item": "https://calcsfor.life/svg-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>SVG Path Scaler</h1>
+                    <p>Vector precision. Paste your SVG path data (the <code>d</code> attribute) and multiply all coordinates by a scale factor to resize your graphics manually.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Path Data (d attribute)</label>
+                    <textarea id="path-in" placeholder="M10 10 L90 90 ...">M10 10 L20 20 L30 10 Z</textarea>
+                </div>
+
+                <div class="form-group" style="max-width: 200px;">
+                    <label>Scale Factor</label>
+                    <input type="number" id="scale" value="2" step="0.1">
+                </div>
+
+                <div class="res-display">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="label">Scaled Path Data</span>
+                        <button id="copy-btn" style="background:none; border:none; color:var(--clr-accent); font-weight:700; cursor:pointer;">Copy Path</button>
+                    </div>
+                    <div class="output-area" id="res-path"></div>
+                    
+                    <div class="preview-box">
+                        <svg viewBox="0 0 100 100">
+                            <path id="preview-path" d=""></path>
+                        </svg>
+                    </div>
+                    <p style="text-align: center; font-size: 0.8rem; color: var(--clr-text-dim);">Live Preview (80x80 container)</p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Math of Vector Graphics</h2>
+                    <p>I genuinely believe that SVG is the most powerful graphic format on the web because it's essentially just code. Each path is a series of commands: `M` means move to a coordinate, `L` means draw a line, and `C` means draw a curve. By multiplying the numbers after these commands, we can scale the entire shape without losing the mathematical relationships between points.</p>
+                    
+                    <p><strong>Absolute vs Relative:</strong> Most modern SVGs use absolute coordinates (capital letters). Scaling relative coordinates (lowercase letters) is slightly different as they represent a distance from the previous point rather than an absolute position on the grid. Our tool handles standard coordinate sets by multiplying all numerical values found in the string.</p>
+                    
+                    <h3>SVG Best Practices:</h3>
+                    <ul>
+                        <li><strong>ViewBox:</strong> Instead of scaling the path data, you should usually use the `viewBox` attribute in your `<svg>` tag. This tool is intended for cases where you need to modify the raw coordinates for use in symbols or combined paths.</li>
+                        <li><strong>Minification:</strong> After scaling your SVG, use a tool like SVGO to remove unnecessary metadata and round off decimal places to save file size.</li>
+                        <li><strong>Accessibility:</strong> Always include a `<title>` tag inside your SVG for screen readers if the graphic is meaningful content.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const pathI = document.getElementById('path-in');
+            const scaleI = document.getElementById('scale');
+            const resP = document.getElementById('res-path');
+            const previewP = document.getElementById('preview-path');
+            const copyBtn = document.getElementById('copy-btn');
+
+            function update() {
+                const rawPath = pathI.value.trim();
+                const scale = parseFloat(scaleI.value) || 1;
+
+                // Regex to find numbers (including negatives and decimals)
+                const regex = /(-?\d*\.?\d+)/g;
+                
+                const scaledPath = rawPath.replace(regex, (match) => {
+                    const val = parseFloat(match);
+                    const scaled = val * scale;
+                    // Round to 3 decimal places to keep it clean
+                    return Math.round(scaled * 1000) / 1000;
+                });
+
+                resP.textContent = scaledPath;
+                previewP.setAttribute('d', scaledPath);
+            }
+
+            [pathI, scaleI].forEach(i => i.addEventListener('input', update));
+
+            copyBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(resP.textContent).then(() => {
+                    const old = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => copyBtn.textContent = old, 2000);
+                });
+            });
+
+            update();
+        })();
+    </script>
+</body>
+</html>
