@@ -72,12 +72,15 @@
         { title: 'Discount Calculator', slug: 'discount-calculator', icon: '🔖', cat: 'finance', desc: 'Final price after percentage or flat discount.', live: true },
         { title: 'Mortgage Calculator', slug: 'mortgage-calculator', icon: '🏦', cat: 'finance', desc: 'Estimate monthly mortgage payments and interest.', live: true },
         { title: 'ARV Calculator', slug: 'arv-calculator', icon: '📈', cat: 'finance', desc: 'After Repair Value & MAO estimate for house flipping.', live: true },
+        { title: 'KDP Royalty Calculator', slug: 'book-royalty-calculator', icon: '📚', cat: 'finance', desc: 'Estimate Amazon KDP profits for ebooks and paperbacks.', live: true },
+        { title: 'ROAS & Ad ROI', slug: 'roas-calculator', icon: '🎯', cat: 'finance', desc: 'Measure the profitability of your marketing campaigns.', live: true },
         { title: 'Grade Calculator', slug: 'grade-calculator', icon: '🎓', cat: 'finance', desc: 'Calculate weighted class grades and final exam needs.', live: true },
         { title: 'Percentage Calculator', slug: 'percentage-calculator', icon: '🔢', cat: 'finance', desc: 'Quickly solve percentage increase, decrease, and common math.', live: true },
 
         // ---- Craft ----
         { title: 'Fabric Yardage Calculator', slug: 'fabric-calculator', icon: '🧵', cat: 'craft', desc: 'How much fabric for a garment or furniture by size and type.', live: true },
         { title: 'Resin Volume Calculator', slug: 'resin-volume-calculator', icon: '💎', cat: 'craft', desc: 'How much epoxy resin for your mold or surface.', live: true },
+        { title: 'Aida Cloth Size', slug: 'aida-cloth-calculator', icon: '🧵', cat: 'craft', desc: 'Fabric dimensions for cross-stitch based on stitch count.', live: true },
         { title: 'Candle Wax Calculator', slug: 'candle-wax-calculator', icon: '🕯️', cat: 'craft', desc: 'Wax weight by container volume for candle making.', live: true },
 
         // ---- Time ----
@@ -97,6 +100,7 @@
         // ---- Fun ----
         { title: 'Alcohol Dilution Calculator', slug: 'alcohol-dilution-calculator', icon: '🍶', cat: 'fun', desc: 'Dilute spirits to a target ABV percentage.', live: true },
         { title: 'BAC Estimate Calculator', slug: 'bac-calculator', icon: '🍺', cat: 'fun', desc: 'Estimate blood alcohol content from drinks and time.', live: true },
+        { title: 'OSRS Agility Calculator', slug: 'osrs-agility-calculator', icon: '🏃', cat: 'fun', desc: 'Calculate laps to your next Agility level in Old School RuneScape.', live: true },
     ];
 
     /* ====== HERO TYPING EFFECT ====== */

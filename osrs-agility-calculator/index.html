@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>OSRS Agility Calculator | Track Laps to Your Next Level</title>
+    <meta name="description" content="Free OSRS Agility calculator. Calculate how many laps you need at Gnome, Canifis, Seers' Village, or Ardougne to reach your target Agility level.">
+    <meta name="keywords" content="osrs agility calculator, runescape agility lap counter, seers village agility exp, canifis rooftop agility, agility level 99 calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun">
+    <link rel="canonical" href="https://calcsfor.life/osrs-agility-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .lap-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .xp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 24px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Gaming",
+        "item": "https://calcsfor.life/#fun"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "OSRS Agility Calculator",
+        "item": "https://calcsfor.life/osrs-agility-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>OSRS Agility Lap Calculator</h1>
+                    <p>The grind is real. Find out exactly how many more laps you need to hit your target level and escape the rooftops.</p>
+                </div>
+
+                <form class="calc-form" id="osrs-form">
+                    <div class="xp-grid">
+                        <div class="form-group">
+                            <label>Current XP</label>
+                            <input type="number" id="current-xp" value="50000">
+                        </div>
+                        <div class="form-group">
+                            <label>Target Level</label>
+                            <input type="number" id="target-lv" value="60" min="1" max="99">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Agility Course</label>
+                        <select id="course">
+                            <option value="86.5">Gnome Stronghold (86.5 XP)</option>
+                            <option value="120">Draynor Rooftop (120 XP)</option>
+                            <option value="160">Al Kharid Rooftop (160 XP)</option>
+                            <option value="238">Varrock Rooftop (238 XP)</option>
+                            <option value="240">Canifis Rooftop (240 XP)</option>
+                            <option value="350">Falador Rooftop (350 XP)</option>
+                            <option value="570" selected>Seers' Village Rooftop (570 XP)</option>
+                            <option value="600">Pollnivneach Rooftop (600 XP)</option>
+                            <option value="793">Ardougne Rooftop (793 XP)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Laps Remaining</span>
+                    <div class="lap-val" id="res-laps">480</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        XP Remaining: 273,000
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Is Agility the worst skill?</h2>
+                    <p>I genuinely believe that Agility training is a test of human willpower. But let's be real—you need those shortcuts and that run energy recovery. Whether you're grinding Marks of Grace in Canifis or doing the Seers' Village teleport method, knowing exactly how many laps are left makes the clicking slightly more bearable.</p>
+                    
+                    <p><strong>Marks of Grace:</strong> Remember that if you are 20 levels above the course's requirement, your Mark of Grace drop rate is reduced by 80%. If you're farming Graceful, stay at Canifis as long as possible!</p>
+                    
+                    <h3>Course Tips:</h3>
+                    <ul>
+                        <li><strong>Seers' Village:</strong> Best XP per hour if you have the Kandarin Hard Diary completed for the teleport.</li>
+                        <li><strong>Canifis:</strong> Best place for Marks of Grace from level 40 to 60.</li>
+                        <li><strong>Ardougne:</strong> The final boss of rooftops. 99 Agility starts here.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            // OSRS XP Table (Level to XP)
+            const xpTable = [0, 0, 83, 174, 276, 388, 512, 650, 801, 969, 1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523, 3973, 4470, 5018, 5624, 6291, 7028, 7842, 8740, 9730, 10824, 12031, 13363, 14833, 16456, 18247, 20224, 22406, 24815, 27473, 30408, 33648, 37224, 41171, 45529, 50339, 55649, 61512, 67983, 75127, 83014, 91717, 101333, 111945, 123660, 136594, 150872, 166636, 184040, 203254, 224466, 247886, 273742, 302288, 333804, 368599, 407015, 449428, 496254, 547953, 605032, 668051, 737627, 814445, 899215, 992895, 1096278, 1210421, 1336443, 1475581, 1629200, 1798808, 1986068, 2192818, 2421087, 2673114, 2951473, 3258779, 3597954, 3972527, 4385995, 4842585, 5346632, 5903283, 6517930, 7196298, 7945314, 8772285, 9685450, 10693623, 11806930, 13034431];
+
+            const curI = document.getElementById('current-xp');
+            const trgI = document.getElementById('target-lv');
+            const crsI = document.getElementById('course');
+            
+            const resL = document.getElementById('res-laps');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const current = parseFloat(curI.value) || 0;
+                const targetLv = parseInt(trgI.value) || 1;
+                const xpPerLap = parseFloat(crsI.value);
+
+                const targetXp = xpTable[targetLv] || 0;
+                const remainingXp = Math.max(0, targetXp - current);
+                const laps = Math.ceil(remainingXp / xpPerLap);
+
+                resL.textContent = laps.toLocaleString();
+                resN.textContent = `XP Remaining: ${remainingXp.toLocaleString()}`;
+            }
+
+            [curI, trgI, crsI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

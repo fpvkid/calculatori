@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>ROAS & ROI Calculator | Measure Ad Campaign Profitability</title>
+    <meta name="description" content="Free ROAS and ROI calculator for digital marketing. Calculate your Return on Ad Spend and overall Profit Margin for Facebook, Google, and Amazon ads.">
+    <meta name="keywords" content="roas calculator, return on ad spend, marketing roi calculator, ad profit tool, facebook ads roas, google ads roi estimator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/roas-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .roas-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--clr-text); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ROAS Calculator",
+        "item": "https://calcsfor.life/roas-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>ROAS & Ad Profit Calculator</h1>
+                    <p>Are your ads actually making money? Track your Return on Ad Spend and net profitability in seconds.</p>
+                </div>
+
+                <form class="calc-form" id="roas-form">
+                    <div class="form-group">
+                        <label>Total Ad Spend ($)</label>
+                        <input type="number" id="spend" value="1000" step="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Revenue from Ads ($)</label>
+                        <input type="number" id="revenue" value="4500" step="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Other Costs (Product, Shipping, etc.) ($)</label>
+                        <input type="number" id="other-costs" value="1500" step="10">
+                        <small>Leave 0 if you only want to see ROAS.</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="res-item">
+                        <span class="label">ROAS (Return on Ad Spend)</span>
+                        <div class="roas-val" id="res-roas">4.5x</div>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Net ROI</span>
+                            <div class="stat-val" id="res-roi">80%</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Net Profit</span>
+                            <div class="stat-val" id="res-profit">$2,000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>ROAS vs ROI: What's the difference?</h2>
+                    <p>I genuinely believe that ROAS is a "vanity metric." A 10x ROAS looks amazing on a screenshot, but if your product costs 95% of your revenue, you're losing money. ROAS only looks at revenue. ROI looks at profit. You can't pay your rent with ROAS—you need profit.</p>
+                    
+                    <p><strong>What is a good ROAS?</strong> It depends on your margins. If you sell a digital course with zero fulfillment cost, a 2x ROAS is profitable. If you sell a physical product with thin margins, you might need a 4x or 5x ROAS just to break even.</p>
+                    
+                    <h3>The Math:</h3>
+                    <ul>
+                        <li><strong>ROAS:</strong> Revenue / Ad Spend.</li>
+                        <li><strong>Net Profit:</strong> Revenue - Ad Spend - Other Costs.</li>
+                        <li><strong>ROI:</strong> (Net Profit / Total Costs) * 100.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const spdI = document.getElementById('spend');
+            const revI = document.getElementById('revenue');
+            const othI = document.getElementById('other-costs');
+            
+            const resR = document.getElementById('res-roas');
+            const resI = document.getElementById('res-roi');
+            const resP = document.getElementById('res-profit');
+
+            function update() {
+                const spend = parseFloat(spdI.value) || 0;
+                const revenue = parseFloat(revI.value) || 0;
+                const other = parseFloat(othI.value) || 0;
+
+                const roas = spend > 0 ? (revenue / spend) : 0;
+                const profit = revenue - spend - other;
+                const totalCosts = spend + other;
+                const roi = totalCosts > 0 ? (profit / totalCosts * 100) : 0;
+
+                resR.textContent = roas.toFixed(1) + 'x';
+                resI.textContent = Math.round(roi) + '%';
+                resP.textContent = '$' + Math.round(profit).toLocaleString();
+                
+                resI.style.color = roi >= 0 ? '#10b981' : '#ef4444';
+            }
+
+            [spdI, revI, othI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
