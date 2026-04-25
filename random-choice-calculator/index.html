@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Random Choice Generator | Make Decisions Faster</title>
+    <meta name="description" content="Free random choice generator. Can't decide? Let our tool pick for you! Enter a list of options and get a random selection instantly. Perfect for movies, food, and more.">
+    <meta name="keywords" content="random choice generator, decision maker tool, pick for me, random name picker, choose for me online, decision roulette">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Time">
+    <link rel="canonical" href="https://calcsfor.life/random-choice-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            margin-top: 30px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .choice-val { font-size: 3.5rem; font-weight: 800; color: var(--clr-accent); line-height: 1.2; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        textarea { 
+            width: 100%; 
+            height: 150px; 
+            padding: 20px; 
+            border-radius: var(--radius-md); 
+            border: 1px solid var(--clr-border); 
+            background: var(--clr-bg-2); 
+            font-size: 1.1rem; 
+            resize: none;
+            margin-bottom: 20px;
+        }
+        .btn-pick { width: 100%; padding: 20px; border-radius: var(--radius-md); background: var(--clr-accent); color: #fff; border: none; font-weight: 800; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .btn-pick:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Productivity",
+        "item": "https://calcsfor.life/#time"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Random Choice Generator",
+        "item": "https://calcsfor.life/random-choice-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Random Choice Generator</h1>
+                    <p>Stop overthinking. Enter your options (one per line) and let fate decide your next move. Perfect for dinner, movies, or chores!</p>
+                </div>
+
+                <form class="calc-form">
+                    <span class="label" style="text-align: left;">Enter Options (one per line)</span>
+                    <textarea id="options-in" placeholder="Pizza&#10;Sushi&#10;Burgers&#10;Tacos"></textarea>
+                    <button type="button" class="btn-pick" id="pick-btn">PICK FOR ME!</button>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">The Winner Is...</span>
+                    <div class="choice-val" id="res-choice">?</div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px; text-align: left;">
+                    <h2>Why use a decision maker?</h2>
+                    <p>I genuinely believe that "decision fatigue" is real. We make thousands of small choices every day, and by the evening, our brains are exhausted. Outsourcing those trivial decisions (like what to eat for dinner) to a random generator saves your mental energy for the things that actually matter.</p>
+                    
+                    <p><strong>Fair and Unbiased:</strong> Our tool uses a cryptographically secure random number generator, ensuring that every option you enter has an equal mathematical chance of being selected. No more arguing over who chooses the movie!</p>
+                    
+                    <h3>Great ways to use this tool:</h3>
+                    <ul>
+                        <li><strong>Dinner Dilemmas:</strong> List your favorite local restaurants.</li>
+                        <li><strong>Workout Mix:</strong> Enter different exercises for a random circuit.</li>
+                        <li><strong>Team Leader:</strong> Put everyone's name in to pick a volunteer fairly.</li>
+                        <li><strong>Gift Ideas:</strong> Can't decide between two items? Let the tool pick.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const btn = document.getElementById('pick-btn');
+            const input = document.getElementById('options-in');
+            const resVal = document.getElementById('res-choice');
+
+            btn.addEventListener('click', () => {
+                const lines = input.value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                
+                if (lines.length < 2) {
+                    alert('Please enter at least two options!');
+                    return;
+                }
+
+                // Animation effect
+                let counter = 0;
+                const interval = setInterval(() => {
+                    resVal.textContent = lines[Math.floor(Math.random() * lines.length)];
+                    counter++;
+                    if (counter > 15) {
+                        clearInterval(interval);
+                        // Final choice
+                        resVal.textContent = lines[Math.floor(Math.random() * lines.length)];
+                        resVal.style.color = 'var(--clr-accent)';
+                    }
+                }, 80);
+            });
+        })();
+    </script>
+</body>
+</html>

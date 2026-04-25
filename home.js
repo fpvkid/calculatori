@@ -106,12 +106,18 @@
         { title: 'Yarn Yardage Calc', slug: 'yarn-calculator', icon: '🧶', cat: 'craft', desc: 'Estimate yarn needed for sweaters, blankets, and scarves.', live: true },
         { title: 'Board Foot Calculator', slug: 'board-foot-calculator', icon: '🪵', cat: 'craft', desc: 'Lumber volume and cost for woodworking projects.', live: true },
         { title: 'Ring Size Converter', slug: 'ring-size-calculator', icon: '💍', cat: 'craft', desc: 'Convert finger measurements to US, UK, and EU sizes.', live: true },
-        { title: 'Hat Size Calculator', slug: 'hat-size-calculator', icon: '👒', cat: 'craft', desc: 'Find your perfect hat size from head circumference.', live: true },
+        { title: 'D&D Stat Roller', slug: 'dnd-stat-roller', icon: '🎲', cat: 'fun', desc: 'Roll 4d6 and drop the lowest for your character stats.', live: true },
+        { title: 'The Love Calculator', slug: 'love-calculator', icon: '💖', cat: 'fun', desc: 'Secret name-based algorithm for romantic compatibility.', live: true },
+        { title: 'Zodiac Sign Finder', slug: 'zodiac-calculator', icon: '✨', cat: 'fun', desc: 'Find your sun sign and element based on your birthday.', live: true },
         { title: 'Candle Wax Calculator', slug: 'candle-wax-calculator', icon: '🕯️', cat: 'craft', desc: 'Wax weight by container volume for candle making.', live: true },
 
         // ---- Time ----
         { title: 'Meeting Cost Calculator', slug: 'meeting-cost-calculator', icon: '🤝', cat: 'time', desc: 'How much this meeting is costing your company.', live: true },
         { title: 'Freelance Rate Calculator', slug: 'freelance-rate-calculator', icon: '📋', cat: 'time', desc: 'Calculate your hourly rate from desired yearly income.', live: true },
+        { title: 'Morse Code Translator', slug: 'morse-code-calculator', icon: '📻', cat: 'time', desc: 'Convert text to dots and dashes and back instantly.', live: true },
+        { title: 'Binary Code Converter', slug: 'binary-calculator', icon: '💻', cat: 'time', desc: 'Translate text into binary 0s and 1s for fun or school.', live: true },
+        { title: 'Random Choice Pick', slug: 'random-choice-calculator', icon: '🎲', cat: 'time', desc: 'Can\'t decide? Let fate choose from your list of options.', live: true },
+        { title: 'Date Difference Tool', slug: 'date-difference-calculator', icon: '📅', cat: 'time', desc: 'Calculate the exact number of days between two dates.', live: true },
 
         // ---- Timers ----
         { title: 'Zen Meditation Timer', slug: 'meditation-timer', icon: '🧘', cat: 'timers', desc: 'Customizable focus sessions with minimalist visual cues.', live: true },

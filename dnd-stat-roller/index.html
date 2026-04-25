@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>D&D Character Stat Roller | 4d6 Drop Lowest Generator</title>
+    <meta name="description" content="Free D&D stat roller. Roll for your character stats using the 4d6 drop lowest method. Get immediate results for Strength, Dexterity, and more.">
+    <meta name="keywords" content="dnd stat roller, dungeons and dragons character generator, 4d6 drop lowest calculator, rpg stat roller, dnd 5e character creator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun">
+    <link rel="canonical" href="https://calcsfor.life/dnd-stat-roller/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            margin-top: 30px;
+        }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .stat-card { background: var(--clr-bg-2); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--clr-border); text-align: center; }
+        .stat-val { font-size: 2.5rem; font-weight: 800; color: var(--clr-accent); display: block; }
+        .stat-lab { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--clr-text-dim); }
+        
+        .btn-roll { width: 100%; padding: 20px; border-radius: var(--radius-md); background: var(--clr-accent); color: #fff; border: none; font-weight: 800; font-size: 1.2rem; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .btn-roll:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun & Games",
+        "item": "https://calcsfor.life/#fun"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "D&D Stat Roller",
+        "item": "https://calcsfor.life/dnd-stat-roller/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>D&D Stat Roller</h1>
+                    <p>Ready for adventure? Roll your character stats using the classic 4d6 (drop the lowest) method. May the d20 be in your favor!</p>
+                </div>
+
+                <button class="btn-roll" id="roll-btn">ROLL STATS</button>
+
+                <div class="res-display">
+                    <div class="stat-grid" id="stats">
+                        <div class="stat-card"><span class="stat-val">?</span><span class="stat-lab">STR</span></div>
+                        <div class="stat-card"><span class="stat-val">?</span><span class="stat-lab">DEX</span></div>
+                        <div class="stat-card"><span class="stat-val">?</span><span class="stat-lab">CON</span></div>
+                        <div class="stat-card"><span class="stat-val">?</span><span class="stat-lab">INT</span></div>
+                        <div class="stat-card"><span class="stat-val">?</span><span class="stat-lab">WIS</span></div>
+                        <div class="stat-card"><span class="stat-val">?</span><span class="stat-lab">CHA</span></div>
+                    </div>
+                    <p style="margin-top: 30px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Total Stat Sum: 0
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How 4d6 Drop Lowest Works</h2>
+                    <p>I genuinely believe that rolling for stats is the most exciting part of starting a new campaign. While "Point Buy" is safe, rolling can give you that rare 18 (or that hilarious 3). The 4d6 method means you roll four six-sided dice, remove the lowest number, and add the remaining three together.</p>
+                    
+                    <p><strong>Standard Array:</strong> If your rolls are terrible, most DMs will let you use the "Standard Array": 15, 14, 13, 12, 10, 8. But where's the fun in that? Take the risk and roll the dice!</p>
+                    
+                    <h3>The Math:</h3>
+                    <ul>
+                        <li><strong>Max Roll:</strong> 18 (three 6s).</li>
+                        <li><strong>Min Roll:</strong> 3 (three 1s).</li>
+                        <li><strong>Average:</strong> Most characters end up with a total sum between 70 and 80.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const btn = document.getElementById('roll-btn');
+            const stats = document.querySelectorAll('.stat-val');
+            const note = document.getElementById('res-note');
+
+            function rollStat() {
+                let dice = [];
+                for(let i=0; i<4; i++) dice.push(Math.floor(Math.random() * 6) + 1);
+                dice.sort((a,b) => a-b);
+                dice.shift(); // drop lowest
+                return dice.reduce((a,b) => a+b, 0);
+            }
+
+            btn.addEventListener('click', () => {
+                let total = 0;
+                stats.forEach(s => {
+                    const val = rollStat();
+                    s.textContent = val;
+                    total += val;
+                });
+                note.textContent = `Total Stat Sum: ${total}. ${total > 85 ? 'God-tier character!' : (total < 65 ? 'Maybe try the Standard Array...' : 'A solid adventurer.')}`;
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Love Calculator | True Love Compatibility by Name</title>
+    <meta name="description" content="Free love calculator online. Test your love compatibility with your partner using our fun name-based algorithm. Get your love percentage and relationship advice.">
+    <meta name="keywords" content="love calculator, compatibility test, name love calculator, true love tester, relationship calculator, fun personality test">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun">
+    <link rel="canonical" href="https://calcsfor.life/love-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .love-val { font-size: 6rem; font-weight: 800; color: #ff4d6d; line-height: 1; margin: 20px 0; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .name-inputs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 15px; align-items: center; margin-bottom: 30px; }
+        .heart-icon { font-size: 2.5rem; color: #ff4d6d; animation: beat 1s infinite; }
+        @keyframes beat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-calc { padding: 15px 40px; border-radius: 100px; background: #ff4d6d; color: #fff; border: none; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .btn-calc:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun",
+        "item": "https://calcsfor.life/#fun"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Love Calculator",
+        "item": "https://calcsfor.life/love-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>The True Love Calculator</h1>
+                    <p>Is it destiny or just a crush? Enter your names to see your romantic compatibility percentage based on our secret mystical algorithm.</p>
+                </div>
+
+                <form class="calc-form" id="love-form">
+                    <div class="name-inputs">
+                        <div class="form-group">
+                            <input type="text" id="name1" placeholder="Your Name" style="text-align: center;">
+                        </div>
+                        <div class="heart-icon">❤️</div>
+                        <div class="form-group">
+                            <input type="text" id="name2" placeholder="Their Name" style="text-align: center;">
+                        </div>
+                    </div>
+                    <button type="button" class="btn-calc" id="calc-btn">CALCULATE COMPATIBILITY</button>
+                </form>
+
+                <div class="res-display" id="res-box" style="display: none;">
+                    <span class="label">Compatibility Score</span>
+                    <div class="love-val" id="res-val">85%</div>
+                    <p style="font-size: 1.2rem; font-weight: 600; color: var(--clr-text);" id="res-msg">
+                        A match made in heaven!
+                    </p>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;">
+                        Note: This tool is for entertainment purposes only. Real love is built on more than just names!
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px; text-align: left;">
+                    <h2>How does it work?</h2>
+                    <p>I genuinely believe that everyone has a little bit of curiosity about their romantic destiny. Our Love Calculator uses a complex (and fun!) algorithm that analyzes the characters in your names to find a compatibility pattern. It’s a great way to break the ice or just have a laugh with your partner.</p>
+                    
+                    <p><strong>Stable Results:</strong> Unlike some apps that give you a random number every time, our calculator is deterministic. This means if you and your crush check your score today, and then again next year, the destiny written in your names will remain the same.</p>
+                    
+                    <h3>What the scores mean:</h3>
+                    <ul>
+                        <li><strong>90% – 100%:</strong> Soulmates. The stars have aligned!</li>
+                        <li><strong>70% – 89%:</strong> Great potential. You have a lot in common.</li>
+                        <li><strong>40% – 69%:</strong> Work in progress. Communication is key!</li>
+                        <li><strong>0% – 39%:</strong> Opposites attract? It’s going to be an uphill battle.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const btn = document.getElementById('calc-btn');
+            const resBox = document.getElementById('res-box');
+            const resVal = document.getElementById('res-val');
+            const resMsg = document.getElementById('res-msg');
+
+            btn.addEventListener('click', () => {
+                const n1 = document.getElementById('name1').value.trim().toLowerCase();
+                const n2 = document.getElementById('name2').value.trim().toLowerCase();
+                
+                if (!n1 || !n2) {
+                    alert('Please enter both names!');
+                    return;
+                }
+
+                // Deterministic calculation based on name sums
+                let sum = 0;
+                const combined = n1 + n2;
+                for(let i=0; i<combined.length; i++) sum += combined.charCodeAt(i);
+                
+                // Base percentage
+                let pct = (sum % 71) + 30; // Between 30 and 100
+                if (pct > 100) pct = 100;
+
+                resBox.style.display = 'block';
+                resVal.textContent = pct + '%';
+
+                let msg = "Work in progress. Communication is key!";
+                if (pct >= 90) msg = "Soulmates! A match made in the stars.";
+                else if (pct >= 75) msg = "Strong connection! You're a great pair.";
+                else if (pct >= 50) msg = "Good potential. There's definitely a spark.";
+                
+                resMsg.textContent = msg;
+                
+                // Scroll to result
+                resBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        })();
+    </script>
+</body>
+</html>
