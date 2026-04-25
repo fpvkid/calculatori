@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Fertilizer NPK Calculator | Calculate Nitrogen for Your Lawn</title>
+    <meta name="description" content="Free fertilizer NPK calculator. Calculate how much fertilizer you need for your lawn or garden based on square footage and desired nitrogen rate.">
+    <meta name="keywords" content="fertilizer calculator, npk ratio tool, lawn nitrogen calculator, how much fertilizer for garden, calculate fertilizer spread rate">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Garden">
+    <link rel="canonical" href="https://calcsfor.life/fertilizer-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .lbs-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .npk-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .npk-item { text-align: center; }
+        .npk-item input { text-align: center; font-size: 1.5rem; font-weight: 800; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Garden",
+        "item": "https://calcsfor.life/#garden"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Fertilizer Calculator",
+        "item": "https://calcsfor.life/fertilizer-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Fertilizer (NPK) Calculator</h1>
+                    <p>Stop guessing with your lawn. Calculate exactly how many pounds of fertilizer you need to reach your target nutrient levels.</p>
+                </div>
+
+                <form class="calc-form" id="fert-form">
+                    <div class="form-group">
+                        <label>Lawn Area (sq ft)</label>
+                        <input type="number" id="area" value="5000" step="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target Nitrogen Rate (lbs per 1,000 sq ft)</label>
+                        <select id="rate">
+                            <option value="0.5">0.5 lbs (Light Feeding)</option>
+                            <option value="1.0" selected>1.0 lbs (Standard Feeding)</option>
+                            <option value="1.5">1.5 lbs (Heavy Feeding)</option>
+                        </select>
+                    </div>
+
+                    <label class="label">Fertilizer N-P-K Ratio</label>
+                    <div class="npk-inputs">
+                        <div class="npk-item">
+                            <input type="number" id="n" value="20">
+                            <div class="m-lab">N (Nitrogen)</div>
+                        </div>
+                        <div class="npk-item">
+                            <input type="number" id="p" value="0">
+                            <div class="m-lab">P (Phosphorus)</div>
+                        </div>
+                        <div class="npk-item">
+                            <input type="number" id="k" value="10">
+                            <div class="m-lab">K (Potassium)</div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Fertilizer Needed</span>
+                    <div class="lbs-val" id="res-lbs">25</div>
+                    <div class="label" style="font-size: 1.5rem; color: var(--clr-text); margin-top: 10px;">Pounds</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        This covers 5,000 sq ft at 1.0 lb N rate.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is N-P-K?</h2>
+                    <p>I genuinely believe that the "N-P-K" numbers on a fertilizer bag are the most important part of gardening. They represent the percentage (by weight) of Nitrogen, Phosphorus, and Potassium in the bag. A 20-0-10 bag is 20% Nitrogen. If you buy a 50lb bag, only 10lbs of it is actually nitrogen—the rest is filler and other nutrients.</p>
+                    
+                    <p><strong>The "Standard" Rate:</strong> Most lawn experts recommend applying 1 pound of Nitrogen per 1,000 square feet per application. Applying too much at once can "burn" the grass, and too little won't give you that lush green look.</p>
+                    
+                    <h3>Nutrient Guide:</h3>
+                    <ul>
+                        <li><strong>Nitrogen (N):</strong> Promotes green, leafy growth (Up).</li>
+                        <li><strong>Phosphorus (P):</strong> Promotes root and flower development (Down).</li>
+                        <li><strong>Potassium (K):</strong> Promotes overall plant health and disease resistance (All around).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const areaI = document.getElementById('area');
+            const rateI = document.getElementById('rate');
+            const nI = document.getElementById('n');
+            
+            const resL = document.getElementById('res-lbs');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const area = parseFloat(areaI.value) || 0;
+                const targetRate = parseFloat(rateI.value);
+                const nPercent = parseFloat(nI.value) || 1;
+
+                // Fertilizer weight = (TargetRate / (N% / 100)) * (Area / 1000)
+                const lbsNeeded = (targetRate / (nPercent / 100)) * (area / 1000);
+
+                resL.textContent = Math.round(lbsNeeded);
+                resN.textContent = `Total pounds of fertilizer for ${area.toLocaleString()} sq ft.`;
+            }
+
+            [areaI, rateI, nI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

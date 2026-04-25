@@ -24,8 +24,10 @@
         // ---- Pets ----
         { title: 'Raw Dog Food Calculator', slug: 'raw-dog-food-calculator', icon: '🥩', cat: 'pets', desc: 'Daily raw feeding portions using the 80/10/10 BARF ratio.', live: true },
         { title: 'Dog Age Calculator', slug: 'dog-age-calculator', icon: '🐕', cat: 'pets', desc: 'Accurate dog-to-human age conversion using breed-adjusted science.', live: true },
-        { title: 'Puppy Weight Predictor', slug: 'puppy-weight-calculator', icon: '🐕‍🦺', cat: 'pets', desc: 'Predict your dog\'s adult weight based on current growth and breed size.', live: true },
-        { title: 'Cat Calorie Calculator', slug: 'cat-calorie-calculator', icon: '🐱', cat: 'pets', desc: 'How many calories your cat needs based on weight and activity.', live: true },
+        { title: 'Puppy Weight Predictor', slug: 'puppy-weight-calculator', icon: '🐕‍🦺', cat: 'pets', desc: 'Estimate your puppy\'s adult weight based on current growth.', live: true },
+        { title: 'Dog Hydration Goal', slug: 'dog-hydration-calculator', icon: '💧', cat: 'pets', desc: 'How much water your dog should drink daily based on weight.', live: true },
+        { title: 'Reptile Tank Size', slug: 'reptile-tank-calculator', icon: '🦎', cat: 'pets', desc: 'Minimum habitat volume for bearded dragons, geckos, and pythons.', live: true },
+        { title: 'Cat Calorie Calculator', slug: 'cat-calorie-calculator', icon: '🐈', cat: 'pets', desc: 'Daily energy needs for indoor and outdoor cats.', live: true },
         { title: 'Aquarium Volume Calculator', slug: 'aquarium-volume-calculator', icon: '🐠', cat: 'pets', desc: 'Calculate gallons or liters for any tank shape.', live: true },
         { title: 'Pet Food Switch Calculator', slug: 'pet-food-switch', icon: '🥣', cat: 'pets', desc: 'Daily mix ratios for a safe 7-day transition to new food.', live: true },
 
@@ -73,8 +75,10 @@
 
         // ---- Garden ----
         { title: 'Raised Bed Soil Calculator', slug: 'raised-bed-soil-calculator', icon: '🌻', cat: 'garden', desc: 'Cubic feet of soil mix for your raised garden bed.', live: true },
-        { title: 'House Plant Soil & Pot', slug: 'potting-soil-calculator', icon: '🪴', cat: 'garden', desc: 'Calculate how many liters/bags for your indoor pots.', live: true },
-        { title: 'Seed Spacing Calculator', slug: 'seed-spacing-calculator', icon: '🌱', cat: 'garden', desc: 'How far apart to plant and how many seeds per bed.', live: true },
+        { title: 'Potting Soil Calculator', slug: 'potting-soil-calculator', icon: '🪴', cat: 'garden', desc: 'Soil volume for round or rectangular plant pots.', live: true },
+        { title: 'Fertilizer (NPK) Tool', slug: 'fertilizer-calculator', icon: '🌱', cat: 'garden', desc: 'Calculate pounds of fertilizer needed based on lawn area.', live: true },
+        { title: 'Mulch Coverage Calc', slug: 'mulch-calculator', icon: '🍂', cat: 'garden', desc: 'Estimate bags or yards of mulch for your flower beds.', live: true },
+        { title: 'Seed Spacing Tool', slug: 'seed-spacing-calculator', icon: '🥕', cat: 'garden', desc: 'Proper distance for planting vegetables and flowers.', live: true },
         { title: 'Compost Ratio Calculator', slug: 'compost-ratio-calculator', icon: '♻️', cat: 'garden', desc: 'Green-to-brown ratio for healthy composting.', live: true },
 
         // ---- Finance ----
