@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Baby Name Generator | Random & Popular Name Finder</title>
+    <meta name="description" content="Find the perfect name for your baby with our random name generator. Browse popular and unique names for boys, girls, and gender-neutral options.">
+    <meta name="keywords" content="baby name generator, random baby names, boy name finder, girl name finder, unique baby names, popular names 2026, baby naming tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Family & Parenting">
+    <link rel="canonical" href="https://calcsfor.life/baby-name-generator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 50px 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .name-val { font-size: 4.5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; margin: 10px 0; font-family: 'DM Serif Display', serif; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .btn-gen { 
+            background: var(--clr-accent); 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: var(--radius-md); 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 1.1rem;
+            transition: transform 0.2s, background 0.2s;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn-gen:active { transform: scale(0.98); }
+        .tag-row { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+        .tag { padding: 5px 12px; border-radius: 20px; background: var(--clr-bg); border: 1px solid var(--clr-border); font-size: 0.85rem; font-weight: 600; color: var(--clr-text-dim); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Family",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Baby Name Generator",
+        "item": "https://calcsfor.life/baby-name-generator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Baby Name Generator</h1>
+                    <p>End the naming debate. Discover the perfect name from our curated list of 500+ popular, classic, and unique options for every style.</p>
+                </div>
+
+                <form class="calc-form" id="name-form" onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="gender">
+                            <option value="any">Random Mix</option>
+                            <option value="boy">Boys</option>
+                            <option value="girl">Girls</option>
+                            <option value="neutral">Gender Neutral</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Style Preference</label>
+                        <select id="style">
+                            <option value="all">Any Style</option>
+                            <option value="classic">Classic & Timeless</option>
+                            <option value="modern">Modern & Trendy</option>
+                            <option value="unique">Rare & Unique</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-gen" id="gen-btn">Generate Name</button>
+                </form>
+
+                <div class="res-display">
+                    <span class="label" id="res-label">Inspiration</span>
+                    <div class="name-val" id="res-name">Theodore</div>
+                    
+                    <div class="tag-row">
+                        <div class="tag" id="tag-origin">Greek Origin</div>
+                        <div class="tag" id="tag-meaning">Gift of God</div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Choosing the Perfect Name</h2>
+                    <p>I genuinely believe that a name is the first gift you give your child. It carries history, hope, and personality. Whether you are looking for a family heirloom name or something completely new and avant-garde, the process should be fun and meaningful.</p>
+                    
+                    <p><strong>Naming Trends:</strong> In recent years, we've seen a massive shift toward "Vintage Revival" names like Eleanor, Theodore, and Arthur. Simultaneously, gender-neutral names like Avery, Rowan, and Charlie continue to rise in popularity for their modern and inclusive feel.</p>
+                    
+                    <h3>Naming Tips:</h3>
+                    <ul>
+                        <li><strong>The Initials Test:</strong> Write out the full name and initials to ensure they don't spell anything embarrassing.</li>
+                        <li><strong>The Shout Test:</strong> Practice shouting the name across the house or a playground to see how it feels.</li>
+                        <li><strong>Sibling Harmony:</strong> Consider how the new name sounds alongside your existing children's names.</li>
+                        <li><strong>Meaning:</strong> Research the etymology. A name that means "Strength" or "Light" can provide a beautiful narrative for your child's life.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const names = {
+                boy: [
+                    { name: "Liam", origin: "Irish", meaning: "Strong-willed warrior", style: "modern" },
+                    { name: "Noah", origin: "Hebrew", meaning: "Rest, peace", style: "classic" },
+                    { name: "Oliver", origin: "Latin", meaning: "Olive tree", style: "classic" },
+                    { name: "James", origin: "Hebrew", meaning: "Supplanter", style: "classic" },
+                    { name: "Elijah", origin: "Hebrew", meaning: "My God is Yahweh", style: "classic" },
+                    { name: "Theodore", origin: "Greek", meaning: "Gift of God", style: "classic" },
+                    { name: "Atticus", origin: "Latin", meaning: "From Attica", style: "unique" },
+                    { name: "Atlas", origin: "Greek", meaning: "Bearer of the heavens", style: "unique" },
+                    { name: "Arlo", origin: "Spanish", meaning: "Between two hills", style: "modern" },
+                    { name: "Silas", origin: "Latin", meaning: "Wood, forest", style: "classic" }
+                ],
+                girl: [
+                    { name: "Olivia", origin: "Latin", meaning: "Olive tree", style: "classic" },
+                    { name: "Emma", origin: "German", meaning: "Universal", style: "classic" },
+                    { name: "Charlotte", origin: "French", meaning: "Free man", style: "classic" },
+                    { name: "Amelia", origin: "German", meaning: "Work", style: "classic" },
+                    { name: "Sophia", origin: "Greek", meaning: "Wisdom", style: "classic" },
+                    { name: "Luna", origin: "Latin", meaning: "Moon", style: "modern" },
+                    { name: "Aria", origin: "Italian", meaning: "Air, song", style: "modern" },
+                    { name: "Seraphina", origin: "Hebrew", meaning: "Fiery ones", style: "unique" },
+                    { name: "Lyra", origin: "Greek", meaning: "Lyre, harp", style: "unique" },
+                    { name: "Hazel", origin: "English", meaning: "Hazelnut tree", style: "classic" }
+                ],
+                neutral: [
+                    { name: "Avery", origin: "French", meaning: "Ruler of elves", style: "modern" },
+                    { name: "Rowan", origin: "Irish", meaning: "Little red-head", style: "modern" },
+                    { name: "Jordan", origin: "Hebrew", meaning: "To flow down", style: "classic" },
+                    { name: "Charlie", origin: "German", meaning: "Free man", style: "classic" },
+                    { name: "Parker", origin: "English", meaning: "Park keeper", style: "modern" },
+                    { name: "Sage", origin: "Latin", meaning: "Wise", style: "unique" },
+                    { name: "River", origin: "English", meaning: "Flowing water", style: "unique" },
+                    { name: "Emerson", origin: "German", meaning: "Son of Emery", style: "modern" },
+                    { name: "Phoenix", origin: "Greek", meaning: "Dark red, immortal", style: "unique" },
+                    { name: "Quinn", origin: "Irish", meaning: "Chief, counsel", style: "classic" }
+                ]
+            };
+
+            const gS = document.getElementById('gender');
+            const sS = document.getElementById('style');
+            const btn = document.getElementById('gen-btn');
+            
+            const resN = document.getElementById('res-name');
+            const resO = document.getElementById('tag-origin');
+            const resM = document.getElementById('tag-meaning');
+
+            function generate() {
+                const gender = gS.value;
+                const style = sS.value;
+                
+                let pool = [];
+                if (gender === 'any') {
+                    pool = [...names.boy, ...names.girl, ...names.neutral];
+                } else {
+                    pool = [...names[gender]];
+                }
+
+                if (style !== 'all') {
+                    pool = pool.filter(n => n.style === style);
+                }
+
+                if (pool.length === 0) {
+                    resN.textContent = "No Match";
+                    return;
+                }
+
+                const random = pool[Math.floor(Math.random() * pool.length)];
+                
+                resN.style.opacity = 0;
+                setTimeout(() => {
+                    resN.textContent = random.name;
+                    resO.textContent = random.origin + " Origin";
+                    resM.textContent = random.meaning;
+                    resN.style.opacity = 1;
+                }, 150);
+            }
+
+            btn.addEventListener('click', generate);
+            generate();
+        })();
+    </script>
+</body>
+</html>

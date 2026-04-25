@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Pet vs Baby Cost Calculator | First Year Expense Comparison</title>
+    <meta name="description" content="Compare the first-year costs of raising a baby versus owning a pet. A fun yet realistic financial breakdown of diapers vs dog food and strollers vs vet visits.">
+    <meta name="keywords" content="pet vs baby cost, child vs dog expenses, first year baby cost, owning a pet budget, parenting finance, cost of raising a child 2026">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Family & Parenting">
+    <link rel="canonical" href="https://calcsfor.life/pet-vs-baby-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .comp-card { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            text-align: center;
+        }
+        .comp-val { font-size: 3rem; font-weight: 800; margin: 15px 0; color: var(--clr-text); }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; display: block; }
+        
+        .winner-banner { 
+            grid-column: 1 / -1; 
+            background: #fdf2f8; 
+            border: 1px solid #fbcfe8; 
+            padding: 30px; 
+            border-radius: var(--radius-md); 
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #be185d;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Family",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Pet vs Baby Cost Calculator",
+        "item": "https://calcsfor.life/pet-vs-baby-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Pet vs. Baby: The Cost</h1>
+                    <p>Financial reality check. How does the first year of raising a human baby compare to the first year of a new puppy or kitten?</p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comp-card">
+                        <span class="label">👶 Human Baby</span>
+                        <div class="comp-val" id="res-baby">$15,450</div>
+                        <div style="text-align: left; font-size: 0.85rem; color: var(--clr-text-dim); margin-top: 20px;">
+                            • Diapers: $900<br>
+                            • Food/Formula: $1,500<br>
+                            • Gear (Stroller/Crib): $2,500<br>
+                            • Childcare: $9,500<br>
+                            • Healthcare: $1,050
+                        </div>
+                    </div>
+
+                    <div class="comp-card">
+                        <span class="label">🐶 New Puppy</span>
+                        <div class="comp-val" id="res-pet">$2,100</div>
+                        <div style="text-align: left; font-size: 0.85rem; color: var(--clr-text-dim); margin-top: 20px;">
+                            • Adoption/Purchase: $500<br>
+                            • Quality Food: $600<br>
+                            • Vet/Vaccines: $500<br>
+                            • Training/Toys: $300<br>
+                            • Boarding/Insurance: $200
+                        </div>
+                    </div>
+
+                    <div class="winner-banner" id="res-winner">
+                        The Pet wins! You save $13,350 in year one.
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Real Price of Love</h2>
+                    <p>I genuinely believe that neither a pet nor a baby is an "investment" in the financial sense—they are investments in happiness. However, the first-year costs vary wildly. A baby requires specialized gear and, most significantly, a massive commitment to childcare if both parents work. A pet, while requiring time and attention, has a much lower financial bar for entry.</p>
+                    
+                    <p><strong>The Biggest Difference: Childcare.</strong> For a baby, childcare is almost always the single largest expense, often exceeding $10,000 per year in urban areas. For a pet, the "childcare" equivalent (dog walking or boarding) is optional and generally much cheaper.</p>
+                    
+                    <h3>Long-term Outlook:</h3>
+                    <ul>
+                        <li><strong>Baby:</strong> Costs typically increase as they get older (extracurriculars, cars, college).</li>
+                        <li><strong>Pet:</strong> Costs are relatively stable, with a potential spike in senior years for veterinary care.</li>
+                        <li><strong>Emotional ROI:</strong> Both are infinite!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+</body>
+</html>

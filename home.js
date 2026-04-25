@@ -14,6 +14,7 @@
         { id: 'garden',   icon: '🌱', name: 'Garden & Plants' },
         { id: 'finance',  icon: '💰', name: 'Finance & Math' },
         { id: 'education', icon: '🎓', name: 'Education & Career' },
+        { id: 'family',   icon: '👪', name: 'Family & Parenting' },
         { id: 'craft',    icon: '🧵', name: 'Craft & Hobby' },
         { id: 'time',     icon: '⏱️', name: 'Time & Productivity' },
         { id: 'auto',     icon: '🚗', name: 'Auto & Travel' },
@@ -70,6 +71,18 @@
         { title: 'ASCVD Heart Risk', slug: 'ascvd-calculator', icon: '🫀', cat: 'health', desc: '10-year risk of heart attack or stroke for adults over 40.', live: true },
         { title: 'Acai Bowl Calories', slug: 'acai-bowl-calculator', icon: '🥣', cat: 'health', desc: 'Nutrition and macro tracker for your smoothie bowls.', live: true },
         { title: 'Sleep Cycle Calculator', slug: 'sleep-cycle-calculator', icon: '🌙', cat: 'health', desc: 'When to sleep or wake up to align with 90min cycles.', live: true },
+
+        // ---- Family & Parenting ----
+        { title: 'Child Support Calc', slug: 'child-support-calculator', icon: '⚖️', cat: 'family', desc: 'Estimate payments using the Income Shares model.', live: true },
+        { title: 'Ovulation Predictor', slug: 'ovulation-calculator', icon: '📅', cat: 'family', desc: 'Identify your fertile window and peak days.', live: true },
+        { title: 'Pregnancy Due Date', slug: 'pregnancy-due-date', icon: '👶', cat: 'family', desc: 'Track your baby\'s arrival date and weeks along.', live: true },
+        { title: 'Baby Gender (Fun)', slug: 'baby-gender-calculator', icon: '☯️', cat: 'family', desc: 'Chinese Lunar Calendar gender prediction chart.', live: true },
+        { title: 'Baby Name Finder', slug: 'baby-name-generator', icon: '✨', cat: 'family', desc: 'Random and popular names with origin and meaning.', live: true },
+        { title: 'Daycare Cost Tool', slug: 'daycare-calculator', icon: '🏫', cat: 'family', desc: 'Monthly and annual childcare expense estimator.', live: true },
+        { title: 'College Savings', slug: 'college-savings-calculator', icon: '🎓', cat: 'family', desc: 'How much to save for tuition using a 529 plan.', live: true },
+        { title: 'Allowance Manager', slug: 'allowance-calculator', icon: '💰', cat: 'family', desc: 'Manage weekly pocket money based on age and chores.', live: true },
+        { title: 'Screen Time Guide', slug: 'screen-time-calculator', icon: '📱', cat: 'family', desc: 'Age-appropriate digital media limits and habits.', live: true },
+        { title: 'Pet vs Baby Cost', slug: 'pet-vs-baby-calculator', icon: '⚖️', cat: 'family', desc: 'Fun first-year expense comparison for family planning.', live: true },
 
         // ---- Home ----
         { title: 'Moving Box Calculator', slug: 'moving-box-calculator', icon: '📦', cat: 'home', desc: 'Estimate how many boxes you need by house or room size.', live: true },
