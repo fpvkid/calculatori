@@ -52,6 +52,9 @@
         { title: 'VO2 Max Calculator', slug: 'vo2-max-calculator', icon: '🫁', cat: 'health', desc: 'Estimate your aerobic fitness and oxygen capacity.', live: true },
         { title: 'Sleep Apnea (AHI) Test', slug: 'ahi-calculator', icon: '😴', cat: 'health', desc: 'Screening test for sleep apnea risk and snoring.', live: true },
         { title: 'TDEE Calculator', slug: 'tdee-calculator', icon: '🔥', cat: 'health', desc: 'Calculate your total daily maintenance calories.', live: true },
+        { title: 'AFP MoM Calculator', slug: 'afp-calculator', icon: '🤰', cat: 'health', desc: 'Prenatal screening multiple of median for AFP levels.', live: true },
+        { title: 'Bilirubin (BiliTool)', slug: 'bili-calculator', icon: '👶', cat: 'health', desc: 'Newborn jaundice risk assessment by hours of life.', live: true },
+        { title: 'ASCVD Heart Risk', slug: 'ascvd-calculator', icon: '🫀', cat: 'health', desc: '10-year risk of heart attack or stroke for adults over 40.', live: true },
         { title: 'Acai Bowl Calories', slug: 'acai-bowl-calculator', icon: '🥣', cat: 'health', desc: 'Nutrition and macro tracker for your smoothie bowls.', live: true },
         { title: 'Sleep Cycle Calculator', slug: 'sleep-cycle-calculator', icon: '🌙', cat: 'health', desc: 'When to sleep or wake up to align with 90min cycles.', live: true },
 

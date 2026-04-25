@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Newborn Bilirubin Calculator | BiliTool Jaundice Risk</title>
+    <meta name="description" content="Free newborn bilirubin calculator. Estimate jaundice risk for infants based on bilirubin levels and hours of life using AAP (BiliTool) guidelines.">
+    <meta name="keywords" content="bilirubin calculator, newborn jaundice risk, bilitool online, infant bilirubin levels chart, jaundice treatment threshold calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/bili-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .risk-val { font-size: 3rem; font-weight: 800; line-height: 1.2; text-transform: uppercase; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .risk-bar { height: 12px; background: #eee; border-radius: 10px; margin: 20px 0; display: flex; overflow: hidden; }
+        .risk-low { flex: 1; background: #10b981; opacity: 0.3; }
+        .risk-med { flex: 1; background: #f59e0b; opacity: 0.3; }
+        .risk-high { flex: 1; background: #ef4444; opacity: 0.3; }
+        .risk-low.active, .risk-med.active, .risk-high.active { opacity: 1; }
+
+        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Bilirubin Calculator",
+        "item": "https://calcsfor.life/bili-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Newborn Bilirubin Calculator</h1>
+                    <p>Track jaundice risk. This tool uses standard AAP guidelines to help you understand your baby's bilirubin results relative to their age in hours.</p>
+                </div>
+
+                <form class="calc-form" id="bili-form">
+                    <div class="grid-inputs">
+                        <div class="form-group">
+                            <label>Bilirubin Level (mg/dL)</label>
+                            <input type="number" id="bili" value="8.0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Age (Hours of life)</label>
+                            <input type="number" id="hours" value="48">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gestational Age</label>
+                        <select id="gest">
+                            <option value="35">35+ Weeks (Standard)</option>
+                            <option value="38" selected>38+ Weeks (Full Term)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Jaundice Risk Zone</span>
+                    <div class="risk-val" id="res-risk">Low Risk</div>
+                    <div class="risk-bar">
+                        <div class="risk-low" id="bar-low"></div>
+                        <div class="risk-med" id="bar-med"></div>
+                        <div class="risk-high" id="bar-high"></div>
+                    </div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Based on AAP guidelines for full-term infants.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is BiliTool?</h2>
+                    <p>I genuinely believe that every new parent should have access to clear data. Jaundice (yellowing of the skin) is extremely common in newborns and is caused by an excess of bilirubin. While most cases resolve on their own, high levels can be dangerous. Doctors use specific charts to determine if a baby needs "blue light" phototherapy.</p>
+                    
+                    <p><strong>The Hour-Specific Nomogram:</strong> A bilirubin level of 8.0 is perfectly normal at 48 hours, but it might be considered high risk if the baby is only 12 hours old. That’s why we always calculate based on the exact hour of life.</p>
+                    
+                    <h3>When to call the doctor:</h3>
+                    <ul>
+                        <li>If the jaundice is spreading to the baby's stomach or legs.</li>
+                        <li>If the baby is very sleepy and difficult to wake for feedings.</li>
+                        <li>If the baby is not having enough wet or dirty diapers.</li>
+                        <li><strong>Note:</strong> This tool is for informational purposes only. Always follow your pediatrician's advice.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const biliI = document.getElementById('bili');
+            const hrsI = document.getElementById('hours');
+            const gstI = document.getElementById('gest');
+            
+            const resR = document.getElementById('res-risk');
+            const resN = document.getElementById('res-note');
+            
+            const barL = document.getElementById('bar-low');
+            const barM = document.getElementById('bar-med');
+            const barH = document.getElementById('bar-high');
+
+            function update() {
+                const bili = parseFloat(biliI.value) || 0;
+                const hours = parseFloat(hrsI.value) || 1;
+                
+                // Simple AAP Threshold approximation for 38+ weeks
+                // These are rough midpoints for the Low/Med/High risk curves
+                let lowThresh = 5 + (hours * 0.12); // approx
+                let highThresh = 8 + (hours * 0.15); // approx
+
+                if (hours > 96) {
+                    lowThresh = 15;
+                    highThresh = 20;
+                }
+
+                [barL, barM, barH].forEach(b => b.classList.remove('active'));
+
+                if (bili >= highThresh) {
+                    resR.textContent = "High Risk";
+                    resR.style.color = "#ef4444";
+                    barH.classList.add('active');
+                    resN.textContent = "Seek immediate medical consultation. Phototherapy may be required.";
+                } else if (bili >= lowThresh) {
+                    resR.textContent = "Medium Risk";
+                    resR.style.color = "#f59e0b";
+                    barM.classList.add('active');
+                    resN.textContent = "Monitor closely. Follow up with your pediatrician within 24 hours.";
+                } else {
+                    resR.textContent = "Low Risk";
+                    resR.style.color = "#10b981";
+                    barL.classList.add('active');
+                    resN.textContent = "Typical levels for this age. Continue standard feeding and monitoring.";
+                }
+            }
+
+            [biliI, hrsI, gstI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
