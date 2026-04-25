@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Window Replacement Cost Calculator | Estimate New Windows Price</title>
+    <meta name="description" content="Free window replacement cost calculator. Estimate the price of new windows for your home based on material, window type, and professional installation.">
+    <meta name="keywords" content="window replacement cost calculator, price of new windows, vinyl window cost, wood window price, window installation estimate">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Home">
+    <link rel="canonical" href="https://calcsfor.life/window-replacement-cost/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cost-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .mat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .mat-btn { 
+            padding: 15px; 
+            border-radius: var(--radius-md); 
+            border: 1px solid var(--clr-border); 
+            background: var(--clr-surface); 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .mat-btn.active { border-color: var(--clr-accent); color: var(--clr-accent); background: var(--clr-accent-glow); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Home & DIY",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Window Replacement Cost",
+        "item": "https://calcsfor.life/window-replacement-cost/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Window Replacement Estimator</h1>
+                    <p>Upgrade your home's energy efficiency and curb appeal. Get an honest estimate for new windows and professional installation.</p>
+                </div>
+
+                <form class="calc-form" id="window-form">
+                    <div class="form-group">
+                        <label>Frame Material</label>
+                        <div class="mat-grid">
+                            <button type="button" class="mat-btn active" data-mult="1.0">Vinyl</button>
+                            <button type="button" class="mat-btn" data-mult="1.4">Aluminum</button>
+                            <button type="button" class="mat-btn" data-mult="1.8">Wood</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Number of Windows</label>
+                        <input type="number" id="count" value="10" min="1" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Window Quality</label>
+                        <select id="quality">
+                            <option value="450">Standard (Double Pane)</option>
+                            <option value="650" selected>Energy Efficient (Low-E / Argon)</option>
+                            <option value="1100">Premium / Custom Shape</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Installation Type</label>
+                        <select id="install">
+                            <option value="150">Retrofit (Into existing frame)</option>
+                            <option value="350" selected>Full-Frame (Completely new)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Project Cost</span>
+                    <div class="cost-val" id="res-cost">$10,000</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;" id="res-note">
+                        Includes materials and average labor costs.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Is it time for new windows?</h2>
+                    <p>I genuinely believe that windows are the most underrated part of a home's value. If you can feel a draft or see fog between the glass panes, your windows aren't just ugly—they are actively stealing money from your bank account through your energy bill.</p>
+                    
+                    <p><strong>Vinyl vs Wood:</strong> Vinyl is the king of value. It doesn't rot, never needs paint, and costs about half of what wood does. Wood is beautiful and lasts longer if maintained, but unless you live in a historic district, vinyl is almost always the smarter financial choice.</p>
+                    
+                    <h3>Cost Factors:</h3>
+                    <ul>
+                        <li><strong>Low-E Coating:</strong> Adds about 10-15% to the cost but saves double that in heating/cooling.</li>
+                        <li><strong>Second Floor:</strong> Labor costs go up if installers need ladders or scaffolding.</li>
+                        <li><strong>Disposal:</strong> Don't forget to ask if your contractor includes the cost of hauling away your old crusty windows!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let matMult = 1.0;
+            const countI = document.getElementById('count');
+            const qualI = document.getElementById('quality');
+            const instI = document.getElementById('install');
+            const resC = document.getElementById('res-cost');
+
+            document.querySelectorAll('.mat-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.mat-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    matMult = parseFloat(this.dataset.mult);
+                    update();
+                });
+            });
+
+            function update() {
+                const count = parseFloat(countI.value) || 0;
+                const windowPrice = parseFloat(qualI.value) * matMult;
+                const installPrice = parseFloat(instI.value);
+
+                const total = count * (windowPrice + installPrice);
+
+                resC.textContent = '$' + Math.round(total).toLocaleString();
+            }
+
+            [countI, qualI, instI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

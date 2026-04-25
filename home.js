@@ -51,6 +51,9 @@
         { title: 'Concrete Volume Calculator', slug: 'concrete-calculator', icon: '🧱', cat: 'home', desc: 'Cubic feet/meters of concrete for slabs and footings.', live: true },
         { title: 'Electricity Cost Calculator', slug: 'electricity-cost-calculator', icon: '⚡', cat: 'home', desc: 'Monthly or yearly cost to run any appliance.', live: true },
         { title: 'Fence Material Calculator', slug: 'fence-calculator', icon: '🏗️', cat: 'home', desc: 'Boards, posts, and rails for your fence project.', live: true },
+        { title: 'ADU Cost Calculator', slug: 'adu-cost-calculator', icon: '🏡', cat: 'home', desc: 'Estimate the budget for building a guest house or granny flat.', live: true },
+        { title: 'Window Replacement Cost', slug: 'window-replacement-cost', icon: '🪟', cat: 'home', desc: 'Estimate the cost of new windows and installation.', live: true },
+        { title: 'Hurricane Shutter Cost', slug: 'hurricane-shutter-calculator', icon: '🌀', cat: 'home', desc: 'Storm protection pricing for your windows and doors.', live: true },
 
         // ---- Garden ----
         { title: 'Raised Bed Soil Calculator', slug: 'raised-bed-soil-calculator', icon: '🌻', cat: 'garden', desc: 'Cubic feet of soil mix for your raised garden bed.', live: true },
@@ -64,6 +67,7 @@
         { title: 'Rent Affordability Calculator', slug: 'rent-calculator', icon: '🏠', cat: 'finance', desc: 'How much rent you can afford based on income.', live: true },
         { title: 'Discount Calculator', slug: 'discount-calculator', icon: '🔖', cat: 'finance', desc: 'Final price after percentage or flat discount.', live: true },
         { title: 'Mortgage Calculator', slug: 'mortgage-calculator', icon: '🏦', cat: 'finance', desc: 'Estimate monthly mortgage payments and interest.', live: true },
+        { title: 'ARV Calculator', slug: 'arv-calculator', icon: '📈', cat: 'finance', desc: 'After Repair Value & MAO estimate for house flipping.', live: true },
         { title: 'Grade Calculator', slug: 'grade-calculator', icon: '🎓', cat: 'finance', desc: 'Calculate weighted class grades and final exam needs.', live: true },
         { title: 'Percentage Calculator', slug: 'percentage-calculator', icon: '🔢', cat: 'finance', desc: 'Quickly solve percentage increase, decrease, and common math.', live: true },
 

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Hurricane Shutter Cost Calculator | Estimate Storm Protection Price</title>
+    <meta name="description" content="Free hurricane shutter cost calculator. Estimate the price of storm protection for your windows based on shutter type (Accordion, Roll-down, Bahama) and house size.">
+    <meta name="keywords" content="hurricane shutter cost, storm shutters price, accordion shutter calculator, roll down shutters cost, bahama shutters price, hurricane protection estimate">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Home">
+    <link rel="canonical" href="https://calcsfor.life/hurricane-shutter-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cost-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .type-select { margin-bottom: 24px; }
+        .shutter-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--clr-border);
+            background: var(--clr-surface);
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .shutter-card.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); }
+        .shutter-card .icon { font-size: 2rem; }
+        .shutter-card .info { flex: 1; }
+        .shutter-card .title { display: block; font-weight: 700; font-size: 1.1rem; }
+        .shutter-card .price { display: block; font-size: 0.8rem; color: var(--clr-text-dim); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Home & DIY",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Hurricane Shutter Calculator",
+        "item": "https://calcsfor.life/hurricane-shutter-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Hurricane Shutter Estimator</h1>
+                    <p>Protect your home from the next big storm. Compare costs for different types of hurricane protection for your windows and doors.</p>
+                </div>
+
+                <form class="calc-form" id="shutter-form">
+                    <div class="form-group">
+                        <label>Select Shutter Type</label>
+                        <div id="shutter-types">
+                            <div class="shutter-card" data-price="12">
+                                <span class="icon">🛡️</span>
+                                <div class="info">
+                                    <span class="title">Storm Panels</span>
+                                    <span class="price">~$12 per sq ft (Budget option)</span>
+                                </div>
+                            </div>
+                            <div class="shutter-card active" data-price="25">
+                                <span class="icon">🪗</span>
+                                <div class="info">
+                                    <span class="title">Accordion Shutters</span>
+                                    <span class="price">~$25 per sq ft (Most popular)</span>
+                                </div>
+                            </div>
+                            <div class="shutter-card" data-price="50">
+                                <span class="icon">🌀</span>
+                                <div class="info">
+                                    <span class="title">Roll-down Shutters</span>
+                                    <span class="price">~$50 per sq ft (Automatic/Ease of use)</span>
+                                </div>
+                            </div>
+                            <div class="shutter-card" data-price="35">
+                                <span class="icon">🏝️</span>
+                                <div class="info">
+                                    <span class="title">Bahama Shutters</span>
+                                    <span class="price">~$35 per sq ft (Aesthetic/Permanent)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Window Area to Protect (sq ft)</label>
+                        <input type="number" id="area" value="200" min="10" max="2000">
+                        <small style="color: var(--clr-text-dim); font-size: 0.75rem;">Average house is 200–300 sq ft of windows.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="labor" checked style="width: auto;"> Include Professional Installation
+                        </label>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Total Cost</span>
+                    <div class="cost-val" id="res-cost">$5,000</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;" id="res-note">
+                        Accordion shutters are a great balance of cost and ease.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Which shutters should you choose?</h2>
+                    <p>I genuinely believe that waiting until a storm is named to buy shutters is the worst financial mistake a homeowner can make. Prices double, and contractors disappear. If you live in a hurricane zone, shutters aren't an "option"—they are insurance for your roof (if windows break, air pressure can lift your roof right off).</p>
+                    
+                    <p><strong>Accordion vs Roll-down:</strong> Accordion shutters are the "sweet spot." They are permanently attached, easy for one person to close in minutes, and cost half of what automatic roll-downs do. If you have a multi-story house, roll-downs are better because you can close them with a remote from inside.</p>
+                    
+                    <h3>Installation Tips:</h3>
+                    <ul>
+                        <li><strong>Permits:</strong> Most Florida counties require a permit for permanent shutters.</li>
+                        <li><strong>Insurance Discounts:</strong> Many insurance companies give a discount if your whole house is "hardened" with shutters.</li>
+                        <li><strong>DIY:</strong> Storm panels can be DIY-ed, but they are heavy, sharp, and a pain to store. Be careful!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let basePrice = 25;
+            const areaI = document.getElementById('area');
+            const laborC = document.getElementById('labor');
+            const resC = document.getElementById('res-cost');
+
+            document.querySelectorAll('.shutter-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.shutter-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    basePrice = parseFloat(this.dataset.price);
+                    update();
+                });
+            });
+
+            function update() {
+                const area = parseFloat(areaI.value) || 0;
+                const laborMult = laborC.checked ? 1.3 : 1.0;
+
+                const total = area * basePrice * laborMult;
+
+                resC.textContent = '$' + Math.round(total).toLocaleString();
+            }
+
+            [areaI, laborC].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

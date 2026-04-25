@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>ARV Calculator | After Repair Value & 70% Rule for Real Estate</title>
+    <meta name="description" content="Free After Repair Value (ARV) calculator for real estate investors. Calculate your Maximum Allowable Offer (MAO) using the 70% rule and repair estimates.">
+    <meta name="keywords" content="arv calculator, after repair value, 70 percent rule real estate, mao calculator, house flipping calculator, real estate investing tools">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/arv-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            margin-top: 30px;
+            display: grid;
+            gap: 20px;
+        }
+        .res-item { text-align: center; }
+        .mao-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.85rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; display: block; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--clr-text); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ARV Calculator",
+        "item": "https://calcsfor.life/arv-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>ARV & 70% Rule Calculator</h1>
+                    <p>Determine the After Repair Value (ARV) and calculate exactly what you should offer on a property to keep your investment safe.</p>
+                </div>
+
+                <form class="calc-form" id="arv-form">
+                    <div class="form-group">
+                        <label>After Repair Value (ARV) ($)</label>
+                        <input type="number" id="arv" value="450000" step="1000">
+                        <small style="color: var(--clr-text-dim); font-size: 0.75rem;">Estimated value based on local comps after all repairs are done.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estimated Repair Costs ($)</label>
+                        <input type="number" id="repairs" value="65000" step="500">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Buy Percentage (The "70% Rule")</label>
+                        <input type="range" id="percent" min="50" max="90" value="70" style="width: 100%; margin-top: 10px;">
+                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                            <span style="font-size: 0.8rem; font-weight: 600;" id="percent-display">70%</span>
+                            <span style="font-size: 0.8rem; color: var(--clr-text-dim);">Standard is 70%</span>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="res-item">
+                        <span class="label">Maximum Allowable Offer (MAO)</span>
+                        <div class="mao-val" id="res-mao">$250,000</div>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Equity Goal</span>
+                            <div class="stat-val" id="res-equity">$135,000</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Total Investment</span>
+                            <div class="stat-val" id="res-total">$315,000</div>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.85rem; text-align: center;">
+                        Formula: (ARV × Buy %) - Repair Costs = MAO.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is the 70% Rule?</h2>
+                    <p>I genuinely believe that the 70% rule is the only thing keeping house flippers from going bankrupt. It states that an investor should pay no more than 70% of the After Repair Value (ARV) of a property, minus the cost of the repairs needed.</p>
+                    
+                    <p><strong>Why 70%?</strong> The remaining 30% isn't just "pure profit." It has to cover your closing costs, holding costs (taxes, utilities, insurance), financing interest, and the selling commission. If you buy at 85% of ARV, you aren't an investor—вы просто покупаете работу (you're just buying a job).</p>
+                    
+                    <h3>Common ARV Mistakes:</h3>
+                    <ul>
+                        <li><strong>Bad Comps:</strong> Comparing a 3-bed house to a 4-bed house across town.</li>
+                        <li><strong>Underestimating Repairs:</strong> Forgetting about permits, foundation issues, or hidden mold.</li>
+                        <li><strong>Forcing the Math:</strong> Adjusting the percentage to 80% just because you "really want" the deal. Don't do it.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const arvI = document.getElementById('arv');
+            const repI = document.getElementById('repairs');
+            const pctI = document.getElementById('percent');
+            const pctD = document.getElementById('percent-display');
+            
+            const resM = document.getElementById('res-mao');
+            const resE = document.getElementById('res-equity');
+            const resT = document.getElementById('res-total');
+
+            function update() {
+                const arv = parseFloat(arvI.value) || 0;
+                const repairs = parseFloat(repI.value) || 0;
+                const percent = (parseFloat(pctI.value) || 70) / 100;
+
+                pctD.textContent = (percent * 100) + '%';
+
+                const mao = (arv * percent) - repairs;
+                const equity = arv - (mao + repairs);
+                const total = mao + repairs;
+
+                resM.textContent = '$' + Math.max(0, Math.round(mao)).toLocaleString();
+                resE.textContent = '$' + Math.max(0, Math.round(equity)).toLocaleString();
+                resT.textContent = '$' + Math.max(0, Math.round(total)).toLocaleString();
+            }
+
+            [arvI, repI, pctI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
