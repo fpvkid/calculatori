@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Self-Employment Tax Calculator | 1099 Tax Estimator</title>
+    <meta name="description" content="Calculate your self-employment tax (15.3%) for the 2024 and 2025 tax years. Determine your social security and medicare contributions as a freelancer.">
+    <meta name="keywords" content="self employment tax calculator, 1099 tax tool, freelancer tax estimator, social security tax for self employed, medicare tax tool, small business tax calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Career">
+    <link rel="canonical" href="https://calcsfor.life/self-employment-tax-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .tax-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Career Finance",
+        "item": "https://calcsfor.life/#education"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Self-Employment Tax Calculator",
+        "item": "https://calcsfor.life/self-employment-tax-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Self-Employment Tax</h1>
+                    <p>Freelancer's burden. Estimate your combined Social Security and Medicare tax liability as an independent contractor or small business owner.</p>
+                </div>
+
+                <form class="calc-form" id="se-form">
+                    <div class="form-group">
+                        <label>Net Business Profit ($)</label>
+                        <input type="number" id="profit" value="85000" step="1000">
+                        <small>Total income minus business expenses.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tax Year</label>
+                        <select id="year">
+                            <option value="0.153">2024 / 2025 (15.3%)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label" id="res-label">Total SE Tax Owed</span>
+                    <div class="tax-val" id="res-tax">$12,010</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Estimated tax before income tax brackets.
+                    </p>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Social Security</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-ss">$9,734</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Medicare</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-med">$2,276</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The 15.3% Rule</h2>
+                    <p>I genuinely believe that every freelancer should be prepared for the SE tax. When you work for yourself, you are both the employer and the employee. This means you must pay both shares of Social Security (12.4%) and Medicare (2.9%), for a total of **15.3%**.</p>
+                    
+                    <p><strong>The 92.35% Factor:</strong> The IRS doesn't tax your entire net profit for self-employment tax. Instead, you only pay it on 92.35% of your net earnings. This calculation effectively treats the employer's half of the tax as a deduction.</p>
+                    
+                    <h3>What counts as "Net Profit"?</h3>
+                    <ul>
+                        <li><strong>Gross Income:</strong> Every dollar you earned from clients.</li>
+                        <li><strong>MINUS Expenses:</strong> Web hosting, home office gear, marketing, software subscriptions, and travel.</li>
+                        <li><strong>EQUALS Net Profit:</strong> The number you enter into this calculator.</li>
+                    </ul>
+                    
+                    <p><em>Note: This tool calculates the SE tax only. You will still owe federal and state **Income Tax** on this profit, though you can deduct half of your SE tax from your taxable income.</em></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const pI = document.getElementById('profit');
+            
+            const resT = document.getElementById('res-tax');
+            const resSS = document.getElementById('res-ss');
+            const resM = document.getElementById('res-med');
+
+            function update() {
+                const profit = parseFloat(pI.value) || 0;
+
+                // Step 1: 92.35% of profit is subject to SE tax
+                const taxableSE = profit * 0.9235;
+
+                // Step 2: SS (12.4%) up to wage base cap (~$168,600)
+                const ssCap = 168600;
+                const ssTax = Math.min(taxableSE, ssCap) * 0.124;
+
+                // Step 3: Medicare (2.9%) - no cap
+                const medTax = taxableSE * 0.029;
+
+                const total = ssTax + medTax;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+                resT.textContent = formatter.format(total);
+                resSS.textContent = formatter.format(ssTax);
+                resM.textContent = formatter.format(medTax);
+            }
+
+            pI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

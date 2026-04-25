@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>LSAT Score Estimator | Law School Admission Test Tool</title>
+    <meta name="description" content="Estimate your LSAT score based on your raw correct answers. Accurate conversion to the 120-180 scale. Free practice tool for law school applicants.">
+    <meta name="keywords" content="lsat score estimator, lsat conversion chart, raw score to lsat, law school admission test tool, lsat practice calculator, lawyer exam tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Education">
+    <link rel="canonical" href="https://calcsfor.life/lsat-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .score-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Education",
+        "item": "https://calcsfor.life/#education"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "LSAT Score Estimator",
+        "item": "https://calcsfor.life/lsat-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>LSAT Score Estimator</h1>
+                    <p>Track your progress. Convert your practice test raw scores into the standard 120–180 LSAT scale used by law schools for admissions.</p>
+                </div>
+
+                <form class="calc-form" id="lsat-form">
+                    <div class="form-group">
+                        <label>Raw Score (Correct Answers)</label>
+                        <input type="number" id="raw" value="75" min="0" max="101">
+                        <small>Total correct answers out of ~101 questions.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target Percentile</label>
+                        <input type="text" id="perc-display" value="Top 15%" readonly style="background: var(--clr-bg-2); border: none; font-weight: 700;">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated LSAT Score</span>
+                    <div class="score-val" id="res-score">160</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Very competitive score for many law schools.
+                    </p>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Approx. Percentile</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-perc">85th</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Admission Tier</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-tier">Strong</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Demystifying LSAT Math</h2>
+                    <p>I genuinely believe that the LSAT is more about strategy than knowledge. Your "Raw Score" is simply the number of questions you answered correctly across all scored sections. This raw score is then "scaled" to a number between 120 and 180 to account for slight differences in difficulty between different versions of the test.</p>
+                    
+                    <p><strong>The Scaling Process:</strong> Because every LSAT is unique, the LSAC uses a statistical process to ensure that a 160 on one test means the same thing as a 160 on another. This means missing 25 questions might give you a 160 on a hard test, but only a 158 on an easier one.</p>
+                    
+                    <h3>General Score Ranges:</h3>
+                    <ul>
+                        <li><strong>170 - 180:</strong> Elite. Top 3% of all test takers. Aiming for Ivy League or T14 law schools.</li>
+                        <li><strong>160 - 169:</strong> Strong. Top 15% of test takers. Competitive for many high-ranking programs.</li>
+                        <li><strong>150 - 159:</strong> Average. Solid score for many regional law schools.</li>
+                        <li><strong>Below 150:</strong> May limit admission options to less competitive schools.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const rI = document.getElementById('raw');
+            const resS = document.getElementById('res-score');
+            const resP = document.getElementById('res-perc');
+            const resT = document.getElementById('res-tier');
+            const resN = document.getElementById('res-note');
+            const pD = document.getElementById('perc-display');
+
+            // Simplified LSAT mapping table
+            const table = [
+                { raw: 101, lsat: 180, p: 99 },
+                { raw: 95,  lsat: 175, p: 98 },
+                { raw: 90,  lsat: 170, p: 96 },
+                { raw: 85,  lsat: 167, p: 93 },
+                { raw: 80,  lsat: 163, p: 89 },
+                { raw: 75,  lsat: 160, p: 85 },
+                { raw: 70,  lsat: 157, p: 78 },
+                { raw: 65,  lsat: 154, p: 70 },
+                { raw: 60,  lsat: 152, p: 62 },
+                { raw: 55,  lsat: 150, p: 54 },
+                { raw: 45,  lsat: 145, p: 38 },
+                { raw: 35,  lsat: 140, p: 25 },
+                { raw: 0,   lsat: 120, p: 1 }
+            ];
+
+            function update() {
+                const raw = parseInt(rI.value) || 0;
+                
+                // Find mapping
+                let match = table[0];
+                for (let i = 0; i < table.length; i++) {
+                    if (raw >= table[i].raw) {
+                        match = table[i];
+                        break;
+                    }
+                }
+
+                resS.textContent = match.lsat;
+                resP.textContent = match.p + 'th';
+                pD.value = `Top ${100-match.p}%`;
+
+                if (match.lsat >= 170) {
+                    resT.textContent = "Elite (T14)";
+                    resT.style.color = "#10b981";
+                } else if (match.lsat >= 160) {
+                    resT.textContent = "Strong";
+                    resT.style.color = "var(--clr-accent)";
+                } else {
+                    resT.textContent = "Average";
+                    resT.style.color = "var(--clr-text-dim)";
+                }
+            }
+
+            rI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

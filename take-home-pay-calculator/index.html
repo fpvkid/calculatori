@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Take-Home Pay Calculator | Net Income Estimator</title>
+    <meta name="description" content="Calculate your paycheck after taxes. Estimate your take-home pay based on federal tax, state tax, and social security deductions. Free salary tool.">
+    <meta name="keywords" content="take home pay calculator, net income tool, paycheck estimator, after tax salary calculator, salary tax tool, income tax estimator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Career">
+    <link rel="canonical" href="https://calcsfor.life/take-home-pay-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .net-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .tax-breakdown { margin-top: 20px; text-align: left; background: var(--clr-bg-2); padding: 20px; border-radius: var(--radius-md); }
+        .t-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--clr-border); }
+        .t-item:last-child { border-bottom: none; font-weight: 700; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Career Tools",
+        "item": "https://calcsfor.life/#education"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Take-Home Pay Calculator",
+        "item": "https://calcsfor.life/take-home-pay-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Take-Home Pay Tool</h1>
+                    <p>What you actually keep. Estimate your net paycheck after federal taxes, FICA, and state-level deductions are removed from your gross salary.</p>
+                </div>
+
+                <form class="calc-form" id="tax-form">
+                    <div class="form-group">
+                        <label>Annual Gross Salary ($)</label>
+                        <input type="number" id="salary" value="75000" step="1000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>State Tax Type</label>
+                        <select id="state-tax">
+                            <option value="0">No Income Tax (TX, FL, WA, etc.)</option>
+                            <option value="0.04" selected>Average (4-5%)</option>
+                            <option value="0.08">High Tax (CA, NY, etc.)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Filing Status</label>
+                        <select id="status">
+                            <option value="14600">Single ($14,600 Ded.)</option>
+                            <option value="29200">Married ($29,200 Ded.)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Monthly Take-Home</span>
+                    <div class="net-val" id="res-monthly">$4,850</div>
+                    
+                    <div class="tax-breakdown">
+                        <div class="t-item"><span>Federal Income Tax</span> <span id="res-fed">-$8,200</span></div>
+                        <div class="t-item"><span>FICA (Social Security/Med)</span> <span id="res-fica">-$5,738</span></div>
+                        <div class="t-item"><span>State Income Tax</span> <span id="res-state">-$3,000</span></div>
+                        <div class="t-item"><span>Total Annual Net</span> <span id="res-annual">$58,062</span></div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Understanding your Paycheck</h2>
+                    <p>I genuinely believe that understanding your net pay is the foundation of financial health. Most people discuss their salary in "Gross" terms, but you only ever see the "Net." The gap between the two is consumed by three primary forces: the IRS (Federal), your state government, and Social Security/Medicare (FICA).</p>
+                    
+                    <p><strong>Filing Status Matters:</strong> Whether you file as Single or Married/Jointly changes your Standard Deduction. This is the amount of income you don't have to pay federal tax on at all. For 2024/2025, this is a significant portion of your income.</p>
+                    
+                    <h3>The Big Three Deductions:</h3>
+                    <ul>
+                        <li><strong>Federal Tax:</strong> A progressive system where higher slices of your income are taxed at higher percentages (10% to 37%).</li>
+                        <li><strong>FICA:</strong> A flat 7.65% for most employees (6.2% for Social Security and 1.45% for Medicare).</li>
+                        <li><strong>State Tax:</strong> Varies wildly. Nine states have no income tax, while others can take over 10% of your top earnings.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const sI = document.getElementById('salary');
+            const stI = document.getElementById('state-tax');
+            const fI = document.getElementById('status');
+            
+            const resM = document.getElementById('res-monthly');
+            const resF = document.getElementById('res-fed');
+            const resFI = document.getElementById('res-fica');
+            const resST = document.getElementById('res-state');
+            const resA = document.getElementById('res-annual');
+
+            function update() {
+                const salary = parseFloat(sI.value) || 0;
+                const stateRate = parseFloat(stI.value);
+                const deduction = parseFloat(fI.value);
+
+                // 1. FICA (Flat 7.65%)
+                const fica = salary * 0.0765;
+
+                // 2. State Tax (Simplified flat)
+                const stateTax = salary * stateRate;
+
+                // 3. Federal Tax (Simplified Progressive)
+                const taxable = Math.max(0, salary - deduction);
+                let fedTax = 0;
+                
+                if (taxable > 191950) fedTax = 34647 + (taxable - 191950) * 0.32;
+                else if (taxable > 100525) fedTax = 16290 + (taxable - 100525) * 0.24;
+                else if (taxable > 47150) fedTax = 5444 + (taxable - 47150) * 0.22;
+                else if (taxable > 11600) fedTax = 1160 + (taxable - 11600) * 0.12;
+                else fedTax = taxable * 0.10;
+
+                const annualNet = salary - fica - stateTax - fedTax;
+                const monthlyNet = annualNet / 12;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+                resM.textContent = formatter.format(monthlyNet);
+                resF.textContent = '-' + formatter.format(fedTax);
+                resFI.textContent = '-' + formatter.format(fica);
+                resST.textContent = '-' + formatter.format(stateTax);
+                resA.textContent = formatter.format(annualNet);
+            }
+
+            [sI, stI, fI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

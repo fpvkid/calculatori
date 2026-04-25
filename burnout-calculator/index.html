@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Burnout Risk Calculator | Professional Stress Test</title>
+    <meta name="description" content="Assess your risk of professional burnout. Take our interactive stress test and receive a personalized score and guidance on mental health at work.">
+    <meta name="keywords" content="burnout calculator, professional stress test, work exhaustion tool, mental health at work, burnout risk score, career health tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Career">
+    <link rel="canonical" href="https://calcsfor.life/burnout-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .score-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .q-item { margin-bottom: 30px; border-bottom: 1px solid var(--clr-border); pb: 20px; }
+        .q-text { font-weight: 600; margin-bottom: 15px; display: block; font-size: 1.1rem; }
+        .options { display: flex; gap: 10px; justify-content: space-between; }
+        .opt { flex: 1; text-align: center; padding: 10px; border: 1px solid var(--clr-border); border-radius: var(--radius-md); cursor: pointer; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; }
+        .opt:hover { background: var(--clr-bg-2); }
+        .opt.selected { background: var(--clr-accent); color: #fff; border-color: var(--clr-accent); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Career Tools",
+        "item": "https://calcsfor.life/#education"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Burnout Calculator",
+        "item": "https://calcsfor.life/burnout-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Burnout Risk Test</h1>
+                    <p>Check your battery. Assess your current level of professional stress and emotional exhaustion with our evidence-based self-assessment tool.</p>
+                </div>
+
+                <div id="quiz">
+                    <div class="q-item" data-q="1">
+                        <span class="q-text">1. How often do you feel emotionally drained by your work?</span>
+                        <div class="options">
+                            <div class="opt" data-val="0">Never</div>
+                            <div class="opt" data-val="1">Rarely</div>
+                            <div class="opt" data-val="2">Sometimes</div>
+                            <div class="opt" data-val="3">Often</div>
+                            <div class="opt" data-val="4">Daily</div>
+                        </div>
+                    </div>
+                    <div class="q-item" data-q="2">
+                        <span class="q-text">2. How often do you feel "used up" at the end of the workday?</span>
+                        <div class="options">
+                            <div class="opt" data-val="0">Never</div>
+                            <div class="opt" data-val="1">Rarely</div>
+                            <div class="opt" data-val="2">Sometimes</div>
+                            <div class="opt" data-val="3">Often</div>
+                            <div class="opt" data-val="4">Daily</div>
+                        </div>
+                    </div>
+                    <div class="q-item" data-q="3">
+                        <span class="q-text">3. How often do you feel tired when you get up and have to face another day on the job?</span>
+                        <div class="options">
+                            <div class="opt" data-val="0">Never</div>
+                            <div class="opt" data-val="1">Rarely</div>
+                            <div class="opt" data-val="2">Sometimes</div>
+                            <div class="opt" data-val="3">Often</div>
+                            <div class="opt" data-val="4">Daily</div>
+                        </div>
+                    </div>
+                    <div class="q-item" data-q="4">
+                        <span class="q-text">4. How often do you find yourself becoming less interested in your work?</span>
+                        <div class="options">
+                            <div class="opt" data-val="0">Never</div>
+                            <div class="opt" data-val="1">Rarely</div>
+                            <div class="opt" data-val="2">Sometimes</div>
+                            <div class="opt" data-val="3">Often</div>
+                            <div class="opt" data-val="4">Daily</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="res-display" id="res-block" style="opacity: 0.5;">
+                    <span class="label">Your Burnout Risk Score</span>
+                    <div class="score-val" id="res-val">0</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Please answer all questions to see your results.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is Burnout?</h2>
+                    <p>I genuinely believe that burnout is the defining health challenge of the modern workplace. It’s not just "being tired." The World Health Organization (WHO) defines burnout as an occupational phenomenon resulting from chronic workplace stress that has not been successfully managed. It is characterized by three dimensions: feelings of energy depletion, increased mental distance from one’s job, and reduced professional efficacy.</p>
+                    
+                    <h3>Key Warning Signs:</h3>
+                    <ul>
+                        <li><strong>Exhaustion:</strong> Feeling physically and emotionally depleted all the time.</li>
+                        <li><strong>Cynicism:</strong> Developing a negative, detached, or overly critical attitude toward your work and colleagues.</li>
+                        <li><strong>Inefficacy:</strong> Feeling like you aren't accomplishing anything, regardless of how much you work.</li>
+                    </ul>
+                    
+                    <p><em>Disclaimer: This tool is for self-assessment and informational purposes only. It is not a clinical diagnostic tool. If you are experiencing severe distress or suicidal thoughts, please contact a mental health professional or a crisis hotline immediately.</em></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const quiz = document.getElementById('quiz');
+            const resVal = document.getElementById('res-val');
+            const resNote = document.getElementById('res-note');
+            const resBlock = document.getElementById('res-block');
+            
+            const answers = {};
+
+            quiz.addEventListener('click', (e) => {
+                if (e.target.classList.contains('opt')) {
+                    const qId = e.target.closest('.q-item').dataset.q;
+                    const val = parseInt(e.target.dataset.val);
+                    
+                    // Toggle UI
+                    const opts = e.target.parentNode.children;
+                    [...opts].forEach(o => o.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                    
+                    answers[qId] = val;
+                    update();
+                }
+            });
+
+            function update() {
+                const qCount = 4;
+                const answeredCount = Object.keys(answers).length;
+                
+                if (answeredCount === qCount) {
+                    resBlock.style.opacity = "1";
+                    let total = 0;
+                    for (let k in answers) total += answers[k];
+                    
+                    const score = Math.round((total / (qCount * 4)) * 100);
+                    resVal.textContent = score;
+
+                    if (score > 75) {
+                        resNote.textContent = "CRITICAL RISK: You are showing signs of severe burnout. Prioritize rest and seek professional support.";
+                        resVal.style.color = "#ef4444";
+                    } else if (score > 40) {
+                        resNote.textContent = "MODERATE RISK: You are experiencing high stress. It's time to re-evaluate your boundaries and self-care.";
+                        resVal.style.color = "var(--clr-accent)";
+                    } else {
+                        resNote.textContent = "LOW RISK: You seem to be managing your work stress well. Keep prioritizing your well-being!";
+                        resVal.style.color = "#10b981";
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

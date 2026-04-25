@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Final Grade Calculator | What Score Do I Need on My Final?</title>
+    <meta name="description" content="Calculate the grade you need on your final exam to reach your target course grade. Easy to use grade calculator for high school and college students.">
+    <meta name="keywords" content="final grade calculator, what do i need on my final, grade estimator tool, target grade calculator, college final score calc, exam grade tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Education">
+    <link rel="canonical" href="https://calcsfor.life/final-grade-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .grade-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Education",
+        "item": "https://calcsfor.life/#education"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Final Grade Calculator",
+        "item": "https://calcsfor.life/final-grade-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Final Grade Needed</h1>
+                    <p>Stop guessing. Calculate exactly what score you need on your final exam to achieve your target grade for the semester.</p>
+                </div>
+
+                <form class="calc-form" id="final-form">
+                    <div class="form-group">
+                        <label>Current Grade (%)</label>
+                        <input type="number" id="current" value="85">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target Grade (%)</label>
+                        <input type="number" id="target" value="90">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Final Exam Weight (%)</label>
+                        <input type="number" id="weight" value="20">
+                        <small>How much is the final exam worth compared to your total grade?</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Required Final Score</span>
+                    <div class="grade-val" id="res-grade">110%</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        You might need some extra credit.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How to use this tool</h2>
+                    <p>I genuinely believe that knowing your targets reduces exam anxiety. This calculator uses the weighted average formula to solve for your missing grade. To find out what you need on your final, you need three pieces of information:</p>
+                    
+                    <ol>
+                        <li><strong>Current Grade:</strong> Your overall percentage in the class right now.</li>
+                        <li><strong>Target Grade:</strong> The final percentage you want to achieve (e.g., 90% for an A).</li>
+                        <li><strong>Final Weight:</strong> How much of your final grade is based on the exam (check your syllabus!).</li>
+                    </ol>
+                    
+                    <h3>The Formula:</h3>
+                    <p><code>Final Score = (Target - (Current * (1 - Weight))) / Weight</code></p>
+                    
+                    <p><em>Example: If you have an 85% and want a 90% with a final worth 20%, you'll need a 110% on the exam. Time to ask for extra credit!</em></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const cI = document.getElementById('current');
+            const tI = document.getElementById('target');
+            const wI = document.getElementById('weight');
+            
+            const resG = document.getElementById('res-grade');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const current = parseFloat(cI.value) || 0;
+                const target = parseFloat(tI.value) || 0;
+                const weight = (parseFloat(wI.value) || 0) / 100;
+
+                if (weight <= 0) {
+                    resG.textContent = "0%";
+                    resN.textContent = "The final isn't weighted!";
+                    return;
+                }
+
+                // Required = (Target - (Current * (1 - Weight))) / Weight
+                const required = (target - (current * (1 - weight))) / weight;
+                
+                resG.textContent = Math.ceil(required) + '%';
+
+                if (required > 100) {
+                    resN.textContent = "This will be tough! Consider extra credit.";
+                    resG.style.color = "#ef4444";
+                } else if (required <= 0) {
+                    resN.textContent = "You've already secured your target grade!";
+                    resG.style.color = "#10b981";
+                } else {
+                    resN.textContent = `Study hard! You need a ${Math.ceil(required)}% to reach your goal.`;
+                    resG.style.color = "var(--clr-accent)";
+                }
+            }
+
+            [cI, tI, wI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
