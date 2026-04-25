@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>MTG Mana Curve Calculator | Deck Building Tool</title>
+    <meta name="description" content="Optimize your Magic: The Gathering deck with our mana curve calculator. Balance your spells and lands for consistent gameplay. Free MTG deck tool.">
+    <meta name="keywords" content="mtg mana curve calculator, deck building tool, magic the gathering math, mana value distribution, mtg land calculator, commander deck builder tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun & Niche">
+    <link rel="canonical" href="https://calcsfor.life/mtg-mana-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 800px; margin: 0 auto; }
+        .chart-container { 
+            display: flex; 
+            align-items: flex-end; 
+            justify-content: space-between; 
+            height: 200px; 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            padding: 20px; 
+            border-radius: var(--radius-md);
+            margin: 30px 0;
+        }
+        .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+        .bar { width: 80%; background: var(--clr-accent); border-radius: 4px 4px 0 0; transition: height 0.3s; }
+        .bar-label { font-size: 0.8rem; font-weight: 700; margin-top: 10px; color: var(--clr-text-dim); }
+        
+        .input-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 30px; }
+        .input-item { text-align: center; }
+        .input-item label { display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 5px; }
+        .input-item input { text-align: center; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "MTG Mana Curve Calculator",
+        "item": "https://calcsfor.life/mtg-mana-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Mana Curve Tool</h1>
+                    <p>Build better decks. Visualize your spell distribution and calculate the optimal land count for your Magic: The Gathering deck.</p>
+                </div>
+
+                <div class="chart-container" id="chart">
+                    <div class="bar-wrap"><div class="bar" style="height: 10%;"></div><span class="bar-label">1</span></div>
+                    <div class="bar-wrap"><div class="bar" style="height: 40%;"></div><span class="bar-label">2</span></div>
+                    <div class="bar-wrap"><div class="bar" style="height: 60%;"></div><span class="bar-label">3</span></div>
+                    <div class="bar-wrap"><div class="bar" style="height: 30%;"></div><span class="bar-label">4</span></div>
+                    <div class="bar-wrap"><div class="bar" style="height: 15%;"></div><span class="bar-label">5</span></div>
+                    <div class="bar-wrap"><div class="bar" style="height: 5%;"></div><span class="bar-label">6+</span></div>
+                </div>
+
+                <form class="calc-form" id="mtg-form">
+                    <div class="form-group">
+                        <label>Format</label>
+                        <select id="format">
+                            <option value="60">Standard / Modern (60 Cards)</option>
+                            <option value="100" selected>Commander / EDH (100 Cards)</option>
+                        </select>
+                    </div>
+
+                    <span class="label">Count per Mana Value</span>
+                    <div class="input-grid">
+                        <div class="input-item"><label>1 CMC</label><input type="number" class="cmc-in" data-idx="0" value="5"></div>
+                        <div class="input-item"><label>2 CMC</label><input type="number" class="cmc-in" data-idx="1" value="12"></div>
+                        <div class="input-item"><label>3 CMC</label><input type="number" class="cmc-in" data-idx="2" value="15"></div>
+                        <div class="input-item"><label>4 CMC</label><input type="number" class="cmc-in" data-idx="3" value="8"></div>
+                        <div class="input-item"><label>5 CMC</label><input type="number" class="cmc-in" data-idx="4" value="4"></div>
+                        <div class="input-item"><label>6+ CMC</label><input type="number" class="cmc-in" data-idx="5" value="2"></div>
+                    </div>
+                </form>
+
+                <div style="background: var(--clr-surface); border: 1px solid var(--clr-border); padding: 30px; border-radius: var(--radius-lg); margin-top: 30px; text-align: center;">
+                    <span class="label">Recommended Land Count</span>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--clr-accent);" id="res-lands">36</div>
+                    <p style="margin-top: 15px; color: var(--clr-text-dim); font-size: 0.95rem;" id="res-note">
+                        Average Mana Value: 2.85
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Importance of the Curve</h2>
+                    <p>I genuinely believe that a deck's mana curve is the difference between a victory and a "non-game." If your curve is too high, you'll have nothing to play in the early turns. If it's too low, you'll run out of gas before your opponent. A healthy curve usually looks like a "hump," peaking at the 2 or 3 mana mark.</p>
+                    
+                    <p><strong>Calculating Lands:</strong> As a rule of thumb, a 60-card deck should have between **22 and 26 lands**, while a 100-card Commander deck needs **34 to 38**. If your average mana value is high (over 3.0), you should lean toward the higher end of these ranges.</p>
+                    
+                    <h3>Deck Building Tips:</h3>
+                    <ul>
+                        <li><strong>Mana Rocks:</strong> In Commander, cards like Sol Ring or Arcane Signet are "mana ramp." They help you play expensive cards sooner, but they don't replace lands entirely.</li>
+                        <li><strong>Card Draw:</strong> If your curve is low (aggro), you need plenty of card draw to ensure you don't run out of spells to cast.</li>
+                        <li><strong>Color Balance:</strong> Don't just count the mana value—ensure you have enough lands that produce the specific colors of mana your spells require.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const inputs = document.querySelectorAll('.cmc-in');
+            const formatS = document.getElementById('format');
+            const bars = document.querySelectorAll('.bar');
+            
+            const resL = document.getElementById('res-lands');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const format = parseInt(formatS.value);
+                let totalSpells = 0;
+                let weightedTotal = 0;
+                let maxCount = 0;
+
+                inputs.forEach(input => {
+                    const count = parseInt(input.value) || 0;
+                    const cmc = parseInt(input.getAttribute('data-idx')) + 1;
+                    totalSpells += count;
+                    weightedTotal += (count * cmc);
+                    if (count > maxCount) maxCount = count;
+                });
+
+                // Update Chart
+                inputs.forEach((input, i) => {
+                    const count = parseInt(input.value) || 0;
+                    const h = maxCount > 0 ? (count / maxCount) * 100 : 0;
+                    bars[i].style.height = h + '%';
+                });
+
+                const avgCMC = totalSpells > 0 ? (weightedTotal / totalSpells) : 0;
+                
+                // Land logic
+                let landCount = Math.round(format * 0.38); // Base 38%
+                if (avgCMC < 2.5) landCount = Math.round(format * 0.34);
+                if (avgCMC > 3.5) landCount = Math.round(format * 0.42);
+
+                resL.textContent = landCount;
+                resN.textContent = `Average Mana Value: ${avgCMC.toFixed(2)}`;
+            }
+
+            inputs.forEach(i => i.addEventListener('input', update));
+            formatS.addEventListener('change', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

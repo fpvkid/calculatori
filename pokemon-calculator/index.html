@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Pokemon Type Weakness Calculator | Battle Strategy Tool</title>
+    <meta name="description" content="Instantly find any Pokemon's weaknesses and resistances. Supports dual types for generations 1-9. Perfect for gym battles and competitive play.">
+    <meta name="keywords" content="pokemon type weakness calculator, pokemon battle tool, dual type resistance chart, pokemon type matchups, competitive pokemon tool, go raid calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun & Niche">
+    <link rel="canonical" href="https://calcsfor.life/pokemon-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 700px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            margin-top: 30px;
+        }
+        
+        .type-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .result-group { margin-top: 25px; }
+        .result-title { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--clr-text-dim); margin-bottom: 10px; display: block; border-bottom: 1px solid var(--clr-border); pb: 5px; }
+        
+        .type-badge-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .type-badge { 
+            padding: 5px 12px; 
+            border-radius: 4px; 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            color: white; 
+            text-transform: uppercase;
+        }
+        
+        /* Pokemon Types Colors */
+        .type-normal { background: #A8A77A; }
+        .type-fire { background: #EE8130; }
+        .type-water { background: #6390F0; }
+        .type-electric { background: #F7D02C; color: black; }
+        .type-grass { background: #7AC74C; }
+        .type-ice { background: #96D9D6; color: black; }
+        .type-fighting { background: #C22E28; }
+        .type-poison { background: #A33EA1; }
+        .type-ground { background: #E2BF65; }
+        .type-flying { background: #A98FF3; }
+        .type-psychic { background: #F95587; }
+        .type-bug { background: #A6B91A; }
+        .type-rock { background: #B6A136; }
+        .type-ghost { background: #735797; }
+        .type-dragon { background: #6F35FC; }
+        .type-dark { background: #705746; }
+        .type-steel { background: #B7B7CE; color: black; }
+        .type-fairy { background: #D685AD; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Pokemon Type Weakness Calculator",
+        "item": "https://calcsfor.life/pokemon-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Type Matchup Tool</h1>
+                    <p>Be the very best. Quickly identify the weaknesses, resistances, and immunities for any single or dual-type Pokemon to gain the upper hand in battle.</p>
+                </div>
+
+                <div class="type-select-grid">
+                    <div class="form-group">
+                        <label>Primary Type</label>
+                        <select id="type1">
+                            <option value="normal">Normal</option>
+                            <option value="fire" selected>Fire</option>
+                            <option value="water">Water</option>
+                            <option value="electric">Electric</option>
+                            <option value="grass">Grass</option>
+                            <option value="ice">Ice</option>
+                            <option value="fighting">Fighting</option>
+                            <option value="poison">Poison</option>
+                            <option value="ground">Ground</option>
+                            <option value="flying">Flying</option>
+                            <option value="psychic">Psychic</option>
+                            <option value="bug">Bug</option>
+                            <option value="rock">Rock</option>
+                            <option value="ghost">Ghost</option>
+                            <option value="dragon">Dragon</option>
+                            <option value="dark">Dark</option>
+                            <option value="steel">Steel</option>
+                            <option value="fairy">Fairy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Secondary Type</label>
+                        <select id="type2">
+                            <option value="none">None</option>
+                            <option value="normal">Normal</option>
+                            <option value="fire">Fire</option>
+                            <option value="water">Water</option>
+                            <option value="electric">Electric</option>
+                            <option value="grass">Grass</option>
+                            <option value="ice">Ice</option>
+                            <option value="fighting" selected>Fighting</option>
+                            <option value="poison">Poison</option>
+                            <option value="ground">Ground</option>
+                            <option value="flying">Flying</option>
+                            <option value="psychic">Psychic</option>
+                            <option value="bug">Bug</option>
+                            <option value="rock">Rock</option>
+                            <option value="ghost">Ghost</option>
+                            <option value="dragon">Dragon</option>
+                            <option value="dark">Dark</option>
+                            <option value="steel">Steel</option>
+                            <option value="fairy">Fairy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="res-display" id="results">
+                    <!-- Dynamic Content -->
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Mastering Type Matchups</h2>
+                    <p>I genuinely believe that understanding type matchups is the most critical skill for any Pokemon trainer. While some matchups are intuitive (Water beats Fire), others are more complex (Fairy beats Fighting). When you encounter a dual-type Pokemon, these multipliers combine—meaning a "Fire/Flying" type takes 4x damage from Rock attacks!</p>
+                    
+                    <p><strong>The "Zero" Multiplier:</strong> Some types are completely immune to others. For example, Ground moves do zero damage to Flying types, and Ghost moves do zero damage to Normal types. Identifying these immunities can save your Pokemon in a clutch battle.</p>
+                    
+                    <h3>Strategy Tips:</h3>
+                    <ul>
+                        <li><strong>STAB (Same Type Attack Bonus):</strong> If a Pokemon uses a move that matches its own type, that move deals 50% more damage.</li>
+                        <li><strong>Coverage:</strong> Always ensure your team has "coverage" moves—attacks that can hit your weaknesses for super effective damage.</li>
+                        <li><strong>Terastallization:</strong> In the newest generations, Pokemon can change their type mid-battle. Keep this in mind when planning your final blow!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const types = ["normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"];
+            
+            // 0: Normal, 1: Fire, 2: Water, 3: Electric, 4: Grass, 5: Ice, 6: Fighting, 7: Poison, 8: Ground, 9: Flying, 10: Psychic, 11: Bug, 12: Rock, 13: Ghost, 14: Dragon, 15: Dark, 16: Steel, 17: Fairy
+            const chart = [
+                [1,1,1,1,1,1,1,1,1,1,1,1,0.5,0,1,1,0.5,1], // Normal
+                [1,0.5,0.5,1,2,2,1,1,1,1,1,2,0.5,1,0.5,1,2,1], // Fire
+                [1,2,0.5,1,0.5,1,1,1,2,1,1,1,2,1,0.5,1,1,1], // Water
+                [1,1,2,0.5,0.5,1,1,1,0,2,1,1,1,1,0.5,1,1,1], // Electric
+                [1,0.5,2,1,0.5,1,1,0.5,2,0.5,1,0.5,2,1,0.5,1,0.5,1], // Grass
+                [1,0.5,0.5,1,2,0.5,1,1,2,2,1,1,1,1,2,1,0.5,1], // Ice
+                [2,1,1,1,1,2,1,0.5,1,0.5,0.5,0.5,2,0,1,2,2,0.5], // Fighting
+                [1,1,1,1,2,1,1,0.5,0.5,1,1,1,0.5,0.5,1,1,0,2], // Poison
+                [1,2,1,2,0.5,1,1,2,1,0,1,0.5,2,1,1,1,2,1], // Ground
+                [1,1,1,0.5,2,1,2,1,1,1,1,2,0.5,1,1,1,0.5,1], // Flying
+                [1,1,1,1,1,1,2,2,1,1,0.5,1,1,1,1,0,0.5,1], // Psychic
+                [1,0.5,1,1,2,1,0.5,0.5,1,0.5,2,1,1,0.5,1,2,0.5,0.5], // Bug
+                [1,2,1,1,1,2,0.5,1,0.5,2,1,2,1,1,1,1,0.5,1], // Rock
+                [0,1,1,1,1,1,1,1,1,1,2,1,1,2,1,0.5,1,1], // Ghost
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,0.5,0], // Dragon
+                [1,1,1,1,1,1,0.5,1,1,1,2,1,1,2,1,0.5,1,0.5], // Dark
+                [1,0.5,0.5,0.5,1,2,1,1,1,1,1,1,2,1,1,1,0.5,2], // Steel
+                [1,0.5,1,1,1,1,2,0.5,1,1,1,1,1,1,2,2,0.5,1] // Fairy
+            ];
+
+            const t1 = document.getElementById('type1');
+            const t2 = document.getElementById('type2');
+            const results = document.getElementById('results');
+
+            function update() {
+                const idx1 = types.indexOf(t1.value);
+                const type2Val = t2.value;
+                const idx2 = type2Val === 'none' ? -1 : types.indexOf(type2Val);
+
+                let multipliers = Array(18).fill(1);
+
+                // Calculate multipliers for each attacking type
+                for (let i = 0; i < 18; i++) {
+                    const m1 = chart[i][idx1];
+                    const m2 = idx2 === -1 ? 1 : chart[i][idx2];
+                    multipliers[i] = m1 * m2;
+                }
+
+                renderResults(multipliers);
+            }
+
+            function renderResults(list) {
+                results.innerHTML = '';
+                const groups = [
+                    { title: "Weakness (4x)", val: 4 },
+                    { title: "Weakness (2x)", val: 2 },
+                    { title: "Resistance (0.5x)", val: 0.5 },
+                    { title: "Resistance (0.25x)", val: 0.25 },
+                    { title: "Immune (0x)", val: 0 }
+                ];
+
+                groups.forEach(g => {
+                    const matches = list.map((v, i) => v === g.val ? types[i] : null).filter(v => v);
+                    if (matches.length > 0) {
+                        const groupDiv = document.createElement('div');
+                        groupDiv.className = 'result-group';
+                        groupDiv.innerHTML = `
+                            <span class="result-title">${g.title}</span>
+                            <div class="type-badge-list">
+                                ${matches.map(t => `<span class="type-badge type-${t}">${t}</span>`).join('')}
+                            </div>
+                        `;
+                        results.appendChild(groupDiv);
+                    }
+                });
+
+                if (results.innerHTML === '') {
+                    results.innerHTML = '<p style="text-align:center; color:var(--clr-text-dim);">No significant weaknesses or resistances.</p>';
+                }
+            }
+
+            t1.addEventListener('change', update);
+            t2.addEventListener('change', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

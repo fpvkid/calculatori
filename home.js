@@ -66,9 +66,7 @@
         { title: 'VO2 Max Calculator', slug: 'vo2-max-calculator', icon: '🫁', cat: 'health', desc: 'Estimate your aerobic fitness and oxygen capacity.', live: true },
         { title: 'Sleep Apnea (AHI) Test', slug: 'ahi-calculator', icon: '😴', cat: 'health', desc: 'Screening test for sleep apnea risk and snoring.', live: true },
         { title: 'TDEE Calculator', slug: 'tdee-calculator', icon: '🔥', cat: 'health', desc: 'Calculate your total daily maintenance calories.', live: true },
-        { title: 'Heart Age Calc', slug: 'heart-age-calculator', icon: '❤️', cat: 'health', desc: 'Is your heart older than you? Risk-based age estimate.', live: true },
         { title: 'AHA PREVENT Tool', slug: 'aha-prevent-calculator', icon: '🛡️', cat: 'health', desc: 'New 10-year CVD risk model including kidney health.', live: true },
-        { title: 'Sleep Apnea (AHI)', slug: 'ahi-calculator', icon: '😴', cat: 'health', desc: 'Severity index for apneas and hypopneas per hour.', live: true },
         { title: 'Adrenal Washout', slug: 'adrenal-washout-calculator', icon: '🧬', cat: 'health', desc: 'CT HU analysis for adrenal nodule evaluation.', live: true },
         { title: 'ANC Calculator', slug: 'anc-calculator', icon: '🩸', cat: 'health', desc: 'Absolute Neutrophil Count for immune system tracking.', live: true },
         { title: 'Breast Implant Size', slug: 'breast-implant-calculator', icon: '🏥', cat: 'health', desc: 'Estimate CC volume based on base width and projection.', live: true },
@@ -175,9 +173,9 @@
         { title: 'Yarn Yardage Calc', slug: 'yarn-calculator', icon: '🧶', cat: 'craft', desc: 'Estimate yarn needed for sweaters, blankets, and scarves.', live: true },
         { title: 'Board Foot Calculator', slug: 'board-foot-calculator', icon: '🪵', cat: 'craft', desc: 'Lumber volume and cost for woodworking projects.', live: true },
         { title: 'Ring Size Converter', slug: 'ring-size-calculator', icon: '💍', cat: 'craft', desc: 'Convert finger measurements to US, UK, and EU sizes.', live: true },
-        { title: 'D&D Stat Roller', slug: 'dnd-stat-roller', icon: '🎲', cat: 'fun', desc: 'Roll 4d6 and drop the lowest for your character stats.', live: true },
-        { title: 'The Love Calculator', slug: 'love-calculator', icon: '💖', cat: 'fun', desc: 'Secret name-based algorithm for romantic compatibility.', live: true },
-        { title: 'Zodiac Sign Finder', slug: 'zodiac-calculator', icon: '✨', cat: 'fun', desc: 'Find your sun sign and element based on your birthday.', live: true },
+        { title: 'Knitting Timer', slug: 'knitting-calculator', icon: '🧶', cat: 'craft', desc: 'Estimate total project time based on your stitch speed.', live: true },
+        { title: 'Pottery Shrinkage', slug: 'pottery-calculator', icon: '🏺', cat: 'craft', desc: 'Calculate raw size needed for target fired dimensions.', live: true },
+        { title: 'Candle Burn Time', slug: 'candle-burn-calculator', icon: '🕯️', cat: 'craft', desc: 'Estimate total life based on wax weight and wick type.', live: true },
         { title: 'Candle Wax Calculator', slug: 'candle-wax-calculator', icon: '🕯️', cat: 'craft', desc: 'Wax weight by container volume for candle making.', live: true },
 
         // ---- Time ----
@@ -210,6 +208,16 @@
         { title: 'OSRS Agility Calculator', slug: 'osrs-agility-calculator', icon: '🏃', cat: 'fun', desc: 'Calculate laps to your next Agility level in Old School RuneScape.', live: true },
         { title: 'Betting Odds Converter', slug: 'betting-odds-calculator', icon: '🎲', cat: 'fun', desc: 'Convert Moneyline, Decimal, and Fractional odds.', live: true },
         { title: 'Sim Racing FOV', slug: 'sim-racing-fov', icon: '🏎️', cat: 'fun', desc: 'Calculate the perfect Field of View for your racing rig.', live: true },
+        { title: 'D&D Stat Roller', slug: 'dnd-stat-roller', icon: '🎲', cat: 'fun', desc: 'Roll 4d6 and drop the lowest for your character stats.', live: true },
+        { title: 'The Love Calculator', slug: 'love-calculator', icon: '💖', cat: 'fun', desc: 'Secret name-based algorithm for romantic compatibility.', live: true },
+        { title: 'Zodiac Sign Finder', slug: 'zodiac-calculator', icon: '✨', cat: 'fun', desc: 'Find your sun sign and element based on your birthday.', live: true },
+        { title: 'Rocket Altitude', slug: 'rocket-calculator', icon: '🚀', cat: 'fun', desc: 'Estimate peak height based on engine impulse and mass.', live: true },
+        { title: 'Metal Detector Depth', slug: 'metal-detector-calculator', icon: '🔎', cat: 'fun', desc: 'Detection depth for coins and relics in different soils.', live: true },
+        { title: 'Astronomy Exposure', slug: 'astronomy-calculator', icon: '🔭', cat: 'fun', desc: 'The 500 Rule for sharp star photography without trails.', live: true },
+        { title: 'MTG Mana Curve', slug: 'mtg-mana-calculator', icon: '🃏', cat: 'fun', desc: 'Optimize your deck spells and lands for consistent play.', live: true },
+        { title: 'Pokemon Weakness', slug: 'pokemon-calculator', icon: '🔴', cat: 'fun', desc: 'Identify dual-type vulnerabilities and resistances instantly.', live: true },
+        { title: 'Sudoku Scorer', slug: 'sudoku-calculator', icon: '🔢', cat: 'fun', desc: 'True difficulty level based on clues and required logic.', live: true },
+        { title: 'Guitar Tension', slug: 'guitar-calculator', icon: '🎸', cat: 'fun', desc: 'Neck force calculation based on string gauge and tuning.', live: true },
     ];
 
     /* ====== HERO TYPING EFFECT ====== */
