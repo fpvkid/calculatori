@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Hat Size Calculator | Convert Head Circumference to US & EU Sizes</title>
+    <meta name="description" content="Free hat size calculator. Convert head circumference in inches or cm into US, UK, and European hat sizes. Find your perfect fit for caps and fedoras.">
+    <meta name="keywords" content="hat size calculator, head circumference to hat size, us hat size chart, find my hat size, cap size converter, fitted hat tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Craft">
+    <link rel="canonical" href="https://calcsfor.life/hat-size-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .hat-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .unit-toggle { display: flex; gap: 8px; margin-bottom: 24px; border: 1px solid var(--clr-border); border-radius: 100px; padding: 4px; }
+        .unit-btn { flex: 1; padding: 10px; border-radius: 100px; border: none; background: transparent; cursor: pointer; font-weight: 600; color: var(--clr-text-dim); transition: 0.3s; }
+        .unit-btn.active { background: var(--clr-surface); color: var(--clr-accent); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+        .size-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .s-item { text-align: center; }
+        .s-val { font-size: 1.5rem; font-weight: 800; display: block; color: var(--clr-text); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Craft & Fashion",
+        "item": "https://calcsfor.life/#craft"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Hat Size Calculator",
+        "item": "https://calcsfor.life/hat-size-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Hat Size Calculator</h1>
+                    <p>Get the right fit. Convert your head measurement into official US, UK, and European hat sizes instantly.</p>
+                </div>
+
+                <div class="unit-toggle">
+                    <button class="unit-btn active" data-unit="in">Inches (in)</button>
+                    <button class="unit-btn" data-unit="cm">Centimeters (cm)</button>
+                </div>
+
+                <form class="calc-form" id="hat-form">
+                    <div class="form-group">
+                        <label id="lbl-input">Head Circumference (in)</label>
+                        <input type="number" id="measurement" value="22.5" step="0.1">
+                        <small>Measure around your head, just above your ears.</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Primary Size (US)</span>
+                    <div class="hat-val" id="res-us">7 1/8</div>
+                    
+                    <div class="size-grid">
+                        <div class="s-item">
+                            <span class="s-val" id="res-uk">7</span>
+                            <span class="label" style="font-size: 0.7rem;">UK Size</span>
+                        </div>
+                        <div class="s-item">
+                            <span class="s-val" id="res-eu">57</span>
+                            <span class="label" style="font-size: 0.7rem;">European</span>
+                        </div>
+                        <div class="s-item">
+                            <span class="s-val" id="res-gen">M/L</span>
+                            <span class="label" style="font-size: 0.7rem;">General</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How to measure your head</h2>
+                    <p>I genuinely believe that measuring for a hat is harder than measuring for a suit. You want to place the tape measure about 1/2 inch above your ears and across the middle of your forehead. Don't pull the tape too tight! A hat that's slightly too big is much better than one that gives you a headache.</p>
+                    
+                    <p><strong>Between sizes?</strong> If you fall between two sizes, always go for the larger one. You can always add a small piece of foam or "hat reducer" tape inside the sweatband to make it snug.</p>
+                    
+                    <h3>Size Conversion Table:</h3>
+                    <ul>
+                        <li><strong>Small:</strong> 6 3/4 – 6 7/8 (US)</li>
+                        <li><strong>Medium:</strong> 7 – 7 1/8 (US)</li>
+                        <li><strong>Large:</strong> 7 1/4 – 7 3/8 (US)</li>
+                        <li><strong>X-Large:</strong> 7 1/2 – 7 5/8 (US)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let unit = 'in';
+            const mI = document.getElementById('measurement');
+            const resUS = document.getElementById('res-us');
+            const resUK = document.getElementById('res-uk');
+            const resEU = document.getElementById('res-eu');
+            const resGen = document.getElementById('res-gen');
+
+            function update() {
+                let val = parseFloat(mI.value) || 0;
+                let cm = unit === 'cm' ? val : val * 2.54;
+                let inches = unit === 'in' ? val : val / 2.54;
+
+                // US Size = inches / 3.14 approx
+                // We'll use a lookup approximation
+                let us = "7";
+                let uk = "6 7/8";
+                let gen = "M";
+
+                if (inches < 21.5) { us = "6 3/4"; uk = "6 5/8"; gen = "S"; }
+                else if (inches < 21.8) { us = "6 7/8"; uk = "6 3/4"; gen = "S"; }
+                else if (inches < 22.2) { us = "7"; uk = "6 7/8"; gen = "M"; }
+                else if (inches < 22.6) { us = "7 1/8"; uk = "7"; gen = "M"; }
+                else if (inches < 23.0) { us = "7 1/4"; uk = "7 1/8"; gen = "L"; }
+                else if (inches < 23.4) { us = "7 3/8"; uk = "7 1/4"; gen = "L"; }
+                else if (inches < 23.8) { us = "7 1/2"; uk = "7 3/8"; gen = "XL"; }
+                else { us = "7 5/8+"; uk = "7 1/2+"; gen = "XL+"; }
+
+                resUS.textContent = us;
+                resUK.textContent = uk;
+                resEU.textContent = Math.round(cm);
+                resGen.textContent = gen;
+            }
+
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    unit = this.dataset.unit;
+                    document.getElementById('lbl-input').textContent = `Head Circumference (${unit})`;
+                    mI.value = (unit === 'in') ? 22.5 : 57;
+                    update();
+                });
+            });
+
+            mI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

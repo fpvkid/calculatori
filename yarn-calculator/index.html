@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Yarn Yardage Calculator | Estimate Yarn for Knitting & Crochet</title>
+    <meta name="description" content="Free yarn yardage calculator. Estimate how much yarn you need for your next knitting or crochet project (sweaters, blankets, scarves) based on size and weight.">
+    <meta name="keywords" content="yarn calculator, knitting yardage estimator, crochet yarn amount, how much yarn for a blanket, yarn weight guide">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Craft">
+    <link rel="canonical" href="https://calcsfor.life/yarn-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .yarn-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .project-grid { display: grid; gap: 10px; margin-bottom: 24px; }
+        .project-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 15px 20px; 
+            border-radius: var(--radius-md); 
+            background: var(--clr-bg-2); 
+            border: 1px solid var(--clr-border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .project-item.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-accent); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Craft & DIY",
+        "item": "https://calcsfor.life/#craft"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Yarn Yardage Calculator",
+        "item": "https://calcsfor.life/yarn-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Yarn Yardage Calculator</h1>
+                    <p>Don't run out of yarn mid-row. Estimate the total yardage needed for your knitting or crochet project based on project type and size.</p>
+                </div>
+
+                <form class="calc-form" id="yarn-form">
+                    <div class="form-group">
+                        <label>Project Type</label>
+                        <div class="project-grid">
+                            <div class="project-item active" data-yards="1500" data-note="Average adult sweater.">
+                                <span>Adult Sweater</span>
+                                <strong>~1,500 Yards</strong>
+                            </div>
+                            <div class="project-item" data-yards="300" data-note="Standard winter scarf.">
+                                <span>Scarf</span>
+                                <strong>~300 Yards</strong>
+                            </div>
+                            <div class="project-item" data-yards="4000" data-note="Large throw blanket.">
+                                <span>Large Blanket</span>
+                                <strong>~4,000 Yards</strong>
+                            </div>
+                            <div class="project-item" data-yards="250" data-note="Standard beanie hat.">
+                                <span>Hat / Beanie</span>
+                                <strong>~250 Yards</strong>
+                            </div>
+                            <div class="project-item" data-yards="1000" data-note="Baby blanket.">
+                                <span>Baby Blanket</span>
+                                <strong>~1,000 Yards</strong>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Yards Needed (Est)</span>
+                    <div class="yarn-val" id="res-yards">1,500</div>
+                    <div class="label" style="font-size: 1.5rem; color: var(--clr-text); margin-top: 10px;">Yards</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Average adult sweater.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Why estimate yarn?</h2>
+                    <p>I genuinely believe that "yarn chicken" is the most stressful part of crafting. Nothing is worse than getting 90% done with a sweater only to realize you're out of yarn and the dye lot is sold out. Our calculator gives you a safe buffer based on industry averages for different weights of yarn (Fingering to Bulky).</p>
+                    
+                    <p><strong>Dye Lots Matter:</strong> Always buy one extra skein! Even if the color looks the same, different dye lots can have subtle shifts that will show up as a line in your finished work.</p>
+                    
+                    <h3>General Guide by Yarn Weight:</h3>
+                    <ul>
+                        <li><strong>Fingering/Sock:</strong> More yardage per skein, but requires more for the same area.</li>
+                        <li><strong>Worsted:</strong> The gold standard for sweaters and hats.</li>
+                        <li><strong>Bulky:</strong> Works up fast, but you'll need many more skeins because the yardage per skein is low.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            document.querySelectorAll('.project-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.project-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const yards = this.dataset.yards;
+                    document.getElementById('res-yards').textContent = parseInt(yards).toLocaleString();
+                    document.getElementById('res-note').textContent = this.dataset.note;
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

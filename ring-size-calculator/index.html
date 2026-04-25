@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Ring Size Converter | Find Your Perfect Fit (US, EU, UK)</title>
+    <meta name="description" content="Free ring size converter. Convert finger circumference or diameter into US, UK, and European ring sizes. Simple measurement guide included.">
+    <meta name="keywords" content="ring size converter, find my ring size, us ring size chart, finger circumference to ring size, jewelry size tool, ring diameter to size">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Craft">
+    <link rel="canonical" href="https://calcsfor.life/ring-size-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .size-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .toggle-group { display: flex; gap: 10px; margin-bottom: 24px; }
+        .toggle-btn { flex: 1; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--clr-border); background: var(--clr-bg-2); cursor: pointer; font-weight: 700; }
+        .toggle-btn.active { border-color: var(--clr-accent); color: var(--clr-accent); background: var(--clr-surface); }
+
+        .size-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .s-item { text-align: center; }
+        .s-val { font-size: 1.5rem; font-weight: 800; display: block; color: var(--clr-text); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Craft & Fashion",
+        "item": "https://calcsfor.life/#craft"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Ring Size Calculator",
+        "item": "https://calcsfor.life/ring-size-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Ring Size Converter</h1>
+                    <p>Stop guessing your ring size. Enter your finger measurement to find your perfect fit in US, UK, and European standards.</p>
+                </div>
+
+                <div class="toggle-group">
+                    <button class="toggle-btn active" data-mode="mm">Millimeters (mm)</button>
+                    <button class="toggle-btn" data-mode="in">Inches (in)</button>
+                </div>
+
+                <form class="calc-form" id="ring-form">
+                    <div class="form-group">
+                        <label id="lbl-input">Inside Circumference (mm)</label>
+                        <input type="number" id="measurement" value="54.4" step="0.1">
+                        <small>Wrap a piece of string around your finger and measure it.</small>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Primary Size (US)</span>
+                    <div class="size-val" id="res-us">7</div>
+                    
+                    <div class="size-grid">
+                        <div class="s-item">
+                            <span class="s-val" id="res-uk">N 1/2</span>
+                            <span class="label" style="font-size: 0.7rem;">UK / AU</span>
+                        </div>
+                        <div class="s-item">
+                            <span class="s-val" id="res-eu">54.4</span>
+                            <span class="label" style="font-size: 0.7rem;">Europe</span>
+                        </div>
+                        <div class="s-item">
+                            <span class="s-val" id="res-diam">17.3 mm</span>
+                            <span class="label" style="font-size: 0.7rem;">Diameter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How to measure at home</h2>
+                    <p>I genuinely believe that the "string test" is the best way to find your size without a pro tool. Wrap a thin piece of string or paper around the base of your finger. Mark where it overlaps, then measure that distance against a ruler. This gives you the *circumference*, which is the most accurate measurement for our calculator.</p>
+                    
+                    <p><strong>Pro Tip:</strong> Measure your fingers at the end of the day when they are at their largest. Don't measure when your hands are cold, as your fingers can be up to half a size smaller than usual!</p>
+                    
+                    <h3>Size Guide:</h3>
+                    <ul>
+                        <li><strong>US Sizes:</strong> Range from 3 to 13.5 (including half sizes).</li>
+                        <li><strong>UK Sizes:</strong> Use letters (A to Z).</li>
+                        <li><strong>EU Sizes:</strong> Usually match the circumference in millimeters (e.g., 54mm = Size 54).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let mode = 'mm';
+            const mI = document.getElementById('measurement');
+            const resUS = document.getElementById('res-us');
+            const resUK = document.getElementById('res-uk');
+            const resEU = document.getElementById('res-eu');
+            const resDiam = document.getElementById('res-diam');
+
+            // Simplified ring size logic
+            function getRingData(circMm) {
+                const diameter = circMm / Math.PI;
+                // US Size formula: (Diameter * 1.43) - 14.3 (approx)
+                let us = (diameter * 1.231) - 14.3; // fine-tuned
+                us = Math.round(us * 2) / 2; // round to nearest 0.5
+                
+                // Map US to UK (rough)
+                const ukMap = {
+                    "5": "J 1/2", "5.5": "L", "6": "M", "6.5": "N", "7": "O", 
+                    "7.5": "P", "8": "Q", "8.5": "R", "9": "S", "9.5": "T", "10": "U"
+                };
+                
+                return {
+                    us: us < 3 ? 3 : (us > 15 ? 15 : us),
+                    uk: ukMap[us] || "N/A",
+                    eu: Math.round(circMm),
+                    diam: diameter.toFixed(1)
+                };
+            }
+
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    mode = this.dataset.mode;
+                    document.getElementById('lbl-input').textContent = `Inside Circumference (${mode})`;
+                    mI.value = (mode === 'mm') ? 54.4 : 2.14;
+                    update();
+                });
+            });
+
+            function update() {
+                let val = parseFloat(mI.value) || 0;
+                if (mode === 'in') val = val * 25.4; // to mm
+
+                const data = getRingData(val);
+                resUS.textContent = data.us;
+                resUK.textContent = data.uk;
+                resEU.textContent = data.eu;
+                resDiam.textContent = data.diam + ' mm';
+            }
+
+            mI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

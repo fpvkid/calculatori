@@ -102,7 +102,11 @@
         // ---- Craft ----
         { title: 'Fabric Yardage Calculator', slug: 'fabric-calculator', icon: '🧵', cat: 'craft', desc: 'How much fabric for a garment or furniture by size and type.', live: true },
         { title: 'Resin Volume Calculator', slug: 'resin-volume-calculator', icon: '💎', cat: 'craft', desc: 'How much epoxy resin for your mold or surface.', live: true },
-        { title: 'Aida Cloth Size', slug: 'aida-cloth-calculator', icon: '🧵', cat: 'craft', desc: 'Fabric dimensions for cross-stitch based on stitch count.', live: true },
+        { title: 'Aida Cloth Count', slug: 'aida-cloth-calculator', icon: '🧵', cat: 'craft', desc: 'Fabric size and stitch count for cross-stitch projects.', live: true },
+        { title: 'Yarn Yardage Calc', slug: 'yarn-calculator', icon: '🧶', cat: 'craft', desc: 'Estimate yarn needed for sweaters, blankets, and scarves.', live: true },
+        { title: 'Board Foot Calculator', slug: 'board-foot-calculator', icon: '🪵', cat: 'craft', desc: 'Lumber volume and cost for woodworking projects.', live: true },
+        { title: 'Ring Size Converter', slug: 'ring-size-calculator', icon: '💍', cat: 'craft', desc: 'Convert finger measurements to US, UK, and EU sizes.', live: true },
+        { title: 'Hat Size Calculator', slug: 'hat-size-calculator', icon: '👒', cat: 'craft', desc: 'Find your perfect hat size from head circumference.', live: true },
         { title: 'Candle Wax Calculator', slug: 'candle-wax-calculator', icon: '🕯️', cat: 'craft', desc: 'Wax weight by container volume for candle making.', live: true },
 
         // ---- Time ----

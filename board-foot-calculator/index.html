@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Board Foot Calculator | Lumber Volume & Cost Tool</title>
+    <meta name="description" content="Free board foot calculator for woodworking. Calculate the volume of lumber in board feet and estimate total project cost. Perfect for woodworkers and DIY.">
+    <meta name="keywords" content="board foot calculator, lumber volume tool, woodworking calculator, calculate board feet, wood cost estimator, lumber dimensions">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Craft">
+    <link rel="canonical" href="https://calcsfor.life/board-foot-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .bf-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .dim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Craft & DIY",
+        "item": "https://calcsfor.life/#craft"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Board Foot Calculator",
+        "item": "https://calcsfor.life/board-foot-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Board Foot Calculator</h1>
+                    <p>Accurate lumber volume. Calculate the total board feet of your lumber and estimate your total material cost instantly.</p>
+                </div>
+
+                <form class="calc-form" id="bf-form">
+                    <div class="dim-grid">
+                        <div class="form-group">
+                            <label>Thickness (in)</label>
+                            <input type="number" id="thick" value="1" step="0.25">
+                        </div>
+                        <div class="form-group">
+                            <label>Width (in)</label>
+                            <input type="number" id="width" value="6" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label>Length (ft)</label>
+                            <input type="number" id="length" value="8" step="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price per Board Foot ($)</label>
+                        <input type="number" id="price" value="5.50" step="0.10">
+                        <small>Check your local hardwood dealer for current rates (e.g., Walnut, Oak).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantity of Boards</label>
+                        <input type="number" id="qty" value="1">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Board Feet (BF)</span>
+                    <div class="bf-val" id="res-bf">4.0</div>
+                    <div class="label" style="font-size: 1.5rem; color: var(--clr-text); margin-top: 10px;" id="res-cost">Total Cost: $22.00</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;">
+                        Formula: (T" x W" x L') / 12
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is a Board Foot?</h2>
+                    <p>I genuinely believe that "Board Foot" is the most logical way to buy wood. Unlike buying lumber by the piece (like at a big-box store), buying by the board foot ensures you are paying for the actual volume of wood you get. One board foot is defined as a piece of wood 12" wide, 12" long, and 1" thick.</p>
+                    
+                    <p><strong>Nominal vs Actual:</strong> In the woodworking world, a "4/4" board (pronounced four-quarter) is nominally 1 inch thick. However, after it's been surfaced (S2S), it will actually be closer to 13/16" or 3/4". Always calculate your board feet based on the *nominal* thickness you are buying!</p>
+                    
+                    <h3>Board Foot Tips:</h3>
+                    <ul>
+                        <li><strong>Wastage:</strong> Always buy 15-20% more wood than your project requires to account for knots, cracks, and grain matching.</li>
+                        <li><strong>Hardwood vs Softwood:</strong> Hardwoods are almost always sold by the board foot, while softwoods (pine, cedar) are often sold by linear foot or by the piece.</li>
+                        <li><strong>Thickness Scale:</strong> 4/4 = 1", 5/4 = 1.25", 8/4 = 2", and so on.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const tI = document.getElementById('thick');
+            const wI = document.getElementById('width');
+            const lI = document.getElementById('length');
+            const pI = document.getElementById('price');
+            const qI = document.getElementById('qty');
+            
+            const resBF = document.getElementById('res-bf');
+            const resC = document.getElementById('res-cost');
+
+            function update() {
+                const thick = parseFloat(tI.value) || 0;
+                const width = parseFloat(wI.value) || 0;
+                const length = parseFloat(lI.value) || 0;
+                const price = parseFloat(pI.value) || 0;
+                const qty = parseFloat(qI.value) || 1;
+
+                // BF = (T" * W" * L') / 12
+                const bfPerBoard = (thick * width * length) / 12;
+                const totalBF = bfPerBoard * qty;
+                const totalCost = totalBF * price;
+
+                resBF.textContent = totalBF.toFixed(2);
+                resC.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
+            }
+
+            [tI, wI, lI, pI, qI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
