@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Brick & Mortar Calculator | Masonry Material Estimator</title>
+    <meta name="description" content="Calculate the number of bricks and bags of mortar needed for your wall project. Accurate estimator for standard and king size bricks. Free masonry tool.">
+    <meta name="keywords" content="brick calculator, mortar estimator, masonry material tool, brick wall calculator, bricks per square foot, mortar mix calculator, masonry project tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Home Improvement">
+    <link rel="canonical" href="https://calcsfor.life/brick-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .brick-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Home Improvement",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Brick Calculator",
+        "item": "https://calcsfor.life/brick-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Brick & Mortar Tool</h1>
+                    <p>Build with confidence. Estimate the total number of bricks and bags of mortar mix required for your wall, accounting for joint thickness.</p>
+                </div>
+
+                <form class="calc-form" id="brick-form">
+                    <div class="form-group">
+                        <label>Wall Area (Square Feet)</label>
+                        <input type="number" id="area" value="100">
+                        <small>Height x Length of the wall.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Brick Size</label>
+                        <select id="brick-size">
+                            <option value="0.147">Standard (8" x 2.25")</option>
+                            <option value="0.198">King Size (9.6" x 2.6")</option>
+                            <option value="0.088">Modular (7.6" x 2.25")</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mortar Joint Thickness (inches)</label>
+                        <select id="joint">
+                            <option value="0.375" selected>3/8" (Standard)</option>
+                            <option value="0.5">1/2" (Thick)</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Total Bricks Needed</span>
+                    <div class="brick-val" id="res-bricks">675</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Includes a 5% waste factor.
+                    </p>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Mortar (80lb Bags)</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-mortar">7</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Wall Weight</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-weight">3.2k lbs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Masonry Math Explained</h2>
+                    <p>I genuinely believe that masonry is an art form, but its foundation is pure math. When you calculate bricks per square foot, you must include the "Mortar Joint." Even a small 3/8-inch joint adds up significantly over a large wall, reducing the total number of bricks needed while increasing the volume of mortar required.</p>
+                    
+                    <p><strong>Bricks per Square Foot:</strong> For a standard modular brick with a 3/8" joint, the industry standard is roughly **6.75 to 7 bricks** per square foot. If you are building a "double wythe" wall (two bricks thick), you'll need to double this number.</p>
+                    
+                    <h3>Material Estimates:</h3>
+                    <ul>
+                        <li><strong>Mortar:</strong> A standard 80lb bag of pre-mixed mortar typically covers about 30 standard bricks.</li>
+                        <li><strong>Waste:</strong> Brick is brittle. Always order 5-10% more than your calculation to account for broken bricks and cuts.</li>
+                        <li><strong>Structural Weight:</strong> Brick is extremely heavy. Ensure your footer or foundation can support the total weight calculated above.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const aI = document.getElementById('area');
+            const bS = document.getElementById('brick-size');
+            const jT = document.getElementById('joint');
+            
+            const resB = document.getElementById('res-bricks');
+            const resM = document.getElementById('res-mortar');
+            const resW = document.getElementById('res-weight');
+
+            function update() {
+                const area = parseFloat(aI.value) || 0;
+                const joint = parseFloat(jT.value);
+                
+                // Brick dimensions based on selection (Standard, King, Modular)
+                let bH, bW;
+                if (bS.value === "0.147") { bW = 8; bH = 2.25; } // Standard
+                else if (bS.value === "0.198") { bW = 9.6; bH = 2.6; } // King
+                else { bW = 7.6; bH = 2.25; } // Modular
+
+                // Area of one brick with joint (converted to sq ft)
+                const brickArea = ((bW + joint) * (bH + joint)) / 144;
+                
+                const rawBricks = area / brickArea;
+                const totalBricks = Math.ceil(rawBricks * 1.05); // 5% waste
+
+                // Mortar (Approx 30 bricks per 80lb bag)
+                const bags = Math.ceil(totalBricks / 30);
+                
+                // Weight (Approx 4.5 lbs per brick + mortar)
+                const weight = totalBricks * 4.8;
+
+                resB.textContent = totalBricks.toLocaleString();
+                resM.textContent = bags;
+                resW.textContent = (weight / 1000).toFixed(1) + 'k lbs';
+            }
+
+            [aI, bS, jT].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

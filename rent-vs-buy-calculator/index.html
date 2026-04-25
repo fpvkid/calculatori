@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Rent vs Buy Calculator | Real Estate Investment Analysis</title>
+    <meta name="description" content="Compare the cost of renting vs buying a home. Our advanced calculator includes opportunity cost, appreciation, and maintenance for a true investment comparison.">
+    <meta name="keywords" content="rent vs buy calculator, home ownership investment tool, buy vs rent analysis, real estate opportunity cost, mortgage vs rent calculator, home value appreciation tool">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Real Estate">
+    <link rel="canonical" href="https://calcsfor.life/rent-vs-buy-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .win-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .input-group-title { font-weight: 700; margin: 20px 0 10px; color: var(--clr-text); display: block; border-bottom: 1px solid var(--clr-border); pb: 5px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Real Estate",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Rent vs Buy Calculator",
+        "item": "https://calcsfor.life/rent-vs-buy-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Rent vs. Buy Analysis</h1>
+                    <p>Go beyond the monthly payment. Compare the long-term wealth impact of buying a home versus renting and investing the difference.</p>
+                </div>
+
+                <form class="calc-form" id="rvb-form">
+                    <span class="input-group-title">Home Purchase Scenario</span>
+                    <div class="form-group">
+                        <label>Home Price ($)</label>
+                        <input type="number" id="price" value="450000" step="5000">
+                    </div>
+                    <div class="form-group">
+                        <label>Down Payment (%)</label>
+                        <input type="number" id="down" value="20">
+                    </div>
+                    <div class="form-group">
+                        <label>Mortgage Rate (%)</label>
+                        <input type="number" id="rate" value="6.5" step="0.1">
+                    </div>
+
+                    <span class="input-group-title">Rental Scenario</span>
+                    <div class="form-group">
+                        <label>Monthly Rent ($)</label>
+                        <input type="number" id="rent" value="2500">
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Market Return (%)</label>
+                        <input type="number" id="market" value="8">
+                        <small>Opportunity cost of your down payment.</small>
+                    </div>
+
+                    <span class="input-group-title">Time Horizon</span>
+                    <div class="form-group">
+                        <label>Years to Hold</label>
+                        <input type="number" id="years" value="10">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label" id="res-label">10-Year Wealth Winner</span>
+                    <div class="win-val" id="res-winner">Buying</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 1rem;" id="res-note">
+                        Buying builds $120,450 more in net worth.
+                    </p>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Total Buy Cost</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-buy-cost">$340k</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Total Rent Cost</span>
+                            <div style="font-size: 1.5rem; font-weight: 800;" id="res-rent-cost">$300k</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The True Cost of a Home</h2>
+                    <p>I genuinely believe that a home is first and foremost a place to live, but financially, it is a massive capital allocation. When you buy, you aren't just paying a mortgage—вы paying property taxes, insurance, and maintenance. Most importantly, you are locking up a down payment that could be earning interest elsewhere.</p>
+                    
+                    <p><strong>Opportunity Cost:</strong> If you put $90,000 down on a house, you lose the ability to invest that $90,000 in the stock market. Over 10 years at 8%, that money could have grown to nearly $200,000. Our calculator accounts for this "hidden cost" of buying.</p>
+                    
+                    <h3>What to Consider:</h3>
+                    <ul>
+                        <li><strong>Appreciation:</strong> Historically, US homes appreciate at ~3-4% per year. This is the primary driver of the "Buy" advantage.</li>
+                        <li><strong>Forced Savings:</strong> Every mortgage payment includes principal, which is essentially moving money from your checking account to your home equity.</li>
+                        <li><strong>Rent Hikes:</strong> Rents generally increase with inflation, while a fixed-rate mortgage payment stays the same for 30 years.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const pI = document.getElementById('price');
+            const dI = document.getElementById('down');
+            const rI = document.getElementById('rate');
+            const rtI = document.getElementById('rent');
+            const mI = document.getElementById('market');
+            const yI = document.getElementById('years');
+            
+            const resW = document.getElementById('res-winner');
+            const resN = document.getElementById('res-note');
+            const resBC = document.getElementById('res-buy-cost');
+            const resRC = document.getElementById('res-rent-cost');
+
+            function update() {
+                const price = parseFloat(pI.value) || 0;
+                const downPct = (parseFloat(dI.value) || 0) / 100;
+                const rate = (parseFloat(rI.value) || 0) / 100 / 12;
+                const rent = parseFloat(rtI.value) || 0;
+                const marketReturn = (parseFloat(mI.value) || 0) / 100;
+                const years = parseFloat(yI.value) || 0;
+
+                const downPayment = price * downPct;
+                const loanAmount = price - downPayment;
+                const months = 360; // Standard 30 yr
+
+                // 1. BUY SCENARIO
+                const pmt = loanAmount * (rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1);
+                const totalPmts = pmt * (years * 12);
+                const taxInsMain = (price * 0.03) * years; // 3% annual for taxes/ins/maint
+                const buyExpenses = totalPmts + taxInsMain;
+                
+                // Appreciation (Assume 3.5%)
+                const finalValue = price * Math.pow(1 + 0.035, years);
+                // Equity = FinalValue - RemainingLoan
+                const remainingLoan = loanAmount * (Math.pow(1 + rate, months) - Math.pow(1 + rate, years * 12)) / (Math.pow(1 + rate, months) - 1);
+                const netEquity = finalValue - remainingLoan;
+                
+                const netBuyPosition = netEquity - buyExpenses - downPayment;
+
+                // 2. RENT SCENARIO
+                const totalRent = rent * 12 * years * 1.02; // 2% rent growth
+                // Invest the downpayment
+                const investmentValue = downPayment * Math.pow(1 + marketReturn, years);
+                const netRentPosition = investmentValue - totalRent;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' });
+
+                resBC.textContent = formatter.format(buyExpenses + downPayment);
+                resRC.textContent = formatter.format(totalRent);
+
+                if (netBuyPosition > netRentPosition) {
+                    resW.textContent = "Buying";
+                    resW.style.color = "#10b981";
+                    resN.textContent = `Buying builds ${formatter.format(netBuyPosition - netRentPosition)} more in net worth over ${years} years.`;
+                } else {
+                    resW.textContent = "Renting";
+                    resW.style.color = "var(--clr-accent)";
+                    resN.textContent = `Renting wins by ${formatter.format(netRentPosition - netBuyPosition)} due to investment returns.`;
+                }
+            }
+
+            [pI, dI, rI, rtI, mI, yI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
