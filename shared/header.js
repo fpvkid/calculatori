@@ -6,6 +6,17 @@
     'use strict';
 
     try {
+        // --- GOOGLE ANALYTICS (GA4) ---
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-RWSDEYGF53';
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RWSDEYGF53');
+
         // Determine base URL
         const scripts = document.querySelectorAll('script[src]');
         let base = '/';
