@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>QR Code Data Tool | Format & Encode Information</title>
+    <meta name="description" content="Prepare and format data for QR codes. Generate strings for Wi-Fi sharing, contact cards (vCard), and website links. The 100th tool on CalcsForLife.">
+    <meta name="keywords" content="qr code data tool, wifi qr generator, vcard qr formatter, qr code math, data encoding tool, business qr tool, qr code strings guide">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Web & Tech">
+    <link rel="canonical" href="https://calcsfor.life/qr-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .qr-mock { 
+            width: 150px; 
+            height: 150px; 
+            background: #eee; 
+            margin: 0 auto 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 10px;
+            border: 2px dashed #ccc;
+        }
+        
+        .output-code { 
+            background: #1e1e1e; 
+            color: #4ade80; 
+            padding: 15px; 
+            border-radius: var(--radius-md); 
+            font-family: monospace; 
+            word-break: break-all; 
+            font-size: 0.9rem;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        
+        .type-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 10px; border-radius: 20px; border: 1px solid var(--clr-border); background: var(--clr-surface); cursor: pointer; font-weight: 700; }
+        .tab-btn.active { background: var(--clr-accent); color: white; border-color: var(--clr-accent); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tech",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "QR Code Data Tool",
+        "item": "https://calcsfor.life/qr-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>QR Data Preparer</h1>
+                    <p>Unlock the pattern. Properly format your information for QR codes, from sharing your Wi-Fi password to creating digital business cards.</p>
+                </div>
+
+                <div class="type-tabs">
+                    <button class="tab-btn active" data-type="url">Link</button>
+                    <button class="tab-btn" data-type="wifi">Wi-Fi</button>
+                    <button class="tab-btn" data-type="vcard">vCard</button>
+                </div>
+
+                <form class="calc-form" id="qr-form">
+                    <div id="fields-url">
+                        <div class="form-group">
+                            <label>Website URL</label>
+                            <input type="url" id="url-in" value="https://calcsfor.life">
+                        </div>
+                    </div>
+                    <div id="fields-wifi" class="hidden">
+                        <div class="form-group"><label>SSID (Network Name)</label><input type="text" id="wifi-ssid" value="Home_Network"></div>
+                        <div class="form-group"><label>Password</label><input type="text" id="wifi-pass" value="password123"></div>
+                    </div>
+                    <div id="fields-vcard" class="hidden">
+                        <div class="form-group"><label>Full Name</label><input type="text" id="vc-name" value="John Doe"></div>
+                        <div class="form-group"><label>Phone</label><input type="text" id="vc-phone" value="+123456789"></div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="qr-mock">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                            <path d="M14 14h2v2h-2zM18 14h3v3h-3zM14 18h3v3h-3zM18 18h3v3h-3z"></path>
+                        </svg>
+                    </div>
+                    <span class="label">Encoded String</span>
+                    <div class="output-code" id="res-code">https://calcsfor.life</div>
+                    <p style="margin-top: 15px; font-size: 0.8rem; color: var(--clr-text-dim);">Click the code above to copy it.</p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Logic of QR Codes</h2>
+                    <p>I genuinely believe that QR (Quick Response) codes are the ultimate bridge between the physical and digital worlds. While they look like random static, they are actually highly organized grids of data. This tool ensures that your data follows the strict protocols required for smartphones to recognize them correctly.</p>
+                    
+                    <p><strong>Did you know?</strong> QR codes can have up to 30% "Error Correction." This means that even if the code is dirty, torn, or partially obscured, your phone can still mathematically reconstruct the missing data and scan it successfully.</p>
+                    
+                    <h3>QR Formatting Tips:</h3>
+                    <ul>
+                        <li><strong>vCard:</strong> This is the universal standard for contact cards. When someone scans a vCard QR, their phone will automatically prompt them to "Add to Contacts."</li>
+                        <li><strong>Wi-Fi Sharing:</strong> The string format `WIFI:T:WPA;S:SSID;P:PASSWORD;;` is recognized by both iOS and Android to instantly connect to a network.</li>
+                        <li><strong>Shorten URLs:</strong> The more data you put in a QR code, the more complex the pattern becomes. For better scannability, use a shortened URL for long links.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const resC = document.getElementById('res-code');
+            const forms = {
+                url: document.getElementById('fields-url'),
+                wifi: document.getElementById('fields-wifi'),
+                vcard: document.getElementById('fields-vcard')
+            };
+
+            let currentType = 'url';
+
+            function update() {
+                let code = "";
+                if (currentType === 'url') {
+                    code = document.getElementById('url-in').value;
+                } else if (currentType === 'wifi') {
+                    const s = document.getElementById('wifi-ssid').value;
+                    const p = document.getElementById('wifi-pass').value;
+                    code = `WIFI:T:WPA;S:${s};P:${p};;`;
+                } else if (currentType === 'vcard') {
+                    const n = document.getElementById('vc-name').value;
+                    const ph = document.getElementById('vc-phone').value;
+                    code = `BEGIN:VCARD\nVERSION:3.0\nFN:${n}\nTEL:${ph}\nEND:VCARD`;
+                }
+                resC.textContent = code;
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentType = tab.getAttribute('data-type');
+                    
+                    Object.values(forms).forEach(f => f.classList.add('hidden'));
+                    forms[currentType].classList.remove('hidden');
+                    update();
+                });
+            });
+
+            document.querySelectorAll('input').forEach(i => i.addEventListener('input', update));
+            
+            resC.addEventListener('click', () => {
+                navigator.clipboard.writeText(resC.textContent).then(() => {
+                    const old = resC.style.color;
+                    resC.style.color = 'white';
+                    setTimeout(() => resC.style.color = old, 1000);
+                });
+            });
+
+            update();
+        })();
+    </script>
+</body>
+</html>

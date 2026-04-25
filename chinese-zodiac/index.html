@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Chinese Zodiac Finder | Year of the Animal Tool</title>
+    <meta name="description" content="Find your Chinese Zodiac sign and element based on your birth year. Discover your animal traits and compatible signs. Free and accurate tool.">
+    <meta name="keywords" content="chinese zodiac finder, year of the dragon, chinese astrology tool, lunar calendar math, wood dragon calculator, zodiac element finder, animal sign traits">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun & Niche">
+    <link rel="canonical" href="https://calcsfor.life/chinese-zodiac/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .animal-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .element-badge { 
+            display: inline-block; 
+            padding: 5px 15px; 
+            background: var(--clr-bg); 
+            border: 1px solid var(--clr-border); 
+            border-radius: 20px; 
+            font-weight: 800; 
+            margin-top: 15px;
+            color: var(--clr-text-dim);
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Chinese Zodiac Finder",
+        "item": "https://calcsfor.life/chinese-zodiac/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Eastern Zodiac</h1>
+                    <p>Discover your essence. Find your animal sign and primary element within the ancient 60-year cycle of the Chinese lunar calendar.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Birth Year</label>
+                    <input type="number" id="year-in" value="1990" min="1900" max="2100">
+                </div>
+
+                <div class="res-display">
+                    <span class="label" id="res-label">Your Chinese Sign</span>
+                    <div class="animal-val" id="res-animal">Horse</div>
+                    <div class="element-badge" id="res-element">Metal Element</div>
+                    
+                    <p style="margin-top: 25px; color: var(--clr-text-dim); font-size: 1.1rem; line-height: 1.6;" id="res-desc">
+                        Energetic, independent, and quick-witted. You love your freedom and thrive in social settings.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The 12 Animals of the Moon</h2>
+                    <p>I genuinely believe that the Chinese Zodiac offers a fascinating alternative to Western astrology. Legend has it that the Great Jade Emperor invited all the animals of the kingdom to a race. The first twelve to finish—the Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, and Pig—earned a place in the calendar.</p>
+                    
+                    <p><strong>The Five Elements:</strong> Beyond the animal sign, your birth year is also tied to one of five elements: **Wood, Fire, Earth, Metal, or Water**. This element further refines your personality traits, creating a complex 60-year cycle of unique combinations.</p>
+                    
+                    <h3>Chinese Zodiac Animals:</h3>
+                    <ul>
+                        <li><strong>Dragon:</strong> Powerful, charismatic, and lucky. A natural leader.</li>
+                        <li><strong>Tiger:</strong> Brave, competitive, and unpredictable. A force of nature.</li>
+                        <li><strong>Rabbit:</strong> Gentle, quiet, and elegant. A lover of peace.</li>
+                        <li><strong>Horse:</strong> Animated, active, and popular. A wanderer at heart.</li>
+                        <li><strong>Ox:</strong> Diligent, dependable, and strong. The foundation of the home.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const animals = ["Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"];
+            const elements = ["Metal", "Metal", "Water", "Water", "Wood", "Wood", "Fire", "Fire", "Earth", "Earth"];
+            
+            const descs = {
+                Rat: "Quick-witted, resourceful, and versatile. You are a clever survivor.",
+                Ox: "Diligent, dependable, and strong. You have a quiet, persistent power.",
+                Tiger: "Brave, competitive, and unpredictable. You are a natural leader with a wild side.",
+                Rabbit: "Gentle, quiet, and elegant. You prefer a harmonious and peaceful life.",
+                Dragon: "Powerful, charismatic, and lucky. You bring energy and fire to everything you do.",
+                Snake: "Enigmatic, intelligent, and wise. You have a deep, intuitive understanding of life.",
+                Horse: "Energetic, independent, and quick-witted. You value your freedom above all else.",
+                Goat: "Gentle, creative, and empathetic. You are a healer and a dreamer.",
+                Monkey: "Innovative, inquisitive, and mischievous. You can solve any problem with a laugh.",
+                Rooster: "Observant, hardworking, and courageous. You are the confident sentinel of the group.",
+                Dog: "Honest, loyal, and prudent. You are a true friend who stands up for what's right.",
+                Pig: "Compassionate, generous, and diligent. You seek abundance and joy in life."
+            };
+
+            const input = document.getElementById('year-in');
+            const resA = document.getElementById('res-animal');
+            const resE = document.getElementById('res-element');
+            const resD = document.getElementById('res-desc');
+
+            function update() {
+                const year = parseInt(input.value) || 1990;
+                
+                // Logic: (year - 4) % 12
+                const animalIdx = (year - 4) % 12;
+                const animal = animals[animalIdx < 0 ? animalIdx + 12 : animalIdx];
+                
+                // Element: Last digit of year
+                const elemIdx = parseInt(year.toString().slice(-1));
+                const element = elements[elemIdx];
+
+                resA.textContent = animal;
+                resE.textContent = `${element} Element`;
+                resD.textContent = descs[animal];
+            }
+
+            input.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

@@ -229,6 +229,17 @@
         { title: 'Password Entropy', slug: 'password-calculator', icon: '🔐', cat: 'fun', desc: 'Calculate true password strength and crack time.', live: true },
         { title: 'Image Breakpoints', slug: 'image-breakpoint-calculator', icon: '🖼️', cat: 'fun', desc: 'Optimal srcset widths for responsive web images.', live: true },
         { title: 'SVG Path Scaler', slug: 'svg-calculator', icon: '📐', cat: 'fun', desc: 'Resize vector paths manually with a scale factor.', live: true },
+        // ---- Misc & Final ----
+        { title: 'Gift Card Tracker', slug: 'gift-card-calculator', icon: '💳', cat: 'fun', desc: 'Manage your store credits and prepaid card spending.', live: true },
+        { title: 'Lottery Visualizer', slug: 'lottery-calculator', icon: '🎰', cat: 'fun', desc: 'See your real chances of winning compared to life events.', live: true },
+        { title: 'Dice Roller', slug: 'dice-calculator', icon: '🎲', cat: 'fun', desc: 'Multi-sided dice simulator for RPGs and board games.', live: true },
+        { title: 'Name Generator', slug: 'name-calculator', icon: '👤', cat: 'fun', desc: 'Create unique fantasy names for Elves, Dwarves, and Orcs.', live: true },
+        { title: 'Morse Player', slug: 'morse-calculator', icon: '📻', cat: 'fun', desc: 'Translate text to dots/dashes with audio and light signals.', live: true },
+        { title: 'Braille Tool', slug: 'braille-calculator', icon: '⠃', cat: 'fun', desc: 'Translate text to the universal 6-dot tactile system.', live: true },
+        { title: 'ASL Alphabet', slug: 'asl-calculator', icon: '🤟', cat: 'fun', desc: 'Visual guide to American Sign Language finger-spelling.', live: true },
+        { title: 'Zodiac Harmony', slug: 'zodiac-compatibility', icon: '💞', cat: 'fun', desc: 'Elemental compatibility score between two star signs.', live: true },
+        { title: 'Chinese Zodiac', slug: 'chinese-zodiac', icon: '🐉', cat: 'fun', desc: 'Find your animal sign and element in the 60-year cycle.', live: true },
+        { title: 'QR Data Tool', slug: 'qr-calculator', icon: '🏁', cat: 'fun', desc: 'Format strings for Wi-Fi, vCards, and links for QR codes.', live: true },
     ];
 
     /* ====== HERO TYPING EFFECT ====== */

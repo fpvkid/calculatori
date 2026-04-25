@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Dice Roller | Multi-Sided RPG Dice Tool</title>
+    <meta name="description" content="Roll multi-sided dice for RPGs and board games. Support for D4, D6, D8, D10, D12, D20, and D100. Fast, random, and free online dice simulator.">
+    <meta name="keywords" content="dice roller, rpg dice simulator, dnd dice tool, roll d20 online, multi-sided dice math, random number generator dice, board game utility">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun & Niche">
+    <link rel="canonical" href="https://calcsfor.life/dice-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .total-val { font-size: 6rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .dice-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
+        .dice-chip { 
+            background: var(--clr-bg); 
+            border: 1px solid var(--clr-border); 
+            width: 50px; 
+            height: 50px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 8px; 
+            font-weight: 800; 
+            font-size: 1.2rem;
+        }
+        
+        .btn-roll { 
+            background: var(--clr-accent); 
+            color: white; 
+            border: none; 
+            padding: 18px 40px; 
+            border-radius: var(--radius-md); 
+            font-weight: 800; 
+            font-size: 1.2rem; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 30px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Dice Roller",
+        "item": "https://calcsfor.life/dice-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Dice Roller</h1>
+                    <p>Roll for initiative. Support for all standard RPG dice sets (d4-d100) with instant totals and individual roll breakdown.</p>
+                </div>
+
+                <form class="calc-form" onsubmit="return false;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label>Dice Type</label>
+                            <select id="type">
+                                <option value="4">D4 (4-sided)</option>
+                                <option value="6" selected>D6 (6-sided)</option>
+                                <option value="8">D8 (8-sided)</option>
+                                <option value="10">D10 (10-sided)</option>
+                                <option value="12">D12 (12-sided)</option>
+                                <option value="20">D20 (20-sided)</option>
+                                <option value="100">D100 (Percentile)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="number" id="count" value="1" min="1" max="50">
+                        </div>
+                    </div>
+                    <button class="btn-roll" id="roll-btn">Roll Dice!</button>
+                </form>
+
+                <div class="res-display">
+                    <span class="label" id="res-label">Total Result</span>
+                    <div class="total-val" id="res-total">0</div>
+                    <div class="dice-grid" id="res-grid">
+                        <!-- Chips -->
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Randomness of the Roll</h2>
+                    <p>I genuinely believe that a physical roll of a dice is one of life's small thrills, but when you're playing remotely or forgot your bag of "math rocks," a digital simulator is a lifesaver. Our roller uses a high-entropy random number generator to ensure that every face has an equal probability of appearing.</p>
+                    
+                    <p><strong>The Dice Set:</strong> In games like Dungeons & Dragons, the "D20" is the most important die, used to determine if an action succeeds. "D6" is your standard board game die, while "D100" is often used for percentile checks to see the severity of an event or the success of a skill.</p>
+                    
+                    <h3>Tabletop Tips:</h3>
+                    <ul>
+                        <li><strong>Critical Hit:</strong> In many games, rolling the maximum number on a die (like a 20 on a D20) results in a "Critical Success," often dealing double damage or achieving a spectacular result.</li>
+                        <li><strong>Averages:</strong> The average roll on a D6 is 3.5. Knowing the average result of your dice pool can help you make better tactical decisions during a game.</li>
+                        <li><strong>Modifiers:</strong> Don't forget to add your character's ability modifiers (like Strength or Intelligence) to the total shown here!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const tS = document.getElementById('type');
+            const cI = document.getElementById('count');
+            const btn = document.getElementById('roll-btn');
+            
+            const resT = document.getElementById('res-total');
+            const resG = document.getElementById('res-grid');
+            const resL = document.getElementById('res-label');
+
+            function roll() {
+                const sides = parseInt(tS.value);
+                const count = parseInt(cI.value) || 1;
+                
+                let total = 0;
+                let results = [];
+
+                for (let i = 0; i < count; i++) {
+                    const r = Math.floor(Math.random() * sides) + 1;
+                    results.push(r);
+                    total += r;
+                }
+
+                // Animation
+                resT.textContent = "...";
+                setTimeout(() => {
+                    resT.textContent = total;
+                    resG.innerHTML = '';
+                    results.forEach(r => {
+                        const chip = document.createElement('div');
+                        chip.className = 'dice-chip';
+                        chip.textContent = r;
+                        resG.appendChild(chip);
+                    });
+                    resL.textContent = `${count}D${sides} Total`;
+                }, 100);
+            }
+
+            btn.addEventListener('click', roll);
+        })();
+    </script>
+</body>
+</html>

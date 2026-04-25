@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Lottery Odds Visualizer | Probability Comparison Tool</title>
+    <meta name="description" content="Understand your chances of winning the lottery with our odds visualizer. Compare jackpot probabilities to real-life events. Free math tool.">
+    <meta name="keywords" content="lottery odds calculator, jackpot probability tool, powerball odds vs reality, mega millions math, lottery visualization, chance of winning tool, probability comparison">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun & Niche">
+    <link rel="canonical" href="https://calcsfor.life/lottery-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 700px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .odds-val { font-size: 3.5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; margin: 15px 0; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .viz-box { 
+            background: var(--clr-bg); 
+            padding: 30px; 
+            border-radius: var(--radius-md); 
+            margin-top: 30px; 
+            text-align: left; 
+            border: 1px solid var(--clr-border);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .highlight { color: var(--clr-accent); font-weight: 800; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Lottery Odds Visualizer",
+        "item": "https://calcsfor.life/lottery-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Lottery Visualizer</h1>
+                    <p>Facing the numbers. Humans aren't evolved to understand massive numbers. We translate abstract "jackpot odds" into real-world physical comparisons.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Select a Lottery / Odds</label>
+                    <select id="odds-preset">
+                        <option value="292201338">Powerball (1 in 292.2 Million)</option>
+                        <option value="302575350">Mega Millions (1 in 302.6 Million)</option>
+                        <option value="13983816">UK National Lottery (1 in 14 Million)</option>
+                        <option value="1000000">1 in a Million</option>
+                        <option value="custom">Custom Odds...</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="custom-wrap">
+                    <label>1 in X</label>
+                    <input type="number" id="custom-val" value="50000000">
+                </div>
+
+                <div class="res-display">
+                    <span class="label">Probability of Winning</span>
+                    <div class="odds-val" id="res-prob">1 in 292,201,338</div>
+                    
+                    <div class="viz-box" id="res-viz">
+                        If you laid out <span class="highlight">292 million</span> pennies in a straight line, it would stretch from <span class="highlight">New York to London</span>. Winning the jackpot is like choosing the one specific "winning" penny while blindfolded.
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Mathematics of Hope</h2>
+                    <p>I genuinely believe that the lottery is often a "tax on people who are bad at math," but that doesn't stop it from being fun to dream. The problem is that our brains stop comprehending scale once we get past a few thousand. When the odds are 1 in 300 million, your chance of winning is effectively **zero**, mathematically speaking.</p>
+                    
+                    <p><strong>Compared to Life Events:</strong> You are roughly **2,000 times** more likely to be struck by lightning in your lifetime than you are to win the Powerball jackpot. You are more likely to be killed by a vending machine or become an Olympic athlete than win these massive lotteries.</p>
+                    
+                    <h3>Realistic Perspective:</h3>
+                    <ul>
+                        <li><strong>Multiple Tickets:</strong> Buying 10 tickets instead of 1 technically doubles your chances, but 10 in 300 million is still effectively zero.</li>
+                        <li><strong>The Fun Factor:</strong> If you enjoy the $2 "dream" for a few days, it's cheap entertainment. If you are spending money you need for rent, the math is your enemy.</li>
+                        <li><strong>Small Prizes:</strong> While the jackpot is nearly impossible, the odds of winning $4 or $10 are quite high (usually around 1 in 25 or 1 in 40).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const presetS = document.getElementById('odds-preset');
+            const customW = document.getElementById('custom-wrap');
+            const customI = document.getElementById('custom-val');
+            
+            const resP = document.getElementById('res-prob');
+            const resV = document.getElementById('res-viz');
+
+            function update() {
+                let val = presetS.value === 'custom' ? parseInt(customI.value) : parseInt(presetS.value);
+                if (presetS.value === 'custom') customW.classList.remove('hidden');
+                else customW.classList.add('hidden');
+
+                if (!val || val < 1) val = 1;
+
+                resP.textContent = `1 in ${val.toLocaleString()}`;
+
+                // Comparisons
+                let html = "";
+                if (val > 200000000) {
+                    html = `If you placed <span class="highlight">${(val/1000000).toFixed(0)} million</span> coins side-by-side, they would span <span class="highlight">4,500 miles</span>. That's a line from New York to London and halfway back. You have to pick the one marked "Winner."`;
+                } else if (val > 10000000) {
+                    html = `Imagine a massive stadium filled with <span class="highlight">${(val/1000000).toFixed(0)} million</span> ping-pong balls. You get one blindfolded reach. The odds of picking the winner are lower than being <span class="highlight">struck by lightning</span> 5 times in your life.`;
+                } else if (val > 1000000) {
+                    html = `This is like trying to find one specific <span class="highlight">grain of sugar</span> in a standard 5lb bag. It's possible, but highly unlikely on your first try.`;
+                } else {
+                    html = `You are much more likely to win this than a national jackpot, but it's still like picking one <span class="highlight">specific seat</span> in a stadium with 50,000 people twenty times over.`;
+                }
+
+                resV.innerHTML = html;
+            }
+
+            presetS.addEventListener('change', update);
+            customI.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

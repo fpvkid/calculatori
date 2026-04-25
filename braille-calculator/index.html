@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Braille Translator | Text to Dots Tool</title>
+    <meta name="description" content="Translate text to Braille dots instantly. Learn the Braille alphabet and create accessible text patterns. Free online education tool.">
+    <meta name="keywords" content="braille translator, text to braille, braille alphabet tool, learn braille online, accessibility tool, dots alphabet math, braille pattern generator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun & Niche">
+    <link rel="canonical" href="https://calcsfor.life/braille-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .braille-val { font-size: 3rem; color: var(--clr-accent); line-height: 1.2; word-break: break-all; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .braille-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
+        .braille-char { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background: var(--clr-bg); 
+            padding: 10px; 
+            border-radius: 8px; 
+            border: 1px solid var(--clr-border);
+        }
+        .braille-sym { font-size: 2.5rem; line-height: 1; }
+        .char-label { font-size: 0.7rem; font-weight: 800; color: var(--clr-text-dim); margin-top: 5px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fun",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Braille Translator",
+        "item": "https://calcsfor.life/braille-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Braille Translator</h1>
+                    <p>Read with your mind. Convert standard text into the universal Braille tactile writing system used by millions of visually impaired people worldwide.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Enter Text</label>
+                    <input type="text" id="text-in" value="BRAILLE" maxlength="20">
+                </div>
+
+                <div class="res-display">
+                    <span class="label">Braille Output</span>
+                    <div class="braille-grid" id="res-grid">
+                        <!-- Dynamic Chars -->
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Language of Touch</h2>
+                    <p>I genuinely believe that Louis Braille's invention is one of the most impactful designs in history. Created in 1824 when he was just 15 years old, the system uses a cell of six dots to represent every letter, number, and punctuation mark. It transformed the lives of blind people by giving them a way to read and write independently.</p>
+                    
+                    <p><strong>Universal System:</strong> While the underlying language (English, French, etc.) remains the same, the dots represent the specific sounds or letters. This tool uses the standard "Grade 1" Braille, which is a direct letter-for-letter translation.</p>
+                    
+                    <h3>Braille Facts:</h3>
+                    <ul>
+                        <li><strong>The Cells:</strong> A standard cell is 2 dots wide and 3 dots high. Each dot is numbered 1 through 6.</li>
+                        <li><strong>Numbers:</strong> In Braille, numbers are represented using the letters A-J preceded by a special "number sign."</li>
+                        <li><strong>Contractions:</strong> "Grade 2" Braille uses contractions (like a shorthand) to make reading faster and reduce the physical size of books.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const brailleMap = {
+                'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠓',
+                'i': '⠊', 'j': '⠚', 'k': '⠇', 'l': '⠸', 'm': '⠭', 'n': '⠝', 'o': '⠕', 'p': '⠏',
+                'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭',
+                'y': '⠽', 'z': '⠵', '1': '⠼⠁', '2': '⠼⠃', '3': '⠼⠉', '4': '⠼⠙', '5': '⠼⠑',
+                '6': '⠼⠋', '7': '⠼⠛', '8': '⠼⠓', '9': '⠼⠊', '0': '⠼⠚', ' ': ' '
+            };
+
+            const input = document.getElementById('text-in');
+            const resG = document.getElementById('res-grid');
+
+            function translate() {
+                const text = input.value.toLowerCase();
+                resG.innerHTML = '';
+                
+                for (let char of text) {
+                    if (brailleMap[char]) {
+                        const div = document.createElement('div');
+                        div.className = 'braille-char';
+                        div.innerHTML = `
+                            <span class="braille-sym">${brailleMap[char]}</span>
+                            <span class="char-label">${char === ' ' ? 'SPC' : char.toUpperCase()}</span>
+                        `;
+                        resG.appendChild(div);
+                    }
+                }
+            }
+
+            input.addEventListener('input', translate);
+            translate();
+        })();
+    </script>
+</body>
+</html>
