@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>VO2 Max Calculator | Estimate Your Aerobic Fitness Level</title>
+    <meta name="description" content="Free VO2 Max calculator. Estimate your maximum oxygen consumption using the Resting Heart Rate method or the Rockport Walk Test. Essential for runners and cyclists.">
+    <meta name="keywords" content="vo2 max calculator, aerobic capacity test, fitness level calculator, rockport walk test, resting heart rate method">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/vo2-max-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .vo2-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .method-tabs { display: flex; gap: 10px; margin-bottom: 24px; border-bottom: 1px solid var(--clr-border); padding-bottom: 15px; }
+        .method-btn { 
+            background: transparent; 
+            border: none; 
+            color: var(--clr-text-dim); 
+            font-weight: 700; 
+            cursor: pointer; 
+            padding: 5px 10px; 
+            transition: all 0.3s;
+        }
+        .method-btn.active { color: var(--clr-accent); border-bottom: 2px solid var(--clr-accent); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "VO2 Max Calculator",
+        "item": "https://calcsfor.life/vo2-max-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>VO2 Max Estimator</h1>
+                    <p>Measure your engine. VO2 Max is the single best predictor of longevity and aerobic fitness.</p>
+                </div>
+
+                <div class="method-tabs">
+                    <button class="method-btn active" data-method="hr">Pulse Method</button>
+                    <button class="method-btn" data-method="rockport">Rockport Walk Test</button>
+                </div>
+
+                <form class="calc-form" id="hr-method">
+                    <div class="form-group">
+                        <label>Max Heart Rate (bpm)</label>
+                        <input type="number" id="max-hr" value="185">
+                        <small>Standard: 220 minus your age.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Resting Heart Rate (bpm)</label>
+                        <input type="number" id="rest-hr" value="65">
+                        <small>Measure this when you first wake up.</small>
+                    </div>
+                </form>
+
+                <form class="calc-form hidden" id="rockport-method">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Weight (lbs)</label>
+                            <input type="number" id="weight" value="180">
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="age" value="35">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>1-Mile Walk Time (min:sec)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="min" value="15" placeholder="min">
+                            <input type="number" id="sec" value="30" placeholder="sec">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Heart Rate at end of walk</label>
+                        <input type="number" id="end-hr" value="120">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated VO2 Max</span>
+                    <div class="vo2-val" id="res-vo2">43.5</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;" id="res-fitness">
+                        Fitness Level: Good
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is VO2 Max?</h2>
+                    <p>I genuinely believe that VO2 Max is the most important number you've never heard of. It measures how much oxygen your body can use during intense exercise. High VO2 Max isn't just for marathon runners—it’s linked to a much longer lifespan and better brain health as you age.</p>
+                    
+                    <p><strong>Pulse Method:</strong> This is a quick estimate based on your "Heart Rate Reserve." It's surprisingly accurate for most people. <strong>Rockport Test:</strong> This is a clinical standard. Walk one mile as fast as you can (no running!), then measure your pulse immediately. It's great if you aren't a runner but want a serious fitness check.</p>
+                    
+                    <h3>What's a good score?</h3>
+                    <ul>
+                        <li><strong>Elite:</strong> 60+ (Men) / 50+ (Women)</li>
+                        <li><strong>Good:</strong> 42-46 (Men) / 33-38 (Women)</li>
+                        <li><strong>Poor:</strong> Below 30</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let activeMethod = 'hr';
+            const resV = document.getElementById('res-vo2');
+            const resF = document.getElementById('res-fitness');
+
+            // Tabs
+            document.querySelectorAll('.method-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeMethod = this.dataset.method;
+                    
+                    document.getElementById('hr-method').classList.toggle('hidden', activeMethod !== 'hr');
+                    document.getElementById('rockport-method').classList.toggle('hidden', activeMethod !== 'rockport');
+                    update();
+                });
+            });
+
+            function update() {
+                let vo2 = 0;
+
+                if (activeMethod === 'hr') {
+                    const max = parseFloat(document.getElementById('max-hr').value) || 1;
+                    const rest = parseFloat(document.getElementById('rest-hr').value) || 1;
+                    vo2 = 15.3 * (max / rest);
+                } else {
+                    const w = parseFloat(document.getElementById('weight').value) || 0;
+                    const a = parseFloat(document.getElementById('age').value) || 0;
+                    const g = parseFloat(document.getElementById('gender').value);
+                    const t = (parseFloat(document.getElementById('min').value) || 0) + ((parseFloat(document.getElementById('sec').value) || 0) / 60);
+                    const hr = parseFloat(document.getElementById('end-hr').value) || 0;
+
+                    // Rockport Formula: 132.853 - (0.0769 × weight) - (0.3877 × age) + (6.315 × gender) - (3.2649 × time) - (0.1565 × HR)
+                    vo2 = 132.853 - (0.0769 * w) - (0.3877 * a) + (6.315 * g) - (3.2649 * t) - (0.1565 * hr);
+                }
+
+                resV.textContent = Math.max(0, vo2).toFixed(1);
+                
+                // Simplified fitness level
+                if (vo2 > 50) resF.textContent = "Fitness Level: Excellent";
+                else if (vo2 > 40) resF.textContent = "Fitness Level: Good";
+                else if (vo2 > 30) resF.textContent = "Fitness Level: Fair";
+                else resF.textContent = "Fitness Level: Poor";
+            }
+
+            document.querySelectorAll('input, select').forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

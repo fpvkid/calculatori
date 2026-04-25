@@ -43,7 +43,11 @@
         { title: 'Water Intake Calculator', slug: 'water-intake-calculator', icon: '💧', cat: 'health', desc: 'How much water you should drink daily based on weight and climate.', live: true },
         { title: 'Macro Calculator', slug: 'macro-calculator', icon: '📊', cat: 'health', desc: 'Protein, carbs, and fat split for cutting, bulking, or maintenance.', live: true },
         { title: 'BMI Calculator', slug: 'bmi-calculator', icon: '⚖️', cat: 'health', desc: 'Check your Body Mass Index and healthy weight range.', live: true },
-        { title: 'Sleep Cycle Calculator', slug: 'sleep-cycle-calculator', icon: '😴', cat: 'health', desc: 'When to sleep or wake up to align with 90min cycles.', live: true },
+        { title: 'Heart Age Calculator', slug: 'heart-age-calculator', icon: '❤️', cat: 'health', desc: 'Is your heart older than you? Find your cardio health age.', live: true },
+        { title: 'VO2 Max Calculator', slug: 'vo2-max-calculator', icon: '🫁', cat: 'health', desc: 'Estimate your aerobic fitness and oxygen capacity.', live: true },
+        { title: 'Sleep Apnea (AHI) Test', slug: 'ahi-calculator', icon: '😴', cat: 'health', desc: 'Screening test for sleep apnea risk and snoring.', live: true },
+        { title: 'TDEE Calculator', slug: 'tdee-calculator', icon: '🔥', cat: 'health', desc: 'Calculate your total daily maintenance calories.', live: true },
+        { title: 'Sleep Cycle Calculator', slug: 'sleep-cycle-calculator', icon: '🌙', cat: 'health', desc: 'When to sleep or wake up to align with 90min cycles.', live: true },
 
         // ---- Home ----
         { title: 'Moving Box Calculator', slug: 'moving-box-calculator', icon: '📦', cat: 'home', desc: 'Estimate how many boxes you need by house or room size.', live: true },

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>TDEE Calculator | Total Daily Energy Expenditure</title>
+    <meta name="description" content="Free TDEE calculator. Find your Total Daily Energy Expenditure based on your BMR and activity level. Perfect for planning weight loss or muscle gain.">
+    <meta name="keywords" content="tdee calculator, maintenance calories, daily calorie burn, bmr calculator, weight loss calorie tool, calories for muscle gain">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/tdee-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cal-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .activity-options { display: grid; gap: 8px; margin-bottom: 24px; }
+        .activity-btn {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--clr-border);
+            background: var(--clr-surface);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .activity-btn.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); color: var(--clr-accent); }
+        .activity-btn .desc { font-size: 0.8rem; opacity: 0.7; font-weight: 400; }
+        .activity-btn .name { font-weight: 700; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "TDEE Calculator",
+        "item": "https://calcsfor.life/tdee-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>TDEE Calculator</h1>
+                    <p>Stop guessing. Find out exactly how many calories your body burns every day based on your real activity level.</p>
+                </div>
+
+                <form class="calc-form" id="tdee-form">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="gender">
+                                <option value="male">Male</option>
+                                <option value="female" selected>Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="age" value="30">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Weight (kg)</label>
+                            <input type="number" id="weight" value="70">
+                        </div>
+                        <div class="form-group">
+                            <label>Height (cm)</label>
+                            <input type="number" id="height" value="170">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Level</label>
+                        <div class="activity-options">
+                            <button type="button" class="activity-btn" data-mult="1.2">
+                                <span class="name">Sedentary</span>
+                                <span class="desc">Office job, little exercise</span>
+                            </button>
+                            <button type="button" class="activity-btn active" data-mult="1.375">
+                                <span class="name">Lightly Active</span>
+                                <span class="desc">1-3 days / week exercise</span>
+                            </button>
+                            <button type="button" class="activity-btn" data-mult="1.55">
+                                <span class="name">Moderately Active</span>
+                                <span class="desc">3-5 days / week exercise</span>
+                            </button>
+                            <button type="button" class="activity-btn" data-mult="1.725">
+                                <span class="name">Very Active</span>
+                                <span class="desc">6-7 days / week heavy exercise</span>
+                            </button>
+                            <button type="button" class="activity-btn" data-mult="1.9">
+                                <span class="name">Athlete</span>
+                                <span class="desc">2x per day / Physical job</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Daily Maintenance Calories</span>
+                    <div class="cal-val" id="res-cal">2,100</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Eat this much to stay at your current weight.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is TDEE?</h2>
+                    <p>I genuinely believe that most people fail their diets because they underestimate their TDEE. Your BMR (Basal Metabolic Rate) is what your body burns just to stay alive if you were in a coma. TDEE is that number plus every step you take, every stair you climb, and every workout you finish.</p>
+                    
+                    <p><strong>Cutting vs Bulking:</strong> Once you know your maintenance calories (TDEE), you can manipulate them. Want to lose fat? Subtract 500 calories. Want to build muscle? Add 300 calories. Don't go below your BMR, or your metabolism will stage a protest (slow down).</p>
+                    
+                    <h3>Macro Tips:</h3>
+                    <ul>
+                        <li><strong>Protein:</strong> Aim for 1.6g - 2g per kg of body weight.</li>
+                        <li><strong>Fats:</strong> Essential for hormones, keep them at 25-30% of total calories.</li>
+                        <li><strong>Carbs:</strong> Fill the rest with carbs to fuel your brain and workouts.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let activityMult = 1.375;
+            const genI = document.getElementById('gender');
+            const ageI = document.getElementById('age');
+            const wI = document.getElementById('weight');
+            const hI = document.getElementById('height');
+            const resC = document.getElementById('res-cal');
+
+            document.querySelectorAll('.activity-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activityMult = parseFloat(this.dataset.mult);
+                    update();
+                });
+            });
+
+            function update() {
+                const age = parseFloat(ageI.value) || 0;
+                const w = parseFloat(wI.value) || 0;
+                const h = parseFloat(hI.value) || 0;
+                const gen = genI.value;
+
+                // Mifflin-St Jeor Formula
+                let bmr = (10 * w) + (6.25 * h) - (5 * age);
+                if (gen === 'male') bmr += 5;
+                else bmr -= 161;
+
+                const tdee = bmr * activityMult;
+
+                resC.textContent = Math.round(tdee).toLocaleString();
+            }
+
+            [genI, ageI, wI, hI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
