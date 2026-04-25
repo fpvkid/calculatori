@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Sim Racing FOV Calculator | iRacing, Assetto Corsa & ACC</title>
+    <meta name="description" content="Free Sim Racing FOV calculator. Calculate the perfect Field of View for your single or triple monitor setup based on screen size and viewing distance.">
+    <meta name="keywords" content="sim racing fov calculator, iracing fov tool, assetto corsa fov, acc fov estimator, triple monitor fov calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Fun">
+    <link rel="canonical" href="https://calcsfor.life/sim-racing-fov/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .fov-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Gaming",
+        "item": "https://calcsfor.life/#fun"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Sim Racing FOV",
+        "item": "https://calcsfor.life/sim-racing-fov/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Sim Racing FOV Calculator</h1>
+                    <p>Stop guessing your view. Calculate the mathematically correct Field of View for your rig to improve your consistency and immersion.</p>
+                </div>
+
+                <form class="calc-form" id="fov-form">
+                    <div class="form-group">
+                        <label>Screen Ratio</label>
+                        <select id="ratio">
+                            <option value="1.777">16:9 (Standard)</option>
+                            <option value="2.333">21:9 (Ultrawide)</option>
+                            <option value="3.555">32:9 (Super Ultrawide)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid-inputs">
+                        <div class="form-group">
+                            <label>Screen Size (inches)</label>
+                            <input type="number" id="size" value="27">
+                        </div>
+                        <div class="form-group">
+                            <label>Distance to Eyes (inches)</label>
+                            <input type="number" id="dist" value="24">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="triples" style="width: auto;"> I am using Triple Monitors
+                        </label>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Calculated Horizontal FOV</span>
+                    <div class="fov-val" id="res-fov">56°</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Setting this in-game will make objects look their real size.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Why is FOV so important?</h2>
+                    <p>I genuinely believe that "Correct FOV" is the single biggest advantage you can give yourself in sim racing. When your FOV is wrong, your brain has to work harder to judge distances and corner entry speeds. When it's right, everything feels natural—the apex is exactly where your eyes expect it to be.</p>
+                    
+                    <p><strong>The "Tunnel Vision" Myth:</strong> Many beginners think a higher FOV is better because they can "see more." But a high FOV distorts the image (the fisheye effect), making speed harder to judge. It's better to have a lower, mathematically correct FOV and rely on your mirrors or "spotter" for awareness.</p>
+                    
+                    <h3>Rig Setup Tips:</h3>
+                    <ul>
+                        <li><strong>Get Closer:</strong> The closer the monitor is to your eyes, the higher your "correct" FOV can be.</li>
+                        <li><strong>Triple Monitors:</strong> If you use triples, the angle between the side monitors matters. This calculator assumes a flat setup; adjust slightly for curved mounts.</li>
+                        <li><strong>Consistency:</strong> Once you find your correct FOV, stick with it across all sims (iRacing, ACC, etc.).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const ratioI = document.getElementById('ratio');
+            const sizeI = document.getElementById('size');
+            const distI = document.getElementById('dist');
+            const tripC = document.getElementById('triples');
+            
+            const resF = document.getElementById('res-fov');
+
+            function update() {
+                const diag = parseFloat(sizeI.value) || 0;
+                const dist = parseFloat(distI.value) || 1;
+                const ratio = parseFloat(ratioI.value);
+                const isTriples = tripC.checked;
+
+                // Calculate width from diagonal and ratio
+                // w^2 + (w/r)^2 = d^2  => w^2(1 + 1/r^2) = d^2
+                const width = Math.sqrt((diag * diag) / (1 + 1/(ratio*ratio)));
+                
+                // FOV = 2 * atan( (width/2) / dist )
+                let fovRad = 2 * Math.atan((width / 2) / dist);
+                let fovDeg = fovRad * (180 / Math.PI);
+
+                if (isTriples) fovDeg = fovDeg * 3;
+
+                resF.textContent = Math.round(fovDeg) + '°';
+            }
+
+            [ratioI, sizeI, distI, tripC].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

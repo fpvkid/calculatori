@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Pneumatic Cylinder Force Calculator | Push & Pull Force Estimates</title>
+    <meta name="description" content="Free pneumatic cylinder force calculator. Calculate the push and pull force of an air cylinder based on bore size, rod diameter, and air pressure (PSI/Bar).">
+    <meta name="keywords" content="pneumatic cylinder force calculator, air cylinder push force, cylinder pull force tool, pneumatic bore size calculation, engineering tools">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Home">
+    <link rel="canonical" href="https://calcsfor.life/pneumatic-cylinder-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .force-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .unit-toggle { display: flex; gap: 8px; margin-bottom: 24px; }
+        .unit-btn { flex: 1; padding: 10px; border-radius: 100px; border: 1px solid var(--clr-border); background: var(--clr-bg-2); cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .unit-btn.active { background: var(--clr-surface); border-color: var(--clr-accent); color: var(--clr-accent); }
+
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--clr-text); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Home & DIY",
+        "item": "https://calcsfor.life/#home"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Pneumatic Cylinder Calculator",
+        "item": "https://calcsfor.life/pneumatic-cylinder-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Air Cylinder Force Calculator</h1>
+                    <p>Accurate engineering. Calculate the exact push and pull (retract) force of your pneumatic cylinders at any pressure.</p>
+                </div>
+
+                <div class="unit-toggle">
+                    <button class="unit-btn active" data-unit="imperial">Imperial (In / PSI)</button>
+                    <button class="unit-btn" data-unit="metric">Metric (mm / Bar)</button>
+                </div>
+
+                <form class="calc-form" id="pneumatic-form">
+                    <div class="form-group">
+                        <label id="lbl-bore">Cylinder Bore Size (inches)</label>
+                        <input type="number" id="bore" value="2" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label id="lbl-rod">Rod Diameter (inches)</label>
+                        <input type="number" id="rod" value="0.625" step="0.001">
+                        <small>Required for calculating pull force.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="lbl-pressure">Air Pressure (PSI)</label>
+                        <input type="number" id="pressure" value="80">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Push Force (Extension)</span>
+                    <div class="force-val" id="res-push">251 lbs</div>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">Pull Force</span>
+                            <div class="stat-val" id="res-pull">226 lbs</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">Piston Area</span>
+                            <div class="stat-val" id="res-area">3.14 in²</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Push vs Pull Force</h2>
+                    <p>I genuinely believe that the "rod diameter" is the most forgotten variable in pneumatic design. When you push a cylinder, air acts on the full surface of the piston. But when you pull it back (retract), the air acts on the piston surface *minus* the area taken up by the rod. This means your cylinder is always weaker when it's pulling than when it's pushing.</p>
+                    
+                    <p><strong>Efficiency Factor:</strong> In a real-world setting, you should multiply the calculated force by 0.7 or 0.8. Internal friction, seal drag, and pressure drops in the valves mean you'll rarely get 100% of the theoretical force.</p>
+                    
+                    <h3>Formulas Used:</h3>
+                    <ul>
+                        <li><strong>Area:</strong> (π × Bore²) / 4</li>
+                        <li><strong>Push Force:</strong> Pressure × Area</li>
+                        <li><strong>Pull Force:</strong> Pressure × (Piston Area - Rod Area)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let unit = 'imperial';
+            const boreI = document.getElementById('bore');
+            const rodI = document.getElementById('rod');
+            const presI = document.getElementById('pressure');
+            
+            const resPush = document.getElementById('res-push');
+            const resPull = document.getElementById('res-pull');
+            const resArea = document.getElementById('res-area');
+
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    unit = this.dataset.unit;
+                    
+                    if (unit === 'imperial') {
+                        document.getElementById('lbl-bore').textContent = 'Cylinder Bore Size (inches)';
+                        document.getElementById('lbl-rod').textContent = 'Rod Diameter (inches)';
+                        document.getElementById('lbl-pressure').textContent = 'Air Pressure (PSI)';
+                        boreI.value = 2; rodI.value = 0.625; presI.value = 80;
+                    } else {
+                        document.getElementById('lbl-bore').textContent = 'Cylinder Bore Size (mm)';
+                        document.getElementById('lbl-rod').textContent = 'Rod Diameter (mm)';
+                        document.getElementById('lbl-pressure').textContent = 'Air Pressure (Bar)';
+                        boreI.value = 50; rodI.value = 16; presI.value = 6;
+                    }
+                    update();
+                });
+            });
+
+            function update() {
+                const bore = parseFloat(boreI.value) || 0;
+                const rod = parseFloat(rodI.value) || 0;
+                const pres = parseFloat(presI.value) || 0;
+
+                const area = (Math.PI * Math.pow(bore, 2)) / 4;
+                const rodArea = (Math.PI * Math.pow(rod, 2)) / 4;
+                
+                let push = area * pres;
+                let pull = (area - rodArea) * pres;
+                
+                let unitLabel = (unit === 'imperial') ? ' lbs' : ' N';
+                let areaLabel = (unit === 'imperial') ? ' in²' : ' mm²';
+
+                if (unit === 'metric') {
+                    // 1 Bar = 0.1 N/mm2. So Force (N) = Area (mm2) * Pressure (Bar) * 0.1
+                    push = area * pres * 0.1;
+                    pull = (area - rodArea) * pres * 0.1;
+                }
+
+                resPush.textContent = Math.round(push).toLocaleString() + unitLabel;
+                resPull.textContent = Math.round(pull).toLocaleString() + unitLabel;
+                resArea.textContent = area.toFixed(2) + areaLabel;
+            }
+
+            [boreI, rodI, presI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

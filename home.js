@@ -60,6 +60,8 @@
         { title: 'Window Replacement Cost', slug: 'window-replacement-cost', icon: '🪟', cat: 'home', desc: 'Estimate the cost of new windows and installation.', live: true },
         { title: 'Hurricane Shutter Cost', slug: 'hurricane-shutter-calculator', icon: '🌀', cat: 'home', desc: 'Storm protection pricing for your windows and doors.', live: true },
         { title: 'HVAC Airflow (CFM)', slug: 'hvac-cfm-calculator', icon: '🌬️', cat: 'home', desc: 'Calculate required airflow for proper room ventilation.', live: true },
+        { title: 'Solar Panel Output', slug: 'solar-output-calculator', icon: '☀️', cat: 'home', desc: 'Estimate kWh generation and electricity bill savings.', live: true },
+        { title: 'Pneumatic Cylinder Force', slug: 'pneumatic-cylinder-calculator', icon: '⚙️', cat: 'home', desc: 'Push and pull force for air cylinders (PSI/Bar).', live: true },
 
         // ---- Garden ----
         { title: 'Raised Bed Soil Calculator', slug: 'raised-bed-soil-calculator', icon: '🌻', cat: 'garden', desc: 'Cubic feet of soil mix for your raised garden bed.', live: true },
@@ -75,6 +77,7 @@
         { title: 'Mortgage Calculator', slug: 'mortgage-calculator', icon: '🏦', cat: 'finance', desc: 'Estimate monthly mortgage payments and interest.', live: true },
         { title: 'ARV Calculator', slug: 'arv-calculator', icon: '📈', cat: 'finance', desc: 'After Repair Value & MAO estimate for house flipping.', live: true },
         { title: 'Annuity Commission', slug: 'annuity-commission-calculator', icon: '🏦', cat: 'finance', desc: 'Estimate agent fees for fixed and variable annuities.', live: true },
+        { title: 'Affirm Payment Estimator', slug: 'affirm-payment-calculator', icon: '💳', cat: 'finance', desc: 'Calculate monthly payments and interest for Affirm BNPL.', live: true },
         { title: 'KDP Royalty Calculator', slug: 'book-royalty-calculator', icon: '📚', cat: 'finance', desc: 'Estimate Amazon KDP profits for ebooks and paperbacks.', live: true },
         { title: 'ROAS & Ad ROI', slug: 'roas-calculator', icon: '🎯', cat: 'finance', desc: 'Measure the profitability of your marketing campaigns.', live: true },
         { title: 'Grade Calculator', slug: 'grade-calculator', icon: '🎓', cat: 'finance', desc: 'Calculate weighted class grades and final exam needs.', live: true },
@@ -105,6 +108,7 @@
         { title: 'BAC Estimate Calculator', slug: 'bac-calculator', icon: '🍺', cat: 'fun', desc: 'Estimate blood alcohol content from drinks and time.', live: true },
         { title: 'OSRS Agility Calculator', slug: 'osrs-agility-calculator', icon: '🏃', cat: 'fun', desc: 'Calculate laps to your next Agility level in Old School RuneScape.', live: true },
         { title: 'Betting Odds Converter', slug: 'betting-odds-calculator', icon: '🎲', cat: 'fun', desc: 'Convert Moneyline, Decimal, and Fractional odds.', live: true },
+        { title: 'Sim Racing FOV', slug: 'sim-racing-fov', icon: '🏎️', cat: 'fun', desc: 'Calculate the perfect Field of View for your racing rig.', live: true },
     ];
 
     /* ====== HERO TYPING EFFECT ====== */
