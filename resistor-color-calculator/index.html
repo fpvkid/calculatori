@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Resistor Color Code Calculator | Decode 4-Band Resistors</title>
+    <meta name="description" content="Free resistor color code calculator. Identify resistor values, tolerances, and multipliers by selecting the colored bands. Simple 4-band decoder.">
+    <meta name="keywords" content="resistor color code calculator, ohmmeter online, 4 band resistor decoder, electronics color code tool, identify resistor values">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Time">
+    <link rel="canonical" href="https://calcsfor.life/resistor-color-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .ohm-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .resistor-viz {
+            height: 60px;
+            width: 300px;
+            background: #e5c07b;
+            margin: 40px auto;
+            border-radius: 30px;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 40px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
+        .band { width: 15px; height: 100%; cursor: pointer; transition: 0.2s; border: 1px solid rgba(0,0,0,0.1); }
+        .band:hover { transform: scaleX(1.2); }
+        
+        .color-picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 24px; }
+        .color-opt { 
+            padding: 10px; 
+            border-radius: var(--radius-sm); 
+            border: 1px solid var(--clr-border); 
+            cursor: pointer; 
+            font-size: 0.8rem; 
+            font-weight: 700;
+            text-align: center;
+        }
+        .color-opt.active { outline: 2px solid var(--clr-accent); }
+        
+        .c-black { background: #000; color: #fff; }
+        .c-brown { background: #8b4513; color: #fff; }
+        .c-red { background: #f00; color: #fff; }
+        .c-orange { background: #ffa500; color: #000; }
+        .c-yellow { background: #ffff00; color: #000; }
+        .c-green { background: #008000; color: #fff; }
+        .c-blue { background: #0000ff; color: #fff; }
+        .c-violet { background: #8a2be2; color: #fff; }
+        .c-gray { background: #808080; color: #fff; }
+        .c-white { background: #fff; color: #000; }
+        .c-gold { background: #ffd700; color: #000; }
+        .c-silver { background: #c0c0c0; color: #000; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Math & Productivity",
+        "item": "https://calcsfor.life/#time"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Resistor Color Calculator",
+        "item": "https://calcsfor.life/resistor-color-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Resistor Color Decoder</h1>
+                    <p>Select the colors of the bands on your 4-band resistor to find its resistance value and tolerance.</p>
+                </div>
+
+                <div class="resistor-viz">
+                    <div class="band c-brown" id="b1" data-val="1"></div>
+                    <div class="band c-black" id="b2" data-val="0"></div>
+                    <div class="band c-red" id="b3" data-val="100"></div>
+                    <div class="band c-gold" id="b4" data-val="5" style="margin-left: 40px;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label id="band-label">Select Color for Band 1</label>
+                    <div class="color-picker" id="picker">
+                        <!-- Options populated by JS -->
+                    </div>
+                </div>
+
+                <div class="res-display">
+                    <span class="label">Resistance Value</span>
+                    <div class="ohm-val" id="res-ohm">1k Ω</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Tolerance: +/- 5% (Gold)
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How to read resistors</h2>
+                    <p>I genuinely believe that the resistor color code is one of the most clever bits of industrial design. Before we had tiny laser printing, colors were the only way to identify components. A standard 4-band resistor uses the first two colors as digits, the third as a multiplier (how many zeros to add), and the fourth as the tolerance.</p>
+                    
+                    <p><strong>Tolerance matters:</strong> If you're building a simple LED circuit, a 10% (Silver) tolerance is fine. But if you're building a precision audio amplifier, you want 1% or better. A 1k Ohm resistor with 10% tolerance could actually be anywhere from 900 to 1,100 Ohms!</p>
+                    
+                    <h3>Memory Aid (Mnemonics):</h3>
+                    <ul>
+                        <li><strong>Bad Boys:</strong> Black (0), Brown (1)</li>
+                        <li><strong>Ravish Our:</strong> Red (2), Orange (3)</li>
+                        <li><strong>Young Girls:</strong> Yellow (4), Green (5)</li>
+                        <li><strong>But Violet:</strong> Blue (6), Violet (7)</li>
+                        <li><strong>Gives Willingly:</strong> Gray (8), White (9)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const bands = [
+                { id: 'b1', colors: ['black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 'gray', 'white'] },
+                { id: 'b2', colors: ['black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 'gray', 'white'] },
+                { id: 'b3', colors: ['black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 'gray', 'white', 'gold', 'silver'] },
+                { id: 'b4', colors: ['brown', 'red', 'gold', 'silver'] }
+            ];
+
+            let activeBand = 0;
+            const colors = {
+                black: {v: 0, m: 1, t: 0}, brown: {v: 1, m: 10, t: 1}, red: {v: 2, m: 100, t: 2},
+                orange: {v: 3, m: 1000, t: 0}, yellow: {v: 4, m: 10000, t: 0}, green: {v: 5, m: 100000, t: 0.5},
+                blue: {v: 6, m: 1000000, t: 0.25}, violet: {v: 7, m: 10000000, t: 0.1}, gray: {v: 8, m: 0, t: 0.05},
+                white: {v: 9, m: 0, t: 0}, gold: {v: 0, m: 0.1, t: 5}, silver: {v: 0, m: 0.01, t: 10}
+            };
+
+            const picker = document.getElementById('picker');
+            const bandLabel = document.getElementById('band-label');
+            const resO = document.getElementById('res-ohm');
+            const resN = document.getElementById('res-note');
+
+            function renderPicker(index) {
+                activeBand = index;
+                bandLabel.textContent = `Select Color for Band ${index + 1}`;
+                picker.innerHTML = '';
+                bands[index].colors.forEach(c => {
+                    const btn = document.createElement('div');
+                    btn.className = `color-opt c-${c}`;
+                    btn.textContent = c.charAt(0).toUpperCase() + c.slice(1);
+                    btn.addEventListener('click', () => {
+                        const bandEl = document.getElementById(`b${index+1}`);
+                        bandEl.className = `band c-${c}`;
+                        bandEl.dataset.color = c;
+                        update();
+                    });
+                    picker.appendChild(btn);
+                });
+            }
+
+            function update() {
+                const c1 = document.getElementById('b1').dataset.color || 'brown';
+                const c2 = document.getElementById('b2').dataset.color || 'black';
+                const c3 = document.getElementById('b3').dataset.color || 'red';
+                const c4 = document.getElementById('b4').dataset.color || 'gold';
+
+                const val = (colors[c1].v * 10) + colors[c2].v;
+                const multiplier = colors[c3].m;
+                const resistance = val * multiplier;
+                const tolerance = colors[c4].t;
+
+                let display = '';
+                if (resistance >= 1000000) display = (resistance / 1000000).toFixed(1) + 'M Ω';
+                else if (resistance >= 1000) display = (resistance / 1000).toFixed(1) + 'k Ω';
+                else display = resistance.toFixed(1) + ' Ω';
+
+                resO.textContent = display;
+                resN.textContent = `Tolerance: +/- ${tolerance}% (${c4.charAt(0).toUpperCase() + c4.slice(1)})`;
+            }
+
+            document.querySelectorAll('.band').forEach((b, i) => {
+                b.addEventListener('click', () => renderPicker(i));
+            });
+
+            // Initial setup
+            document.getElementById('b1').dataset.color = 'brown';
+            document.getElementById('b2').dataset.color = 'black';
+            document.getElementById('b3').dataset.color = 'red';
+            document.getElementById('b4').dataset.color = 'gold';
+            renderPicker(0);
+            update();
+        })();
+    </script>
+</body>
+</html>

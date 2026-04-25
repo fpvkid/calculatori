@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>ADU Property Value Calculator | Estimate Home Equity Increase</title>
+    <meta name="description" content="Free ADU property value increase calculator. Estimate how much an Accessory Dwelling Unit (granny flat) will add to your home's market value and equity.">
+    <meta name="keywords" content="adu property value calculator, home value increase adu, equity gain granny flat, real estate investment adu, adu roi calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Finance">
+    <link rel="canonical" href="https://calcsfor.life/adu-value-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .value-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--clr-text); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Finance",
+        "item": "https://calcsfor.life/#finance"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ADU Value Calculator",
+        "item": "https://calcsfor.life/adu-value-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>ADU Value Increase Estimator</h1>
+                    <p>Will it pay off? Estimate the market value and home equity boost you'll gain by adding an Accessory Dwelling Unit to your property.</p>
+                </div>
+
+                <form class="calc-form" id="value-form">
+                    <div class="form-group">
+                        <label>ADU Square Footage (sq ft)</label>
+                        <input type="number" id="sqft" value="600" min="150" max="1200">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Local Median Price per Sq Ft ($)</label>
+                        <input type="number" id="psf" value="450" step="10">
+                        <small>Check Zillow or Redfin for your zip code average.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Current Home Value ($)</label>
+                        <input type="number" id="home-val" value="650000" step="10000">
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Value Increase</span>
+                    <div class="value-val" id="res-increase">$216,000</div>
+                    
+                    <div class="stat-grid">
+                        <div class="res-item">
+                            <span class="label">New Home Value</span>
+                            <div class="stat-val" id="res-new">$866,000</div>
+                        </div>
+                        <div class="res-item">
+                            <span class="label">% Increase</span>
+                            <div class="stat-val" id="res-pct">33%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How ADUs build equity</h2>
+                    <p>I genuinely believe that an ADU is the "infinite money glitch" of real estate. Unlike a kitchen remodel which might only return 60% of its cost, an ADU adds living square footage to your property. Appraisers in the US generally value this additional space at about 70-80% of the main house's price per square foot.</p>
+                    
+                    <p><strong>The Rental Yield:</strong> Beyond the property value, you have to consider the cash flow. A $200k investment that adds $250k in value *and* pays $2,000 a month in rent is a financial grand slam. It's why cities in California and Oregon are seeing record-breaking ADU permit applications.</p>
+                    
+                    <h3>Value Factors:</h3>
+                    <ul>
+                        <li><strong>Permitted vs Unpermitted:</strong> If you build it without a permit, it adds ZERO legal value to your home. In fact, it might even make it harder to sell.</li>
+                        <li><strong>Comparables:</strong> Look for other homes in your neighborhood with guest houses. These are your "comps" that an appraiser will use.</li>
+                        <li><strong>Quality:</strong> A high-end ADU that matches the main house's style will always command a higher valuation than a converted shed.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const sqftI = document.getElementById('sqft');
+            const psfI = document.getElementById('psf');
+            const homeI = document.getElementById('home-val');
+            
+            const resI = document.getElementById('res-increase');
+            const resN = document.getElementById('res-new');
+            const resP = document.getElementById('res-pct');
+
+            function update() {
+                const sqft = parseFloat(sqftI.value) || 0;
+                const psf = parseFloat(psfI.value) || 0;
+                const homeVal = parseFloat(homeI.value) || 0;
+
+                // Value Increase Formula: sqft * (psf * 0.8 multiplier for secondary space)
+                const increase = sqft * (psf * 0.8);
+                const newVal = homeVal + increase;
+                const pct = (increase / homeVal) * 100;
+
+                resI.textContent = '$' + Math.round(increase).toLocaleString();
+                resN.textContent = '$' + Math.round(newVal).toLocaleString();
+                resP.textContent = Math.round(pct) + '%';
+            }
+
+            [sqftI, psfI, homeI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

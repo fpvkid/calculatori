@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Child Height Predictor | Estimate Adult Height of Your Child</title>
+    <meta name="description" content="Free child height predictor. Estimate your child's future adult height based on parental height using the clinical Mid-Parental Height (Tanner) formula.">
+    <meta name="keywords" content="child height predictor, future height calculator, how tall will my child be, adult height estimator, tanner formula height">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/child-height-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .height-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .unit-toggle { display: flex; gap: 8px; margin-bottom: 24px; border: 1px solid var(--clr-border); border-radius: 100px; padding: 4px; }
+        .unit-btn { flex: 1; padding: 10px; border-radius: 100px; border: none; background: transparent; cursor: pointer; font-weight: 600; color: var(--clr-text-dim); transition: 0.3s; }
+        .unit-btn.active { background: var(--clr-surface); color: var(--clr-accent); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Child Height Predictor",
+        "item": "https://calcsfor.life/child-height-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Child Height Predictor</h1>
+                    <p>Will they be tall? Estimate your child's adult height based on the "Mid-Parental" formula used by pediatricians worldwide.</p>
+                </div>
+
+                <div class="unit-toggle">
+                    <button class="unit-btn active" data-unit="us">US (ft/in)</button>
+                    <button class="unit-btn" data-unit="metric">Metric (cm)</button>
+                </div>
+
+                <form class="calc-form" id="height-form">
+                    <div class="form-group">
+                        <label>Child's Gender</label>
+                        <select id="gender">
+                            <option value="boy">Boy</option>
+                            <option value="girl">Girl</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="lbl-father">Father's Height</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="f-main" value="5" style="flex: 1;">
+                            <input type="number" id="f-sub" value="10" placeholder="in" style="flex: 1;" class="us-only">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="lbl-mother">Mother's Height</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="m-main" value="5" style="flex: 1;">
+                            <input type="number" id="m-sub" value="4" placeholder="in" style="flex: 1;" class="us-only">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Estimated Adult Height</span>
+                    <div class="height-val" id="res-height">5' 11"</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Range: 5' 9" – 6' 1" (+/- 2 inches)
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>How accurate is this?</h2>
+                    <p>I genuinely believe that genetics is the main driver, but not the only one. The Mid-Parental Height (or Tanner Formula) is remarkably accurate for about 90% of the population. It assumes that a child will likely land somewhere in the middle of their parents' heights, adjusted for their own gender.</p>
+                    
+                    <p><strong>Nutrition & Environment:</strong> While your DNA sets the "ceiling" for how tall you can be, nutrition and sleep determine if you actually reach that ceiling. Children today are often taller than their parents because of better access to high-quality protein and healthcare.</p>
+                    
+                    <h3>The Formula:</h3>
+                    <ul>
+                        <li><strong>Boys:</strong> ((Father's Height + Mother's Height) + 5 inches) / 2</li>
+                        <li><strong>Girls:</strong> ((Father's Height + Mother's Height) - 5 inches) / 2</li>
+                        <li><strong>Margin of Error:</strong> Most children land within 2 inches (5cm) of this prediction.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let unit = 'us';
+            const genI = document.getElementById('gender');
+            const fMain = document.getElementById('f-main');
+            const fSub = document.getElementById('f-sub');
+            const mMain = document.getElementById('m-main');
+            const mSub = document.getElementById('m-sub');
+            
+            const resH = document.getElementById('res-height');
+            const resN = document.getElementById('res-note');
+
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    unit = this.dataset.unit;
+                    
+                    if (unit === 'us') {
+                        document.querySelectorAll('.us-only').forEach(el => el.style.display = 'block');
+                        document.getElementById('lbl-father').textContent = "Father's Height (ft/in)";
+                        document.getElementById('lbl-mother').textContent = "Mother's Height (ft/in)";
+                        fMain.value = 5; fSub.value = 10; mMain.value = 5; mSub.value = 4;
+                    } else {
+                        document.querySelectorAll('.us-only').forEach(el => el.style.display = 'none');
+                        document.getElementById('lbl-father').textContent = "Father's Height (cm)";
+                        document.getElementById('lbl-mother').textContent = "Mother's Height (cm)";
+                        fMain.value = 178; mMain.value = 163;
+                    }
+                    update();
+                });
+            });
+
+            function update() {
+                let fTotal = parseFloat(fMain.value) || 0;
+                let mTotal = parseFloat(mMain.value) || 0;
+
+                if (unit === 'us') {
+                    fTotal = (fTotal * 12) + (parseFloat(fSub.value) || 0);
+                    mTotal = (mTotal * 12) + (parseFloat(mSub.value) || 0);
+                }
+
+                const gen = genI.value;
+                let predicted = 0;
+
+                if (unit === 'us') {
+                    if (gen === 'boy') predicted = (fTotal + mTotal + 5) / 2;
+                    else predicted = (fTotal + mTotal - 5) / 2;
+                    
+                    const ft = Math.floor(predicted / 12);
+                    const inch = Math.round(predicted % 12);
+                    resH.textContent = `${ft}' ${inch}"`;
+                    resN.textContent = `Range: ${ft}' ${inch-2}" – ${ft}' ${inch+2}" (+/- 2 inches)`;
+                } else {
+                    if (gen === 'boy') predicted = (fTotal + mTotal + 13) / 2;
+                    else predicted = (fTotal + mTotal - 13) / 2;
+                    
+                    resH.textContent = Math.round(predicted) + ' cm';
+                    resN.textContent = `Range: ${Math.round(predicted-5)} – ${Math.round(predicted+5)} cm (+/- 5cm)`;
+                }
+            }
+
+            [genI, fMain, fSub, mMain, mSub].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
