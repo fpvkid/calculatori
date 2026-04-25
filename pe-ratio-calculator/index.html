@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>P:E Ratio Calculator | Protein to Energy Satiety Tool</title>
+    <meta name="description" content="Free P:E ratio calculator. Calculate the Protein-to-Energy ratio of any food to determine its satiety score. Optimize your diet for fat loss and muscle gain.">
+    <meta name="keywords" content="pe ratio calculator, protein to energy ratio, satiety score calculator, ted nyman pe ratio, weight loss food tool, protein density calculator">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/pe-ratio-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+        }
+        .ratio-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        .score-bar { height: 12px; background: #eee; border-radius: 10px; margin-top: 20px; position: relative; overflow: hidden; }
+        .score-fill { height: 100%; width: 50%; background: var(--clr-accent); transition: 0.5s; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "P:E Ratio Calculator",
+        "item": "https://calcsfor.life/pe-ratio-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>P:E Ratio Calculator</h1>
+                    <p>Stop looking at calories, start looking at density. Calculate the Protein-to-Energy ratio of your food to maximize satiety and fat loss.</p>
+                </div>
+
+                <form class="calc-form" id="pe-form">
+                    <div class="form-group">
+                        <label>Protein (grams)</label>
+                        <input type="number" id="prot" value="25">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Carbs (grams)</label>
+                            <input type="number" id="carb" value="5">
+                        </div>
+                        <div class="form-group">
+                            <label>Fat (grams)</label>
+                            <input type="number" id="fat" value="10">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Your P:E Ratio Score</span>
+                    <div class="ratio-val" id="res-ratio">1.6</div>
+                    <div class="score-bar"><div class="score-fill" id="res-fill"></div></div>
+                    <p style="margin-top: 20px; color: var(--clr-text-dim); font-size: 0.9rem;" id="res-note">
+                        Excellent! This is a high-satiety food.
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>What is the P:E Ratio?</h2>
+                    <p>I genuinely believe that the P:E ratio is the most important number on any food label. It was popularized by Dr. Ted Naiman and it’s simple: divide the grams of protein by the sum of grams of carbs and fats. The higher the number, the more likely the food is to make you feel "full" for fewer calories.</p>
+                    
+                    <p><strong>Satiety scores:</strong> Foods with a P:E ratio above 1.0 are generally great for fat loss. Foods below 0.5 (like donuts or pizza) are "energy dense" but low satiety, meaning you can eat 1,000 calories of them and still feel hungry an hour later.</p>
+                    
+                    <h3>Common P:E Ratios:</h3>
+                    <ul>
+                        <li><strong>Egg Whites:</strong> ~10.0 (Pure protein)</li>
+                        <li><strong>Chicken Breast:</strong> ~4.0 (High satiety)</li>
+                        <li><strong>Whole Eggs:</strong> ~1.0 (Balanced)</li>
+                        <li><strong>Avocado:</strong> ~0.1 (High energy, low protein)</li>
+                        <li><strong>Donut:</strong> ~0.05 (The "Hunger Trap")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const pI = document.getElementById('prot');
+            const cI = document.getElementById('carb');
+            const fI = document.getElementById('fat');
+            
+            const resR = document.getElementById('res-ratio');
+            const resF = document.getElementById('res-fill');
+            const resN = document.getElementById('res-note');
+
+            function update() {
+                const p = parseFloat(pI.value) || 0;
+                const c = parseFloat(cI.value) || 0;
+                const f = parseFloat(fI.value) || 0;
+
+                // P:E = P / (C + F)
+                const ratio = p / (c + f || 1);
+                
+                resR.textContent = ratio.toFixed(1);
+                
+                // Visualization (cap at ratio 3.0 for 100%)
+                const fillPct = Math.min(100, (ratio / 3) * 100);
+                resF.style.width = fillPct + '%';
+
+                if (ratio > 1.5) {
+                    resN.textContent = "Excellent! High satiety, ideal for fat loss.";
+                    resF.style.background = "#10b981";
+                } else if (ratio >= 0.7) {
+                    resN.textContent = "Good balance. This food is satiating.";
+                    resF.style.background = "#3b82f6";
+                } else {
+                    resN.textContent = "Low satiety. Watch out, this is an energy-dense food.";
+                    resF.style.background = "#ef4444";
+                }
+            }
+
+            [pI, cI, fI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

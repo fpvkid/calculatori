@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Keto Macro Calculator | Custom Ketogenic Diet Plan</title>
+    <meta name="description" content="Free Keto macro calculator. Calculate your personal ketogenic macros for fat loss or maintenance. Get exact protein, fat, and carb targets for ketosis.">
+    <meta name="keywords" content="keto macro calculator, ketogenic diet tool, net carbs calculator, keto fat loss guide, high fat low carb macros, ketosis tracker">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/keto-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            margin-top: 30px;
+        }
+        .cal-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; text-align: center; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; text-align: center; }
+        
+        .macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px; border-top: 1px solid var(--clr-border); pt: 20px; }
+        .macro-item { text-align: center; }
+        .m-val { font-size: 1.5rem; font-weight: 800; display: block; color: var(--clr-text); }
+        .m-lab { font-size: 0.75rem; color: var(--clr-text-dim); font-weight: 700; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Keto Macro Calculator",
+        "item": "https://calcsfor.life/keto-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Keto Macro Calculator</h1>
+                    <p>Enter your details to get your personalized ketogenic breakdown. We keep the carbs low and the focus high.</p>
+                </div>
+
+                <form class="calc-form" id="keto-form">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Current Weight (lbs)</label>
+                            <input type="number" id="weight" value="200">
+                        </div>
+                        <div class="form-group">
+                            <label>Body Fat % (est)</label>
+                            <input type="number" id="bf" value="25">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Level</label>
+                        <select id="activity">
+                            <option value="1.2">Sedentary (Office job)</option>
+                            <option value="1.375" selected>Lightly Active (1-3 days/week)</option>
+                            <option value="1.55">Moderately Active (3-5 days/week)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Daily Carb Limit (Net)</label>
+                        <input type="number" id="carbs" value="20">
+                        <small>Standard keto is 20g net carbs.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Calorie Deficit / Surplus (%)</label>
+                        <input type="range" id="deficit" min="-20" max="40" value="20" style="width: 100%;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 5px;">
+                            <span>Bulking (-20%)</span>
+                            <span id="def-val">20% Deficit</span>
+                            <span>Cutting (40%)</span>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <span class="label">Target Daily Calories</span>
+                    <div class="cal-val" id="res-cals">1,850</div>
+                    
+                    <div class="macro-grid">
+                        <div class="macro-item">
+                            <span class="m-val" id="res-m-fat">145g</span>
+                            <span class="m-lab">FAT</span>
+                        </div>
+                        <div class="macro-item">
+                            <span class="m-val" id="res-m-prot">120g</span>
+                            <span class="m-lab">PROTEIN</span>
+                        </div>
+                        <div class="macro-item">
+                            <span class="m-val" id="res-m-carb">20g</span>
+                            <span class="m-lab">CARBS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Protein is a Goal, Fat is a Lever</h2>
+                    <p>I genuinely believe that the biggest mistake on Keto is treating fat like a goal. If you are trying to lose weight, you don't *have* to hit your fat macro. Your body has plenty of stored fat to burn! You should hit your protein goal every day to save your muscle, keep your carbs under 20g to stay in ketosis, and only use fat to feel full.</p>
+                    
+                    <p><strong>Net Carbs vs Total Carbs:</strong> Fiber doesn't raise your blood sugar, so on Keto, we subtract it. Net Carbs = Total Carbs - Fiber. This is why you can eat a massive bowl of spinach (high fiber) but not a small slice of bread (low fiber, high starch).</p>
+                    
+                    <h3>Keto Success Tips:</h3>
+                    <ul>
+                        <li><strong>Electrolytes:</strong> When you drop carbs, your body flushes water and salt. Drink more water and add salt, potassium, and magnesium to avoid the "Keto Flu."</li>
+                        <li><strong>Hidden Carbs:</strong> Watch out for sauces, dressings, and "sugar-free" snacks that use maltitol.</li>
+                        <li><strong>Patience:</strong> It takes about 2-4 days to enter ketosis, but 3-6 weeks to become "fat adapted" where your energy levels truly stabilize.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const wI = document.getElementById('weight');
+            const bfI = document.getElementById('bf');
+            const actI = document.getElementById('activity');
+            const crbI = document.getElementById('carbs');
+            const defI = document.getElementById('deficit');
+            const defV = document.getElementById('def-val');
+            
+            const resC = document.getElementById('res-cals');
+            const resF = document.getElementById('res-m-fat');
+            const resP = document.getElementById('res-m-prot');
+            const resCr = document.getElementById('res-m-carb');
+
+            function update() {
+                const w = parseFloat(wI.value) || 0;
+                const bf = parseFloat(bfI.value) || 20;
+                const activity = parseFloat(actI.value);
+                const carbs = parseFloat(crbI.value) || 0;
+                const deficitPct = parseFloat(defI.value) / 100;
+
+                defV.textContent = (deficitPct * 100).toFixed(0) + '% ' + (deficitPct >= 0 ? 'Deficit' : 'Surplus');
+
+                // LBM (Lean Body Mass)
+                const lbm = w * (1 - (bf / 100));
+                
+                // TDEE (rough)
+                const tdee = (lbm * 15) * activity; 
+                const targetCals = tdee * (1 - deficitPct);
+
+                // Protein: 1g per lb of LBM
+                const proteinG = lbm;
+                const proteinCals = proteinG * 4;
+                const carbCals = carbs * 4;
+                const fatCals = targetCals - proteinCals - carbCals;
+                const fatG = Math.max(30, fatCals / 9);
+
+                resC.textContent = Math.round(targetCals).toLocaleString();
+                resF.textContent = Math.round(fatG) + 'g';
+                resP.textContent = Math.round(proteinG) + 'g';
+                resCr.textContent = Math.round(carbs) + 'g';
+            }
+
+            [wI, bfI, actI, crbI, defI].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

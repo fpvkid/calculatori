@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Arby's Menu Macro Calculator | Nutrition Tracker for Roast Beef & Sides</title>
+    <meta name="description" content="Free Arby's menu nutrition calculator. Track calories, fat, and protein for your favorite Arby's roast beef sandwiches, curly fries, and gyros. Perfect for Keto.">
+    <meta name="keywords" content="arbys nutrition calculator, arbys macros, roast beef calories, arbys curly fries nutrition, keto at arbys calculator, fast food tracker">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Health">
+    <link rel="canonical" href="https://calcsfor.life/arbys-menu-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            margin-top: 30px;
+        }
+        .cal-val { font-size: 4rem; font-weight: 800; color: var(--clr-accent); line-height: 1; text-align: center; }
+        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; text-align: center; }
+        
+        .menu-grid { display: grid; gap: 10px; margin-bottom: 24px; }
+        .menu-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 15px 20px; 
+            border-radius: var(--radius-md); 
+            background: var(--clr-bg-2); 
+            border: 1px solid var(--clr-border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .menu-item.active { border-color: var(--clr-accent); background: var(--clr-accent-glow); }
+        .menu-item .info { font-size: 0.8rem; opacity: 0.7; }
+
+        .macro-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; border-top: 1px solid var(--clr-border); pt: 20px; text-align: center; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Health",
+        "item": "https://calcsfor.life/#health"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Arby's Menu Calculator",
+        "item": "https://calcsfor.life/arbys-menu-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Arby's Nutrition Calculator</h1>
+                    <p>Track your meal at Arby's. Select your items to see the total calories, protein, and fat. Great for Keto and low-carb planning!</p>
+                </div>
+
+                <div class="menu-grid" id="menu">
+                    <div class="menu-item" data-cal="360" data-fat="14" data-prot="23">
+                        <div>
+                            <strong>Classic Roast Beef</strong>
+                            <div class="info">360 Cal | 23g Protein</div>
+                        </div>
+                        <input type="checkbox">
+                    </div>
+                    <div class="menu-item" data-cal="510" data-fat="24" data-prot="38">
+                        <div>
+                            <strong>Double Roast Beef</strong>
+                            <div class="info">510 Cal | 38g Protein</div>
+                        </div>
+                        <input type="checkbox">
+                    </div>
+                    <div class="menu-item" data-cal="450" data-fat="20" data-prot="23">
+                        <div>
+                            <strong>Beef 'n Cheddar</strong>
+                            <div class="info">450 Cal | 23g Protein</div>
+                        </div>
+                        <input type="checkbox">
+                    </div>
+                    <div class="menu-item" data-cal="710" data-fat="44" data-prot="23">
+                        <div>
+                            <strong>Greek Gyro</strong>
+                            <div class="info">710 Cal | 23g Protein</div>
+                        </div>
+                        <input type="checkbox">
+                    </div>
+                    <div class="menu-item" data-cal="550" data-fat="29" data-prot="5">
+                        <div>
+                            <strong>Curly Fries (Medium)</strong>
+                            <div class="info">550 Cal | 5g Protein</div>
+                        </div>
+                        <input type="checkbox">
+                    </div>
+                    <div class="menu-item" data-cal="440" data-fat="23" data-prot="23">
+                        <div>
+                            <strong>Mozzarella Sticks (4pc)</strong>
+                            <div class="info">440 Cal | 23g Protein</div>
+                        </div>
+                        <input type="checkbox">
+                    </div>
+                </div>
+
+                <div class="res-display">
+                    <span class="label">Total Meal Calories</span>
+                    <div class="cal-val" id="res-cals">0</div>
+                    
+                    <div class="macro-stats">
+                        <div>
+                            <div class="m-val" style="font-size: 1.5rem; font-weight: 800;" id="res-fat">0g</div>
+                            <span class="label" style="font-size: 0.6rem;">FAT</span>
+                        </div>
+                        <div>
+                            <div class="m-val" style="font-size: 1.5rem; font-weight: 800;" id="res-prot">0g</div>
+                            <span class="label" style="font-size: 0.6rem;">PROTEIN</span>
+                        </div>
+                        <div>
+                            <div class="m-val" style="font-size: 1.5rem; font-weight: 800;" id="res-carbs">0g</div>
+                            <span class="label" style="font-size: 0.6rem;">EST. CARBS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>Eating Keto at Arby's?</h2>
+                    <p>I genuinely believe that Arby's is one of the best fast food chains for people on a low-carb diet. Why? Because their roast beef is high quality and you can simply ask for "no bun." A Double Roast Beef without the bun is basically pure protein and fat—perfect for staying in ketosis while on the road.</p>
+                    
+                    <p><strong>Watch the sauces:</strong> The Horsey Sauce and Arby's Sauce are delicious, but they contain sugar. If you're strict Keto, stick to spicy brown mustard or bring your own sugar-free mayo.</p>
+                    
+                    <h3>Menu Secrets:</h3>
+                    <ul>
+                        <li><strong>The Meat Mountain:</strong> Yes, it’s a real (secret) menu item. It contains almost every meat they have. It’s a protein bomb!</li>
+                        <li><strong>Half-Pound Roast Beef:</strong> If you're really hungry, this is the ultimate low-carb option.</li>
+                        <li><strong>Curly Fries:</strong> These are the legendary side dish, but at 550 calories for a medium, they are a major "cheat meal" item.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            const items = document.querySelectorAll('.menu-item');
+            const resC = document.getElementById('res-cals');
+            const resF = document.getElementById('res-fat');
+            const resP = document.getElementById('res-prot');
+            const resCr = document.getElementById('res-carbs');
+
+            function update() {
+                let cal = 0, fat = 0, prot = 0;
+                items.forEach(item => {
+                    const cb = item.querySelector('input');
+                    if (cb.checked) {
+                        item.classList.add('active');
+                        cal += parseFloat(item.dataset.cal);
+                        fat += parseFloat(item.dataset.fat);
+                        prot += parseFloat(item.dataset.prot);
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+
+                resC.textContent = cal.toLocaleString();
+                resF.textContent = fat + 'g';
+                resP.textContent = prot + 'g';
+                
+                // Rough estimate for carbs: (Cal - (Fat*9 + Prot*4)) / 4
+                let carbs = (cal - (fat * 9 + prot * 4)) / 4;
+                resCr.textContent = Math.max(0, Math.round(carbs)) + 'g';
+            }
+
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'INPUT') {
+                        const cb = item.querySelector('input');
+                        cb.checked = !cb.checked;
+                    }
+                    update();
+                });
+            });
+
+            update();
+        })();
+    </script>
+</body>
+</html>
