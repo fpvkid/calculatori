@@ -24,6 +24,7 @@
         // ---- Pets ----
         { title: 'Raw Dog Food Calculator', slug: 'raw-dog-food-calculator', icon: '🥩', cat: 'pets', desc: 'Daily raw feeding portions using the 80/10/10 BARF ratio.', live: true },
         { title: 'Dog Age Calculator', slug: 'dog-age-calculator', icon: '🐕', cat: 'pets', desc: 'Accurate dog-to-human age conversion using breed-adjusted science.', live: true },
+        { title: 'Puppy Weight Predictor', slug: 'puppy-weight-calculator', icon: '🐕‍🦺', cat: 'pets', desc: 'Predict your dog\'s adult weight based on current growth and breed size.', live: true },
         { title: 'Cat Calorie Calculator', slug: 'cat-calorie-calculator', icon: '🐱', cat: 'pets', desc: 'How many calories your cat needs based on weight and activity.', live: true },
         { title: 'Aquarium Volume Calculator', slug: 'aquarium-volume-calculator', icon: '🐠', cat: 'pets', desc: 'Calculate gallons or liters for any tank shape.', live: true },
         { title: 'Pet Food Switch Calculator', slug: 'pet-food-switch', icon: '🥣', cat: 'pets', desc: 'Daily mix ratios for a safe 7-day transition to new food.', live: true },

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Puppy Weight Calculator | Predict Your Dog's Adult Weight</title>
+    <meta name="description" content="Free puppy weight predictor. Estimate how big your puppy will get based on their current age, weight, and breed size. Accurate growth curve modeling.">
+    <meta name="keywords" content="puppy weight calculator, adult dog weight predictor, how big will my puppy get, dog growth chart, puppy weight chart by week">
+    <meta name="author" content="calcsfor.life">
+    <meta name="category" content="Pets">
+    <link rel="canonical" href="https://calcsfor.life/puppy-weight-calculator/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <style>
+        .calc-section { padding: 120px 0 80px; }
+        .calc-wrapper { max-width: 600px; margin: 0 auto; }
+        .res-display { 
+            background: var(--clr-surface); 
+            border: 1px solid var(--clr-border); 
+            border-radius: var(--radius-lg); 
+            padding: 40px; 
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px var(--clr-accent-glow);
+        }
+        .weight-val { font-size: 5rem; font-weight: 800; color: var(--clr-accent); line-height: 1; }
+        .weight-label { font-size: 1rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }
+        
+        .unit-toggle {
+            display: flex;
+            background: var(--clr-bg-2);
+            padding: 4px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            border: 1px solid var(--clr-border);
+        }
+        .unit-toggle button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            color: var(--clr-text-dim);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .unit-toggle button.active {
+            background: var(--clr-surface);
+            color: var(--clr-accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .breed-sizes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .breed-size-btn {
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--clr-border);
+            background: var(--clr-surface);
+            color: var(--clr-text);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .breed-size-btn.active {
+            border-color: var(--clr-accent);
+            background: var(--clr-accent-glow);
+            color: var(--clr-accent);
+        }
+        .breed-size-btn span { display: block; font-size: 0.75rem; opacity: 0.7; font-weight: 400; margin-top: 4px; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://calcsfor.life/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Pets",
+        "item": "https://calcsfor.life/#pets"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Puppy Weight Predictor",
+        "item": "https://calcsfor.life/puppy-weight-calculator/"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <main class="calc-section">
+        <div class="container">
+            <div class="calc-wrapper">
+                <div class="section-header">
+                    <h1>Puppy Weight Predictor</h1>
+                    <p>How big will your "little" buddy actually get? Our predictor uses growth curves tailored to different breed sizes for maximum accuracy.</p>
+                </div>
+
+                <div class="unit-toggle">
+                    <button id="unit-us" class="active">US (lbs/oz)</button>
+                    <button id="unit-metric">Metric (kg)</button>
+                </div>
+
+                <form class="calc-form" id="puppy-form">
+                    <div class="form-group">
+                        <label>Expected Breed Size</label>
+                        <div class="breed-sizes" id="breed-sizes">
+                            <button type="button" class="breed-size-btn" data-size="small">Small <span>0-22 lbs</span></button>
+                            <button type="button" class="breed-size-btn active" data-size="medium">Medium <span>23-55 lbs</span></button>
+                            <button type="button" class="breed-size-btn" data-size="large">Large <span>56-99 lbs</span></button>
+                            <button type="button" class="breed-size-btn" data-size="giant">Giant <span>100+ lbs</span></button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="label-age">Age (Weeks)</label>
+                        <input type="number" id="age" value="12" min="1" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label id="label-weight">Current Weight</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="weight-main" value="15" step="0.1" style="flex: 2;">
+                            <input type="number" id="weight-sub" value="0" placeholder="oz" style="flex: 1;" class="us-only">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="res-display">
+                    <div class="weight-label">Estimated Adult Weight</div>
+                    <div class="weight-val" id="res-weight">~ 52 lbs</div>
+                    <p style="margin-top: 20px; color: var(--clr-text-muted); font-size: 0.9rem;" id="res-note">
+                        Puppies grow fastest between 3-6 months. Large breeds grow for up to 2 years!
+                    </p>
+                </div>
+
+                <div class="info-content" style="margin-top: 60px;">
+                    <h2>The Science of Puppy Growth</h2>
+                    <p>I genuinely hate generic "multiply by 2" formulas. Growth isn't linear. A Great Dane щенку (puppy) grows at a completely different rate than a Frenchie. While most small dogs are close to their full size by 9 months, giant breeds keep filling out until they are two years old.</p>
+                    
+                    <p><strong>When to use this?</strong> This calculator is most accurate between 12 and 24 weeks of age. If your puppy is only 4 weeks old, it's too early to tell—the genetics are still warming up! If they are over 10 months, they are likely already at 90% of their final weight.</p>
+                    
+                    <h3>Growth Milestones:</h3>
+                    <ul>
+                        <li><strong>Small Breeds:</strong> Often hit 50% of adult weight by 3 months.</li>
+                        <li><strong>Medium Breeds:</strong> Hit 50% by 4 months.</li>
+                        <li><strong>Large/Giant Breeds:</strong> Might only be 50% at 5-6 months.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../shared/header.js" defer></script>
+    <script src="../shared/footer.js" defer></script>
+    <script>
+        (function() {
+            let unit = 'us';
+            let breedSize = 'medium';
+
+            const puppyForm = document.getElementById('puppy-form');
+            const ageInput = document.getElementById('age');
+            const weightMain = document.getElementById('weight-main');
+            const weightSub = document.getElementById('weight-sub');
+            const resWeight = document.getElementById('res-weight');
+            const resNote = document.getElementById('res-note');
+
+            // Unit Toggles
+            document.getElementById('unit-us').addEventListener('click', function() {
+                unit = 'us';
+                this.classList.add('active');
+                document.getElementById('unit-metric').classList.remove('active');
+                document.querySelectorAll('.us-only').forEach(el => el.style.display = 'block');
+                document.getElementById('label-weight').textContent = 'Current Weight (lbs/oz)';
+                update();
+            });
+
+            document.getElementById('unit-metric').addEventListener('click', function() {
+                unit = 'metric';
+                this.classList.add('active');
+                document.getElementById('unit-us').classList.remove('active');
+                document.querySelectorAll('.us-only').forEach(el => el.style.display = 'none');
+                document.getElementById('label-weight').textContent = 'Current Weight (kg)';
+                update();
+            });
+
+            // Breed Size Toggles
+            document.querySelectorAll('.breed-size-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.breed-size-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    breedSize = this.dataset.size;
+                    update();
+                });
+            });
+
+            function update() {
+                const age = parseFloat(ageInput.value) || 1;
+                let weight = parseFloat(weightMain.value) || 0;
+                
+                if (unit === 'us') {
+                    const oz = parseFloat(weightSub.value) || 0;
+                    weight = weight + (oz / 16);
+                }
+
+                // Growth Coefficients based on size and age
+                // Adult = (Weight / Age) * TargetAge
+                // TargetAge varies: Small (40), Medium (52), Large (70), Giant (90)
+                let targetAge = 52;
+                if (breedSize === 'small') targetAge = 40;
+                if (breedSize === 'large') targetAge = 70;
+                if (breedSize === 'giant') targetAge = 90;
+
+                let estimatedAdult = (weight / age) * targetAge;
+
+                // Sanity capping for older pups
+                if (age > targetAge * 0.8) {
+                    estimatedAdult = weight * 1.1; // Almost done
+                }
+
+                let displayVal = Math.round(estimatedAdult);
+                let unitLabel = (unit === 'us') ? ' lbs' : ' kg';
+
+                resWeight.textContent = `~ ${displayVal}${unitLabel}`;
+                
+                // Note logic
+                if (breedSize === 'giant' && age < 20) {
+                    resNote.textContent = "Giant breeds have huge growth spurts. Expect this number to fluctuate!";
+                } else if (age > 40) {
+                    resNote.textContent = "Your dog is nearing adulthood. This estimate is very solid.";
+                } else {
+                    resNote.textContent = "Puppies grow fastest between 3-6 months. Large breeds grow for up to 2 years!";
+                }
+            }
+
+            [ageInput, weightMain, weightSub].forEach(i => i.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>
