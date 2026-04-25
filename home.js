@@ -181,7 +181,6 @@
         // ---- Time ----
         { title: 'Meeting Cost Calculator', slug: 'meeting-cost-calculator', icon: '🤝', cat: 'time', desc: 'How much this meeting is costing your company.', live: true },
         { title: 'Freelance Rate Calculator', slug: 'freelance-rate-calculator', icon: '📋', cat: 'time', desc: 'Calculate your hourly rate from desired yearly income.', live: true },
-        { title: 'Morse Code Translator', slug: 'morse-code-calculator', icon: '📻', cat: 'time', desc: 'Convert text to dots and dashes and back instantly.', live: true },
         { title: 'Binary Code Converter', slug: 'binary-calculator', icon: '💻', cat: 'time', desc: 'Translate text into binary 0s and 1s for fun or school.', live: true },
         { title: 'Random Choice Pick', slug: 'random-choice-calculator', icon: '🎲', cat: 'time', desc: 'Can\'t decide? Let fate choose from your list of options.', live: true },
         { title: 'Date Difference Tool', slug: 'date-difference-calculator', icon: '📅', cat: 'time', desc: 'Calculate the exact number of days between two dates.', live: true },

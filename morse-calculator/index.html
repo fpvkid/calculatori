@@ -6,7 +6,7 @@
     
     <!-- Primary SEO -->
     <title>Morse Code Translator & Player | Audio & Visual Tool</title>
-    <meta name="description" content="Translate text to Morse code and play it back with audio and visual signals. Free online Morse code tool with Web Audio API integration.">
+    <meta name="description" content="Translate text to Morse code and Morse code to text in real-time. Play it back with audio and visual signals. Free online Morse code tool.">
     <meta name="keywords" content="morse code translator, play morse code audio, morse code visualizer, text to dots and dashes, ham radio tool, learning morse code, emergency signal math">
     <meta name="author" content="calcsfor.life">
     <meta name="category" content="Fun & Niche">
@@ -28,16 +28,28 @@
             text-align: center;
             margin-top: 30px;
         }
-        .morse-val { font-size: 2.5rem; font-weight: 800; color: var(--clr-accent); line-height: 1.2; word-break: break-all; font-family: monospace; }
-        .label { font-size: 0.9rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        textarea { 
+            width: 100%; 
+            height: 100px; 
+            padding: 15px; 
+            border-radius: var(--radius-md); 
+            border: 1px solid var(--clr-border); 
+            background: var(--clr-bg); 
+            color: var(--clr-text);
+            font-family: monospace; 
+            font-size: 1.1rem; 
+            resize: none;
+            margin-bottom: 15px;
+        }
+        .label { font-size: 0.8rem; color: var(--clr-text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 5px; display: block; text-align: left; }
         
         .signal-lamp { 
-            width: 80px; 
-            height: 80px; 
+            width: 60px; 
+            height: 60px; 
             border-radius: 50%; 
             background: var(--clr-bg); 
             border: 4px solid var(--clr-border); 
-            margin: 20px auto; 
+            margin: 0 auto 20px; 
             transition: background 0.05s;
         }
         .signal-lamp.on { background: #fbbf24; box-shadow: 0 0 30px #fbbf24; border-color: #fbbf24; }
@@ -50,7 +62,7 @@
             border-radius: var(--radius-md); 
             font-weight: 800; 
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -89,18 +101,17 @@
             <div class="calc-wrapper">
                 <div class="section-header">
                     <h1>Morse Code Tool</h1>
-                    <p>Communicate in code. Translate any text into dots and dashes, then play the message back using high-frequency audio and visual light signals.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Enter Message</label>
-                    <input type="text" id="text-in" value="SOS" maxlength="20">
+                    <p>Communicate in code. Translate between text and Morse signals instantly. Play the message back using audio and visual light pulses.</p>
                 </div>
 
                 <div class="res-display">
                     <div class="signal-lamp" id="lamp"></div>
-                    <span class="label">Morse Sequence</span>
-                    <div class="morse-val" id="res-morse">... --- ...</div>
+                    
+                    <span class="label">Text Input</span>
+                    <textarea id="text-in" placeholder="Type message here...">SOS</textarea>
+                    
+                    <span class="label">Morse Input / Output</span>
+                    <textarea id="morse-in" placeholder="... --- ..."></textarea>
                     
                     <button class="btn-play" id="play-btn">
                         <span>▶ Play Signal</span>
@@ -117,9 +128,9 @@
                     <ul>
                         <li><strong>Dot:</strong> The basic unit of time.</li>
                         <li><strong>Dash:</strong> Three times as long as a dot.</li>
-                        <li><strong>Gap:</strong> The space between parts of the same letter is one dot long.</li>
-                        <li><strong>Letter Space:</strong> The gap between letters is three dots long.</li>
-                        <li><strong>Word Space:</strong> The gap between words is seven dots long.</li>
+                        <li><strong>Gap:</strong> One dot length between parts of the same letter.</li>
+                        <li><strong>Letter Space:</strong> Three dot lengths between letters.</li>
+                        <li><strong>Word Space:</strong> Seven dot lengths between words.</li>
                     </ul>
                 </div>
             </div>
@@ -139,41 +150,48 @@
                 '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
                 '9': '----.', '0': '-----', ' ': '/'
             };
+            const reverseMap = Object.fromEntries(Object.entries(morseMap).map(([k, v]) => [v, k]));
 
-            const input = document.getElementById('text-in');
-            const resM = document.getElementById('res-morse');
+            const textIn = document.getElementById('text-in');
+            const morseIn = document.getElementById('morse-in');
             const lamp = document.getElementById('lamp');
             const playBtn = document.getElementById('play-btn');
 
             let audioCtx = null;
             let playing = false;
 
-            function translate() {
-                const text = input.value.toUpperCase();
-                let result = [];
-                for (let char of text) {
-                    if (morseMap[char]) result.push(morseMap[char]);
-                }
-                resM.textContent = result.join(' ');
-                return result;
+            function updateFromText() {
+                const text = textIn.value.toUpperCase();
+                let result = text.split('').map(char => morseMap[char] || char).join(' ');
+                morseIn.value = result;
+            }
+
+            function updateFromMorse() {
+                const morse = morseIn.value;
+                let result = morse.split(' ').map(code => reverseMap[code] || code).join('');
+                textIn.value = result.toLowerCase();
             }
 
             async function playSignal() {
                 if (playing) return;
                 playing = true;
                 playBtn.disabled = true;
+                const oldText = playBtn.querySelector('span').textContent;
                 playBtn.querySelector('span').textContent = "⏹ Playing...";
 
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                const sequence = translate();
-                const unit = 100; // ms per dot
+                const sequence = morseIn.value.split(' ');
+                const unit = 100;
 
                 for (let word of sequence) {
                     for (let char of word) {
+                        if (char === '/') {
+                            await new Promise(r => setTimeout(r, unit * 4));
+                            continue;
+                        }
                         const duration = char === '.' ? unit : unit * 3;
                         
-                        // Turn ON
                         lamp.classList.add('on');
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
@@ -184,23 +202,23 @@
                         
                         await new Promise(r => setTimeout(r, duration));
                         
-                        // Turn OFF
                         lamp.classList.remove('on');
                         osc.stop();
-                        
-                        await new Promise(r => setTimeout(r, unit)); // gap between dots/dashes
+                        await new Promise(r => setTimeout(r, unit));
                     }
-                    await new Promise(r => setTimeout(r, unit * 2)); // gap between letters
+                    await new Promise(r => setTimeout(r, unit * 2));
                 }
 
                 playing = false;
                 playBtn.disabled = false;
-                playBtn.querySelector('span').textContent = "▶ Play Signal";
+                playBtn.querySelector('span').textContent = oldText;
             }
 
-            input.addEventListener('input', translate);
+            textIn.addEventListener('input', updateFromText);
+            morseIn.addEventListener('input', updateFromMorse);
             playBtn.addEventListener('click', playSignal);
-            translate();
+            
+            updateFromText();
         })();
     </script>
 </body>
